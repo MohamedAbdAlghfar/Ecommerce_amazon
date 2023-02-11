@@ -28,7 +28,7 @@ class Category extends Model
         'Wieght',
     ];
     
-    
+    //change that 
     public function Orders()
 {
     return $this->hasMany('App\Models\Order');
