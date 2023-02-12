@@ -18,6 +18,8 @@ class Order extends Model
 
     ];
 
+
+    // add here too 
     public function User()
     {
      return $this->belongsTo('App\Models\User');
