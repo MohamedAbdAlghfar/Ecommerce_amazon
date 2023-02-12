@@ -19,7 +19,8 @@ class Order extends Model
     ];
 
 
-    // add here too 
+    
+    // order comment 
     public function User()
     {
      return $this->belongsTo('App\Models\User');
