@@ -27,7 +27,7 @@ class Category extends Model
         'Discount',
         'Wieght',
     ];
-    // again 
+    // again fjahlfalhdajkl
     // look if it was changed
      // try again 
     //here the second change test
