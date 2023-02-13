@@ -27,8 +27,10 @@ class Category extends Model
         'Discount',
         'Wieght',
     ];
-    
-    //change that 
+    // again fjahlfalhdajkl
+    // look if it was changed
+     // try again 
+    //here the second change test
     public function Orders()
 {
     return $this->hasMany('App\Models\Order');

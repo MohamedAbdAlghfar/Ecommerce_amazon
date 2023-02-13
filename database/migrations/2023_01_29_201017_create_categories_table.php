@@ -11,21 +11,21 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->integer('Price');
-            $table->integer('Discount');
-            $table->integer('Available_Cices');
-            $table->integer('Weight');
-            $table->string('Color');
-            $table->string('Col_1');
-            $table->string('Col_2');
-            $table->string('Col_3');
-            $table->string('Col_4');
-            $table->integer('About');  
-            $table->integer('Name');
-            $table->integer('Brand');
+            $table->integer('Price')->nullable();
+            $table->integer('Discount')->nullable();
+            $table->integer('Available_Bices')->nullable();
+            $table->integer('Weight')->nullable();
+            $table->string('Color')->nullable();
+            $table->string('Col_1')->nullable();
+            $table->string('Col_2')->nullable();
+            $table->string('Col_3')->nullable();
+            $table->string('Col_4')->nullable();
+            $table->string('About')->nullable();  
+            $table->string('Name')->nullable();
+            $table->string('Brand')->nullable();
             $table->unsignedInteger('Parent_id')->nullable();
-            $table->integer('Ordering');
-            $table->biginteger('Store_Id');
+            $table->integer('Ordering')->nullable();
+            $table->biginteger('Store_Id')->nullable();
             
             $table->timestamps();
         });
