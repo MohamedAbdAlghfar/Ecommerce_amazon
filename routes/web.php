@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */  // ....      
 
-Route::get('/', function () {
+Route::get('/homepage', function () {
     return view('index');
 });
 
-Route::get('/homepage', [App\Http\Controllers\homepages\mainhome::class, 'index']);
-
+Route::get('/filtering' , function (){ //here the route for filter produtcts 
+    return view('filtering');
+});
