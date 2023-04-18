@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -113,7 +115,7 @@
             </div>
         </div>
         <div class="linking">
-            <a href="">Home</a>
+            <a href="{{url('/filtering')}}">Home</a>
             <a href="">Electronics</a>
             <a href="">PC</a>
             <a href="">Phones</a>
