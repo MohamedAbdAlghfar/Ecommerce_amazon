@@ -121,6 +121,7 @@
             <a href="">Phones</a>
             <a href="">Fashion</a>
             <a href="">Sports</a>
+            <a href="">Kitchen</a>
             <a href="">Books</a>
             <a href="">Offers</a>
             <a href="">Beauty & Makeup</a>
