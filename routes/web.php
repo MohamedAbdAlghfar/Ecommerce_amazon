@@ -20,3 +20,7 @@ Route::get('/homepage', function () {
 Route::get('/filtering' , function (){ //here the route for filter produtcts 
     return view('filtering');
 });
+
+Route::get('/mobilephones' , function (){ //here the route for filter produtcts 
+    return view('mobilephones');
+});

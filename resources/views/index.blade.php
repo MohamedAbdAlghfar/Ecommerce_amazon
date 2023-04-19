@@ -118,7 +118,7 @@
             <a href="{{url('/filtering')}}">Home</a>
             <a href="">Electronics</a>
             <a href="">PC</a>
-            <a href="">Phones</a>
+            <a href="{{url('/mobilephones')}}">Phones</a>
             <a href="">Fashion</a>
             <a href="">Sports</a>
             <a href="">Kitchenn</a>

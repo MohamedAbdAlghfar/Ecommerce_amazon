@@ -13,10 +13,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarColor">
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="#">Women's</a> </li>
-            <li class="nav-item"><a class="nav-link" href="#">Men's</a> </li>                
-            <li class="nav-item "><a class="nav-link" href="#">Home</a> </li>
-            <li class="nav-item "><a class="nav-link" href="#">Sale</a> </li>
+            <li class="nav-item"><a class="nav-link" href="{{url('/homepage')}}">back to Home page</a> </li>
+            <li class="nav-item"><a class="nav-link" href="#">Go To offers Page</a> </li>                
+            {{--  --}}
         </ul>        
     </div>
     </div>    
