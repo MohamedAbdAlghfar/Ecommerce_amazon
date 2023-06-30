@@ -17,10 +17,22 @@ Route::get('/homepage', function () {
     return view('index');
 });
 
-Route::get('/filtering' , function (){ //here the route for filter produtcts 
-    return view('filtering');
+Route::get('/home' , function (){ //here the route for filter produtcts 
+    return view('home');
 });
 
 Route::get('/mobilephones' , function (){ //here the route for filter produtcts 
     return view('mobilephones');
+});
+
+Route::get('/fashion' , function (){ //here the route for filter produtcts 
+    return view('fashion');
+});
+
+Route::get('/electronics' , function (){ //here the route for filter produtcts 
+    return view('electronics');
+});
+
+Route::get('/computers' , function (){ //here the route for filter produtcts 
+    return view('Computers');
 });
