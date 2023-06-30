@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('Weight')->nullable();
             $table->string('Color')->nullable();
             $table->string('Col_1')->nullable();
+            $table->integer('Buy')->nullable();
+            $table->string('Description')->nullable();
             $table->string('Col_2')->nullable();
             $table->string('Col_3')->nullable();
             $table->string('Col_4')->nullable();
@@ -25,7 +27,7 @@ return new class extends Migration
             $table->string('Brand')->nullable();
             $table->unsignedInteger('Parent_id')->nullable();
             $table->integer('Ordering')->nullable();
-            $table->biginteger('Store_Id')->nullable();
+           // $table->biginteger('Store_Id')->nullable();
             
             $table->timestamps();
         });

@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->foreignId('user_id')->constrained();
+          //$table->foreignId('user_id')->constrained();
             $table->string('Name');
             $table->string('Phone');                                      // .. Done ..
             $table->string('About');

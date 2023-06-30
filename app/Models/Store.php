@@ -21,7 +21,7 @@ class Store extends Model
     ];
 
     public function User() {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsToMany('App\Models\User');
     }
 
 

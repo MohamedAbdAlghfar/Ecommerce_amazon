@@ -30,9 +30,9 @@ class Order extends Model
     {
      return $this->belongsTo('App\Models\Category');
     }
-    public function Transfer_company()
+    public function ShippingCompany()
     {
-     return $this->belongsTo('App\Models\Transfer_company');
+     return $this->belongsTo('App\Models\ShippingCompany');
     }
 
 }

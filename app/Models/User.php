@@ -55,7 +55,7 @@ class User extends Authenticatable
 
 
     public function Store() {
-        return $this->hasOne('App\Models\Store');
+        return $this->belongsToMany('App\Models\Store');
     }
 
 
