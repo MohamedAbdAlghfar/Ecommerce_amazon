@@ -40,14 +40,18 @@ public function Stores() {
     return $this->belongsToMany('App\Models\Store');
 }
     
-public function Photos()
+public function Photo()
 {
-    return $this->hasMany('App\Models\Photo');
+    return $this->morphMany('App\Models\Photo', 'photoable');
 }   
 
 public function Comments()
 {
     return $this->hasMany('App\Models\Comments');
+}
+
+public function Users() {
+    return $this->belongsToMany('App\Models\User');
 }
 
 }
