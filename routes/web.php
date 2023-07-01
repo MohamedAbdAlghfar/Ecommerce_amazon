@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */  // ....      
 
-Route::get('/homepage', function () {
-    return view('index');
+Route::get('/loginform' , function(){
+    return view('loginform');
 });
 
 Route::get('/home' , function (){ //here the route for filter produtcts 
