@@ -41,36 +41,48 @@
                 <div class="col-xs-12 col-sm-6">
                   <div class="form-group">
                     <label>First Name<span class="req">*</span> </label>
-                    <input type="text" class="form-control" name="f_name" id="f_name" required data-validation-required-message="Please enter your name." autocomplete="off">
+                    <input type="text" class="form-control" name="F_Name" id="f_name" required data-validation-required-message="Please enter your name." autocomplete="off">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                   <div class="form-group">
                     <label> Last Name<span class="req">*</span> </label>
-                    <input type="text" class="form-control" name="l_name" id="l_name" required data-validation-required-message="Please enter your name." autocomplete="off">
+                    <input type="text" class="form-control" name="L_Name" id="l_name" required data-validation-required-message="Please enter your name." autocomplete="off">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label> Your Email<span class="req">*</span> </label>
-                <input type="email" class="form-control" name="email" id="email" required data-validation-required-message="Please enter your email address." autocomplete="off">
+                <input type="email" class="form-control" name="Email" id="email" required data-validation-required-message="Please enter your email address." autocomplete="off">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
                 <label> Your gender<span class="req">*</span> </label>
-                <input type="text" class="form-control" name="gender" id="gender" required data-validation-required-message="your gender" autocomplete="off">
+                <input type="text" class="form-control" name="Gender" id="gender" required data-validation-required-message="your gender" autocomplete="off">
                 <p class="help-block text-danger"></p>
               </div>
+              {{--  --}}
+              <div class="form-group">
+                <label>Address<span class="req">*</span> </label>
+                <input type="text" class="form-control" name="Address" id="Address" required data-validation-required-message="your gender" autocomplete="off">
+                <p class="help-block text-danger"></p>
+              </div>
+              {{--  --}}
               <div class="form-group">
                 <label> Your Phone<span class="req">*</span> </label>
-                <input type="tel" class="form-control" name="phone" id="phone" required data-validation-required-message="Please enter your phone number." autocomplete="off">
+                <input type="tel" class="form-control" name="Phone" id="phone" required data-validation-required-message="Please enter your phone number." autocomplete="off">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
                 <label> Password<span class="req">*</span> </label>
-                <input type="password" class="form-control" name="password" id="password" required data-validation-required-message="Please enter your password" autocomplete="off">
+                <input type="password" class="form-control" name="Password" id="password" required data-validation-required-message="Please enter your password" autocomplete="off">
+                <p class="help-block text-danger"></p>
+              </div>
+              <div class="form-group">
+                <label>Confirm Password<span class="req">*</span> </label>
+                <input type="password" class="form-control" name="Conf_Password" id="password" required data-validation-required-message="Please enter your password" autocomplete="off">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="mrgn-30-top">
@@ -92,12 +104,12 @@
             <form id="login" action="signup" method="POST">
               <div class="form-group">
                 <label> Your Email<span class="req">*</span> </label>
-                <input type="email" name="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address." autocomplete="off">
+                <input type="email" name="Email" class="form-control" id="email" required data-validation-required-message="Please enter your email address." autocomplete="off">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
                 <label> Password<span class="req">*</span> </label>
-                <input type="password" name="password" class="form-control" id="password" required data-validation-required-message="Please enter your password" autocomplete="off">
+                <input type="password" name="Password" class="form-control" id="password" required data-validation-required-message="Please enter your password" autocomplete="off">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="mrgn-30-top">
