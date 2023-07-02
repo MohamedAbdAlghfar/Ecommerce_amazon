@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('Email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('Password');
-            $table->integer('Kind')->nullable();  //admin or user or user&store-manager or admin-in-store or owner
+            $table->integer('Kind')->nullable()->default(0);  //admin or user or user&store-manager or admin-in-store or owner
             $table->rememberToken();
             $table->timestamps();
         });
