@@ -23,10 +23,11 @@
           <li class="active"><a href="#signup"  role="tab" data-toggle="tab">Sign up</a></li>
           <li><a href="#login"  role="tab" data-toggle="tab">Log in</a></li>
         </ul>
+        {{-- login --}}
         <div class="tab-content">
           <div class="tab-pane fade active in" id="signup">
             <h2 class="text-uppercase text-center"> Sign Up for Free</h2>
-            <form id="signup">
+            <form id="signup" action="adduser" method="POST">
               <div class="row">
                 <div class="col-xs-12 col-sm-6">
                   <div class="form-group">

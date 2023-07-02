@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use app\Http\Contrallers\signupcontraller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/loginform' , function(){
     return view('loginform');
 });
+
+// Route::get('adduser' , 'adduser');
+// Route::post('adduser' , signupcontraller::class , ['store']);
 
 Route::get('/home' , function (){ //here the route for filter produtcts 
     return view('home');
