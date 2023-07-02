@@ -54,8 +54,12 @@ class User extends Authenticatable
     }
 
 
-    public function Store() {
+    public function Stores() {
         return $this->belongsToMany('App\Models\Store');
+    }
+
+    public function Categories() {
+        return $this->belongsToMany('App\Models\Category');
     }
 
 

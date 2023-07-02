@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('Color')->nullable();
             $table->string('Col_1')->nullable();
             $table->integer('Buy')->nullable();
-            $table->string('Description')->nullable();
+            $table->string('Description',500)->nullable(); 
             $table->string('Col_2')->nullable();
             $table->string('Col_3')->nullable();
             $table->string('Col_4')->nullable();
-            $table->string('About')->nullable();  
+            $table->string('About',500)->nullable();  
             $table->string('Name')->nullable();
             $table->string('Brand')->nullable();
             $table->unsignedInteger('Parent_id')->nullable();

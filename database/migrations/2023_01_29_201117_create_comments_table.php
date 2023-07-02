@@ -9,9 +9,9 @@ return new class extends Migration
     
     public function up()
     {
-        Schema::create('commentable', function (Blueprint $table) {
-            $table->id();
-            $table->string('Body');
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();  
+            $table->string('Body',500);
             $table->unsignedInteger('Parent_id')->nullable();
             $table->foreignId('category_id')->constrained();
             $table->integer('user_id');

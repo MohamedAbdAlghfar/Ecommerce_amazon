@@ -12,11 +12,11 @@ return new class extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
           //$table->foreignId('user_id')->constrained();
-            $table->string('Name');
+            $table->string('Name'); 
             $table->string('Phone');                                      // .. Done ..
-            $table->string('About');
+            $table->string('About',500);
             $table->string('Website');
-            $table->string('services');
+            $table->string('services',500);
             $table->string('Location');
             $table->string('Email');
 

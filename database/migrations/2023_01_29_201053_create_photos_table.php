@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->string('Filename');
             $table->integer('photoable_id');
-            $table->string('photoable_type');
+            $table->string('photoable_type'); 
 
             $table->timestamps();
         });

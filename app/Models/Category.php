@@ -11,7 +11,7 @@ class Category extends Model
     protected $fillable = [
         'Name',
         'Col_1',
-        'Col_2',
+        'Col_2',  
         'Col_3',
         'Col_4',
         'Description',
@@ -40,7 +40,7 @@ public function Stores() {
     return $this->belongsToMany('App\Models\Store');
 }
     
-public function Photo()
+public function Photos()
 {
     return $this->morphMany('App\Models\Photo', 'photoable');
 }   

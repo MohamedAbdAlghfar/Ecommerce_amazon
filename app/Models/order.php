@@ -26,10 +26,15 @@ class Order extends Model
      return $this->belongsTo('App\Models\User');
     }
     
+   
+   
     public function Category()
     {
      return $this->belongsTo('App\Models\Category');
     }
+    
+    
+    
     public function ShippingCompany()
     {
      return $this->belongsTo('App\Models\ShippingCompany');

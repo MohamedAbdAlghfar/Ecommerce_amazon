@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('shipping_companies', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->string('Name');
+            $table->string('Name'); 
             $table->string('Phone');
             $table->string('Website');                         // .. Done ..
             $table->string('Email');
