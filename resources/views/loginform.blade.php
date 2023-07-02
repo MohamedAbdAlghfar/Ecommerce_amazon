@@ -23,65 +23,81 @@
           <li class="active"><a href="#signup"  role="tab" data-toggle="tab">Sign up</a></li>
           <li><a href="#login"  role="tab" data-toggle="tab">Log in</a></li>
         </ul>
-        {{-- login --}}
+
+
+
+
+
+
+
+        {{-- sign up part --}}
         <div class="tab-content">
           <div class="tab-pane fade active in" id="signup">
             <h2 class="text-uppercase text-center"> Sign Up for Free</h2>
-            <form id="signup" action="adduser" method="POST">
+            {{--  --}}
+            <form id="signup" action="/signup" method="POST">
+              @csrf
               <div class="row">
                 <div class="col-xs-12 col-sm-6">
                   <div class="form-group">
                     <label>First Name<span class="req">*</span> </label>
-                    <input type="text" class="form-control" id="first_name" required data-validation-required-message="Please enter your name." autocomplete="off">
+                    <input type="text" class="form-control" name="f_name" id="f_name" required data-validation-required-message="Please enter your name." autocomplete="off">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                   <div class="form-group">
                     <label> Last Name<span class="req">*</span> </label>
-                    <input type="text" class="form-control" id="last_name" required data-validation-required-message="Please enter your name." autocomplete="off">
+                    <input type="text" class="form-control" name="l_name" id="l_name" required data-validation-required-message="Please enter your name." autocomplete="off">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label> Your Email<span class="req">*</span> </label>
-                <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address." autocomplete="off">
+                <input type="email" class="form-control" name="email" id="email" required data-validation-required-message="Please enter your email address." autocomplete="off">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
                 <label> Your gender<span class="req">*</span> </label>
-                <input type="email" class="form-control" id="email" required data-validation-required-message="your gender" autocomplete="off">
+                <input type="text" class="form-control" name="gender" id="gender" required data-validation-required-message="your gender" autocomplete="off">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
                 <label> Your Phone<span class="req">*</span> </label>
-                <input type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number." autocomplete="off">
+                <input type="tel" class="form-control" name="phone" id="phone" required data-validation-required-message="Please enter your phone number." autocomplete="off">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
                 <label> Password<span class="req">*</span> </label>
-                <input type="password" class="form-control" id="password" required data-validation-required-message="Please enter your password" autocomplete="off">
+                <input type="password" class="form-control" name="password" id="password" required data-validation-required-message="Please enter your password" autocomplete="off">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="mrgn-30-top">
-                <button type="submit" class="btn btn-larger btn-block"/>
+                <button type="submit" class="btn btn-larger btn-block">
                 Sign up
                 </button>
               </div>
             </form>
           </div>
+
+
+
+
+
+
+          {{-- login part --}}
           <div class="tab-pane fade in" id="login">
             <h2 class="text-uppercase text-center"> Log in</h2>
-            <form id="login">
+            <form id="login" action="signup" method="POST">
               <div class="form-group">
                 <label> Your Email<span class="req">*</span> </label>
-                <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address." autocomplete="off">
+                <input type="email" name="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address." autocomplete="off">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
                 <label> Password<span class="req">*</span> </label>
-                <input type="password" class="form-control" id="password" required data-validation-required-message="Please enter your password" autocomplete="off">
+                <input type="password" name="password" class="form-control" id="password" required data-validation-required-message="Please enter your password" autocomplete="off">
                 <p class="help-block text-danger"></p>
               </div>
               <div class="mrgn-30-top">

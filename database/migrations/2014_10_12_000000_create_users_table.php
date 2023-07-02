@@ -14,13 +14,13 @@ return new class extends Migration
             $table->string('F_Name')->nullable();
             $table->string('L_Name')->nullable();
             $table->string('Phone' )->nullable();
-            $table->integer('Gender')->nullable();
+            $table->string('Gender',6)->nullable();
             $table->string('Address')->nullable();
             $table->string('Email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('Password');
             $table->integer('Kind')->nullable();  //admin or user or user&store-manager or admin-in-store or owner
-            $table->rememberToken();
+            $table->rememberToken()->nullable();
             $table->timestamps();
         });
     }
