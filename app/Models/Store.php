@@ -20,7 +20,7 @@ class Store extends Model
     
     ];
 
-    public function User() {
+    public function Users() {
         return $this->belongsToMany('App\Models\User');
     }
 
