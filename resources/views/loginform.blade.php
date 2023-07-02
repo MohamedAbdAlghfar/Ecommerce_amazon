@@ -35,7 +35,7 @@
           <div class="tab-pane fade active in" id="signup">
             <h2 class="text-uppercase text-center"> Sign Up for Free</h2>
             {{--  --}}
-            <form id="signup" action="/signup" method="POST">
+            <form id="signup" action="signup" method="POST">
               @csrf
               <div class="row">
                 <div class="col-xs-12 col-sm-6">
