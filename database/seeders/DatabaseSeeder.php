@@ -11,6 +11,7 @@ use App\Models\order;
 use App\Models\Photo;
 use App\Models\ShippingCompany;
 use App\Models\Store;
+use App\Models\Cart;
 
 class DatabaseSeeder extends Seeder
 {
@@ -58,8 +59,15 @@ class DatabaseSeeder extends Seeder
     
     
     \App\Models\Photo::factory(131)->create();
-     
-     
+    $carts = \App\Models\Cart::factory(20)->create();     
+    foreach ($carts as $cart) {
+        $category_ids = [];
+        $category_ids[] = Category::all()->random()->id;
+        $category_ids[] = Category::all()->random()->id;
+        $category_ids[] = Category::all()->random()->id;
+    $cart->Categories()->sync($category_ids);
+    
+    }     
 
 
 

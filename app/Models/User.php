@@ -72,4 +72,10 @@ class User extends Authenticatable
         return $this->morphOne('App\Models\Photo', 'photoable');
     }
 
+    public function Cart()
+    {
+        return $this->hasOne('App\Models\Cart');
+    }
+
+
 }
