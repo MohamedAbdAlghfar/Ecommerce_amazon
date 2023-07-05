@@ -54,4 +54,9 @@ public function Users() {
     return $this->belongsToMany('App\Models\User');
 }
 
+public function Carts() {
+    return $this->belongsToMany('App\Models\Cart');
+}
+
+
 }
