@@ -43,3 +43,40 @@ Route::get('/electronics' , function (){ //here the route for filter produtcts
 Route::get('/computers' , function (){ //here the route for filter produtcts 
     return view('Computers');
 });
+
+// admin routes
+//{
+
+    Route::resource('admin', 'App\Http\Controllers\Admin\AdminController');
+    Route::resource('admin/product', 'App\Http\Controllers\Admin\ProductController');
+
+
+
+
+
+
+
+
+
+
+
+
+
+ //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
