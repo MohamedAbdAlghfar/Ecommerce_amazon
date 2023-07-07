@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('Name')->nullable();
             $table->string('Brand')->nullable();
             $table->unsignedInteger('Parent_id')->nullable();
-            $table->integer('Ordering')->nullable();
+           // $table->integer('Ordering')->nullable();
            // $table->biginteger('Store_Id')->nullable();
             
             $table->timestamps();

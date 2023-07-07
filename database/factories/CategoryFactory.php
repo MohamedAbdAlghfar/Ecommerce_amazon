@@ -18,12 +18,12 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-       $ordering = rand(0, 5);
-       if($ordering != 0)
-       $parent_id = Category::where('Ordering',$ordering - 1 )->get()->random()->id;
-       else
-       $parent_id = Category::where('Ordering',0 )->get()->random()->id;
-     // $parent_id = 1;  
+     //  $ordering = rand(0, 5);
+    //   if($ordering != 0)
+       $parent_id = Category::all()->random()->id;
+    //   else
+    //   $parent_id = Category::where('Ordering',0 )->get()->random()->id;
+    //  $parent_id = 1;  
     
       
       
@@ -44,7 +44,7 @@ class CategoryFactory extends Factory
             'About' => fake()->paragraph(),
             'Name' => fake()->name(),
             'Brand' => fake()->name(),
-            'Ordering' => $ordering,
+         //   'Ordering' => $ordering,
           
             'Parent_id' => $parent_id,
 

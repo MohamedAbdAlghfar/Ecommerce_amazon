@@ -27,3 +27,40 @@ Route::controller(Get_category_type_controller::class)->group(function () {
     Route::get('/mobile', 'Mobile');
     Route::get('/kitchen', 'Kitchen');
 });
+
+// admin routes
+//{
+
+    Route::resource('admin', 'App\Http\Controllers\Admin\AdminController');
+    Route::resource('admin/product', 'App\Http\Controllers\Admin\ProductController');
+
+
+
+
+
+
+
+
+
+
+
+
+
+ //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

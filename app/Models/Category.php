@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable = [
+    protected $fillable = [ 
         'Name',
         'Col_1',
         'Col_2',  
@@ -19,13 +19,13 @@ class Category extends Model
         'About',
         'Color',
         'Buy',
-        'Ordering',
+     //   'Ordering',
         'Brand',
-        'Parent',
+        'Parent_id',
         'Price',
-        'Available_Pieces',
+        'Available_Bices',
         'Discount',
-        'Wieght',
+        'Weight',
     ];
     // again fjahlfalhdajkl
     // look if it was changed
