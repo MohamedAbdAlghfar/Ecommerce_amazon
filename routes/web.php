@@ -12,6 +12,7 @@ use App\Http\Middleware\Is_Store_Owner;
 use App\Http\Middleware\Is_User;
 
 
+
 Route::get('signup', function() { return view('loginform'); });
 Route::post('signup' , [signupcontraller::class , 'store']);
 
@@ -26,6 +27,7 @@ Route::get('/home' , function (){ //here the route for filter produtcts
 //<<<<<<< HEAD
 Route::get('/fashion' , function (){ //here the route for filter produtcts 
     return view('fashion');
+});
 // .. Middleware Route Groups ..
 
 Route::middleware([Is_Owner::class])->group(function () {
@@ -35,7 +37,7 @@ Route::middleware([Is_Owner::class])->group(function () {
         // .. Use That If You Didnt Want To Make Check For This Route .. 
     })->withoutMiddleware([Is_Owner::class]);
 });
-
+/*
 Route::middleware([Is_Owner_Assistant::class])->group(function () {
     Route::get('/anything', 'handle');
 });
@@ -54,7 +56,7 @@ Route::middleware([Is_User::class])->group(function () {
 
 // .. End Of Authentication Routes
 
-
+*/
 
 
 
@@ -71,8 +73,9 @@ Route::middleware([Is_User::class])->group(function () {
 
 
 
-
-
+    Route::get('admin/profile/myprofile', ['as' => 'myprofile.edit', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@edit']);
+	
+	Route::put('admin/profile/myprofile', ['as' => 'myprofile.update', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@update']);
 
 
 
@@ -114,3 +117,7 @@ Route::controller(Get_category_type_controller::class)->group(function () {
 //>>>>>>> 6b226dde2fa9348aeca0f3f3d52cd44afe1a8084
 
 //
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

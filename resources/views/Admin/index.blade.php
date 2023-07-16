@@ -308,7 +308,7 @@ section {
    
 </nav>
 <div align = "right">
-<a href="">
+<a href="admin/profile/myprofile">
   <div class="circle">
     
   <img src="https://m.media-amazon.com/images/I/61LjHM2KxfL._AC_UL480_QL65_.jpg" alt="Profile Picture">
