@@ -26,7 +26,7 @@ class signupcontraller extends Controller
             echo "<h1>please write the similar password</h1>";
         }
         
-
+ 
         
     }
 }

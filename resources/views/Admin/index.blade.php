@@ -264,7 +264,23 @@ section {
     }
 }
 
-    </style>
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+}
+
+.circle img {
+  width: 100%;
+  height: auto;
+}
+  
+  </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -284,11 +300,23 @@ section {
         <a href="">Edit Product</a>
         <a href="">Delete Store</a>
         <a href="">Make Discount</a>
-        <a href="">Admin page</a>
+        <a href="admin/profile/admins">Admin page</a>
         <a href="">Recent Sold</a>
         <a href="">Show Product</a>
         <a href="">Requests</a>
-    </nav>
+
+   
+</nav>
+<div align = "right">
+<a href="admin/profile/myprofile">
+  <div class="circle">
+    
+  <img src="https://m.media-amazon.com/images/I/61LjHM2KxfL._AC_UL480_QL65_.jpg" alt="Profile Picture">
+  
+</div>
+</a>
+<font color = "white">MY PROFILE</font>   
+</div>
     <section>
         <div class="Counter">
             <h3>Total money</h3>

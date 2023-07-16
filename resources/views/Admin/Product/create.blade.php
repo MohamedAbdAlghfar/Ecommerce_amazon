@@ -48,7 +48,7 @@ button[type="submit"]:hover {
 </style>
 
 
-
+ 
 
 
 
@@ -84,21 +84,31 @@ button[type="submit"]:hover {
 		<textarea id="About" name="About"></textarea>
         
         <div class="form-group{{ $errors->has('Category_id') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-Category_id">{{ __('Parent Title') }}</label>
-                                    
-                                    <select name="Parent_id" required class="form-control">
-                                    <option value="0">Null</option>    
-                                    @foreach(\App\Models\Category::orderBy('id', 'desc')->get() as $Category)
-                                        <option value="{{ $Category->id}}">{{ $Category->Name}}</option>
-                                        @endforeach
-                                    </select>
+    <label class="form-control-label" for="input-Category_id">{{ __('Parent Title') }}</label>
+    
+    <select id="category-select" name="Parent_id" required class="form-control">
+        <option value="0">Null</option>
+        @foreach(\App\Models\Category::orderBy('id', 'desc')->get() as $Category)
+            <option value="{{ $Category->id}}">{{ $Category->Name}}</option>
+        @endforeach
+    </select>
 
-                                    @if ($errors->has('Category_id'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('Category_id') }}</strong>
-                                        </span>
-                                    @endif
+    @if ($errors->has('Category_id'))
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('Category_id') }}</strong>
+        </span>
+    @endif
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#category-select').select2();
+    });
+</script>
         <label for="col_1">Aditional_info:</label>
 		<input type="text" id="col_1" name="Col_1" >
         
