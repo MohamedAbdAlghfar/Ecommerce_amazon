@@ -16,36 +16,56 @@ Route::get('signup', function() { return view('loginform'); });
 Route::post('signup' , [signupcontraller::class , 'store']);
 
 
-Route::get('/home' , function (){ //here the route for filter produtcts 
-    return view('home');
+Route::get('/link' , function (){ //here the route for filter produtcts 
+    return 'hello world';
 });
+
+
+Route::get('/topnav' , function(){
+    return view('topnav');
+});
+
+
+
+// .. Home Page Routes ..
+Route::prefix('admin')->group(function () {
+    Route::get('/users', function () {
+        // Matches The "/admin/users" URL
+    });
+});
+// .. End Of Home Page Routes ..
+
+
+
+
+
 
 
 // .. Middleware Route Groups ..
 
 Route::middleware([Is_Owner::class])->group(function () {
-    Route::get('/add-admin', [ProductController::class , 'store']);
+   // Route::get('/add-admin', [ProductController::class , 'store']);
 
     Route::get('/profile', function () {
         // .. Use That If You Didnt Want To Make Check For This Route .. 
     })->withoutMiddleware([Is_Owner::class]);
 });
 
-Route::middleware([Is_Owner_Assistant::class])->group(function () {
-    Route::get('/anything', 'handle');
-});
+// Route::middleware([Is_Owner_Assistant::class])->group(function () {
+//     Route::get('/anything', 'handle');
+// });
 
-Route::middleware([Is_Store_Admin::class])->group(function () {
-    Route::get('/anything', 'handle');
-});
+// Route::middleware([Is_Store_Admin::class])->group(function () {
+//     Route::get('/anything', 'handle');
+// });
 
-Route::middleware([Is_Store_Owner::class])->group(function () {
-    Route::get('/anything', 'handle');
-});
+// Route::middleware([Is_Store_Owner::class])->group(function () {
+//     Route::get('/anything', 'handle');
+// });
 
-Route::middleware([Is_User::class])->group(function () {
-    Route::get('/anything', 'handle');
-});
+// Route::middleware([Is_User::class])->group(function () {
+//     Route::get('/anything', 'handle');
+// });
 
 // .. End Of Authentication Routes
 

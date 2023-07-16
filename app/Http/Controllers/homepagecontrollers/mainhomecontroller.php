@@ -9,40 +9,53 @@ use App\Http\Controllers\homepagecontrollers\Bestsellercontroller;
 
 class mainhomecontroller extends Controller
 {
+    public function __construct() {
+        // .. Best Seller Part
+        // all have the same "Logic"..
+        $this->best_books = DB::table('categories')->select('image','name','price')
+        ->where('parent_id',1)->orderBy('Buy', 'desc')->take(10)->get();
+
+        $this->best_kitchen = DB::table('categories')->select('image','name','price')
+        ->where('parent_id',2)->orderBy('Buy', 'desc')->take(10)->get();
+
+        $this->best_sports = DB::table('categories')->select('image','name','price')
+        ->where('parent_id',3)->orderBy('Buy', 'desc')->take(10)->get();
+
+        $this->best_electronics= DB::table('categories')->select('image','name','price')
+        ->where('parent_id',4)->orderBy('credit', 'desc')->take(10)->get();
+
+        $this->best_computers = DB::table('categories')->select('image','name','price')
+        ->where('parent_id',5)->orderBy('credit', 'desc')->take(10)->get();
+
+        $this->best_supermarket = DB::table('categories')->select('image','name','price')
+        ->where('parent_id',6)->orderBy('credit', 'desc')->take(10)->get();
+
+        $this->best_fashion = DB::table('categories')->select('image','name','price')
+        ->where('parent_id',7)->orderBy('credit', 'desc')->take(10)->get();
+
+        $this->best_home = DB::table('categories')->select('image','name','price')
+        ->where('parent_id',8)->orderBy('credit', 'desc')->take(10)->get();
+
+        $this->best_phones = DB::table('categories')->select('image','name','price')
+        ->where('parent_id',9)->orderBy('credit', 'desc')->take(10)->get();
+
+        $this->best_makeup = DB::table('categories')->select('image','name','price')
+        ->where('parent_id',10)->orderBy('credit', 'desc')->take(10)->get();
+
+    }
     public function getdata()
     {
-        mainhomecontroller::get_fashion();
-        mainhomecontroller::get_kitchen();
-        mainhomecontroller::get_home();
-        mainhomecontroller::get_sports();
-        mainhomecontroller::get_books();
-        mainhomecontroller::get_mobile_phones();
-        mainhomecontroller::get_pc();
-        mainhomecontroller::get_electronics();
-        mainhomecontroller::get_makeup();
-        mainhomecontroller::get_supermarket();
 
-        // .. Best Seller Part ..
-        Bestsellercontroller::best_computers();
-        Bestsellercontroller::best_kitchen();
-        Bestsellercontroller::best_home();
-        Bestsellercontroller::best_books();
-        Bestsellercontroller::best_electronics();
-        Bestsellercontroller::best_supermarket();
-        Bestsellercontroller::best_makeup();
-        Bestsellercontroller::best_mobilephones();
-        Bestsellercontroller::best_sports();
-        Bestsellercontroller::get_computers();
-
-        return view('homepage', compact('fashion',
-        'kitchen',
-        'books',
-        'home',
-        'pc',
-        'sports',
-        'electronics',
-        'phones',
-        'beauty_and_makeup',
-        'supermarket'));
+        return view('homepage', compact(
+        'best_books',
+        'best_kitchen',
+        'best_sports',
+        'best_electronics',
+        'best_computers',
+        'best_supermarket',
+        'best_fashion',
+        'best_home',
+        'best_phones',
+        'best_makeup'));
     }
 }
