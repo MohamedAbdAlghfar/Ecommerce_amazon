@@ -21,27 +21,9 @@ Route::get('/link' , function (){ //here the route for filter produtcts
     return 'hello world';
 });
 
-
-Route::get('/topnav' , function(){
+Route::get('/nav', function(){
     return view('topnav');
 });
-
-
-
-// .. Home Page Routes ..
-Route::prefix('admin')->group(function () {
-    Route::get('/users', function () {
-        // Matches The "/admin/users" URL
-    });
-});
-// .. End Of Home Page Routes ..
-
-
-
-
-
-
-
 
 
 //<<<<<<< HEAD
@@ -58,6 +40,10 @@ Route::middleware([Is_Owner::class])->group(function () {
     })->withoutMiddleware([Is_Owner::class]);
 });
 
+// Route::middleware([Is_Owner_Assistant::class])->group(function () {
+//     Route::get('/anything', 'handle');
+// });
+/*
 Route::middleware([Is_Owner_Assistant::class])->group(function () {
     Route::get('/anything', 'handle');
 });

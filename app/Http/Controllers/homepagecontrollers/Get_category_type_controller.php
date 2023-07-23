@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class Get_category_type_controller extends Controller
 {
-    //functions of the cards in home page 
+    // .. those functions for show category type pages that shows one type like fashion or other .. 
 
     public function get_fashion(){
         $fashion = DB::table('categories')->where('Parent_id',1)->get();
