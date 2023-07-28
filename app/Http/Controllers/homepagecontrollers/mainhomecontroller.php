@@ -4,30 +4,31 @@ namespace App\Http\Controllers\homepagecontrollers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\homepagecontrollers\mainhomecontroller;
 use App\Http\Controllers\homepagecontrollers\Bestsellercontroller;
+use App\Models\category;
 
 class mainhomecontroller extends Controller
 {
     public function __construct() {
-        // .. Best Seller Part
+        // .. Get Best Seller Products ..
 
-        $Best_Seller = array();
+        $Best_Seller= array();
 
-           for ($i = 1; $i <= 10; $i++) {
-                $category = DB::table('categories')
-                    ->select('image', 'name', 'price')
-                    ->where('parent_id', $i)
-                    ->orderBy('credit', 'desc')
-                    ->take(10)
-                    ->get();
-
-                $Best_Seller[$i] = $category;
-            }
-
+        for ($i = 1; $i <= 10; $i++) {
+            $category = Category::select('Name', 'Price')
+                ->where('Parent_Id', $i)
+                ->orderBy('Buy', 'desc')
+                ->take(10)
+                ->get();
+        
+            $this->Best_Seller[$i] = $category;
+        }        
+            
     }
-    public function getdata()
+    public function getdata($id)
     {
-        return view('homepage', compact('Best_Seller'));
+        return $this->Best_Seller[$id];
     }
 }
