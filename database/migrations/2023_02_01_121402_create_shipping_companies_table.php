@@ -11,12 +11,13 @@ return new class extends Migration
     {
         Schema::create('shipping_companies', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->string('Name'); 
-            $table->string('Phone');
-            $table->string('Website');                         // .. Done ..
-            $table->string('Email');
-            $table->string('Address');
-            $table->string('Location');
+            $table->string('name');   
+            $table->string('phone'); 
+            $table->string('website');                         // .. Done ..
+            $table->string('email'); 
+            $table->string('address');
+            $table->string('location');
+            $table->string('cover_image'); 
             $table->timestamps();
         });
     }

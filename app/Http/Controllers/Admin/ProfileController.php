@@ -15,7 +15,7 @@ class ProfileController extends Controller
     public function index()
     {
         
-        $admins = User::where('Kind', 1)->get();        
+        $admins = User::where('kind', 1)->get();        
         return view('Admin\Profile\index',compact('admins'));
 
 

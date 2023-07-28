@@ -14,11 +14,11 @@ class CartFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition()  
     {
         $user_id = User::all()->random()->id;
         return [
-            'user_id' => $user_id,
+            'user_id' => $user_id, 
         ];
     }
 }

@@ -2,7 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\homepagecontrollers\mainhomecontroller;
+=======
+use App\Http\Controllers\Admin\RecentController;
+
+
+>>>>>>> f7a9a10e887551562d5c45ebeeaf7dc4f6020819
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,3 +29,5 @@ Route::get('/test' , function (){
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('admin/Product/recent' , [RecentController::class ,'index']);

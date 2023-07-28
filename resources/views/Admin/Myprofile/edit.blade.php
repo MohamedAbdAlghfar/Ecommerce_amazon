@@ -90,7 +90,7 @@ button[type="submit"]:hover {
       <div class="profile">
         <div class="avatar">
             @if($admin->Photo)
-                                <img src="/images/{{$admin->Photo->Filename}}" class="card-img-top" alt="admin Photo">
+                                <img src="/images/{{$admin->Photo->filename}}" class="card-img-top" alt="admin Photo">
                                 @else
                                 <img  src="/images/default.jpeg" class="card-img-top" alt="admin Photo">
                                 @endif </div>
@@ -101,26 +101,30 @@ button[type="submit"]:hover {
           @csrf
           @method('put')
           <label for="name">First Name:</label>
-		<input type="text" id="name" name="F_Name" required value= "{{ $admin->F_Name }}">
+		<input type="text" id="name" name="f_name" required value= "{{ $admin->f_name }}">
         <br><br><br><br>
         <label for="name">Last Name:</label>
-		<input type="text" id="name" name="L_Name" required value= "{{ $admin->L_Name }}">
+		<input type="text" id="name" name="l_name" required value= "{{ $admin->l_name }}">
         <br><br><br><br>
        
         <label for="email">Email:</label>
-		<input type="text" id="email" name="Email" required value= "{{ $admin->Email }}">
+		<input type="text" id="email" name="email" required value= "{{ $admin->email }}">
 
         <br><br><br><br>
         <label for="address">Address:</label>
-		<input type="text" id="address" name="Address" required value= "{{ $admin->Address }}">
+		<input type="text" id="address" name="address" required value= "{{ $admin->address }}">
         
         <br><br><br><br>
         <label for="phone">Phone:</label>
-		<input type="text" id="phone" name="Phone" required value= "{{ $admin->Phone }}">
+		<input type="text" id="phone" name="phone" required value= "{{ $admin->phone }}">
 
         <br><br><br><br>
         <label for="gender">Gender:</label>
-		<input type="text" id="gender" name="Gender" required value= "{{ $admin->Gender }}">
+<select id="gender" name="gender" >
+    <option value="" disabled selected>{{ $admin->gender == 0 ? 'male' : 'female' }}</option>
+    <option value="male"{{ $admin->gender == 'male' ? ' selected' : '' }}>Male</option>
+    <option value="female"{{ $admin->gender == 'female' ? ' selected' : '' }}>Female</option>
+</select>
     <br><br><br>
     <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-image">{{ __('change your picture') }}</label>

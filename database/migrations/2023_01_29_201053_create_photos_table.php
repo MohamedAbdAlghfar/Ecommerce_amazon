@@ -11,11 +11,10 @@ return new class extends Migration
     {
         Schema::create('photoable', function (Blueprint $table) {
             $table->id();
-            $table->string('Filename');
+            $table->string('filename');  
             $table->integer('photoable_id');
             $table->string('photoable_type'); 
-
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 

@@ -37,20 +37,20 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'Name' => 'required|min:5|max:150',
-            'Available_Bices' => 'required',
-            'Price' => 'required',
-            'Brand' => 'required',
-            'Color' => 'required',
-            'Weight' => 'required',
-            'Description' => 'required',
-            'About' => 'required',
-            'Parent_id' => 'required',
+            'name' => 'required|min:5|max:150',
+            'available_pieces' => 'required',
+            'price' => 'required',
+            'brand' => 'required',
+            'color' => 'required',
+            'weight' => 'required',
+            'description' => 'required',
+            'about' => 'required',
+            'parent_id' => 'required',
             'image' => 'required',                
         ]; 
         $this->validate($request, $rules);
 
-        $Category = Category::create($request->merge(["Parent_id" => $request->get('Parent_id'),"Buy" => 0])->all());
+        $Category = Category::create($request->merge(["parent_id" => $request->get('parent_id'),"buy" => 0])->all());
 
         if($Category) {
             
@@ -62,7 +62,7 @@ class ProductController extends Controller
 
                 if($file->move('images', $file_to_store)) {
                     photo::create([
-                        'Filename' => $file_to_store,
+                        'filename' => $file_to_store,
                         'photoable_id' => $Category->id,
                         'photoable_type' => 'App\Models\Category',
                     ]);

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+
+.recent-sold {
+  margin-top: 20px;
+}
+
+.recent-sold h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.sold-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.sold-item {
+  border: 3px solid #ccc;
+  padding: 10px;
+}
+
+.sold-item img {
+  width: 40%;
+  margin-bottom: 10px;
+}
+
+.sold-item h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.sold-date {
+  font-style: italic;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.sold-price {
+  font-weight: bold;
+  font-size: 16px;
+  color: black;
+}
+
+.fixed-size-img {
+  width: 100px;
+  height: 100px;
+}
+   
+.back-button {
+  background-color: red;
+  color: white;
+  border: 1px solid black;
+  padding: 5px 10px;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+   </style>
+  </head>
+
+
+<body bgcolor = "#008374">
+
+<div class="recent-sold">
+  <h2>Recent Sold Items</h2>
+  <div class="sold-grid">
+  @foreach ($recentorder as $recentorder) 
+  <div class="sold-item">
+ <div class="fixed-size-img">
+ @if ($recentorder->Category->Photos->isNotEmpty())
+    <img src="{{ $recentorder->Category->Photos->first()->filename }}">
+@else
+    <p> NO IMAGE FOUND </p>
+@endif
+
+</div> 
+  <h3>{{ $recentorder->Category->name }}</h3>
+      <p class="sold-date"><font color="black"><b>Sold on </b></font> :: {{ $recentorder->created_at }}</p>
+      <p class="sold-price">$ {{ $recentorder->price }}</p>
+      <p class="sold-price"><font color="black">THE BUYER :: </font> {{ $recentorder->User->f_name }}</p>
+      <p class="sold-price"><font color="black">LOCATION OF ORDER </font> ::{{ $recentorder->location }} </p>
+      <p class="sold-price"><font color="black">OTHER AVAILABLE PIECES </font> ::{{ $recentorder->Category->available_pieces }} </p>
+    </div>
+@endforeach
+</div>
+</div>
+</div>
+<br>
+<a href="{{ route('admin.index') }}" class="back-button">Back</a>
+</body>
+
+
+
+
+
+
+
+</html>

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\Rejestrationcontrallers\signupcontraller;
 use App\Http\Controllers\homepagecontrollers\Get_category_type_controller;
-use App\Http\Controllers\homepagecontrollers\mainhomecontroller;
 use App\Http\Controllers\homepagecontrollers\ProductController;
 use App\Http\Middleware\Is_Owner;
 use App\Http\Middleware\Is_Owner_Assistant;
@@ -76,12 +75,13 @@ Route::middleware([Is_Owner_Assistant::class])->group(function () {
     Route::resource('admin', 'App\Http\Controllers\Admin\AdminController');
     Route::resource('admin/product', 'App\Http\Controllers\Admin\ProductController');
     Route::resource('admin/profile/admins', 'App\Http\Controllers\Admin\ProfileController');
-
-
+    Route::resource('admin/Product/recent', 'App\Http\Controllers\Admin\RecentController');
 
     Route::get('admin/profile/myprofile', ['as' => 'myprofile.edit', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@edit']);
 	
 	Route::put('admin/profile/myprofile', ['as' => 'myprofile.update', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@update']);
+
+
 
 
 
@@ -124,6 +124,6 @@ Route::controller(Get_category_type_controller::class)->group(function () {
 
 //
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

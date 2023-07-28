@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\User;
+use App\Models\Product;
 use App\Models\ShippingCompany;
 use App\Models\Store;
 use App\Models\Category;
@@ -19,25 +19,16 @@ class photoFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition()
-    {  $user_id = User::all()->random()->id;
-       $shipingcom_id = ShippingCompany::all()->random()->id;
-       $store_id =  Store::all()->random()->id;
-       $category_id = Category::all()->random()->id; 
-       $photoable_id = fake()->randomElement([$user_id,$shipingcom_id,$store_id,$category_id]) ;
-       $photoable_type = ""; 
-       if($photoable_id == $user_id)
-       $photoable_type = 'App\Models\User';
-       elseif($photoable_id == $shipingcom_id)
-       $photoable_type = 'App\Models\ShippingCompany';
-       elseif($photoable_id == $store_id)
-       $photoable_type = 'App\Models\Store';
-       else
-       $photoable_type = 'App\Models\Category';
+    {  $photoable_id= Product::all()->random()->id;
+        
+       
+       $photoable_type = 'App\Models\Product';
+       
 
 
 
         return [
-            'Filename' => fake()->randomElement([
+            'filename' => fake()->randomElement([
             'https://m.media-amazon.com/images/I/61iQu0VHEWL._AC_UL480_FMwebp_QL65_.jpg',
             'https://m.media-amazon.com/images/I/61xW8gDKGGL._AC_UL480_FMwebp_QL65_.jpg',
             'https://m.media-amazon.com/images/I/71JouV4uIVL._AC_UL480_FMwebp_QL65_.jpg',
@@ -48,8 +39,8 @@ class photoFactory extends Factory
             'https://m.media-amazon.com/images/I/410pPI-1NRL._SY500__AC_SY230_.jpg',
             'https://m.media-amazon.com/images/I/4165BwTcQzL._AC._SR360,460.jpg',
             'https://m.media-amazon.com/images/I/71tduSp8ooL._AC._SR360,460.jpg']),
-            'photoable_id' => $photoable_id,
-            'photoable_type' => $photoable_type,
+            'photoable_id' => $photoable_id, 
+            'photoable_type' => $photoable_type, 
 
         ];
     }

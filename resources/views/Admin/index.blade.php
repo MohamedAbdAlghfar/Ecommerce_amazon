@@ -300,8 +300,8 @@ section {
         <a href="">Edit Product</a>
         <a href="">Delete Store</a>
         <a href="">Make Discount</a>
-        <a href="admin/profile/admins">Admin page</a>
-        <a href="">Recent Sold</a>
+        <a href="admin/profile/admins">Admins page</a>
+        <a href="admin/Product/recent">Recent Sold</a>
         <a href="">Show Product</a>
         <a href="">Requests</a>
 

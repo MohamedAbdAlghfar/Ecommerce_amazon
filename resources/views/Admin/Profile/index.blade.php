@@ -27,10 +27,10 @@
         @foreach ($admins as $admin)
         <tr>
             <td align = "center">{{ $admin->id }}</td>
-            <td align = "center">{{ $admin->F_Name }}</td>
-            <td align = "center">{{ $admin->L_Name }}</td>
-            <td align = "center">{{ $admin->Email }}</td>
-            <td align = "center">{{ $admin->Phone }}</td>
+            <td align = "center">{{ $admin->f_name }}</td>
+            <td align = "center">{{ $admin->l_name }}</td>
+            <td align = "center">{{ $admin->email }}</td>
+            <td align = "center">{{ $admin->phone }}</td>
         </tr>        
         @endforeach
     </tbody>
