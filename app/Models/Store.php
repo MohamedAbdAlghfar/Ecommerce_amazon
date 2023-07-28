@@ -9,28 +9,28 @@ class Store extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'Name',
-        'Email',
+        'name',  
+        'email',
         'id',
-        'Location',
-        'Services',
-        'Phone',
-        'Link_Website',
-        'About_Store',
-    
+        'location',
+        'services', 
+        'phone',
+        'link_website',  
+        'about_store',
+        'store_cover',
+        'store_image',
+        'user_id'
     ];
 
-    public function Users() {
-        return $this->belongsToMany('App\Models\User');
+    public function User() {
+        return $this->belongsTo(User::class);
     }
 
 
-    public function Photo() {
-        return $this->morphOne('App\Models\Photo', 'photoable');
-    }
+    
 
-    public function Categories() {
-        return $this->belongsToMany('App\Models\Category');
+    public function Products() {
+        return $this->hasMany(Product::class);
     }
 
 

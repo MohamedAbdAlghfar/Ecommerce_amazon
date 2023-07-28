@@ -18,14 +18,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'F_Name',
-        'Email',        
+        'f_name',
+        'email',         
         'id',
-        'Gender',
-        'Address',
-        'Kind',
-        'Phone',
-        'L_Name',
+        'gender',
+        'address',  
+        'kind',
+        'phone',
+        'l_name',
+        'password', 
+        'profile_image',
     
     ];
 
@@ -50,32 +52,28 @@ class User extends Authenticatable
 
     public function Orders()
     {
-        return $this->hasMany('App\Models\Order');
+        return $this->hasMany(order::class);
     }
 
 
-    public function Stores() {
-        return $this->belongsToMany('App\Models\Store');
+    public function Store()
+    {
+        return $this->hasOne(Store::class);
     }
 
-    public function Categories() {
-        return $this->belongsToMany('App\Models\Category');
+    public function Cart() {
+        return $this->hasOne(Cart::class);
     }
 
 
     public function Comments()
     {
-        return $this->hasMany('App\Models\Comments');
+        return $this->hasMany(Comments::class);
     }
 
-    public function Photo() {
-        return $this->morphOne('App\Models\Photo', 'photoable');
-    }
+    
 
-    public function Cart()
-    {
-        return $this->hasOne('App\Models\Cart');
-    }
+    
 
 
 }

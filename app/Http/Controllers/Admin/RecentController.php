@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
-use App\Models\User;
-use App\Models\Store;
-class AdminController extends Controller
+class RecentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,19 +14,13 @@ class AdminController extends Controller
      */
     public function index()
     {
-         
-        $user_count = User::where('kind',0)->count();
-        $store_count = Store::all()->count();
-        $totalPrice_in_day = Order::whereDate('created_at', today())->sum('Price');
-        $totalPrice_in_month = Order::whereMonth('created_at', now()->month)
-        ->whereYear('created_at', now()->year)
-        ->sum('price');
-        $total_order_price = Order::all()->sum('price');
-        return view('Admin\index',compact('user_count','store_count','totalPrice_in_day','totalPrice_in_month','total_order_price'));
+    $recentorder = Order::orderBy('created_at', 'desc')->get();
+return $recentorder;
+
     }
 
     /**
-     * Show the form for creating a new resource. 
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */

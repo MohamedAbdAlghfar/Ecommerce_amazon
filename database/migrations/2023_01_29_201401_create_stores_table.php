@@ -12,14 +12,16 @@ return new class extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
           //$table->foreignId('user_id')->constrained();
-            $table->string('Name'); 
-            $table->string('Phone');                                      // .. Done ..
-            $table->string('About',500);
-            $table->string('Website');
-            $table->string('services',500);
-            $table->string('Location');
-            $table->string('Email');
-
+            $table->string('name'); 
+            $table->string('about_store',500);  
+            $table->string('phone');                                      // .. Done ..
+            $table->string('link_website');
+            $table->string('services',500);    
+            $table->string('location');
+            $table->string('email');
+            $table->string('store_cover');
+            $table->string('store_image');  
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

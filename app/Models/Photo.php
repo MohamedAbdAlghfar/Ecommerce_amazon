@@ -10,14 +10,14 @@ class Photo extends Model
     use HasFactory;
     protected $table = 'photoable' ;
     protected $fillable = [
-        'Filename',
-    	'photoable_id', 
-    	'photoable_type',
+        'filename', 
+    	'photoable_id',  
+    	'photoable_type', 
     ];
   
   public function photoable ()
 {
-        return $this->morphTo('App\Models\Photo');
+        return $this->morphTo(Photo::class);
 }
 
 

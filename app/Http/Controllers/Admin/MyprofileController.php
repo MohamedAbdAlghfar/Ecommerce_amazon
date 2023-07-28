@@ -69,14 +69,21 @@ class MyprofileController extends Controller
     {
         
         $admin = User::where('id', 2)->first();
-        $admin->update($request->all());
+        $data = $request->all();
+        if($data['gender'] == 'male') {
+            $data['gender'] = 0;
+        }
+        else{
+            $data['gender'] = 1;
+        }
+        $admin->update($data);
 
 
         if($file = $request->file('image')) {
 
-            $Filename = $file->getClientOriginalName();
+            $filename = $file->getClientOriginalName();
             $fileextension = $file->getClientOriginalExtension();
-            $file_to_store = time() . '_' . explode('.', $Filename)[0] . '_.'.$fileextension;
+            $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
 
             if($file->move('images', $file_to_store)) {
                 if($admin->Photo) {
@@ -84,17 +91,17 @@ class MyprofileController extends Controller
 
                     // remove the old image
 
-                    $Filename = $Photo->Filename;
-                    if(file_exists('images/'.$Filename)) {
+                    $filename = $Photo->filename;
+                    if(file_exists('images/'.$filename)) {
                         // delete the file
-                        unlink('images/'.$Filename);
+                        unlink('images/'.$filename);
                     }
 
-                    $Photo->Filename = $file_to_store;
+                    $Photo->filename = $file_to_store;
                     $Photo->save();
                 }else {
                     Photo::create([
-                        'Filename' => $file_to_store,
+                        'filename' => $file_to_store,
                         'photoable_id' => $admin->id,
                         'photoable_type' => 'App\Models\User',
                     ]);

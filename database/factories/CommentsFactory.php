@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
 use App\Models\Comments;
 /**
@@ -20,12 +20,12 @@ class CommentsFactory extends Factory
     {
         
         $user_id = User::all()->random()->id;
-        $category_id = Category::all()->random()->id;
+        $product_id = Product::all()->random()->id;
         return [
-            'Body' => fake()->paragraph(),
-            'Parent_id' => fake()->numberBetween(0,100),
+            'body' => fake()->paragraph(), 
+            'parent_id' => fake()->numberBetween(0,100),
             'user_id' => $user_id,
-            'category_id' => $category_id,
+            'product_id' => $product_id,  
 
 
 

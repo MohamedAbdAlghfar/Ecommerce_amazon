@@ -9,19 +9,21 @@ class Comments extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'Body',
-        'Parent',        
+        'body', 
+        'parent_id', 
+        'product_id',
+        'user_id',        
         'id',
         
     ];
 
-    public function User()
+    public function User() 
     {
-     return $this->belongsTo('App\Models\User');
+     return $this->belongsTo(User::class);
     }
 
-    public function Category()
+    public function Product() 
     {
-     return $this->belongsTo('App\Models\Category');
+     return $this->belongsTo(Product::class);
     }
 }

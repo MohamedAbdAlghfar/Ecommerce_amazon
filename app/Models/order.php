@@ -8,13 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    protected $fillable = [        
-        'Order_Date',        
+    protected $fillable = [               
         'id',
-        'Location',
-        'Trans_Date',    
-        'Price',
-        'Discount',
+        'location', 
+        'trans_date',     
+        'price',
+        'discount', 
+        'user_id',
+        'shipping_company',
+        'product_id', 
+
 
     ];
 
@@ -23,21 +26,21 @@ class Order extends Model
     // order comment on new 
     public function User()
     {
-     return $this->belongsTo('App\Models\User');
+     return $this->belongsTo(User::class);
     }
     
    
    
-    public function Category()
+    public function Product()
     {
-     return $this->belongsTo('App\Models\Category');
+     return $this->belongsTo(Product::class);
     }
     
     
     
     public function ShippingCompany()
     {
-     return $this->belongsTo('App\Models\ShippingCompany');
+     return $this->belongsTo(ShippingCompany::class);
     }
 
 }

@@ -10,22 +10,21 @@ class ShippingCompany extends Model
     use HasFactory;
     use HasFactory;
     protected $fillable = [
-        'Name',
-        'Email',
+        'name', 
+        'email',
         'id',
-        'Location',
-        'Phone',
-        'Website',
-        'Address',
+        'location', 
+        'phone',
+        'website',
+        'address',
+        'cover_image',
     ];
 
-    public function Photo() {
-        return $this->morphOne('App\Models\Photo', 'photoable');
-    }
+    
 
-    public function Orders()
+    public function Orders() 
 {
-    return $this->hasMany('App\Models\Order');
+    return $this->hasMany(order::class);
 }
 
 
