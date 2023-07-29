@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Rejestrationcontrallers;
+namespace App\Http\Controllers\RejestrationContrallers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-class signupcontraller extends Controller
+class SignUpController extends Controller
 {
     public function store(Request $Request)
     {

@@ -2,30 +2,44 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\homepagecontrollers\mainhomecontroller;
-use App\Http\Controllers\Admin\RecentController;
+use App\Http\Controllers\RejestrationContrallers\{SignUpController,LoginController};
+use App\Http\Controllers\HomePageControllers\{MainHomeController,UserProfileController};
+use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController};
+use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
 
 
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| API Routes   - Mohammed
 |--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
 */
 
-Route::get('/category' , [mainhomecontroller::class , 'getCategory']);
-Route::get('/product/{id}' , [mainhomecontroller::class , 'getProduct']);
+Route::prefix('my-api')->group(function(){
 
-Route::get('/test' , function (){
-    return "Authenticated";
+    Route::get('admin/Product/recent' , [RecentController::class ,'index']);
+
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('admin/Product/recent' , [RecentController::class ,'index']);
+
+/*
+|--------------------------------------------------------------------------
+| API Routes   - Abdullah
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('my-api')->group(function () {
+  
+    Route::get('/category' , [MainHomeController::class , 'getCategory']);
+    Route::get('/product/{id}' , [MainHomeController::class , 'getProduct']);
+    Route::get('' , [UserProfileController::class]);
+
+    Route::middleware([Is_Owner::class])->group(function () {
+
+        Route::get('/profile', function () {
+        })->withoutMiddleware([Is_Owner::class]);
+    });
+});
