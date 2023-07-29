@@ -4,45 +4,39 @@ namespace App\Http\Controllers\homepagecontrollers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\homepagecontrollers\mainhomecontroller;
 use App\Http\Controllers\homepagecontrollers\Bestsellercontroller;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\User;
 
 class mainhomecontroller extends Controller
 {
-    public function getdata()
+    public function __construct() {
+        // .. Get Best Seller Products ..
+
+        $Best_Seller= array();
+
+        for ($i = 1; $i <= 10; $i++) {
+            $Product = Product::select('name', 'price')
+                ->where('category_id', $i)
+                ->orderBy('Buy', 'desc')
+                ->take(10)
+                ->get();
+        
+            $this->Best_Seller[$i] = $Product;
+        }
+        $this->categories = Category::select('id','name','parent_id', 'image')->whereBetween('id', [1, 10])->get();
+
+    }
+
+    public function getCategory(){
+        return response()->json($this->categories);
+    }
+
+    public function getProduct($id)
     {
-        mainhomecontroller::get_fashion();
-        mainhomecontroller::get_kitchen();
-        mainhomecontroller::get_home();
-        mainhomecontroller::get_sports();
-        mainhomecontroller::get_books();
-        mainhomecontroller::get_mobile_phones();
-        mainhomecontroller::get_pc();
-        mainhomecontroller::get_electronics();
-        mainhomecontroller::get_makeup();
-        mainhomecontroller::get_supermarket();
-
-        // .. Best Seller Part ..
-        Bestsellercontroller::best_computers();
-        Bestsellercontroller::best_kitchen();
-        Bestsellercontroller::best_home();
-        Bestsellercontroller::best_books();
-        Bestsellercontroller::best_electronics();
-        Bestsellercontroller::best_supermarket();
-        Bestsellercontroller::best_makeup();
-        Bestsellercontroller::best_mobilephones();
-        Bestsellercontroller::best_sports();
-        Bestsellercontroller::get_computers();
-
-        return view('homepage', compact('fashion',
-        'kitchen',
-        'books',
-        'home',
-        'pc',
-        'sports',
-        'electronics',
-        'phones',
-        'beauty_and_makeup',
-        'supermarket'));
+        return response()->json($this->Best_Seller[$id]);
     }
 }
