@@ -14,7 +14,7 @@ use App\Models\User;
 class mainhomecontroller extends Controller
 {
     public function __construct() {
-        // .. Get Best Seller Products ..
+        // .. Get Best Seller Products .. 
 
         $Best_Seller= array();
 
