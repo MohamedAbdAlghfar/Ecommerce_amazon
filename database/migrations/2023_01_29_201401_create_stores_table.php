@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('store_cover');
             $table->string('store_image');  
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

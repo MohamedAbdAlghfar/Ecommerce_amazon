@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('body',500); 
             $table->unsignedInteger('parent_id')->nullable();
             $table->foreignId('product_id')->constrained();
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

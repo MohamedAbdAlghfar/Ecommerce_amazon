@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Order;
+use App\Models\order;
 use App\Models\User;
 use App\Models\Store;
 class AdminController extends Controller
@@ -19,11 +19,11 @@ class AdminController extends Controller
          
         $user_count = User::where('kind',0)->count();
         $store_count = Store::all()->count();
-        $totalPrice_in_day = Order::whereDate('created_at', today())->sum('Price');
-        $totalPrice_in_month = Order::whereMonth('created_at', now()->month)
+        $totalPrice_in_day = order::whereDate('created_at', today())->sum('price');
+        $totalPrice_in_month = order::whereMonth('created_at', now()->month)
         ->whereYear('created_at', now()->year)
         ->sum('price');
-        $total_order_price = Order::all()->sum('price');
+        $total_order_price = order::all()->sum('price');
         return view('Admin\index',compact('user_count','store_count','totalPrice_in_day','totalPrice_in_month','total_order_price'));
     }
 
