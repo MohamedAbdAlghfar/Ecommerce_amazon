@@ -87,15 +87,31 @@ button[type="submit"]:hover {
     <label class="form-control-label" for="input-Category_id">{{ __('Parent Title') }}</label>
     
     <select id="category-select" name="parent_id" required class="form-control">
-        <option value="0">Null</option>
-        @foreach(\App\Models\Category::orderBy('id', 'desc')->get() as $Category)
-            <option value="{{ $Category->id}}">{{ $Category->name}}</option>
-        @endforeach
-    </select>
+    <option value="0">Null</option>
+    @foreach(\App\Models\Category::orderBy('id', 'desc')->get() as $Category)
+        <option value="{{ $Category->id }}">{{ $Category->name }}</option>
+    @endforeach
+</select>
 
     @if ($errors->has('Category_id'))
         <span class="invalid-feedback" role="alert">
             <strong>{{ $errors->first('Category_id') }}</strong>
+        </span>
+    @endif
+</div>
+
+
+<div class="form-group{{ $errors->has('Store_id') ? ' has-danger' : '' }}">
+    <label class="form-control-label" for="input-Store_id">{{ __('Store Title') }}</label>
+<select id="category-select" name="store_id" required class="form-control">
+    <option value="0">Null</option>
+    @foreach(\App\Models\Store::orderBy('id', 'desc')->get() as $Store)
+        <option value="{{ $Store->id }}">{{ $Store->name }}</option>
+    @endforeach
+</select>
+@if ($errors->has('Store_id'))
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('Store_id') }}</strong>
         </span>
     @endif
 </div>

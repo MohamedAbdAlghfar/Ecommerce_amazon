@@ -12,7 +12,7 @@ class MyprofileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+     
 
     /**
      * Show the form for creating a new resource.
@@ -70,11 +70,13 @@ class MyprofileController extends Controller
         
         $admin = User::where('id', 2)->first();
         $data = $request->all();
-        if($data['gender'] == 'male') {
-            $data['gender'] = 0;
-        }
-        else{
-            $data['gender'] = 1;
+        if(isset($data['gender'])) {
+            if($data['gender'] == 'male') {
+                $data['gender'] = 0;
+            }
+            else{
+                $data['gender'] = 1;
+            }
         }
         $admin->update($data);
 
@@ -86,25 +88,21 @@ class MyprofileController extends Controller
             $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
 
             if($file->move('images', $file_to_store)) {
-                if($admin->Photo) {
-                    $Photo = $admin->Photo;
+                if($admin->profile_image) {
+                    $Photo = $admin->profile_image;
 
                     // remove the old image
 
-                    $filename = $Photo->filename;
+                    $filename = $Photo;
                     if(file_exists('images/'.$filename)) {
                         // delete the file
                         unlink('images/'.$filename);
                     }
 
-                    $Photo->filename = $file_to_store;
-                    $Photo->save();
+                    $admin->profile_image = $file_to_store;
+$admin->save();
                 }else {
-                    Photo::create([
-                        'filename' => $file_to_store,
-                        'photoable_id' => $admin->id,
-                        'photoable_type' => 'App\Models\User',
-                    ]);
+                    $admin->profile_image = $file_to_store;
                 }
             }
         }

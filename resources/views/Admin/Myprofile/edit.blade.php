@@ -87,10 +87,10 @@ button[type="submit"]:hover {
 </head>
   <body bgcolor = "#008374">
     <div class="container">
-      <div class="profile">
+      <div class="profile"> 
         <div class="avatar">
-            @if($admin->Photo)
-                                <img src="/images/{{$admin->Photo->filename}}" class="card-img-top" alt="admin Photo">
+            @if($admin->profile_image)
+                                <img src="/images/{{$admin->profile_image}}" class="card-img-top" alt="admin Photo">
                                 @else
                                 <img  src="/images/default.jpeg" class="card-img-top" alt="admin Photo">
                                 @endif </div>

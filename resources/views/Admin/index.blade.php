@@ -304,6 +304,7 @@ section {
         <a href="admin/Product/recent">Recent Sold</a>
         <a href="">Show Product</a>
         <a href="">Requests</a>
+        <a href="">Add Category</a>
 
    
 </nav>
