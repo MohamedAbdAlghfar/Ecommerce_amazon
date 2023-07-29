@@ -17,7 +17,8 @@ use App\Http\Controllers\Admin\RecentController;
 |
 */
 
-Route::get('/product/{id}' , [mainhomecontroller::class , 'getdata']);
+Route::get('/category' , [mainhomecontroller::class , 'getCategory']);
+Route::get('/product/{id}' , [mainhomecontroller::class , 'getProduct']);
 
 Route::get('/test' , function (){
     return "Authenticated";

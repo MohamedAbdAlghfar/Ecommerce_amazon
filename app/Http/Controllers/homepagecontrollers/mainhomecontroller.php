@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\homepagecontrollers\mainhomecontroller;
 use App\Http\Controllers\homepagecontrollers\Bestsellercontroller;
-use App\Models\category;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\User;
 
 class mainhomecontroller extends Controller
 {
@@ -17,18 +19,24 @@ class mainhomecontroller extends Controller
         $Best_Seller= array();
 
         for ($i = 1; $i <= 10; $i++) {
-            $category = Category::select('Name', 'Price')
-                ->where('Parent_Id', $i)
+            $Product = Product::select('name', 'price')
+                ->where('category_id', $i)
                 ->orderBy('Buy', 'desc')
                 ->take(10)
                 ->get();
         
-            $this->Best_Seller[$i] = $category;
-        }        
-            
+            $this->Best_Seller[$i] = $Product;
+        }
+        $this->categories = Category::select('id','name','parent_id', 'image')->whereBetween('id', [1, 10])->get();
+
     }
-    public function getdata($id)
+
+    public function getCategory(){
+        return response()->json($this->categories);
+    }
+
+    public function getProduct($id)
     {
-        return $this->Best_Seller[$id];
+        return response()->json($this->Best_Seller[$id]);
     }
 }
