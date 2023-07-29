@@ -31,12 +31,17 @@ Route::prefix('my-api')->group(function(){
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('my-api')->group(function () {
+Route::prefix('v-api')->group(function () {
   
     Route::get('/category' , [MainHomeController::class , 'getCategory']);
     Route::get('/product/{id}' , [MainHomeController::class , 'getProduct']);
-    Route::get('' , [UserProfileController::class]);
-
+    // 
+    Route::get('/profile' , [UserProfileController::class , 'index']);
+    Route::post('/profile' , [UserProfileController::class , 'store']);
+    Route::get('/profile/{id}' , [UserProfileController::class , 'show']);
+    Route::put('/profile/{id}' , [UserProfileController::class , 'update']);
+    Route::delete('/profile/{id}' , [UserProfileController::class , 'delete']);
+    // 
     Route::middleware([Is_Owner::class])->group(function () {
 
         Route::get('/profile', function () {

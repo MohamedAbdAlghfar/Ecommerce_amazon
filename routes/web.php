@@ -2,18 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
-use App\Http\Controllers\RejestrationContrallers\signupcontraller;
-use App\Http\Controllers\HomePageControllers\mainhomecontroller;
+use App\Http\Controllers\RejestrationContrallers\SignUpController;
+use App\Http\Controllers\HomePageControllers\MainHomeController;
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
 
 
 // ..  ..
 
-Route::get('signup', function() { return view('loginform'); });
-Route::post('signup' , [signupcontraller::class , 'store']);
+// Route::get('signup', function() { return view('loginform'); });
+// Route::post('signup' , [signupcontraller::class , 'store']);
 
 
-Route::get('/query' , [mainhomecontroller::class , 'getdata']);
+Route::get('/query' , [MainHomeController::class , 'getdata']);
 
 
 Route::get('/nav', function(){
