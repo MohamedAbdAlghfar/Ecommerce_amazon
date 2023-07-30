@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\homepagecontrollers;
+namespace App\Http\Controllers\HomePageControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\homepagecontrollers\mainhomecontroller;
-use App\Http\Controllers\homepagecontrollers\Bestsellercontroller;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
 
-class mainhomecontroller extends Controller
+class MainHomeController extends Controller
 {
     public function __construct() {
-        // .. Get Best Seller Products ..
+        // .. Get Best Seller Products .. 
 
         $Best_Seller= array();
 

@@ -63,10 +63,10 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'check-role' => \App\Http\Middleware\Is_User::class,
-        'check-role' => \App\Http\Middleware\Is_Owner::class,
-        'check-role' => \App\Http\Middleware\Is_Store_Owner::class,
-        'check-role' => \App\Http\Middleware\Is_Owner_Assistant::class,
-        'check-role' => \App\Http\Middleware\Is_Store_Admin::class,
+        'is-user' => \App\Http\Middleware\Is_User::class,
+        'is-owner' => \App\Http\Middleware\Is_Owner::class,
+        'is-sotre-owner' => \App\Http\Middleware\Is_Store_Owner::class,
+        'is-owner-assistant' => \App\Http\Middleware\Is_Owner_Assistant::class,
+        'is-sotre-admin' => \App\Http\Middleware\Is_Store_Admin::class,
     ];
 }
