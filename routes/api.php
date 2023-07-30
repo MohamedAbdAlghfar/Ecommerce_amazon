@@ -42,9 +42,12 @@ Route::prefix('v-api')->group(function () {
     Route::put('/profile/{id}' , [UserProfileController::class , 'update']);
     Route::delete('/profile/{id}' , [UserProfileController::class , 'delete']);
     // 
-    Route::middleware([Is_Owner::class])->group(function () {
+    Route::group(['middleware' => ['is-user']], function () {
 
         Route::get('/profile', function () {
+            return 'profile page';
+        });
+        Route::get('/profile/page', function () { //that to make example for disaple middleware for one route
         })->withoutMiddleware([Is_Owner::class]);
     });
 });
