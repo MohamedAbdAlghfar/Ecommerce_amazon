@@ -15,7 +15,7 @@ class RecentController extends Controller
     public function index()
     {
     $recentorder = Order::orderBy('created_at', 'desc')->get();
-return $recentorder;
+    return view('Admin\Product\recent',compact('recentorder'));
 
     }
 
