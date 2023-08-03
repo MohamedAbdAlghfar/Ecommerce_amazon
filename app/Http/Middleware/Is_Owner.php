@@ -5,18 +5,28 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class Is_Owner
 {
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next, $guard = null)
     {
-        if(Auth::user()->kind==3)
-        {
-            return $next($request);
-        }if(Auth::user()->kind== 2 or 1 or 4 or 0){
-            return back();
+        if($guard != null){
+            auth()->shouldUse('$guard'); //shoud you user guard / table
+            $token = $request->header('auth-token');
+            $request->headers->set('auth-token', (string) $token, true);
+            $request->headers->set('Authorization', 'Bearer '.$token, true);
+            try {
+              //  $user = $this->auth->authenticate($request);  //check authenticted user
+                $user = JWTAuth::parseToken()->authenticate();
+            } catch (TokenExpiredException $e) {
+                return  $this -> returnError('401','Unauthenticated user');
+            } catch (JWTException $e) {
+
+                return  $this -> returnError('', 'token_invalid'.$e->getMessage());
+            }
+
         }
-        // .. If Not User , Redirect To Login Page ..
-        return redirect()->route('signup');
+         return $next($request);
     }
 }

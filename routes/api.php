@@ -33,6 +33,8 @@ Route::prefix('my-api')->group(function(){
 
 Route::prefix('v-api')->group(function () {
   
+    Route::get('signup', [SignUpController::class , 'store']);
+    Route::post('signup', [SignUpController::class , 'store']);
     Route::get('/category' , [MainHomeController::class , 'getCategory']);
     Route::get('/product/{id}' , [MainHomeController::class , 'getProduct']);
     // 
@@ -42,12 +44,14 @@ Route::prefix('v-api')->group(function () {
     Route::put('/profile/{id}' , [UserProfileController::class , 'update']);
     Route::delete('/profile/{id}' , [UserProfileController::class , 'delete']);
     // 
-    Route::group(['middleware' => ['is-user']], function () {
+    // Route::group(['middleware' => ['is-owner']], function () {
+    //     Route::get('/profile-page', function () { // .. that to make example for disaple middleware for one route ..
+    //     })->withoutMiddleware([Is_Owner::class]);
+    // });
 
-        Route::get('/profile', function () {
-            return 'profile page';
+    Route::group(['middleware' => ['is-owner']],function () {
+        Route::get('/owner', function () {
+            return 'owner page';
         });
-        Route::get('/profile/page', function () { //that to make example for disaple middleware for one route
-        })->withoutMiddleware([Is_Owner::class]);
-    });
+    }); 
 });

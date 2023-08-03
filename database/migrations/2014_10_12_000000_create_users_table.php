@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('kind')->nullable()->default(0);  //admin 1 or user 0 or user&store-manager 2 or admin-in-store 3 or owner  4
-            $table->string('profile_image');  
+            $table->string('profile_image')->default('jpg.jpg');  
             $table->rememberToken();
             $table->timestamps();
         });
