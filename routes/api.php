@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RejestrationContrallers\{SignUpController,LoginController};
+use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,LogoutController};
 use App\Http\Controllers\HomePageControllers\{MainHomeController,UserProfileController};
 use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController};
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
@@ -33,8 +33,9 @@ Route::prefix('my-api')->group(function(){
 
 Route::prefix('v-api')->group(function () {
   
-    Route::get('signup', [SignUpController::class , 'store']);
-    Route::post('signup', [SignUpController::class , 'store']);
+    Route::post('logout', [LogoutController::class , 'logout']);
+    Route::post('login' , [LoginController::class , 'login']);
+    Route::post('register', [SignUpController::class , 'signup']);
     Route::get('/category' , [MainHomeController::class , 'getCategory']);
     Route::get('/product/{id}' , [MainHomeController::class , 'getProduct']);
     // 
