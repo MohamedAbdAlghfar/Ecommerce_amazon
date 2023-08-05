@@ -54,8 +54,9 @@ class MyprofileController extends Controller
      */
     public function edit()
     {
-        $admin = User::where('id', 2)->first();
-        return view('Admin.Myprofile.edit',compact('admin'));
+        $admin = User::select('profile_image','f_name','l_name','email','address','phone','gender')->where('id', 2)->first();
+         return view('Admin.Myprofile.edit',compact('admin'));
+        // return response()->json($admin);
     }
 
     /**
@@ -108,8 +109,8 @@ $admin->save();
         }
 
 
-        return redirect('/admin')->withStatus('Product successfully created.');
-
+     //   return redirect('/admin')->withStatus('profile successfully updated.');
+     return response()->json(['message' => 'profile successfully updated.']);
 
     }
 

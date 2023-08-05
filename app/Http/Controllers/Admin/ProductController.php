@@ -26,7 +26,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view("Admin\Product\create");
+       // return view("Admin\Product\create");
+        return response()->json(['message' => ' Create method called.']);
     }
 
     /**
@@ -75,10 +76,10 @@ class ProductController extends Controller
                     ]);
                 }
             }
-            return redirect('/admin')->withStatus('Product successfully created.');        }
+           // return redirect('/admin')->withStatus('Product successfully created.');        
+            return response()->json(['message' => 'product successfully created.']);
 
-
-
+        }
 
 
 

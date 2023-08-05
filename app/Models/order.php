@@ -15,7 +15,7 @@ class Order extends Model
         'price',
         'discount', 
         'user_id',
-        'shipping_company',
+        'shipping_company_id',
         'product_id', 
 
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('price')->nullable();   
             $table->integer('discount')->nullable();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('shipping_company')->nullable()->constrained('shipping_companies')->onDelete('set null');
+            $table->foreignId('shipping_company_id')->nullable()->constrained();
             $table->foreignId('product_id')->constrained(); 
             $table->string('location')->nullable();
             $table->datetime('trans_date');

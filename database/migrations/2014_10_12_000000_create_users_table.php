@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();   
-            $table->string('f_name')->nullable();
+            $table->string('f_name')->nullable(); 
             $table->string('l_name')->nullable(); 
             $table->string('phone' )->nullable();
             $table->integer('gender')->nullable();   // 0 => male , 1 => female
