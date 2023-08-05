@@ -17,14 +17,20 @@ use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Own
 Route::prefix('my-api')->group(function(){
 
     Route::get('admin/Product/recent' , [RecentController::class ,'index']);
+    Route::get('admin' , [AdminController::class ,'index']);
+    Route::get('admin/profile/admins' , [ProfileController::class ,'index']);
+    Route::get('admin/profile/myprofile', [MyprofileController::class, 'edit']);
+    Route::put('admin/profile/myprofile', [MyprofileController::class, 'update']);
+    Route::get('admin/product', [ProductController::class, 'create']);
+    Route::post('admin/product', [ProductController::class, 'store']);
 
-});
+}); 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
 
-
+ 
 /*
 |--------------------------------------------------------------------------
 | API Routes   - Abdullah
@@ -52,4 +58,8 @@ Route::prefix('v-api')->group(function () {
     });
 });
 
-Route::get('admin/Product/recent' , [RecentController::class ,'index']);
+
+
+// Admin
+
+//Route::get('admin/Product/recent' , [RecentController::class ,'index']);

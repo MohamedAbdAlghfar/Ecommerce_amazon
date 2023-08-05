@@ -321,17 +321,17 @@ section {
     <section>
         <div class="Counter">
             <h3>Total money</h3>
-            <p>This Month: ${{ $totalPrice_in_month }}</p>
-            <p>This Day: ${{ $totalPrice_in_day }}</p>
-            <p>in General: ${{ $total_order_price }}</p>
+            <p>This Month: ${{ $data['totalPrice_in_month'] }}</p>
+            <p>This Day: ${{ $data['totalPrice_in_day'] }}</p>
+            <p>in General: ${{ $data['total_order_price'] }}</p>
         </div>
         <div class="card">
             <h2>Number of Users</h2>
-            <p>{{ $user_count }}</p>
+            <p>{{ $data['user_count'] }}</p>
         </div>
         <div class="card">
             <h2>Number of Stores</h2>
-            <p>{{ $store_count }}</p>
+            <p>{{ $data['store_count'] }}</p>
         </div>
     </section>
     <div class="foot">

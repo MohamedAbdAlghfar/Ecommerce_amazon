@@ -84,6 +84,11 @@
       <p class="sold-price"><font color="black">THE BUYER :: </font> {{ $recentorder->User->f_name }}</p>
       <p class="sold-price"><font color="black">LOCATION OF ORDER </font> ::{{ $recentorder->location }} </p>
       <p class="sold-price"><font color="black">OTHER AVAILABLE PIECES </font> ::{{ $recentorder->Product->available_pieces }} </p>
+@if($recentorder->ShippingCompany)
+    <p class="sold-price"><font color="black">THE SHIPPING_COM NAME </font> ::{{ $recentorder->ShippingCompany->name }}</p>
+@else
+    <p class="sold-price"><font color="black">No Shipping Company</font></p>
+@endif
     </div>
 @endforeach
 </div>
