@@ -39,8 +39,8 @@ Route::prefix('my-api')->group(function(){
 
 Route::prefix('v-api')->group(function () {
   
-    //Route::post('logout', [LogoutController::class , 'logout']);
-    //Route::post('login' , [LoginController::class , 'login']);
+    Route::post('logout', [LogoutController::class , 'logout']);
+    Route::post('login' , [LoginController::class , 'login']);
     Route::post('register', [SignUpController::class , 'signup']);
     Route::get('/category' , [MainHomeController::class , 'getCategory']);
     Route::get('/product/{id}' , [MainHomeController::class , 'getProduct']);
