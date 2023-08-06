@@ -38,14 +38,14 @@ use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Own
 // admin routes
 //
 
-    // Route::resource('admin', 'App\Http\Controllers\Admin\AdminController');
-    // Route::resource('admin/product', 'App\Http\Controllers\Admin\ProductController');
-    // Route::resource('admin/profile/admins', 'App\Http\Controllers\Admin\ProfileController');
-    // Route::resource('admin/Product/recent', 'App\Http\Controllers\Admin\RecentController');
+     Route::resource('admin', 'App\Http\Controllers\Admin\AdminController');
+     Route::resource('admin/product', 'App\Http\Controllers\Admin\ProductController');
+     Route::resource('admin/profile/admins', 'App\Http\Controllers\Admin\ProfileController');
+     Route::resource('admin/Product/recent', 'App\Http\Controllers\Admin\RecentController');
 
-    // Route::get('admin/profile/myprofile', ['as' => 'myprofile.edit', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@edit']);
+     Route::get('admin/profile/myprofile', ['as' => 'myprofile.edit', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@edit']);
 	
-	// Route::put('admin/profile/myprofile', ['as' => 'myprofile.update', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@update']);
+	 Route::put('admin/profile/myprofile', ['as' => 'myprofile.update', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@update']);
 
 
 
