@@ -62,9 +62,3 @@ Route::prefix('v-api')->group(function () {
         });
     }); 
 });
-
-
-
-// Admin
-
-//Route::get('admin/Product/recent' , [RecentController::class ,'index']);
