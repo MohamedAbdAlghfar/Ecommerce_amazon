@@ -13,20 +13,7 @@ class SignUpController extends Controller
 
     public function signup(Request $Request)
     {
-        $messages = [
-            'f_name.required' => 'First name is required',
-            'l_name.required' => 'Last name is required',
-            'email.required' => 'Email is required',
-            'email.email' => 'Email must be a valid email address',
-            'address.required' => 'Address is required',
-            'gender.required' => 'Gender is required',
-            'phone.required' => 'Phone is required',
-            'password.required' => 'Password is required',
-            'password.min' => 'Password must be at least 8 characters long',
-            'password.confirmed' => 'Password confirmation does not match'
-        ];
-        
-        $validatedData = $Request->validate($messages,[
+        $validatedData = $Request->validate([
             'f_name'  => 'required',
             'l_name'  => 'required',
             'email'   => 'required|email',
