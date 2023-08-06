@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RejestrationContrallers\{SignUpController,LoginController};
+use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,LogoutController};
 use App\Http\Controllers\HomePageControllers\{MainHomeController,UserProfileController};
 use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController};
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
@@ -39,6 +39,9 @@ Route::prefix('my-api')->group(function(){
 
 Route::prefix('v-api')->group(function () {
   
+    Route::post('logout', [LogoutController::class , 'logout']);
+    Route::post('login' , [LoginController::class , 'login']);
+    Route::post('register', [SignUpController::class , 'signup']);
     Route::get('/category' , [MainHomeController::class , 'getCategory']);
     Route::get('/product/{id}' , [MainHomeController::class , 'getProduct']);
     // 
@@ -48,14 +51,16 @@ Route::prefix('v-api')->group(function () {
     Route::put('/profile/{id}' , [UserProfileController::class , 'update']);
     Route::delete('/profile/{id}' , [UserProfileController::class , 'delete']);
     // 
-    Route::group(['middleware' => ['is-user']], function () {
+    // Route::group(['middleware' => ['is-owner']], function () {
+    //     Route::get('/profile-page', function () { // .. that to make example for disaple middleware for one route ..
+    //     })->withoutMiddleware([Is_Owner::class]);
+    // });
 
-        Route::get('/profile', function () {
-            return 'profile page';
+    Route::group(['middleware' => ['is-owner']],function () {
+        Route::get('/owner', function () {
+            return 'owner page';
         });
-        Route::get('/profile/page', function () { //that to make example for disaple middleware for one route
-        })->withoutMiddleware([Is_Owner::class]);
-    });
+    }); 
 });
 
 
