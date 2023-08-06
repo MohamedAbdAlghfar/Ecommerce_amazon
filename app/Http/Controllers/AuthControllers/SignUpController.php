@@ -11,6 +11,11 @@ class SignUpController extends Controller
 {
     public $token;
 
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['signup']]);
+    }
+
     public function signup(Request $Request)
     {
         $validatedData = $Request->validate([
@@ -34,7 +39,7 @@ class SignUpController extends Controller
         ]);   
 
         $this->token = JWTAuth::fromUser($user);
-        
+        // $this->token = $user->createToken('secrettoken')->plainTextToken;
         return response()->json([
             'status' =>'success',
             'message'=>'user registered successfully',

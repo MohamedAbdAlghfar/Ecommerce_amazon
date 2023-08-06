@@ -9,7 +9,10 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class MyprofileController extends Controller
 {
    
-     
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
 
     
     public function create()
@@ -32,11 +35,13 @@ class MyprofileController extends Controller
   
     public function edit()
     {
-        $admin = JWTAuth::user()->select('profile_image','f_name','l_name','email','address','phone','gender');
-        // return view('Admin.Myprofile.edit',compact('admin'));
-         return response()->json($admin);
-    }
+        // get the authenticated user
+        $user = auth()->user();
 
+        // return the user profile as a JSON response
+        return response()->json(optional($user)->only('email', 'address','gender','f_name','l_name'));
+    }
+    
    
     public function update(Request $request)
     {

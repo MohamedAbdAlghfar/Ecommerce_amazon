@@ -40,6 +40,7 @@ Route::prefix('my-api')->group(function(){
 Route::prefix('v-api')->group(function () {
   
     Route::post('logout', [LogoutController::class , 'logout']);
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login' , [LoginController::class , 'login']);
     Route::post('register', [SignUpController::class , 'signup']);
     Route::get('/category' , [MainHomeController::class , 'getCategory']);
