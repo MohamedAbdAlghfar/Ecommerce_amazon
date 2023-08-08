@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\AuthControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\{User,Cart};
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
@@ -32,14 +32,20 @@ class SignUpController extends Controller
             'phone'   => $validatedData['phone'],
             'password'=> Hash::make($validatedData['password']),
         ]);   
+        
+        // .. Create The Default Cart Of User ..
+        $cart = Cart::create([
+            'user_id' => $user->id,
+          ]);
 
         $this->token = JWTAuth::fromUser($user);
-        // $this->token = $user->createToken('secrettoken')->plainTextToken;
+
         return response()->json([
             'status' =>'success',
             'message'=>'user registered successfully',
             'token'  =>$this->token , 
             'user'   =>$user ,
+            'cart'   =>$cart ,
         ]);
     }
 }
