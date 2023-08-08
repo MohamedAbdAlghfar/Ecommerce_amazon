@@ -40,7 +40,6 @@ Route::prefix('my-api')->group(function(){
 Route::prefix('v-api')->group(function () {
   
     Route::post('logout', [LogoutController::class , 'logout']);
-    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login' , [LoginController::class , 'login']);
     Route::post('register', [SignUpController::class , 'signup']);
     Route::get('/category' , [MainHomeController::class , 'getCategory']);
@@ -57,7 +56,7 @@ Route::prefix('v-api')->group(function () {
     //     })->withoutMiddleware([Is_Owner::class]);
     // });
 
-    Route::group(['middleware' => ['is-owner']],function () {
+    Route::group(['middleware' => ['is-owner-assistant']],function () {
         Route::get('/owner', function () {
             return 'owner page';
         });

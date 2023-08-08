@@ -5,18 +5,24 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class Is_Owner_Assistant
 {
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
-        if(Auth::user()->kind==1)
-        {
-            return $next($request);
-        }if(Auth::user()->kind== 2 or 3 or 0){
-            return back();
+        // Get the token from the header
+        $token = $request->header("Authorization");
+        // Parse the token and get the user
+        $user = JWTAuth::parseToken()->toUser($token);
+        // .. Check User Exists ..
+        if (!$user) {
+            return response()->json(['user_not_found'], 404);
         }
-        // .. If Not User , Redirect To Login Page ..
-        return redirect()->route('signup');
+        if (in_array($user->role, [1])) {
+            return $next($request);
+        } else {
+            return response()->json(['role_not_allowed'], 403);
+        }
     }
 }

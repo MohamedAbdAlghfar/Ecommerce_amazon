@@ -9,11 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Response;
 
 class LoginController extends Controller
-{
-    public function showLoginForm(){
-        //
-    }
-
+{   
     public function login(Request $Request){
         $Request->validate([
             'email'   => 'required|email',
