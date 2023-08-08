@@ -7,26 +7,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
+ // .. All Roles .. = value ..
+ // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Manager=2 || Store-Admin=3 ..
+
 class Is_Owner
 {
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
     {
-        if($guard != null){
-            auth()->shouldUse('$guard'); //shoud you user guard / table
-            $token = $request->header('auth-token');
-            $request->headers->set('auth-token', (string) $token, true);
-            $request->headers->set('Authorization', 'Bearer '.$token, true);
-            try {
-              //  $user = $this->auth->authenticate($request);  //check authenticted user
-                $user = JWTAuth::parseToken()->authenticate();
-            } catch (TokenExpiredException $e) {
-                return  $this -> returnError('401','Unauthenticated user');
-            } catch (JWTException $e) {
-
-                return  $this -> returnError('', 'token_invalid'.$e->getMessage());
-            }
-
+        $token = $request->header("Authorization");
+        // Parse the token and get the user
+        $user = JWTAuth::parseToken()->toUser($token);
+        if (!$user) {
+            return response()->json(['user_not_found'], 404);
         }
-         return $next($request);
+        if (in_array($user->role, [4])) { // .. Role .. = value ..
+            // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Owner=2 || Store-Admin=3 ..           
+            return $next($request);
+        } else {
+            return response()->json(['role_not_allowed'], 403);
+        }
     }
 }

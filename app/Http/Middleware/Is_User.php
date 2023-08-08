@@ -8,14 +8,18 @@ use Illuminate\Support\Facades\Auth;
 
 class Is_User
 {
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
-        if(Auth::user()->kind==0)
-        {
+        $token = $request->header("Authorization");
+
+        $user = JWTAuth::parseToken()->toUser($token);
+
+        if (!$user) {
+            return response()->json(['user_not_found'], 404);
+        }
+        if (in_array($user->role, [0,1,2,3,4])) { // .. Role .. = value ..
+            // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Manager=2 || Store-Admin=3 .. 
             return $next($request);
         }
-        // .. If Not User , Redirect To Login Page ..
-        return redirect()->route('signup');
-              
     }
 }
