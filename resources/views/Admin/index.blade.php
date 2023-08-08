@@ -47,7 +47,7 @@ nav a:hover {
 
     nav a {
         padding: 0;
-        width: 110px;
+        width: 60px;
         height: 39px;
         display: flex;
         justify-content: center;
@@ -295,18 +295,20 @@ section {
 <body bgcolor ="black">
     <nav>
         <!-- Links -->
-        <a href="admin/product/create">Add Product</a>
-        <a href="">Delete Product</a>
-        <a href="">Edit Product</a>
-        <a href="">Delete Store</a>
-        <a href="">Make Discount</a>
-        <a href="admin/profile/admins">Admins page</a>
+        <a href="admin/product/create">Add Product</a>  <!--  Done!   -->
+      <!--  <a href="">Delete Product</a> -->
+       <!-- <a href="">Edit Product</a>  -->
+      <!--  <a href="">Make Discount</a>  -->
+        <a href="admin/product/show">Show Product</a>
         <a href="admin/Product/recent">Recent Sold</a>
-        <a href="">Show Product</a>
         <a href="">Requests</a>
-        <a href="">Add Category</a>
+        <a href="">Delete Store</a>
+        <a href="admin/profile/admins">Admins page</a>
+        <a href="admin/category/create">Add Category</a>
+       <!--  <a href="">Delete Category</a>  -->
+        <!--  <a href="">Edit Category</a>  -->
+        <a href="">Show Category</a>
 
-   
 </nav>
 <div align = "right">
 <a href="admin/profile/myprofile">
