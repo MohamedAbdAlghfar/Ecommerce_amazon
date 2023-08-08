@@ -5,7 +5,7 @@ use App\Models\User;
 use App\Http\Controllers\RejestrationContrallers\SignUpController;
 use App\Http\Controllers\HomePageControllers\MainHomeController;
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
-
+ use App\Http\Controllers\Admin;
 
 // ..  ..
 
@@ -39,15 +39,19 @@ use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Own
 //
 
      Route::resource('admin', 'App\Http\Controllers\Admin\AdminController');
-     Route::resource('admin/product', 'App\Http\Controllers\Admin\ProductController');
-     Route::resource('admin/profile/admins', 'App\Http\Controllers\Admin\ProfileController');
+    
+     Route::resource('admin/product', App\Http\Controllers\Admin\ProductController::class);
+     
+     Route::get('admin/product/show', [App\Http\Controllers\Admin\ProductController::class, 'show']);
      Route::resource('admin/Product/recent', 'App\Http\Controllers\Admin\RecentController');
 
-     Route::get('admin/profile/myprofile', ['as' => 'myprofile.edit', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@edit']);
-	
+     Route::resource('admin/profile/admins', 'App\Http\Controllers\Admin\ProfileController');
+
+     Route::get('admin/profile/myprofile', ['as' => 'myprofile.edit', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@edit']);	
 	 Route::put('admin/profile/myprofile', ['as' => 'myprofile.update', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@update']);
-
-
+     
+      Route::resource('admin/category', 'App\Http\Controllers\Admin\CategoryController');
+     
 
  
 

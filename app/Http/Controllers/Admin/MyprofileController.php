@@ -32,9 +32,18 @@ class MyprofileController extends Controller
   
     public function edit()
     {
-        $admin = JWTAuth::user()->select('profile_image','f_name','l_name','email','address','phone','gender');
-        // return view('Admin.Myprofile.edit',compact('admin'));
-         return response()->json($admin);
+        $admin = JWTAuth::user();
+        $profileData = [
+            'profile_image' => $admin->profile_image,
+            'f_name' => $admin->f_name,
+            'l_name' => $admin->l_name,
+            'email' => $admin->email,
+            'address' => $admin->address,
+            'phone' => $admin->phone,
+            'gender' => $admin->gender,
+        ];
+        return response()->json($profileData);
+
     }
 
    

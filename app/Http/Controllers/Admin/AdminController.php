@@ -13,7 +13,7 @@ class AdminController extends Controller
     public function index()
     {
          
-        $user_count = User::where('kind', 0)->count();
+        $user_count = User::where('role', 0)->count();
 $store_count = Store::count();
 $totalPrice_in_day = Order::whereDate('created_at', today())->sum('price');
 $totalPrice_in_month = Order::whereMonth('created_at', now()->month)

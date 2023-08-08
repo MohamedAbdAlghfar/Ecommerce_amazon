@@ -11,7 +11,7 @@ class ProfileController extends Controller
     public function index()
     {
         
-        $admins = User::select('id','f_name','l_name','email','phone')->where('kind', 1)->get();        
+        $admins = User::select('id','f_name','l_name','email','phone')->where('role', 1)->get();        
         
         //return view('Admin\Profile\index',compact('admins'));
         return response()->json($admins);

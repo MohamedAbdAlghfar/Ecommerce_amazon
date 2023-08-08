@@ -13,7 +13,7 @@
 
 .profile {
   display: flex;
-}
+         }
 
 .avatar {
   margin-right: 20px;

@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,LogoutController};
 use App\Http\Controllers\HomePageControllers\{MainHomeController,UserProfileController};
-use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController};
+use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController,CategoryController};
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
 
 
@@ -23,6 +23,12 @@ Route::prefix('my-api')->group(function(){
     Route::put('admin/profile/myprofile', [MyprofileController::class, 'update']);
     Route::get('admin/product', [ProductController::class, 'create']);
     Route::post('admin/product', [ProductController::class, 'store']);
+    Route::get('admin/product/{product}', [ProductController::class, 'edit']);
+    Route::put('admin/product/{product}', [ProductController::class, 'update']);
+    Route::get('admin/product/show', [ProductController::class, 'show']);
+    Route::delete('admin/product/{product}', [ProductController::class, 'destroy']);
+    Route::get('admin/category', [CategoryController::class, 'create']);
+    Route::post('admin/category', [CategoryController::class, 'store']);
 
 }); 
 
@@ -38,7 +44,7 @@ Route::prefix('my-api')->group(function(){
 */
 
 Route::prefix('v-api')->group(function () {
-  
+   
     Route::post('logout', [LogoutController::class , 'logout']);
     Route::post('login' , [LoginController::class , 'login']);
     Route::post('register', [SignUpController::class , 'signup']);
