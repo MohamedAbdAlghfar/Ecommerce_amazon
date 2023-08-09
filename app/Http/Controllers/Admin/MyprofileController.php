@@ -46,7 +46,7 @@ class MyprofileController extends Controller
     public function update(Request $request)
     {
         
-        $admin = JWTAuth::user();
+        $admin = auth()->user();
         $data = $request->all();
         if(isset($data['gender'])) {
             if($data['gender'] == 'male') {
