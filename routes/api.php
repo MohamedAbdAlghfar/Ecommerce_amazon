@@ -62,7 +62,7 @@ Route::prefix('v-api')->group(function () {
     //     })->withoutMiddleware([Is_Owner::class]);
     // });
 
-    Route::group(['middleware' => ['is-owner']],function () {
+    Route::group(['middleware' => ['is-owner-assistant']],function () {
         Route::get('/owner', function () {
             return 'owner page';
         });

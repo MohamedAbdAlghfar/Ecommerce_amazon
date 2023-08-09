@@ -18,8 +18,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view("Admin\Product\create");
-       // return response()->json(['message' => ' Create method called.']); 
+       // return view("Admin\Product\create");
+        return response()->json(['message' => ' Create method called.']); 
     }
 
     

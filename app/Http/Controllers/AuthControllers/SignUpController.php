@@ -34,7 +34,7 @@ class SignUpController extends Controller
         ]);   
 
         $this->token = JWTAuth::fromUser($user);
-        
+        // $this->token = $user->createToken('secrettoken')->plainTextToken;
         return response()->json([
             'status' =>'success',
             'message'=>'user registered successfully',

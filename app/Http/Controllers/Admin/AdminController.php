@@ -30,7 +30,7 @@ $data = [
 ];
 
           return view('Admin\index',compact('data'));
-    //  return response()->json($data);
+     // return response()->json($data);
      
     }
 

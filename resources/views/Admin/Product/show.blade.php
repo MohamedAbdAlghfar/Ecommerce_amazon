@@ -48,7 +48,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <a href="{{ route('product.edit', $product) }}" class="back-button">Edit</a>
-                                        <a href="" class="back-button">Discount</a>
+                                        
 
                                         <input class="btn btn-danger btn-sm" type="submit" value="Delete" name="deletecourse">
                                     </form>
