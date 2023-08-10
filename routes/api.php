@@ -2,12 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserControllers\{AddCartController,DelCartController,GetCartProducts,DeleteAccountController,EditAccountController};
-use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,LogoutController};
-use App\Http\Controllers\HomePageControllers\{MainHomeController};
 use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController,CategoryController,Del_StoreController,RequestController};
+// ..
+use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,LogoutController};
+use App\Http\Controllers\ClientSideControllers\UserAccount\{DeleteAccountController,EditAccountController,CreateStoreController};
+use App\Http\Controllers\ClientSideControllers\HomePage\{MainHomeController};
+use App\Http\Controllers\ClientSideControllers\ProductDetails_Payment\{AddCartController,DelCartController,GetCartProducts};
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
-
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +50,7 @@ Route::prefix('my-api')->group(function(){
 Route::prefix('v-api')->group(function () { 
    
     Route::post('logout', [LogoutController::class , 'logout']);
-    Route::post('login' , [LoginController::class , 'login']);
+    Route::post('login' , [LoginController::class , 'login'])->name('login');
     Route::post('register', [SignUpController::class , 'signup']);
     Route::get('/category' , [MainHomeController::class , 'getCategory']);
     Route::get('/product/{id}' , [MainHomeController::class , 'getProduct']);
@@ -63,15 +64,10 @@ Route::prefix('v-api')->group(function () {
     Route::post('addcart/{productId}', [AddCartController::class, 'addToCart']);
     Route::post('delcart/{productId}', [DelCartController::class, 'deleteFromCart']);
     Route::post('cartproducts', [GetCartProducts::class, 'getAllProducts']);
-    //
-    // Route::group(['middleware' => ['is-owner']], function () {
-    //     Route::get('/profile-page', function () { // .. that to make example for disaple middleware for one route ..
-    //     })->withoutMiddleware([Is_Owner::class]);
-    // });
 
     Route::group(['middleware' => ['is-owner-assistant']],function () {
         Route::get('/owner', function () {
-            return 'owner page';
+            return 'owner page'->withoutMiddleware([Is_Owner_Assistant::class]);
         });
     }); 
 });

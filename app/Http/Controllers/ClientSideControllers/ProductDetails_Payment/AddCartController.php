@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\UserControllers;
+namespace App\Http\Controllers\ClientSideControllers\ProductDetails_Payment;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -19,6 +19,13 @@ class AddCartController extends Controller
     public function addToCart($productid){ // .. This Is Product Id ..
 
       $user = auth()->user();
+
+      // .. This Catch Any Admin Role Try To Add Product To His Cart , Coz He Doesent Have a Cart ..
+      if (!$user->role == 0) {
+        return response()->json([
+          'message' =>'Only User Can Have Products In Cart , Not Admin',
+        ]);
+      }
 
       $cartId = $user->cart->id;
 

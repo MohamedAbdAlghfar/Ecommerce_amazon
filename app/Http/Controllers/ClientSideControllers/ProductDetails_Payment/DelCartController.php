@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\UserControllers;
+namespace App\Http\Controllers\ClientSideControllers\ProductDetails_Payment;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Cart;
-use App\Models\User;
 use App\Models\CartProduct;
 
 class DelCartController extends Controller

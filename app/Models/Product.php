@@ -16,7 +16,7 @@ class Product extends Model
         'weight', 
         'color', 
         'col_1', 
-        'buy', 
+        'sold', 
         'description',   
         'col_2', 
         'col_3', 

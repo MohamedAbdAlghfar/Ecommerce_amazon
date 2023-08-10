@@ -27,6 +27,7 @@ class ProductFactory extends Factory
             
             'price' => fake()->randomFloat(2, 10, 100),
             'discount' => fake()->randomElement([20,30,50]),
+            'rate' => fake()->randomFloat(2, 10, 100),
             'available_pieces' => fake()->numberBetween(0, 100),
             'weight' => fake()->numberBetween(1, 30),
             'color' => fake()->randomElement(['red','blue','green','white','black']),
@@ -34,7 +35,7 @@ class ProductFactory extends Factory
             'col_2' => fake()->word(),  
             'col_3' => fake()->word(), 
             'col_4' => fake()->word(),
-            'buy' => fake()->numberBetween(1, 30),
+            'sold' => fake()->numberBetween(1, 30),
             'description' => fake()->paragraph(),
             'about' => fake()->paragraph(),
             'brand' => fake()->name(),

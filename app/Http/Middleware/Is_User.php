@@ -17,9 +17,7 @@ class Is_User
         if (!$user) {
             return response()->json(['user_not_found'], 404);
         }
-        if (in_array($user->role, [0,1,2,3,4])) { // .. Role .. = value ..
-            // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Manager=2 || Store-Admin=3 .. 
-            return $next($request);
-        }
+        // .. If Authorized , Then He Can Access ..
+        return $next($request);
     }
 }

@@ -8,43 +8,28 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LogoutController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('auth:api');
+    }
+
     public function logout(Request $request){
-        
-        $token = $request->header('Authorization');
 
-        // .. Check If Token Valid Or No ..
-        if (!preg_match('/^Bearer\s+(.{32})$/', $token)) {
+        $user = auth()->user();
+
+        $token = JWTAuth::parseToken();
+
+        $loggedOut = $token->invalidate();
+
+        if ($loggedOut) {
+            // .. Logout Done Successfully ..
             return response()->json([
-                'status' => 'error',
-                'message' => 'Invalid token format',
+                'message'=>'user logged out successfully',
             ]);
         }
-        if (!JWTAuth::check($this->token)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Invalid token',
-            ]);
-        }
-        if ($token) {
-            try {
-                JWTAuth::invalidate($token);
-
-                // .. Return a Success Response ..
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'User logged out successfully',
-                ]);
-            } catch (JWTException $e) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Failed to logout, please try again',
-                ], 500);
-            }
-        } else {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'No token provided',
-            ], 401);
-        }
+        // .. If Any Error Happen In Logging Out ..
+        return response()->json([
+            'message'=>'user doesnt logged out',
+        ]);
     }
 }
