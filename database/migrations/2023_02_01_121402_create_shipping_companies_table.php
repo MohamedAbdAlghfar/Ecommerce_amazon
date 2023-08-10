@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('website');                         // .. Done ..
             $table->string('email'); 
             $table->string('address');
-            $table->string('location');
+            $table->string('location'); 
             $table->string('cover_image'); 
             $table->timestamps();
         });

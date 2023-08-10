@@ -24,31 +24,42 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">{{ __('Products') }}</h3>
+                            <h3 class="mb-0">{{ __('Stores') }}</h3>
                         </div>
                     </div>
                 </div>
-                @foreach($product as $product)
+                @foreach($store as $store)
                 <div class="row">
-                @if ($product->Photos->isNotEmpty())
-    <img src="/images/{{ $product->Photos->first()->filename }}">
+                @if ($store->store_image)
+    <img src="/images/{{ $store->store_image }}">
                 @else
                                 
                                     <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo">
                                 @endif
+                                
+                            
+                <div class="row">
+                @if ($store->store_cover)
+    <img src="/images/{{ $store->store_cover }}">
+                @else
+                                
+                                    <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo">
+                                @endif
+                                
+                                
+                                
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ \Str::limit($product->name, 100) }}</h5>
+                                    <h5 class="card-title">{{ \Str::limit($store->name, 100) }}</h5>
                                 </div>
                             </div>
                         </div>
                         
                        
-                        <form  method="POST" action="{{ route('product.destroy', $product) }}"> 
+                        <form  method="POST" action="{{ route('store.destroy', $store) }}"> 
                                         
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ route('product.edit', $product) }}" class="back-button">Edit</a>
-                                        
+                                      
 
                                         <input class="btn btn-danger btn-sm" type="submit" value="Delete" name="deletecourse">
                                     </form>
@@ -66,3 +77,6 @@
 <a href="{{ route('admin.index') }}" class="back-button">Back</a>
 </body>
 </html>
+
+
+

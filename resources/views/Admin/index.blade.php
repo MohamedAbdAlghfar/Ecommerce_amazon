@@ -301,13 +301,13 @@ section {
       <!--  <a href="">Make Discount</a>  -->
         <a href="admin/product/show">Show Product</a>
         <a href="admin/Product/recent">Recent Sold</a>
-        <a href="">Requests</a>
-        <a href="">Delete Store</a>
+        <a href="admin/Product/request">Requests</a>
+        <a href="admin/store/show">Delete Store</a>
         <a href="admin/profile/admins">Admins page</a>
         <a href="admin/category/create">Add Category</a>
        <!--  <a href="">Delete Category</a>  -->
         <!--  <a href="">Edit Category</a>  -->
-        <a href="">Show Category</a>
+        <a href="admin/category/show">Show Category</a>
 
 </nav>
 <div align = "right">

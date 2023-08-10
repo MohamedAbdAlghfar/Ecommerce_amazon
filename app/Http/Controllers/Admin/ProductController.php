@@ -16,7 +16,7 @@ class ProductController extends Controller
     }
 
 
-    public function create()
+    public function create() 
     {
        // return view("Admin\Product\create");
         return response()->json(['message' => ' Create method called.']); 
@@ -78,8 +78,8 @@ class ProductController extends Controller
     {
 
         $product = Product::orderBy('created_at', 'desc')->get();
-        return view('admin/Product/show',compact('product'));
-     // return response()->json($product);
+     //   return view('admin/Product/show',compact('product'));
+       return response()->json($product);
     }
 
     
@@ -139,8 +139,8 @@ class ProductController extends Controller
                 }
             }
         }
-  return redirect()->route('admin.index')->withStatus(__('product successfully updated.'));
-// return response()->json(['message' => 'product successfully updated.']);
+ // return redirect()->route('admin.index')->withStatus(__('product successfully updated.'));
+ return response()->json(['message' => 'product successfully updated.']);
 
 
     }

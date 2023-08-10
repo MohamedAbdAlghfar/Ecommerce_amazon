@@ -4,36 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+   
+    public function create() 
     {
       //  return view("Admin\Category\create"); 
       return response()->json(['message' => ' Create method called.']); 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $rules = [
@@ -74,48 +62,102 @@ class CategoryController extends Controller
 return response()->json(['message' => 'category successfully created.']);
 
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    
+    public function show()
     {
-        //
+        $category = Category::orderBy('created_at', 'desc')->get();
+     //   return view('admin/Category/show',compact('category'));
+      return response()->json($category);
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    
+    public function edit(Category $category)
     {
-        //
+        
+  // return view('admin/Category/edit',compact('category'));
+  return response()->json($category);
+
+
+
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    
+    public function update(Request $request,  Category $category)
     {
-        //
+        
+        $rules = [
+            'name' => 'required|min:5|max:150',            
+            'image' => 'required',                
+        ];
+
+        $this->validate($request, $rules);
+        $category->update($request->all());
+     
+     
+     
+        if($file = $request->file('image')) {
+
+            $filename = $file->getClientOriginalName();
+            $fileextension = $file->getClientOriginalExtension();
+            $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
+
+            if($file->move('images', $file_to_store)) {
+                if($category->image) {
+                    $Photo = $category->image;
+
+                    // remove the old image
+
+                    $filename = $Photo;
+                    if(file_exists('images/'.$filename)) {
+                        // delete the file
+                        unlink('images/'.$filename);
+                    }
+
+                    $category->image = $file_to_store;
+$category->save();
+                }else {
+                    $category->image = $file_to_store;
+                }
+            }
+        }
+
+
+     //   return redirect('/admin')->withStatus('category successfully updated.');
+     return response()->json(['message' => 'category successfully updated.']);
+
+
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy(Category $category)
     {
-        //
+        
+
+        if ($category->image) {
+            
+                $filename = $category->image;
+                unlink('images/' . $filename);
+                $imagePath = $category->image;
+
+                if ($imagePath) {
+                    Storage::delete($imagePath);
+                    $category->update(['image' => 'default.jpeg']); // Remove the image path from the category
+                }
+            
+        }
+        
+        $category->delete();
+       // return redirect()->route('admin.index')->withStatus(__('category successfully deleted.'));
+        return response()->json(['message' => 'category successfully deleted.']);
+
+
+
+
+
+
+
     }
 }
