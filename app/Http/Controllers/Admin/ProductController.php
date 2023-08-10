@@ -40,7 +40,7 @@ class ProductController extends Controller
         $this->validate($request, $rules);
 
         $Product = new Product;
-        $Product->fill($request->merge(["buy" => 0])->all());
+        $Product->fill($request->merge(["sold" => 0])->all());
         
         $parent_id = $request->input('parent_id'); // get the selected parent category ID from the request data
         $category = Category::find($parent_id); // get the Category model for the selected parent category

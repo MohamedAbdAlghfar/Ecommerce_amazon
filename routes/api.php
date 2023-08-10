@@ -2,11 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController,CategoryController,Del_StoreController,RequestController};
+use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController,CategoryController};
 // ..
 use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,LogoutController};
 use App\Http\Controllers\ClientSideControllers\UserAccount\{DeleteAccountController,EditAccountController,CreateStoreController};
 use App\Http\Controllers\ClientSideControllers\HomePage\{MainHomeController};
+use App\Http\Controllers\ClientSideControllers\ProductType\{FiltersController,GetCardsController};
 use App\Http\Controllers\ClientSideControllers\ProductDetails_Payment\{AddCartController,DelCartController,GetCartProducts};
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
 
