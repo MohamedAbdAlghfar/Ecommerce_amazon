@@ -41,11 +41,11 @@ class SignUpController extends Controller
         $this->token = JWTAuth::fromUser($user);
 
         return response()->json([
-            'status' =>'success',
-            'message'=>'user registered successfully',
-            'token'  =>$this->token , 
-            'user'   =>$user ,
-            'cart'   =>$cart ,
+            'status' => 'success',
+            'message' => 'user registered successfully',
+            'token' => $this->token , 
+            'user' => $user ,
+            'usercart' => $cart ,
         ]);
     }
 }
