@@ -8,7 +8,7 @@ use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,Logou
 use App\Http\Controllers\ClientSideControllers\UserAccount\{DeleteAccountController,EditAccountController,CreateStoreController};
 use App\Http\Controllers\ClientSideControllers\HomePage\{MainHomeController};
 use App\Http\Controllers\ClientSideControllers\ProductType\{FiltersController,GetCardsController};
-use App\Http\Controllers\ClientSideControllers\ProductDetails_Payment\{AddCartController,DelCartController,GetCartProducts};
+use App\Http\Controllers\ClientSideControllers\ProductDetails_Payment\{AddCartController,DelCartController,GetCartProducts,GetSuggestedProducts,GetProductDetails};
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
 
 /*
