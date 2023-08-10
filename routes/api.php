@@ -27,11 +27,17 @@ Route::prefix('my-api')->group(function(){
     Route::post('admin/product', [ProductController::class, 'store']);
     Route::get('admin/product/{product}', [ProductController::class, 'edit']);
     Route::put('admin/product/{product}', [ProductController::class, 'update']);
-    Route::get('admin/product/show', [ProductController::class, 'show']);
+    Route::get('admin/Product/show', [ProductController::class, 'show']);
     Route::delete('admin/product/{product}', [ProductController::class, 'destroy']);
     Route::get('admin/category', [CategoryController::class, 'create']);
     Route::post('admin/category', [CategoryController::class, 'store']);
-
+    Route::get('admin/category/show', [CategoryController::class, 'show']);
+    Route::delete('admin/category/{category}', [CategoryController::class, 'destroy']);
+    Route::put('admin/category/{category}', [CategoryController::class, 'update']);
+    Route::get('admin/category/{category}', [CategoryController::class, 'edit']);
+    Route::delete('admin/store/{store}', [Del_StoreController::class, 'destroy']);
+    Route::get('admin/store/show', [Del_StoreController::class, 'show']);
+    Route::get('admin/Product/request' , [RequestController::class ,'index']);
 }); 
 
 
@@ -41,7 +47,7 @@ Route::prefix('my-api')->group(function(){
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('v-api')->group(function () {
+Route::prefix('v-api')->group(function () { 
    
     Route::post('logout', [LogoutController::class , 'logout']);
     Route::post('login' , [LoginController::class , 'login'])->name('login');
