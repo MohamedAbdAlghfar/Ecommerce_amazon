@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class CartProduct extends Pivot
 {
+    use HasFactory;
+
+    protected $table = 'cart_product';
+
     protected $fillable = [
         'product_id',
         'cart_id',
@@ -20,4 +24,5 @@ class CartProduct extends Pivot
     {
         return $this->belongsTo(Cart::class);
     }
+
 }

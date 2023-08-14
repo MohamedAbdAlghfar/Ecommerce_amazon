@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes; 
     use HasFactory;
     protected $dates = ['deleted_at']; 
     protected $fillable = [  
@@ -40,7 +40,7 @@ protected static function boot()
     parent::boot();
 
     static::deleting(function ($category) {
-        $category->deleted_by = auth()->user()->id;
+        $category->deleted_by = auth()->user()->id; 
         $category->save();
     });
 }

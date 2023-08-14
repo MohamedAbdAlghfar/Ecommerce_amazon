@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
        \App\Models\Product::factory(200)->create();
        \App\Models\Comments::factory(150)->create();
         \App\Models\ShippingCompany::factory(4)->create();
-        \App\Models\order::factory(200)->create();
-       $stores = \App\Models\Store::factory(7)->create();
+       $orders = \App\Models\order::factory(200)->create();
+       
      
     
     
@@ -46,12 +46,23 @@ class DatabaseSeeder extends Seeder
     $carts = \App\Models\Cart::factory(50)->create();     
     foreach ($carts as $cart) {
         $product_ids = [];
-        $product_ids[] = Category::all()->random()->id;
-        $product_ids[] = Category::all()->random()->id;
-        $product_ids[] = Category::all()->random()->id;
+        $product_ids[] = Product::all()->random()->id;
+        $product_ids[] = Product::all()->random()->id;
+        $product_ids[] = Product::all()->random()->id;
     $cart->Products()->sync($product_ids);
     
     }     
+
+
+    foreach ($stores as $store) {
+        $user_ids = [];
+        $user_ids[] = User::all()->random()->id;
+        $user_ids[] = User::all()->random()->id;
+        $user_ids[] = User::all()->random()->id;
+    $store->Admins()->sync($user_ids);
+    }
+
+    
 
 
 

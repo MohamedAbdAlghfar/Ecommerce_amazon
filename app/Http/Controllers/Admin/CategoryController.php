@@ -61,8 +61,8 @@ class CategoryController extends Controller
     public function show()
     {
         $category = Category::orderBy('created_at', 'desc')->get();
-  //      return view('admin/Category/show',compact('category'));
-     return response()->json($category); 
+        return view('admin/Category/show',compact('category'));
+  //   return response()->json($category); 
 
     }
 
@@ -81,7 +81,7 @@ class CategoryController extends Controller
         
         $rules = [
             'name' => 'required|min:5|max:150',            
-            'image' => 'required',                
+                           
         ];
 
         $this->validate($request, $rules);

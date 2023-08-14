@@ -15,8 +15,8 @@ class Del_StoreController extends Controller
     public function show()
     {
         $store = Store::orderBy('created_at', 'desc')->get();
-        //   return view('admin/Store/show',compact('store')); 
-         return response()->json($store);
+           return view('admin/Store/show',compact('store')); 
+       //  return response()->json($store);
     }
 
     public function destroy(Store $store)

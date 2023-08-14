@@ -71,6 +71,7 @@
   @foreach ($request as $request) 
   <div class="sold-item">
  <div class="fixed-size-img">
+ 
  @if ($request->Product->Photos->isNotEmpty())
     <img src="{{ $request->Product->Photos->first()->filename }}">
 @else

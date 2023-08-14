@@ -32,12 +32,12 @@ class Product extends Model
         'category_id',  
         'deleted_by',
     ];
-    public function Comments() 
+    public function comments() 
 {
-    return $this->hasMany(Comments::class);
+    return $this->hasMany(Comment::class);
 }
 
-   public function Store()
+   public function store()
     {
      return $this->belongsTo(Store::class);
     }
@@ -47,20 +47,14 @@ class Product extends Model
         return $this->morphMany(Photo::class, 'photoable');
     }
 
-    public function Category()
+    public function category()
     {
      return $this->belongsTo(Category::class);
     }
 
-    public function Orders() 
-{
-    return $this->hasMany(order::class);
-}
 
-public function Carts()
-{
-    return $this->belongsToMany(Cart::class);
-}
+
+
 
 protected static function boot()
 {
@@ -75,6 +69,14 @@ protected static function boot()
 
 
 
+    public function orders() 
+    {
+        return $this->hasMany(Order::class);
+    }
 
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class);
+    }
 
 }

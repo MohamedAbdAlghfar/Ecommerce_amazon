@@ -23,9 +23,11 @@ class CommentsFactory extends Factory
         $product_id = Product::all()->random()->id;
         return [
             'body' => fake()->paragraph(), 
-            'parent_id' => fake()->numberBetween(0,100),
+            'parent_id' => null,
+            'type' => fake()->numberBetween(1, 2),
             'user_id' => $user_id,
-            'product_id' => $product_id,  
+            'rate' => fake()->randomFloat(2, 10, 100),
+            'product_id' => $product_id,    
 
 
 

@@ -25,7 +25,7 @@ class User extends Authenticatable implements JWTSubject
         'id',
         'gender',
         'address',  
-        'kind',
+        'role',
         'phone',
         'l_name',
         'password', 
@@ -40,7 +40,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $hidden = [
         'Password',
-        'remember_token',
+        'remember_token', 
     ];
 
     /**
@@ -54,14 +54,16 @@ class User extends Authenticatable implements JWTSubject
 
     public function Orders()
     {
-        return $this->hasMany(order::class);
+        return $this->hasMany(Order::class);
     }
 
 
-    public function Store()
+    public function Stores()
     {
-        return $this->hasOne(Store::class);
+        return $this->belongsToMany(Store::class);
     }
+
+    
 
     public function Cart() {
         return $this->hasOne(Cart::class);
@@ -70,34 +72,19 @@ class User extends Authenticatable implements JWTSubject
 
     public function Comments()
     {
-        return $this->hasMany(Comments::class);
+        return $this->hasMany(Comment::class);
     }
 
-    
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
     }
 
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
+
     public function getJWTCustomClaims()
     {
         return [];
     }
-
-    
-
-
-
-
 
 }

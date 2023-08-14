@@ -6,21 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
     public function up()
     {
-        Schema::create('photoable', function (Blueprint $table) {
+        Schema::create('store_user', function (Blueprint $table) {
             $table->id();
-            $table->string('filename');   
-            $table->integer('photoable_id');
-            $table->string('photoable_type'); 
-            $table->timestamps(); 
+            $table->foreignId('store_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->timestamps();
         });
     }
 
-    
     public function down()
     {
-        Schema::dropIfExists('photos');
+        Schema::dropIfExists('store_user');
     }
 };

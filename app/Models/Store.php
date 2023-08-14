@@ -23,12 +23,12 @@ class Store extends Model
         'about_store',
         'store_cover',
         'store_image',
-        'user_id',
-        'deleted_by',
+       
+        'deleted_by', 
     ];
 
-    public function User() {
-        return $this->belongsTo(User::class);
+    public function Admins() {
+        return $this->belongsToMany(User::class);
     }
 
 

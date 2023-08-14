@@ -4,32 +4,31 @@ namespace App\Http\Controllers\ClientSideControllers\UserAccount;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Models\User;
+use App\Models\User;
 
-class DeleteAccountController extends Controller
+class GetPersonalDataController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth:api');
     }
-    
-    public function destroy()
-    {
-        $user = auth()->user();
+    public function getPersonalData(){
 
+        $user = auth()->user();
+        
         $userId = $user->id;
 
-        $deleteUser = User::where('id', $userId)->delete();
+        $userPersonalData = User::where('id', $userId)->get();
 
-        if (!$deleteUser) {
-            return resposne()->json([
+        if (!$userPersonalData) {
+            return response()->json([
                 'status'=>'Failed',
-                'message'=>'Error on deleting the user ! .. Try Again',
+                'message'=>'Some Thing Went Wrong ! .. Try Again Later',
             ]);
         }
         return response()->json([
             'status'=>'Success',
-            'message'=>'Account Deletion Were Done'
+            'user data'=>$userPersonalData,
         ]);
     }
 }

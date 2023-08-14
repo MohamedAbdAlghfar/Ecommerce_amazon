@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
- // .. All Roles .. = value ..
- // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Manager=2 || Store-Admin=3 ..
-
 class Is_Owner
 {
     public function handle($request, Closure $next)

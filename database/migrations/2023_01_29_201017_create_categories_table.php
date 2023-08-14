@@ -9,7 +9,7 @@ return new class extends Migration
 
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) { 
+        Schema::create('categories', function (Blueprint $table) {  
             $table->bigIncrements('id')->unsigned();          
             $table->string('name')->nullable();             
             $table->unsignedInteger('parent_id');   
