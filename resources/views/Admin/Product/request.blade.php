@@ -66,7 +66,7 @@
 <body bgcolor = "#008374">
 
 <div class="recent-sold">
-  <h2>Recent Sold Items</h2>
+  <h2>Requests</h2>
   <div class="sold-grid">
   @foreach ($request as $request) 
   <div class="sold-item">

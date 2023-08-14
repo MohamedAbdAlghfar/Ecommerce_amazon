@@ -41,10 +41,10 @@ use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Own
      Route::resource('admin', 'App\Http\Controllers\Admin\AdminController'); 
     
      Route::resource('admin/product', App\Http\Controllers\Admin\ProductController::class);
-     
      Route::get('admin/product/show', [App\Http\Controllers\Admin\ProductController::class, 'show']);
      Route::resource('admin/Product/recent', 'App\Http\Controllers\Admin\RecentController');
      Route::resource('admin/Product/request', 'App\Http\Controllers\Admin\RequestController');
+     Route::get('admin/product/delBy/{id}', 'App\Http\Controllers\Admin\ProductDelByController@showDeletedProduct');
 
      Route::resource('admin/profile/admins', 'App\Http\Controllers\Admin\ProfileController');
 
@@ -53,10 +53,11 @@ use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Own
      
       Route::resource('admin/category', 'App\Http\Controllers\Admin\CategoryController');
       Route::get('admin/category/show', [App\Http\Controllers\Admin\CategoryController::class, 'show']);
+      Route::get('admin/category/delBy/{id}', 'App\Http\Controllers\Admin\CategoryDelByController@showDeletedCategory');
 
       Route::get('admin/store/show', [App\Http\Controllers\Admin\Del_StoreController::class, 'show']);
       Route::resource('admin/store', 'App\Http\Controllers\Admin\Del_StoreController');
-
+      Route::get('admin/store/delBy/{id}', 'App\Http\Controllers\Admin\StoreDelByController@showDeletedStore');
 
 
 

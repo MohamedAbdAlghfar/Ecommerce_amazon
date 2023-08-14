@@ -17,11 +17,13 @@ return new class extends Migration
             $table->string('phone');                                      // .. Done ..
             $table->string('link_website');
             $table->string('services',500);    
-            $table->string('location'); 
+            $table->string('location');  
             $table->string('email');
             $table->string('store_cover');
             $table->string('store_image');  
             $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('deleted_by')->nullable();
+            $table->foreign('deleted_by')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -29,6 +31,8 @@ return new class extends Migration
     
     public function down()
     {
+        $table->dropForeign(['deleted_by']); 
+        $table->dropColumn('deleted_by');
         Schema::dropIfExists('stores');
     }
 };

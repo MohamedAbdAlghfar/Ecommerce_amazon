@@ -13,44 +13,9 @@ class ProfileController extends Controller
         
         $admins = User::select('id','f_name','l_name','email','phone')->where('role', 1)->get();        
         
-        //return view('Admin\Profile\index',compact('admins'));
-        return response()->json($admins);
+        return view('Admin\Profile\index',compact('admins'));
+       // return response()->json($admins);
 
     }
 
-    
-    public function create()
-    {
-        //
-    }
-
-    
-    public function store(Request $request)
-    {
-        //
-    }
-
-    
-    public function show($id)
-    {
-        //
-    }
-
-    
-    public function edit($id)
-    {
-        //
-    }
-
-    
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    
-    public function destroy($id)
-    {
-        //
-    }
 }
