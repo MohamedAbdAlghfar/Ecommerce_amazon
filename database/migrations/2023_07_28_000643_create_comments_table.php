@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->id(); 
-            $table->string('body',500); 
+            $table->id();
+            $table->string('body', 500);
+            $table->tinyInteger('type')->nullable(); // if type = 1 it were question , if it = 2 , it were rate
             $table->unsignedInteger('parent_id')->nullable();
-            $table->foreignId('product_id')->constrained();
+            $table->foreignId('product_id')->constrained()->nullable();
+            $table->float('rate')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

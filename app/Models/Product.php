@@ -27,12 +27,12 @@ class Product extends Model
         'store_id', 
         'category_id',  
     ];
-    public function Comments() 
+    public function comments() 
 {
-    return $this->hasMany(Comments::class);
+    return $this->hasMany(Comment::class);
 }
 
-   public function Store()
+   public function store()
     {
      return $this->belongsTo(Store::class);
     }
@@ -42,22 +42,19 @@ class Product extends Model
         return $this->morphMany(Photo::class, 'photoable');
     }
 
-    public function Category()
+    public function category()
     {
      return $this->belongsTo(Category::class);
     }
 
-    public function Orders() 
-{
-    return $this->hasMany(order::class);
-}
+    public function orders() 
+    {
+        return $this->belongsToMany(Order::class);
+    }
 
-public function Carts()
-{
-    return $this->belongsToMany(Cart::class);
-}
-
-
-
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class);
+    }
 
 }

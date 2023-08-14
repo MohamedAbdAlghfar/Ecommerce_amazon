@@ -5,7 +5,7 @@ namespace App\Http\Controllers\ClientSideControllers\UserAccount;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EditAccountController extends Controller
+class EditPersonalDataController extends Controller
 {
     public function __construct()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\ClientSideControllers\ProductDetails_Payment;
+namespace App\Http\Controllers\ClientSideControllers\UserAccount;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class GetCartProducts extends Controller
         $user = auth()->user();
         $cartId = $user->cart->id;
 
-        $cartAllProducts = Cart::with('products')->findOrFail($cartId);
+        $cartAllProducts = Cart::with('products')->findOrFail($cartId)->get();
 
         if($cartAllProducts){
             return response()->json([

@@ -53,13 +53,19 @@ class User extends Authenticatable implements JWTSubject
 
     public function Orders()
     {
-        return $this->hasMany(order::class);
+        return $this->hasMany(Order::class);
     }
 
 
     public function Store()
     {
         return $this->hasOne(Store::class);
+    }
+
+    public function storesAdminIn()
+    {
+        return $this->belongsToMany(Store::class);
+        // this relation used to get the admins in 
     }
 
     public function Cart() {
@@ -69,29 +75,19 @@ class User extends Authenticatable implements JWTSubject
 
     public function Comments()
     {
-        return $this->hasMany(Comments::class);
+        return $this->hasMany(Comment::class);
     }
 
-    
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
     }
 
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
+
     public function getJWTCustomClaims()
     {
         return [];
     }
-
 
 }

@@ -26,28 +26,30 @@ class FiltersController extends Controller
             $query->where('sold', $buy)->orderBy('sold', 'desc'); //.. Get most sold In any Category ..
         }
 
-        // Check if the price filter is present and apply it
-        if ($request->has('offers')) {
-            $price = $request->query('offers');
-            $query->where('Discount', '<=', $price);  //search to make min and max value for price
+        // ..
+
+        if ($request->has('discount')) {
+            $discount = $request->query('discount');  // this statement need to focous coz it doesent work
+            $query->where('discount', '>', 0);
         }
         // --------------------------------------------------------------------------------
 
         // Get the min and max price from the request
         $minPrice = $request->query('minPrice');
         $maxPrice = $request->query('maxPrice');
-        // Check if the price filter is present and apply it
-       if ($request->has('price')) {
-           // Filter the products by price
+
+        if ($request->has('price')) {
            $query->whereBetween('price', [$minPrice, $maxPrice]);
         }
 
+        // ..
 
-        // Check if the rating filter is present and apply it
-        if ($request->has('rating')) {
-            $rating = $request->query('rating');    // .. make a rate , modify products table and add rating column ..
-            $query->where('rating', '>=', $rating);
+        if ($request->has('rate')) {
+            $rate = $request->query('rate');
+            $query->where('rate', '>=', $rate);
         }
+        
+        // ..
 
         // Check if the products belong to the specified category
         $query->whereHas('categories', function ($q) use ($category) {

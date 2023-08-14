@@ -22,16 +22,18 @@ class Store extends Model
         'user_id'
     ];
 
-    public function User() {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 
 
-    
+    public function assitant()
+    {
+        return $this->hasMany(User::class);
+    }
 
     public function Products() {
         return $this->hasMany(Product::class);
     }
-
-
+    
 }

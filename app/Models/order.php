@@ -29,14 +29,10 @@ class Order extends Model
      return $this->belongsTo(User::class);
     }
     
-   
-   
-    public function Product()
+    public function products()
     {
-     return $this->belongsTo(Product::class);
+        return $this->hasMany(Product::class);
     }
-    
-    
     
     public function ShippingCompany()
     {
