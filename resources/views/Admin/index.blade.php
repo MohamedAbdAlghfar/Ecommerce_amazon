@@ -294,7 +294,8 @@ section {
 
 <body bgcolor ="black">
     <nav>
-        <!-- Links -->
+
+    <!-- Links -->
         <a href="admin/product/create">Add Product</a>  <!--  Done!   -->
       <!--  <a href="">Delete Product</a> -->
        <!-- <a href="">Edit Product</a>  -->

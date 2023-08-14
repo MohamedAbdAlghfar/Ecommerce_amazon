@@ -70,6 +70,7 @@ protected static function boot()
         $product->deleted_by = auth()->user()->id; 
         $product->save();
     });
+
 }
 
 
