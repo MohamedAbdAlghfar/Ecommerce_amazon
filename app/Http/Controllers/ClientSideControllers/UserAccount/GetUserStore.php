@@ -18,7 +18,7 @@ class GetUserStore extends Controller
 
         $userId = $user->id;
 
-        $userStore = Store::where('user_id', $userId)->get();
+        $userStore = Store::where('user_id', $userId)->first();
 
         if (!$userStore) {
             return response()->json([
