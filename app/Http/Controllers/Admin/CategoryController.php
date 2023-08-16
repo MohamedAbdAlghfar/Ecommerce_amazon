@@ -6,19 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
+use Tymon\JWTAuth\Facades\JWTAuth;
 class CategoryController extends Controller
 {
     
-    public function index()
-    {
-        //
-    }
-
-   
     public function create() 
     {
-      //  return view("Admin\Category\create"); 
-      return response()->json(['message' => ' Create method called.']); 
+        return view("Admin\Category\create"); 
+     // return response()->json(['message' => ' Create method called.']); 
     }
 
     
@@ -58,16 +53,16 @@ class CategoryController extends Controller
 
 
     }
- // return redirect('/admin')->withStatus('category successfully created.');        
-return response()->json(['message' => 'category successfully created.']);
+  return redirect('/admin')->withStatus('category successfully created.');        
+// return response()->json(['message' => 'category successfully created.']);
 
     }
     
     public function show()
     {
         $category = Category::orderBy('created_at', 'desc')->get();
-     //   return view('admin/Category/show',compact('category'));
-      return response()->json($category);
+        return view('admin/Category/show',compact('category'));
+  //   return response()->json($category); 
 
     }
 
@@ -75,11 +70,8 @@ return response()->json(['message' => 'category successfully created.']);
     public function edit(Category $category)
     {
         
-  // return view('admin/Category/edit',compact('category'));
-  return response()->json($category);
-
-
-
+   return view('admin/Category/edit',compact('category'));
+ // return response()->json($category);
 
     }
 
@@ -89,7 +81,7 @@ return response()->json(['message' => 'category successfully created.']);
         
         $rules = [
             'name' => 'required|min:5|max:150',            
-            'image' => 'required',                
+                           
         ];
 
         $this->validate($request, $rules);
@@ -124,8 +116,8 @@ $category->save();
         }
 
 
-     //   return redirect('/admin')->withStatus('category successfully updated.');
-     return response()->json(['message' => 'category successfully updated.']);
+        return redirect('/admin')->withStatus('category successfully updated.');
+  //   return response()->json(['message' => 'category successfully updated.']);
 
 
 
@@ -135,7 +127,7 @@ $category->save();
     public function destroy(Category $category)
     {
         
-
+        $category->deleted_by = auth()->user()->id;
         if ($category->image) {
             
                 $filename = $category->image;
@@ -150,13 +142,8 @@ $category->save();
         }
         
         $category->delete();
-       // return redirect()->route('admin.index')->withStatus(__('category successfully deleted.'));
-        return response()->json(['message' => 'category successfully deleted.']);
-
-
-
-
-
+        return redirect()->route('admin.index')->withStatus(__('category successfully deleted.'));
+     //   return response()->json(['message' => 'category successfully deleted.']);
 
 
     }

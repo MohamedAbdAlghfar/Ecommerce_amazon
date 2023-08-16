@@ -29,7 +29,7 @@ class StoreFactory extends Factory
             'services' => fake()->paragraph(),
             'location' => fake()->address(),
             'email' => fake()->unique()->safeEmail(),
-            'user_id' => $user_id ,
+            
             'store_cover' => fake()->randomElement([
                 'https://m.media-amazon.com/images/I/61iQu0VHEWL._AC_UL480_FMwebp_QL65_.jpg',
                 'https://m.media-amazon.com/images/I/61xW8gDKGGL._AC_UL480_FMwebp_QL65_.jpg',
@@ -42,7 +42,7 @@ class StoreFactory extends Factory
                 'https://m.media-amazon.com/images/I/4165BwTcQzL._AC._SR360,460.jpg',
                 'https://m.media-amazon.com/images/I/71tduSp8ooL._AC._SR360,460.jpg']),
             'store_image' => fake()->randomElement([
-                'https://m.media-amazon.com/images/I/61iQu0VHEWL._AC_UL480_FMwebp_QL65_.jpg',
+                'https://m.media-amazon.com/images/I/61iQu0VHEWL._AC_UL480_FMwebp_QL65_.jpg', 
                 'https://m.media-amazon.com/images/I/61xW8gDKGGL._AC_UL480_FMwebp_QL65_.jpg',
                 'https://m.media-amazon.com/images/I/71JouV4uIVL._AC_UL480_FMwebp_QL65_.jpg',
                 'https://images-eu.ssl-images-amazon.com/images/G/42/Egypt-hq/2022/img/Consumer_Electronics/PC/1483263_EG_PCRevamp_L2_Desktop-03.jpg',

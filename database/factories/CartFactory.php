@@ -19,6 +19,6 @@ class CartFactory extends Factory
         $user_id = User::all()->random()->id;
         return [
             'user_id' => $user_id, 
-        ];
+        ]; 
     }
 }

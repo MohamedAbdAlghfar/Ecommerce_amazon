@@ -27,7 +27,7 @@ class CommentsFactory extends Factory
             'type' => fake()->numberBetween(1, 2),
             'user_id' => $user_id,
             'rate' => fake()->randomFloat(2, 10, 100),
-            'product_id' => $product_id,  
+            'product_id' => $product_id,    
 
 
 

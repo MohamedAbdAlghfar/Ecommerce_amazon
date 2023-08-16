@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -24,7 +25,7 @@ class User extends Authenticatable implements JWTSubject
         'id',
         'gender',
         'address',  
-        'kind',
+        'role',
         'phone',
         'l_name',
         'password', 
@@ -39,7 +40,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $hidden = [
         'Password',
-        'remember_token',
+        'remember_token', 
     ];
 
     /**
@@ -57,16 +58,12 @@ class User extends Authenticatable implements JWTSubject
     }
 
 
-    public function Store()
-    {
-        return $this->hasOne(Store::class);
-    }
-
-    public function storesAdminIn()
+    public function Stores()
     {
         return $this->belongsToMany(Store::class);
-        // this relation used to get the admins in 
     }
+
+    
 
     public function Cart() {
         return $this->hasOne(Cart::class);

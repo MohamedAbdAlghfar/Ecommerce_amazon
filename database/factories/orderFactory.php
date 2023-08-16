@@ -33,7 +33,7 @@ class orderFactory extends Factory
        
         return [
             'price' => fake()->randomFloat(2, 10, 100), 
-            'discount' => fake()->randomElement([20,30,50]),
+            'discount' => fake()->randomElement([20,30,50]), 
             'user_id' => $user_id, 
             'shipping_company_id' => $shipingcom_id,
             'product_id' => $product_id, 

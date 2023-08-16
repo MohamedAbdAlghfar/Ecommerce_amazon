@@ -7,19 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\photo;
 use App\Models\Product;
 use App\Models\Category;
+use Tymon\JWTAuth\Facades\JWTAuth;
 class ProductController extends Controller
 {
-   
-    public function index()
-    {
-        // 
-    }
-
-
+    
     public function create() 
     {
-       // return view("Admin\Product\create");
-        return response()->json(['message' => ' Create method called.']); 
+        return view("Admin\Product\create");
+     //    return response()->json(['message' => ' Create method called.']); 
     }
 
     
@@ -40,7 +35,7 @@ class ProductController extends Controller
         $this->validate($request, $rules);
 
         $Product = new Product;
-        $Product->fill($request->merge(["buy" => 0])->all());
+        $Product->fill($request->merge(["sold" => 0])->all());
         
         $parent_id = $request->input('parent_id'); // get the selected parent category ID from the request data
         $category = Category::find($parent_id); // get the Category model for the selected parent category
@@ -60,12 +55,12 @@ class ProductController extends Controller
                     photo::create([
                         'filename' => $file_to_store,
                         'photoable_id' => $Product->id,
-                        'photoable_type' => 'App\Models\Product',
+                        'photoable_type' => 'App\Models\Product', 
                     ]);
                 }
             }
-           // return redirect('/admin')->withStatus('Product successfully created.');        
-            return response()->json(['message' => 'product successfully created.']);
+            return redirect('/admin')->withStatus('Product successfully created.');        
+          //  return response()->json(['message' => 'product successfully created.']);
 
         }
 
@@ -78,15 +73,15 @@ class ProductController extends Controller
     {
 
         $product = Product::orderBy('created_at', 'desc')->get();
-     //   return view('admin/Product/show',compact('product'));
-       return response()->json($product);
+        return view('admin/Product/show',compact('product'));
+      // return response()->json($product);
     }
 
     
     public function edit(Product $product)
     {
-      //  return view('admin/Product/edit',compact('product'));
-       return response()->json($product);
+        return view('admin/Product/edit',compact('product'));
+     //  return response()->json($product); 
     }
 
     
@@ -102,7 +97,7 @@ class ProductController extends Controller
             'description' => 'required',
             'about' => 'required',
             
-            'image' => 'required',                
+                         
         ]; 
         $this->validate($request, $rules);
         $product->update($request->all());
@@ -139,8 +134,8 @@ class ProductController extends Controller
                 }
             }
         }
- // return redirect()->route('admin.index')->withStatus(__('product successfully updated.'));
- return response()->json(['message' => 'product successfully updated.']);
+  return redirect()->route('admin.index')->withStatus(__('product successfully updated.'));
+// return response()->json(['message' => 'product successfully updated.']);
 
 
     }
@@ -148,6 +143,8 @@ class ProductController extends Controller
    
     public function destroy(Product $product)
     {
+       
+            $product->deleted_by = auth()->user()->id;
         if ($product->photos->isNotEmpty()) {
             foreach ($product->photos as $photo) {
                 $filename = $photo->filename;
@@ -157,8 +154,8 @@ class ProductController extends Controller
         }
         
         $product->delete();
-       // return redirect()->route('admin.index')->withStatus(__('product successfully deleted.'));
-        return response()->json(['message' => 'product successfully deleted.']);
+        return redirect()->route('admin.index')->withStatus(__('product successfully deleted.'));
+      //  return response()->json(['message' => 'product successfully deleted.']);
 
 
     }

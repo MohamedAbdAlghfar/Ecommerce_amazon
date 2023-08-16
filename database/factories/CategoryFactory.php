@@ -15,12 +15,12 @@ class CategoryFactory extends Factory
     
         $parent_id = Category::all()->random()->id; 
 
-        // $parent_id = 1;      // when first migration 
+       // $parent_id = 1;      // when first migration 
            
         return [
 
             'name' => fake()->name(),
-            'parent_id' => $parent_id,
+            'parent_id' => $parent_id, 
             'image'     => fake()->randomElement([
                 'https://m.media-amazon.com/images/I/61iQu0VHEWL._AC_UL480_FMwebp_QL65_.jpg',
                 'https://m.media-amazon.com/images/I/61xW8gDKGGL._AC_UL480_FMwebp_QL65_.jpg',
@@ -35,6 +35,6 @@ class CategoryFactory extends Factory
 
 
 
-        ];
+        ]; 
     }
 }

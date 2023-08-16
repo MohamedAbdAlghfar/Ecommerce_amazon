@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+   
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
@@ -31,18 +27,18 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('brand')->nullable();
             $table->foreignId('store_id')->constrained();
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('category_id')->constrained(); 
+            $table->unsignedBigInteger('deleted_by')->nullable();
+            $table->foreign('deleted_by')->references('id')->on('users');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
+        $table->dropForeign(['deleted_by']); 
+        $table->dropColumn('deleted_by');
         Schema::dropIfExists('products');
     }
 };

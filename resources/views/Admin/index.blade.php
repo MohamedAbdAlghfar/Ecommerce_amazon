@@ -294,20 +294,25 @@ section {
 
 <body bgcolor ="black">
     <nav>
-        <!-- Links -->
+
+    <!-- Links -->
         <a href="admin/product/create">Add Product</a>  <!--  Done!   -->
       <!--  <a href="">Delete Product</a> -->
        <!-- <a href="">Edit Product</a>  -->
       <!--  <a href="">Make Discount</a>  -->
         <a href="admin/product/show">Show Product</a>
+        <a href="admin/product/delBy/{id}">Product Del By</a>
         <a href="admin/Product/recent">Recent Sold</a>
         <a href="admin/Product/request">Requests</a>
         <a href="admin/store/show">Delete Store</a>
+        <a href="admin/store/delBy/{id}">Store Del By</a>
         <a href="admin/profile/admins">Admins page</a>
         <a href="admin/category/create">Add Category</a>
        <!--  <a href="">Delete Category</a>  -->
         <!--  <a href="">Edit Category</a>  -->
         <a href="admin/category/show">Show Category</a>
+        <a href="admin/category/delBy/{id}">Category Del By</a>
+        
 
 </nav>
 <div align = "right">

@@ -22,7 +22,7 @@ class photoFactory extends Factory
     {  $photoable_id= Product::all()->random()->id;
         
        
-       $photoable_type = 'App\Models\Product';
+       $photoable_type = 'App\Models\Product'; 
        
 
 

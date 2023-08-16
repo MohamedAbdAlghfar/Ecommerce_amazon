@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController,CategoryController};
+use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController,CategoryController,Del_StoreController,RequestController,CategoryDelByController,ProductDelByController,StoreDelByController};
 // ..
 use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,LogoutController};
 use App\Http\Controllers\ClientSideControllers\UserAccount\{DelCartController,GetCartProducts,DeleteAccountController,
@@ -41,6 +41,9 @@ Route::prefix('my-api')->group(function(){
     Route::delete('admin/store/{store}', [Del_StoreController::class, 'destroy']);
     Route::get('admin/store/show', [Del_StoreController::class, 'show']);
     Route::get('admin/Product/request' , [RequestController::class ,'index']);
+    Route::get('admin/category/delBy/{id}', [CategoryDelByController::class,'showDeletedCategory']);
+    Route::get('admin/product/delBy/{id}', [ProductDelByController::class,'showDeletedProduct']);
+    Route::get('admin/store/delBy/{id}', [StoreDelByController::class,'showDeletedStore']);
 }); 
 
 

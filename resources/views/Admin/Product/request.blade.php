@@ -66,11 +66,12 @@
 <body bgcolor = "#008374">
 
 <div class="recent-sold">
-  <h2>Recent Sold Items</h2>
+  <h2>Requests</h2>
   <div class="sold-grid">
   @foreach ($request as $request) 
   <div class="sold-item">
  <div class="fixed-size-img">
+ 
  @if ($request->Product->Photos->isNotEmpty())
     <img src="{{ $request->Product->Photos->first()->filename }}">
 @else

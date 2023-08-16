@@ -13,33 +13,17 @@ class MyprofileController extends Controller
     {
         $this->middleware('auth:api');
     }
-
-    
-    public function create()
-    {
-        //
-    }
-
-   
-    public function store(Request $request)
-    {
-        //
-    }
-
-   
-    public function show($id)
-    {
-        //
-    }
-
-  
+ 
     public function edit()
     {
         // get the authenticated user
         $user = auth()->user();
 
-        // return the user profile as a JSON response
-        return response()->json(optional($user)->only('email', 'address','gender','f_name','l_name'));
+       //  return the user profile as a JSON response
+    
+       return view('admin/Myprofile/edit',compact('user'));
+      //   return response()->json(optional($user)->only('email', 'address','gender','f_name','l_name'));
+    
     }
     
    
@@ -86,14 +70,9 @@ $admin->save();
         }
 
 
-     //   return redirect('/admin')->withStatus('profile successfully updated.');
-     return response()->json(['message' => 'profile successfully updated.']);
+        return redirect('/admin')->withStatus('profile successfully updated.');
+   //  return response()->json(['message' => 'profile successfully updated.']);
 
     }
-
-
-    public function destroy($id)
-    {
-        //
-    }
+   
 }
