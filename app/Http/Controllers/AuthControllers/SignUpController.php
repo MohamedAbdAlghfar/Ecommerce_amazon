@@ -17,11 +17,20 @@ class SignUpController extends Controller
             'f_name'  => 'required',
             'l_name'  => 'required',
             'email'   => 'required|email',
+            // 'email' => 'required|email|unique:users',  // this is another way to check is email is already exists
             'address' => 'required',
             'gender'  => 'required',
             'phone'   => 'required',
             'password'=> 'required|min:8|confirmed',
         ]);
+
+        $checkEmail = User::where('email', $validatedData['email'])->first();
+        if ($checkEmail) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'email is already registered',
+            ]);
+        }
 
         $user = User::create([
             'f_name'  => $validatedData['f_name'],
