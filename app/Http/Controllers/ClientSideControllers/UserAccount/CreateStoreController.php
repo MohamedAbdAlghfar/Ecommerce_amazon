@@ -5,6 +5,8 @@ namespace App\Http\Controllers\ClientSideControllers\UserAccount;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Models\{Store,User};
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreateStoreController extends Controller
 {
@@ -23,14 +25,14 @@ class CreateStoreController extends Controller
 
         $rules = [
             'name' => 'required|min:5|max:150',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:stores',
             'about_store' => 'required',
             'phone' => 'required',
             'location' =>'required',
-            'store_cover' => 'required',
+            'store_cover' => 'nullable',
             'store_image' => 'required',
             'services' => 'required',  
-            'link_website' => 'required',                
+            'link_website' => 'nullable',                
         ]; 
         $this->validate($request, $rules);
 
@@ -60,4 +62,16 @@ class CreateStoreController extends Controller
             'store'  => $createStore,
         ]);
     }
+
+    // Override the failedValidation method
+    protected function failedValidation(Validator $validator)
+    {
+        // Throw an exception with a custom response
+        throw new HttpResponseException(response()->json([
+            'status' => 'error',
+            'message' => 'Validation failed',
+            'errors' => $validator->errors()
+        ], 422));
+    }
+
 }

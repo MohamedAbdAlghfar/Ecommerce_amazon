@@ -29,7 +29,7 @@ class DeleteAccountController extends Controller
         }
         return response()->json([
             'status'=>'Success',
-            'message'=>'Account Deletion Were Done'
+            'message'=>'Account Deletion Were Done !'
         ]);
     }
 }

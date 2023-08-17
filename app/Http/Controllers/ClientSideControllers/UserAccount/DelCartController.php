@@ -26,8 +26,6 @@ class DelCartController extends Controller
         return response()->json([
           'status' => 'success',
           'message' => 'Product deleted from cart successfully',
-          'cart_product' => $deleteProductFromCart,
-          'user_name'=> $user->f_name,
         ]);
       } else {
         return response()->json([

@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{User,Cart};
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 class SignUpController extends Controller
@@ -16,26 +18,19 @@ class SignUpController extends Controller
         $validatedData = $Request->validate([
             'f_name'  => 'required',
             'l_name'  => 'required',
-            'email'   => 'required|email',
-            // 'email' => 'required|email|unique:users',  // this is another way to check is email is already exists
-            'address' => 'required',
+            'email'   => 'required|email|unique:users',
+            'age'     => 'required',
+            'address' => 'nullable',
             'gender'  => 'required',
             'phone'   => 'required',
             'password'=> 'required|min:8|confirmed',
         ]);
 
-        $checkEmail = User::where('email', $validatedData['email'])->first();
-        if ($checkEmail) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'email is already registered',
-            ]);
-        }
-
         $user = User::create([
             'f_name'  => $validatedData['f_name'],
             'l_name'  => $validatedData['l_name'],
             'email'   => $validatedData['email'],
+            'age'     => $validatedData['age'],
             'address' => $validatedData['address'],
             'gender'  => $validatedData['gender'],
             'phone'   => $validatedData['phone'],
@@ -57,4 +52,16 @@ class SignUpController extends Controller
             'usercart' => $cart ,
         ]);
     }
+
+    // Override the failedValidation method
+        
+    protected function failedValidation(Validator $validator){
+        // Throw an exception with a custom response
+        throw new HttpResponseException(response()->json([
+            'status' => 'error',
+            'message' => 'Validation failed',
+            'errors' => $validator->errors()
+        ], 422));
+    }
+
 }
