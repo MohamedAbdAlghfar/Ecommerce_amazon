@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class LoginController extends Controller
 {   
@@ -32,4 +34,16 @@ class LoginController extends Controller
             'user'   =>$user,
         ]);
     }
+        
+    // Override the failedValidation method
+        
+    protected function failedValidation(Validator $validator){
+        // Throw an exception with a custom response
+        throw new HttpResponseException(response()->json([
+            'status' => 'error',
+            'message' => 'Validation failed',
+            'errors' => $validator->errors()
+        ], 422));
+    }
+
 }

@@ -8,7 +8,7 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\CartProduct;
 
-class AddCartController extends Controller 
+class AddToCartController extends Controller 
 {
     public function __construct()
     {

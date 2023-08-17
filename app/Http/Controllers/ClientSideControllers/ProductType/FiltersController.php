@@ -52,7 +52,7 @@ class FiltersController extends Controller
         // ..
 
         // Check if the products belong to the specified category
-        $query->whereHas('categories', function ($q) use ($category) {
+        $query->whereHas('category', function ($q) use ($category) {
         $q->where('categories.id', $category);
         });
 

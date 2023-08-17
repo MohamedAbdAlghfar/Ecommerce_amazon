@@ -9,7 +9,7 @@ use App\Http\Controllers\ClientSideControllers\UserAccount\{DelCartController,Ge
     EditPersonalDataController,CreateStoreController,GetPersonalDataController,GetUserOrders,GetUserStore};
 use App\Http\Controllers\ClientSideControllers\HomePage\{MainHomeController};
 use App\Http\Controllers\ClientSideControllers\ProductType\{FiltersController,GetCardsController};
-use App\Http\Controllers\ClientSideControllers\ProductDetails_Payment\{AddCartController,GetSuggestedProducts,GetProductDetails};
+use App\Http\Controllers\ClientSideControllers\ProductDetails_Payment\{AddToCartController,GetSuggestedProducts,GetProductDetails};
 use App\Http\Controllers\StoreControllers\{EditStoreController};
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
 
