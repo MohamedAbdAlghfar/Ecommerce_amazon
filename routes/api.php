@@ -21,29 +21,37 @@ use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Own
 
 Route::prefix('my-api')->group(function(){
 
-    Route::get('admin/Product/recent' , [RecentController::class ,'index']);
-    Route::get('admin' , [AdminController::class ,'index']);
-    Route::get('admin/profile/admins' , [ProfileController::class ,'index']);
-    Route::get('admin/profile/myprofile', [MyprofileController::class, 'edit']);
-    Route::put('admin/profile/myprofile', [MyprofileController::class, 'update']);
+    // product
     Route::get('admin/product', [ProductController::class, 'create']);
     Route::post('admin/product', [ProductController::class, 'store']);
     Route::get('admin/product/{product}', [ProductController::class, 'edit']);
     Route::put('admin/product/{product}', [ProductController::class, 'update']);
     Route::get('admin/Product/show', [ProductController::class, 'show']);
     Route::delete('admin/product/{product}', [ProductController::class, 'destroy']);
+    Route::get('admin/Product/request' , [RequestController::class ,'index']);
+    Route::get('admin/Product/recent' , [RecentController::class ,'index']);
+    Route::get('admin/product/delBy/{id}', [ProductDelByController::class,'showDeletedProduct']);
+    // dashboard
+    Route::get('admin' , [AdminController::class ,'index']);
+    // profile
+    Route::get('admin/profile/admins' , [ProfileController::class ,'index']);
+    Route::get('admin/profile/myprofile', [MyprofileController::class, 'edit']);
+    Route::put('admin/profile/myprofile', [MyprofileController::class, 'update']);
+    // category
     Route::get('admin/category', [CategoryController::class, 'create']);
     Route::post('admin/category', [CategoryController::class, 'store']);
     Route::get('admin/category/show', [CategoryController::class, 'show']);
     Route::delete('admin/category/{category}', [CategoryController::class, 'destroy']);
     Route::put('admin/category/{category}', [CategoryController::class, 'update']);
     Route::get('admin/category/{category}', [CategoryController::class, 'edit']);
+    Route::get('admin/category/delBy/{id}', [CategoryDelByController::class,'showDeletedCategory']);
+    // store
     Route::delete('admin/store/{store}', [Del_StoreController::class, 'destroy']);
     Route::get('admin/store/show', [Del_StoreController::class, 'show']);
-    Route::get('admin/Product/request' , [RequestController::class ,'index']);
-    Route::get('admin/category/delBy/{id}', [CategoryDelByController::class,'showDeletedCategory']);
-    Route::get('admin/product/delBy/{id}', [ProductDelByController::class,'showDeletedProduct']);
     Route::get('admin/store/delBy/{id}', [StoreDelByController::class,'showDeletedStore']);
+    
+    
+    
 }); 
 
 

@@ -10,6 +10,15 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class StoreDelByController extends Controller 
 {
+   
+     // ------------------------------------------------ [ (REPORT) ] ------------------------------------------------------- //
+    // this controller belong to {{Delete Store}}
+      //details
+           // showDeletedStore : use to take store id and return view to show data of admin that delete 
+   
+   
+   
+   
     public function showDeletedStore($storeId)  
     {
         $store = Store::withTrashed()->find($storeId); 

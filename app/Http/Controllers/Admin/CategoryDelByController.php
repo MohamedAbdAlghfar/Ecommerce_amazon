@@ -11,6 +11,14 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class CategoryDelByController extends Controller
 {
 
+   // ------------------------------------------------ [ (REPORT) ] ------------------------------------------------------- //
+    // this controller belong to {{Delete Category}}
+      //details
+           // showDeletedCategory : use to take category id and return view to show data of admin that delete
+
+
+
+
 
     public function showDeletedCategory($categoryId)
 {

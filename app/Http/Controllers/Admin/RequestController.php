@@ -8,7 +8,20 @@ use App\Models\Order;
 
 class RequestController extends Controller
 {
+  
     
+   // ------------------------------------------------ [ (REPORT) ] ------------------------------------------------------- //
+    // this controller belong to {{Requests}}
+      //details
+           // index : use to show order that requsted
+
+
+
+
+
+
+
+
     public function index()
     {
         $request = Order::select('price', 'location', 'created_at', 'product_id', 'shipping_company_id', 'user_id','trans_date')

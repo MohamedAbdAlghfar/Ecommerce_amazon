@@ -11,6 +11,16 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class ProductDelByController extends Controller
 {
     
+   // ------------------------------------------------ [ (REPORT) ] ------------------------------------------------------- //
+    // this controller belong to {{Delete Product}}
+      //details
+           // showDeletedProduct : use to take product id and return view to show data of admin that delete
+
+
+
+
+
+
     public function showDeletedProduct($productId)  
 {
     $product = Product::withTrashed()->find($productId); 

@@ -29,8 +29,8 @@
                     </div>
                 </div>
                 @foreach($product as $product)
-                <div class="row">
-                @if ($product->Photos->isNotEmpty())
+                <div class="row">   
+              @if ($product->Photos->isNotEmpty())
     <img src="/images/{{ $product->Photos->first()->filename }}">
                 @else
                                 
@@ -41,8 +41,8 @@
                                 </div>
                             </div>
                         </div>
-                        
-                       
+                        <h5>N.Of Available pieces ::  {{ $product->available_pieces }} </h5>
+                       @if($product->store_id == Null)
                         <form  method="POST" action="{{ route('product.destroy', $product) }}"> 
                                         
                                         @csrf
@@ -51,9 +51,22 @@
                                         
 
                                         <input class="btn btn-danger btn-sm" type="submit" value="Delete" name="deletecourse">
-                                    </form>
-                    @endforeach
-                </div>
+                            
+                                </form>
+                       
+                                @endif            
+                   
+                        @if($product->store_id != Null)
+                        <h5 class="card-title">Store Name :: {{ $product->Store->name }}</h5>
+                        @endif  
+                      
+                        @endforeach
+              
+                        
+              
+              
+              
+                    </div>
                 
                 <div class="card-footer py-4">
                     <nav class="d-flex justify-content-end" aria-label="...">

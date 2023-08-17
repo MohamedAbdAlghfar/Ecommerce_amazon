@@ -11,6 +11,24 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class ProductController extends Controller
 {
     
+       // ------------------------------------------------ [ (REPORT) ] ------------------------------------------------------- //
+    // this controller belong to {{Product Pages}}
+      //details
+           // functions
+                // 1- create : return view to create product
+                // 2- store  : store the product in database and save his image
+                // 3- show   : show all product in web
+                // 4- edit   : show specific product to edit
+                // 5- update : update the product in database and his image
+                // 6- destroy: delete specific product from database and delete his image and save data of admin that delete (soft delete)
+
+
+
+
+
+
+
+
     public function create() 
     {
         return view("Admin\Product\create");
@@ -35,7 +53,7 @@ class ProductController extends Controller
         $this->validate($request, $rules);
 
         $Product = new Product;
-        $Product->fill($request->merge(["sold" => 0])->all());
+        $Product->fill($request->merge(["sold" => 0 , "store_id" => Null])->all());
         
         $parent_id = $request->input('parent_id'); // get the selected parent category ID from the request data
         $category = Category::find($parent_id); // get the Category model for the selected parent category
@@ -72,7 +90,7 @@ class ProductController extends Controller
     public function show()
     {
 
-        $product = Product::orderBy('created_at', 'desc')->get();
+        $product = Product::select('id','name','available_pieces','store_id')->orderBy('store_id', 'asc')->get();
         return view('admin/Product/show',compact('product'));
      //  return response()->json($product);
     }

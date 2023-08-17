@@ -11,7 +11,16 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class Del_StoreController extends Controller
 {
 
-    
+       // ------------------------------------------------ [ (REPORT) ] ------------------------------------------------------- //
+    // this controller belong to {{Delete Store Page}}
+      //details
+           // 1- show    :  show all stores in web
+           // 2- destroy : use to delete store from database and delete his images
+
+
+
+
+
     public function show()
     {
         $store = Store::orderBy('created_at', 'desc')->get();

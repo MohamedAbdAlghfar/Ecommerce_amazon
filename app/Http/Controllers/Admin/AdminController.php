@@ -9,7 +9,16 @@ use App\Models\User;
 use App\Models\Store;
 class AdminController extends Controller
 {
-    
+   // ------------------------------------------------ [ (REPORT) ] ------------------------------------------------------- //
+    // this controller belong to {{Dashboard Page}}
+      //details
+         // 1- index : 
+           // it return number of user in web (user_count) && number of stores in web (store_count)
+           // && total price of sold in this day (totalPrice_in_day) && total price of sold in this month (totalPrice_in_month)
+           // && total price of sold in general (total_order_price)
+
+
+
     public function index()
     {
          
@@ -30,10 +39,7 @@ $data = [
 ];
 
           return view('Admin\index',compact('data'));
-    //  return response()->json($data);
+    //    return response()->json($data);
      
-    }
-
-    
-    
+    }   
 }

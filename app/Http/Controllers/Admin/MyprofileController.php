@@ -9,6 +9,15 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class MyprofileController extends Controller
 {
    
+   // ------------------------------------------------ [ (REPORT) ] ------------------------------------------------------- //
+    // this controller belong to {{Myprofile Page}}
+      //details
+           // 1- edit  : return view have data of authintecation admin
+           // 2- update: update data of authintecation admin 
+
+
+
+
     public function __construct()
     {
         $this->middleware('auth:api');
