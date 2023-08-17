@@ -14,12 +14,13 @@ return new class extends Migration
             $table->string('f_name')->nullable(); 
             $table->string('l_name')->nullable();  
             $table->string('phone' )->nullable();
-            $table->integer('gender')->nullable();   // 0 => male , 1 => female
+            $table->tinyInteger('gender')->nullable();   // 0 => male , 1 => female
+            $table->tinyInteger('age')->nullable();
             $table->string('address')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('role')->nullable()->default(0);  // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Owner=2 || Store-Admin=3 ..
+            $table->tinyInteger('role')->nullable()->default(0);  // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Owner=2 || Store-Admin=3 ..
             $table->string('profile_image')->default('jpg.jpg');  
             $table->rememberToken();
             $table->timestamps();

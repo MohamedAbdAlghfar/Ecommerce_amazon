@@ -18,7 +18,7 @@ class GetPersonalDataController extends Controller
         
         $userId = $user->id;
 
-        $userPersonalData = User::where('id', $userId)->get();
+        $userPersonalData = User::find($userId)->only('f_name','l_name','email','age','gender','address','phone');
 
         if (!$userPersonalData) {
             return response()->json([
