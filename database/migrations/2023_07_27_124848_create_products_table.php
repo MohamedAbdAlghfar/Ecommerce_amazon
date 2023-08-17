@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('about',500)->nullable();
             $table->string('name')->nullable();
             $table->string('brand')->nullable();
-            $table->foreignId('store_id')->constrained();
+            $table->foreignId('store_id')->nullable()->constrained();
             $table->foreignId('category_id')->constrained(); 
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->foreign('deleted_by')->references('id')->on('users');

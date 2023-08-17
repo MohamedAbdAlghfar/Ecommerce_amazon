@@ -80,7 +80,7 @@
 
 </div> 
   <h3>{{ $request->Product->name }}</h3>
-      <p class="sold-date"><font color="black"><b>Sold on </b></font> :: {{ $request->created_at }}</p>
+      <p class="sold-date"><font color="black"><b>Request on </b></font> :: {{ $request->created_at }}</p>
       <p class="sold-price">$ {{ $request->price }}</p>
       <p class="sold-price"><font color="black">THE BUYER :: </font> {{ $request->User->f_name }}</p>
       <p class="sold-price"><font color="black">LOCATION OF ORDER </font> ::{{ $request->location }} </p>

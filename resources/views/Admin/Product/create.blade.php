@@ -78,16 +78,16 @@ button[type="submit"]:hover {
 		<input type="number" id="Weight" name="weight" required>        
 		
         <label for="description">Description:</label>
-		<textarea id="description" name="description"></textarea>
+		<textarea id="description" name="description" required></textarea>
         
         <label for="About">About:</label>
-		<textarea id="About" name="about"></textarea>
+		<textarea id="About" name="about" required></textarea>
         
         <div class="form-group{{ $errors->has('Category_id') ? ' has-danger' : '' }}">
     <label class="form-control-label" for="input-Category_id">{{ __('Parent Title') }}</label>
     
     <select id="category-select" name="parent_id" required class="form-control">
-    <option value="0">Null</option>
+    
     @foreach(\App\Models\Category::orderBy('id', 'desc')->get() as $Category)
         <option value="{{ $Category->id }}">{{ $Category->name }}</option>
     @endforeach
@@ -101,20 +101,7 @@ button[type="submit"]:hover {
 </div>
 
 
-<div class="form-group{{ $errors->has('Store_id') ? ' has-danger' : '' }}">
-    <label class="form-control-label" for="input-Store_id">{{ __('Store Title') }}</label>
-<select id="category-select" name="store_id" required class="form-control">
-    <option value="0">Null</option>
-    @foreach(\App\Models\Store::orderBy('id', 'desc')->get() as $Store)
-        <option value="{{ $Store->id }}">{{ $Store->name }}</option>
-    @endforeach
-</select>
-@if ($errors->has('Store_id'))
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $errors->first('Store_id') }}</strong>
-        </span>
-    @endif
-</div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />

@@ -27,7 +27,7 @@ class ProductController extends Controller
             'brand' => 'required',
             'color' => 'required',
             'weight' =>'required',
-            'description' => 'required',
+            'description' => 'required', 
             'about' => 'required',
             
             'image' => 'required',                
@@ -60,7 +60,7 @@ class ProductController extends Controller
                 }
             }
             return redirect('/admin')->withStatus('Product successfully created.');        
-          //  return response()->json(['message' => 'product successfully created.']);
+       //     return response()->json(['message' => 'product successfully created.']);
 
         }
 
@@ -74,7 +74,7 @@ class ProductController extends Controller
 
         $product = Product::orderBy('created_at', 'desc')->get();
         return view('admin/Product/show',compact('product'));
-      // return response()->json($product);
+     //  return response()->json($product);
     }
 
     

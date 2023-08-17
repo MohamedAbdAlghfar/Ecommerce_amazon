@@ -79,7 +79,7 @@
 
 </div> 
   <h3>{{ $recentorder->Product->name }}</h3>
-      <p class="sold-date"><font color="black"><b>Sold on </b></font> :: {{ $recentorder->created_at }}</p>
+      <p class="sold-date"><font color="black"><b>Sold on </b></font> :: {{ $recentorder->trans_date }}</p>
       <p class="sold-price">$ {{ $recentorder->price }}</p>
       <p class="sold-price"><font color="black">THE BUYER :: </font> {{ $recentorder->User->f_name }}</p>
       <p class="sold-price"><font color="black">LOCATION OF ORDER </font> ::{{ $recentorder->location }} </p>

@@ -131,6 +131,17 @@ button[type="submit"]:hover {
     @endif
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#category-select').select2();
+    });
+</script>
+
+
     <br><br><br>
     <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-image">{{ __('change your picture') }}</label>

@@ -61,8 +61,8 @@ class CategoryController extends Controller
     public function show()
     {
         $category = Category::orderBy('created_at', 'desc')->get();
-        return view('admin/Category/show',compact('category'));
-  //   return response()->json($category); 
+      //  return view('admin/Category/show',compact('category'));
+     return response()->json($category); 
 
     }
 
@@ -117,7 +117,7 @@ $category->save();
 
 
         return redirect('/admin')->withStatus('category successfully updated.');
-  //   return response()->json(['message' => 'category successfully updated.']);
+    // return response()->json(['message' => 'category successfully updated.']);
 
 
 
@@ -142,8 +142,8 @@ $category->save();
         }
         
         $category->delete();
-        return redirect()->route('admin.index')->withStatus(__('category successfully deleted.'));
-     //   return response()->json(['message' => 'category successfully deleted.']);
+  //      return redirect()->route('admin.index')->withStatus(__('category successfully deleted.'));
+        return response()->json(['message' => 'category successfully deleted.']);
 
 
     }
