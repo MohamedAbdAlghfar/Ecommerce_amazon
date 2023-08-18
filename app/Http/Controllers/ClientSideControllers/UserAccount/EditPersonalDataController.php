@@ -15,24 +15,14 @@ class EditPersonalDataController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function getData(){
-        $user_ = auth()->user();
-        $user_id = $user_->id;
-
-        $userPersonalData = User::where('id',$user_id)->get();
-
-        if ($userPersonalData) {
-            return response()->json([
-                'status'=>'success',
-                'data'  =>$userPersonalData,
-            ]);
-        }
+    // .. Get User's All Data To Show In Update Form And Modify Any Of it ..
+    public function getUserData(){
+        $user = auth()->user();
         return response()->json([
-            'status'=>'failed',
-            'data'  =>'failed to get the data !. try Again Later ',
+            'userdata' => $user,
         ]);
     }
-
+        
     public function update(Request $request)
     {
         $user = auth()->user();
@@ -44,7 +34,7 @@ class EditPersonalDataController extends Controller
             'l_name'  => 'required',
             'email'   => 'required|email|unique:users',
             'age'     => 'required',
-            'profile_image'  => 'required',
+            'profile_image' => 'required',
             'address' => 'required',
             'gender'  => 'required',
             'phone'   => 'required',
@@ -53,20 +43,15 @@ class EditPersonalDataController extends Controller
         $this->validate($request, $rules);
 
 
-        // .. updating .. 
-        $updateUser = User::find($user->id);
-        $updateUser->f_name  = $request->f_name;
-        $updateUser->l_name  = $request->l_name;
-        $updateUser->email   = $request->email;
-        $updateUser->age     = $request->age;
-        $updateUser->profile_image  = $request->profile_image;
-        $updateUser->address = $request->address;
-        $updateUser->gender  = $request->gender;
-        $updateUser->phone   = $request->phone;
-        $updateUser->password= $request->password;
-
-        $updateUser->save();  
-
+        // .. updating ..  
+        $updateUser = User::update(
+            [
+                'id' => $user->id,
+            ],
+            $request->except(['f_name', 'l_name', 'email', 'age', 'address', 
+            'gender','profile_image', 'phone', 'password']),
+        );
+        
         if ($updateUser) {
             return response()->json([
                 'status'  => 'Success',
