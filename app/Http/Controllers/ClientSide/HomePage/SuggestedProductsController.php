@@ -52,9 +52,9 @@ class SuggestedProductsController extends Controller
         }
 
 
-        function getProductsByCategory($category) {
-            return Product::whereHas('category', function ($query) use ($category) {
-                $query->where('name', $category)->limit(10)->offset(0); })->get();
+        function getProductsByCategory($categoryName) {
+            return Product::whereHas('category', function ($query) use ($categoryName) {
+                $query->where('name', $categoryName)->limit(10)->offset(0); })->get();
         }
 
 
