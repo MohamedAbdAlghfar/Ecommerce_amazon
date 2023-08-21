@@ -6,12 +6,12 @@ use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductContro
 use App\Http\Controllers\Owner\{OwnerController,CreateAdminController,DeleteAdminController,CreateOwnerController};
 // ..
 use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,LogoutController};
-use App\Http\Controllers\ClientSideControllers\UserAccount\{DelCartController,GetCartProducts,DeleteAccountController,
+use App\Http\Controllers\ClientSide\UserAccount\{DelCartController,GetCartProducts,DeleteAccountController,
     EditPersonalDataController,CreateStoreController,GetPersonalDataController,GetUserOrders,GetUserStore};
-use App\Http\Controllers\ClientSideControllers\HomePage\{MainHomeController};
-use App\Http\Controllers\ClientSideControllers\ProductType\{FiltersController,GetCardsController};
-use App\Http\Controllers\ClientSideControllers\ProductDetails_Payment\{AddToCartController,GetSuggestedProducts,GetProductDetails};
-use App\Http\Controllers\StoreControllers\{EditStoreController};
+use App\Http\Controllers\ClientSide\HomePage\{MainHomeController};
+use App\Http\Controllers\ClientSide\ProductType\{FiltersController,GetCardsController};
+use App\Http\Controllers\ClientSide\ProductDetails_Payment\{AddToCartController,GetSuggestedProducts,GetProductDetails};
+use App\Http\Controllers\Store\{EditStoreController};
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
 
 /*
