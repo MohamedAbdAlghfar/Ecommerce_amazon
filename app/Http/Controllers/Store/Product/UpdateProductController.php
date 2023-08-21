@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Store\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CategoryFilterController extends Controller
+class UpdateProductController extends Controller
 {
-    // filter by category
+    //
 }

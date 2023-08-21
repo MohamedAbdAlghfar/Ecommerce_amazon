@@ -7,5 +7,5 @@ use Illuminate\Http\Request;
 
 class OrderFilterController extends Controller
 {
-    //
+    // filter will be by select box 
 }

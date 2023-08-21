@@ -10,7 +10,7 @@ class GetSuggestedProducts extends Controller
 {
     public function suggestedProducts(Request $request){
         $prodId = $request->id;
-        $categoryId = Product::where('id', $prodId);
+        $categoryId = Product::find($prodId)->only('category_id');
 
         // .. Get All Products Of One Parent In Category ..
         $products = Product::whereHasNested('category', function ($query) use ($categoryId) {
