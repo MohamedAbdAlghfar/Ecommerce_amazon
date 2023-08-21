@@ -3,8 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Store;
-use App\Models\Category;
+use App\Models\{Category,Store,User};
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
  */
@@ -20,7 +19,7 @@ class ProductFactory extends Factory
        
         $store_id  = Store::all()->random()->id;
         $category_id = Category::all()->random()->id;
-       
+        $userId = User::all()->random()->id;
        
        
         return [
@@ -42,15 +41,7 @@ class ProductFactory extends Factory
             'name' => fake()->name(),
             'store_id' => $store_id ,
             'category_id' => $category_id ,
-
-
-
-
-
-
-
-
-
+            'added_by' => $userId ,
 
         ];
     }

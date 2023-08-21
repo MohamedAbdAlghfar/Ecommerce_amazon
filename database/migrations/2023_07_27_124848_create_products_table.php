@@ -30,6 +30,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained(); 
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->foreign('deleted_by')->references('id')->on('users');
+            $table->tinyInteger('added_by')->nullable();
             $table->timestamps();
         });
     }

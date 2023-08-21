@@ -31,6 +31,7 @@ class Product extends Model
         'store_id', 
         'category_id',  
         'deleted_by',
+        'added_by',
     ];
     public function comments() 
 {
