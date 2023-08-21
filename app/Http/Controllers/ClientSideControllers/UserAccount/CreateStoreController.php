@@ -59,7 +59,6 @@ class CreateStoreController extends Controller
         return response()->json([
             'status' => 'Failed',
             'message'=> 'Error In Creating Store ! .. Try Again Later',
-            'store'  => $createStore,
         ]);
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ClientSideControllers\UserAccount;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
@@ -14,6 +15,14 @@ class EditPersonalDataController extends Controller
         $this->middleware('auth:api');
     }
 
+    // .. Get User's All Data To Show In Update Form And Modify Any Of it ..
+    public function getUserData(){
+        $user = auth()->user();
+        return response()->json([
+            'userdata' => $user,
+        ]);
+    }
+        
     public function update(Request $request)
     {
         $user = auth()->user();
@@ -21,31 +30,28 @@ class EditPersonalDataController extends Controller
         $userId = $user->id;
 
         $rules = [
-            'f_name'  => 'nullable',
-            'l_name'  => 'nullable',
-            'email'   => 'nullable|email|unique:users',
-            'age'     => 'nullable',
-            'address' => 'nullable',
-            'gender'  => 'nullable',
-            'phone'   => 'nullable',
-            'password'=> 'nullable|min:8|confirmed',
+            'f_name'  => 'required',
+            'l_name'  => 'required',
+            'email'   => 'required|email|unique:users',
+            'age'     => 'required',
+            'profile_image' => 'required',
+            'address' => 'required',
+            'gender'  => 'required',
+            'phone'   => 'required',
+            'password'=> 'required|min:8|confirmed',
         ];
         $this->validate($request, $rules);
 
 
-        // .. updating .. 
-        $updateUser = User::find($user->id);
-        $updateUser->f_name  = $request->f_name;
-        $updateUser->l_name  = $request->l_name;
-        $updateUser->email   = $request->email;
-        $updateUser->age     = $request->age;
-        $updateUser->address = $request->address;
-        $updateUser->gender  = $request->gender;
-        $updateUser->phone   = $request->phone;
-        $updateUser->password= $request->password;
-
-        $updateUser->save();  
-
+        // .. updating ..  
+        $updateUser = User::update(
+            [
+                'id' => $user->id,
+            ],
+            $request->except(['f_name', 'l_name', 'email', 'age', 'address', 
+            'gender','profile_image', 'phone', 'password']),
+        );
+        
         if ($updateUser) {
             return response()->json([
                 'status'  => 'Success',
