@@ -69,6 +69,17 @@ Route::delete('owner/delete-admin/{user}', 'App\Http\Controllers\Owner\DeleteAdm
 Route::get('owner/create', 'App\Http\Controllers\Owner\CreateOwnerController@create');
 Route::post('owner/create', 'App\Http\Controllers\Owner\CreateOwnerController@store')->name('CreateOwner.store');
 
+// shipping_combany Admin routes
+
+Route::get('shippingCombany', 'App\Http\Controllers\Shipping\ShippingController@index')->name('Shipping.index');
+Route::get('shippingCombany/show/{id}', 'App\Http\Controllers\Shipping\ShippingController@show')->name('Shipping.show');
+Route::delete('shippingCombany/{shipping}', 'App\Http\Controllers\Shipping\DeleteShippingController@destroy')->name('DeleteShipping.destroy');
+Route::put('shippingCombany/order/{id}', 'App\Http\Controllers\Shipping\updateOrderStatusController@change')->name('UpdateStatus.change');
+
+
+
+
+
 
 
  //}

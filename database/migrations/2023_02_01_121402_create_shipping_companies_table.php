@@ -13,7 +13,7 @@ return new class extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->string('name');   
             $table->string('phone'); 
-            $table->string('website');                         // .. Done ..
+            $table->string('website');                          // .. Done ..
             $table->string('email'); 
             $table->string('address');
             $table->string('location'); 

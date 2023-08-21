@@ -324,6 +324,10 @@ section {
             <p>{{ $data['user_count'] }}</p>
         </div>
         <div class="card">
+            <h2>Number of Admins</h2>
+            <p>{{ $data['Admin_count'] }}</p>
+        </div>
+        <div class="card">
             <h2>Number of Stores</h2>
             <p>{{ $data['store_count'] }}</p>
         </div>
