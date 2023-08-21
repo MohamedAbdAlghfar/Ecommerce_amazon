@@ -90,10 +90,10 @@ button[type="submit"]:hover {
       <div class="profile"> 
         <div class="avatar">
         @if ($product->Photos->isNotEmpty())
-    <img src="/images/{{ $product->Photos->first()->filename }}">
+    <img src="/images/{{ $product->Photos->first()->filename }}"width = 200px hight = 200px>
         @else
                                 
-    <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo">
+    <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo"width = 200px hight = 200px>
         @endif
             
         <div class="info">

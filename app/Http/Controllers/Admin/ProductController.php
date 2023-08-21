@@ -39,7 +39,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|min:5|max:150',
+            'name' => 'required|min:2|max:150',
             'available_pieces' => 'required',
             'price' => 'required',
             'brand' => 'required',

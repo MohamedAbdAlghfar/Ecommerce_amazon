@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController,CategoryController,Del_StoreController,RequestController,CategoryDelByController,ProductDelByController,StoreDelByController};
+use App\Http\Controllers\Owner\{OwnerController,CreateAdminController,DeleteAdminController,CreateOwnerController};
 // ..
 use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,LogoutController};
 use App\Http\Controllers\ClientSideControllers\UserAccount\{DelCartController,GetCartProducts,DeleteAccountController,
@@ -21,6 +22,7 @@ use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Own
 
 Route::prefix('my-api')->group(function(){
 
+    /////////////////////////Admin Part/////////////////////////////////////////
     // product
     Route::get('admin/product', [ProductController::class, 'create']);
     Route::post('admin/product', [ProductController::class, 'store']);
@@ -50,8 +52,21 @@ Route::prefix('my-api')->group(function(){
     Route::get('admin/store/show', [Del_StoreController::class, 'show']);
     Route::get('admin/store/delBy/{id}', [StoreDelByController::class,'showDeletedStore']);
     
-    
-    
+    /////////////////////////Owner Part/////////////////////////////////////////
+    // dashboard
+    Route::get('owner' , [OwnerController::class ,'index'])->name('owner.index');
+    // admin
+    Route::get('admin/create', [CreateAdminController::class, 'create']);
+    Route::post('admin/create', [CreateAdminController::class, 'store'])->name('CreateAdmin.store');
+    Route::get('owner/admin/show', [DeleteAdminController::class, 'index']);
+    Route::delete('owner/delete-admin/{user}', [DeleteAdminController::class, 'destroy'])->name('DeleteAdmin.destroy');
+    // owner
+    Route::get('owner/create', [CreateOwnerController::class, 'create']);
+    Route::post('owner/create', [CreateOwnerController::class, 'store'])->name('CreateOwner.store');
+
+
+
+
 }); 
 
 

@@ -31,10 +31,10 @@
                 @foreach($store as $store)
                 <div class="row">
                 @if ($store->store_image)
-    <img src="/images/{{ $store->store_image }}">
+    <img src="/images/{{ $store->store_image }}"width = 200px hight = 200px>
                 @else
                                 
-                                    <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo">
+                                    <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo"width = 200px hight = 200px>
                                 @endif
                                 
                             

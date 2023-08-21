@@ -72,7 +72,7 @@
   <div class="sold-item">
  <div class="fixed-size-img">
  @if ($recentorder->Product->Photos->isNotEmpty())
-    <img src="{{ $recentorder->Product->Photos->first()->filename }}">
+    <img src="{{ $recentorder->Product->Photos->first()->filename }}"width = 200px hight = 200px>
 @else
     <p> NO IMAGE FOUND </p>
 @endif

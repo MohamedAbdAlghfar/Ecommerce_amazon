@@ -9,10 +9,10 @@ return new class extends Migration
     
     public function up()  
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) { 
             $table->bigIncrements('id')->unsigned();   
             $table->string('f_name')->nullable(); 
-            $table->string('l_name')->nullable();  
+            $table->string('l_name')->nullable();   
             $table->string('phone' )->nullable();
             $table->tinyInteger('gender')->nullable();   // 0 => male , 1 => female
             $table->tinyInteger('age')->nullable();
