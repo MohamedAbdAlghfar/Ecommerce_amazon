@@ -35,6 +35,7 @@ class orderFactory extends Factory
             'price' => fake()->randomFloat(2, 10, 100), 
             'discount' => fake()->randomElement([20,30,50]), 
             'user_id' => $user_id, 
+            'status' => fake()->randomElement([1,2,3]),
             'shipping_company_id' => $shipingcom_id,
             'product_id' => $product_id, 
             'location' => fake()->address(),

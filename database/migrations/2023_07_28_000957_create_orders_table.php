@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('price')->nullable();   
             $table->integer('discount')->nullable();
             $table->foreignId('user_id')->constrained();
+            $table->tinyInteger('status')->nullable();
             $table->foreignId('shipping_company_id')->nullable()->constrained();
             $table->foreignId('product_id')->constrained(); 
             $table->string('location')->nullable();
