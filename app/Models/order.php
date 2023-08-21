@@ -17,8 +17,7 @@ class Order extends Model
         'user_id',
         'shipping_company_id',
         'product_id', 
-
-
+        'status',
     ];
 
 

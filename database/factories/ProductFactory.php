@@ -3,8 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Store;
-use App\Models\Category;
+use App\Models\{Category,Store,User};
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
  */
@@ -20,14 +19,14 @@ class ProductFactory extends Factory
        
         $store_id  = Store::all()->random()->id;
         $category_id = Category::all()->random()->id;
-       
+        $userId = User::all()->random()->id;
        
        
         return [
             
             'price' => fake()->randomFloat(2, 10, 100),
             'discount' => fake()->randomElement([20,30,50]),
-            'rate' => fake()->randomFloat(2, 10, 100),
+            'rate' => mt_rand(1,5) * 0.9,
             'available_pieces' => fake()->numberBetween(0, 100),
             'weight' => fake()->numberBetween(1, 30),
             'color' => fake()->randomElement(['red','blue','green','white','black']),
@@ -42,15 +41,7 @@ class ProductFactory extends Factory
             'name' => fake()->name(),
             'store_id' => $store_id ,
             'category_id' => $category_id ,
-
-
-
-
-
-
-
-
-
+            'added_by' => $userId ,
 
         ];
     }

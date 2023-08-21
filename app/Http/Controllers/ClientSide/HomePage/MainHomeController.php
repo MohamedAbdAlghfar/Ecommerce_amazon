@@ -17,22 +17,21 @@ class MainHomeController extends Controller
             $Product = Product::select('name', 'price')
                 ->where('category_id', $i)
                 ->orderBy('sold', 'desc')
-                ->take(10)
+                ->take(20)
                 ->get();
         
             $this->Best_Seller[$i] = $Product;
         }
-        $this->categories = Category::select(['id','name','parent_id', 'image'])->whereBetween('id', [1, 10])->get();
+
+        // .. Get Top 11 Main Categories , Actually Parents Of All Products ..
+        $this->categories = Category::select(['id','name','parent_id', 'image'])->whereBetween('id', [1, 11])->get();
 
     }
 
     public function getCategory(){
         if ($this->categories) {
             // .. Success Fetching ..
-            return response()->json([
-                'message' =>'Data Fetching Done',
-                'categories'=>$this->categories ,
-            ]);
+            return response()->json([$this->categories]);
         }
         // .. Failed Fetching ..
         return response()->json([
@@ -44,11 +43,7 @@ class MainHomeController extends Controller
     {
         if ($this->categories) {
             // .. Success Fetching ..
-            return response()->json([
-                'status'  => 'Success',
-                'message' => 'Data Fetching Done',
-                'best seller products' => $this->Best_Seller[$id] ,
-            ]);
+            return response()->json([$this->Best_Seller[$id]]);
         }
         // .. Failed Fetching ..
         return response()->json([
