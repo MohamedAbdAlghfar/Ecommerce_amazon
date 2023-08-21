@@ -22,7 +22,7 @@ class StoreFactory extends Factory
        
        
         return [
-            'name' => fake()->name(),  
+            'name' => fake()->company(),  
             'phone' => fake()->PhoneNumber(),
             'about_store' => fake()->paragraph(),  
             'link_website' => fake()->url(),

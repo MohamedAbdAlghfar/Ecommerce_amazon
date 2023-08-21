@@ -11,7 +11,7 @@ use App\Models\Product;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\order>
  */
-class orderFactory extends Factory
+class OrderFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,7 +22,12 @@ class orderFactory extends Factory
     {
         $user_id = User::all()->random()->id;
         $shipingcom_id = ShippingCompany::all()->random()->id;
-        $product_id = Product::all()->random()->id;
+        $product = Product::inRandomOrder()->first();
+        $productDiscount = $product->discount;
+        $productPrice    = $product->price;
+        $productActualPrice = $productPrice - ($productDiscount/100) * $productPrice;
+        $product_id = $product->id;
+        $storeId = $product->store_id;
 
         $start_date = '-1 year'; // Set the start date to one year ago
         $end_date = 'now'; // Set the end date to now
@@ -32,12 +37,12 @@ class orderFactory extends Factory
        
        
         return [
-            'price' => fake()->randomFloat(2, 10, 100), 
-            'discount' => fake()->randomElement([20,30,50]), 
-            'user_id' => $user_id, 
+            'price' => $productActualPrice,
+            'user_id' => $user_id,
+            'store_id' => $storeId,
             'status' => fake()->randomElement([1,2,3]),
             'shipping_company_id' => $shipingcom_id,
-            'product_id' => $product_id, 
+            'product_id' => $product_id,
             'location' => fake()->address(),
             'trans_date' => $trans_date->format('Y-m-d H:i:s'),
 

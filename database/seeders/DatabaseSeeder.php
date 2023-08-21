@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Comments;
-use App\Models\order;
+use App\Models\Order;
 use App\Models\Photo;
 use App\Models\ShippingCompany;
 use App\Models\Store;
@@ -26,13 +26,15 @@ class DatabaseSeeder extends Seeder
        $Categories = \App\Models\Category::factory(40)->create();
        $users = \App\Models\User::factory(50)->create();
        
+
     
     
        $stores = \App\Models\Store::factory(7)->create();
        \App\Models\Product::factory(200)->create();
        \App\Models\Comments::factory(150)->create();
         \App\Models\ShippingCompany::factory(4)->create();
-       $orders = \App\Models\order::factory(200)->create();
+       $orders = \App\Models\Order::factory(200)->create();
+       $requests = \App\Models\Request::factory(200)->create();
        
      
     

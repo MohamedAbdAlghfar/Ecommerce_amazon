@@ -13,8 +13,8 @@ class Order extends Model
         'location', 
         'trans_date',     
         'price',
-        'discount', 
         'user_id',
+        'store_id',
         'shipping_company_id',
         'product_id', 
         'status',
@@ -26,6 +26,11 @@ class Order extends Model
     public function User()
     {
      return $this->belongsTo(User::class);
+    }
+
+    public function store()
+    {
+     return $this->belongsTo(Store::class);
     }
     
     public function product() 
