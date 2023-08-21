@@ -26,7 +26,7 @@ class ProductFactory extends Factory
             
             'price' => fake()->randomFloat(2, 10, 100),
             'discount' => fake()->randomElement([20,30,50]),
-            'rate' => fake()->randomFloat(2, 10, 100),
+            'rate' => mt_rand(1,5) * 0.9,
             'available_pieces' => fake()->numberBetween(0, 100),
             'weight' => fake()->numberBetween(1, 30),
             'color' => fake()->randomElement(['red','blue','green','white','black']),
