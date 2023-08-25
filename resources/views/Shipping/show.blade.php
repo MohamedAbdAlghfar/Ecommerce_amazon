@@ -64,23 +64,19 @@
 
 
 <body bgcolor = "#008374">
+<div align = "center">
+<h2> {{ $data['shipping']->name }} </h2>
+</div>
+
 
 <div class="recent-sold">
-
-@if($shipping->Orders)
-<div align = "center">
-<h2>{{ $shipping->name }}</h2>
-  
-  @if ($shipping->cover_image)
-    <img src="{{ $shipping->cover_image }}"width = 400px hight = 200px align = "center">
-  @else
-    <p> NO IMAGE FOUND </p>
-  @endif
-</div>
+@if($data['shipping']->cover_image)
+<img src="/images/{{$data['shipping']->cover_image}}"width = 200px hight = 200px>
+@endif
   <br><br>
   <div class="sold-grid">
-  @foreach ($shipping->Orders as $Order) 
-  @if($Order->trans_date > now()->toDateString())
+  @foreach ($data['order'] as $Order) 
+  
   <div class="sold-item">
  <div class="fixed-size-img">
  
@@ -89,22 +85,24 @@
   
 <p class="sold-date"><font color="black"><b>Request on </b></font> :: {{ $Order->created_at }}</p>
       <p class="sold-price">$ {{ $Order->price }}</p>
-      <p class="sold-price"><font color="black">Product name :: </font> {{ $Order->Product->name }}</p>
-      <p class="sold-price"><font color="black">From Store :: </font> {{ $Order->Product->Store->name }}</p>
-      <p class="sold-price"><font color="black">THE BUYER :: </font> {{ $Order->User->f_name }}</p>
+      <p class="sold-price"><font color="black">Product name :: </font> {{ $Order->product_name }}</p>
+      <p class="sold-price"><font color="black">From Store :: </font> {{ $Order->store_name }}</p>
+      <p class="sold-price"><font color="black">THE BUYER :: </font> {{ $Order->user_name }}</p>
       <p class="sold-price"><font color="black">LOCATION OF ORDER </font> ::{{ $Order->location }} </p>
       <p class="sold-price"><font color="black"> Tras_date </font> ::{{ $Order->trans_date }} </p>
-      <a href="{{ route('UpdateStatus.change', $Order) }}" class="back-button">Accept</a>
+      <form method="POST" action="{{ route('UpdateStatus.change', $Order) }}"> 
+    @csrf
+    @method('put')
+    <button type="submit" class="back-button">Accept</button>
+</form>
     </div>
-    @endif
+    
 @endforeach
 </div>
 </div>
 </div>
 <br>
-@else
-<h2> No Orders </h2>
-@endif
+
 <a href="{{ route('Shipping.index') }}" class="back-button">Back</a>
 </body>
 

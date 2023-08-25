@@ -27,5 +27,11 @@ class ShippingCompany extends Model
     return $this->hasMany(order::class);
 }
 
+public function Stores()
+{
+    return $this->belongsToMany(Store::class)->withPivot('debt');
+}
+
+
 
 }

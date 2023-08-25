@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) { 
             $table->id();
             $table->integer('price')->nullable();   
             $table->integer('discount')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->tinyInteger('status')->nullable();
-            $table->foreignId('shipping_company_id')->nullable()->constrained();
+            $table->foreignId('shipping_company_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('product_id')->constrained(); 
             $table->string('location')->nullable();
             $table->datetime('trans_date');

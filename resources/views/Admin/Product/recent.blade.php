@@ -71,22 +71,22 @@
   @foreach ($recentorder as $recentorder) 
   <div class="sold-item">
  <div class="fixed-size-img">
- @if ($recentorder->Product->Photos->isNotEmpty())
-    <img src="{{ $recentorder->Product->Photos->first()->filename }}"width = 200px hight = 200px>
+ @if ($recentorder->filename)
+    <img src="{{ $recentorder->filename }}"width = 200px hight = 200px>
 @else
     <p> NO IMAGE FOUND </p>
 @endif
 
 </div> 
-  <h3>{{ $recentorder->Product->name }}</h3>
+  <h3>{{ $recentorder->product_name }}</h3>
       <p class="sold-date"><font color="black"><b>Sold on </b></font> :: {{ $recentorder->trans_date }}</p>
       <p class="sold-price">$ {{ $recentorder->price }}</p>
-      <p class="sold-price"><font color="black">From Store :: </font> {{ $recentorder->Product->Store->name }}</p> 
-      <p class="sold-price"><font color="black">THE BUYER :: </font> {{ $recentorder->User->f_name }}</p>
+      <p class="sold-price"><font color="black">From Store :: </font> {{ $recentorder->store_name }}</p> 
+      <p class="sold-price"><font color="black">THE BUYER :: </font> {{ $recentorder->user_name }}</p>
       <p class="sold-price"><font color="black">LOCATION OF ORDER </font> ::{{ $recentorder->location }} </p>
-      <p class="sold-price"><font color="black">OTHER AVAILABLE PIECES </font> ::{{ $recentorder->Product->available_pieces }} </p>
-@if($recentorder->ShippingCompany)
-    <p class="sold-price"><font color="black">THE SHIPPING_COM NAME </font> ::{{ $recentorder->ShippingCompany->name }}</p>
+      <p class="sold-price"><font color="black">OTHER AVAILABLE PIECES </font> ::{{ $recentorder->available_pieces }} </p>
+      @if($recentorder->shipping_com_name)
+    <p class="sold-price"><font color="black">THE SHIPPING_COM NAME </font> ::{{ $recentorder->shipping_com_name }}</p>
 @else
     <p class="sold-price"><font color="black">No Shipping Company</font></p>
 @endif

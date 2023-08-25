@@ -90,9 +90,25 @@ class ProductController extends Controller
     public function show()
     {
 
-        $product = Product::select('id','name','available_pieces','store_id')->orderBy('store_id', 'asc')->get();
-        return view('admin/Product/show',compact('product'));
-     //  return response()->json($product);
+        $product_of_web = Product::select('products.id', 'products.name as product_name', 'products.available_pieces', 'products.store_id','photoable.filename')->where('products.store_id',Null)->join('photoable', 'photoable.photoable_id', '=', 'products.id')->get();
+
+        $product_of_store = Product::select('products.id', 'products.name as product_name', 'products.available_pieces', 'products.store_id', 'stores.name as store_name', 'photoable.filename')
+        ->join('stores', 'stores.id', '=', 'products.store_id')
+        ->leftJoin('photoable', 'photoable.photoable_id', '=', 'products.id')
+        ->orderBy('products.store_id', 'asc')
+        ->get();
+
+   $data = [
+   'product_of_web' => $product_of_web,
+   'product_of_store' => $product_of_store 
+
+   ];
+
+
+
+
+          return view('admin/Product/show',compact('data'));
+      // return response()->json($data);
     }
 
     

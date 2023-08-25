@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\ShippingCompany;
 use App\Models\Product;
 
-
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\order>
  */
@@ -41,6 +40,10 @@ class orderFactory extends Factory
             'location' => fake()->address(),
             'trans_date' => $trans_date->format('Y-m-d H:i:s'),
 
+        
+        
+        
+        
         ];
     }
 }

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController,CategoryController,Del_StoreController,RequestController,CategoryDelByController,ProductDelByController,StoreDelByController};
 use App\Http\Controllers\Owner\{OwnerController,CreateAdminController,DeleteAdminController,CreateOwnerController};
+use App\Http\Controllers\Shipping\{ShippingController,DeleteShippingController,updateOrderStatusController,CreateShippingController,StoresShippingDebtController,delStoresShippingDebtController};
 // ..
 use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,LogoutController};
 use App\Http\Controllers\ClientSide\UserAccount\{DelCartController,GetCartProducts,DeleteAccountController,
@@ -64,8 +65,19 @@ Route::prefix('my-api')->group(function(){
     Route::get('owner/create', [CreateOwnerController::class, 'create']);
     Route::post('owner/create', [CreateOwnerController::class, 'store'])->name('CreateOwner.store');
 
-
-
+/////////////////////////Shipping company Part/////////////////////////////////////////
+    // dashboard
+    Route::get('shippingCombany' , [ShippingController::class ,'index'])->name('owner.index');
+    // shipping company
+    Route::get('shippingCombany/show/{id}', [ShippingController::class, 'show'])->name('Shipping.show');
+    Route::delete('shippingCombany/{shipping}', [DeleteShippingController::class, 'destroy'])->name('DeleteShipping.destroy');
+    Route::get('shippingCombany/create', [CreateShippingController::class, 'create']);
+    Route::post('shippingCombany/create', [CreateShippingController::class, 'store'])->name('CreateShipping.store');
+    // order
+    Route::put('shippingCombany/order/{id}', [updateOrderStatusController::class, 'change'])->name('UpdateStatus.change');
+    // store
+    Route::get('shippingCombany/getStoresShippingPrice/{id}', [StoresShippingDebtController::class, 'getShippingStores'])->name('Shipping.getShippingStores');
+    Route::delete('shippingCombany/delStoresShippingDebt/{shipping_id}/{store_id}', [delStoresShippingDebtController::class, 'DelStoreDebt'])->name('delShippingStoresDebt.DelStoreDebt');
 
 }); 
 

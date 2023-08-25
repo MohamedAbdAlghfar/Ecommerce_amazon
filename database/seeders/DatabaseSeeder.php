@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
        $stores = \App\Models\Store::factory(7)->create();
        \App\Models\Product::factory(200)->create();
        \App\Models\Comments::factory(150)->create();
-        \App\Models\ShippingCompany::factory(4)->create();
+        $shippings = \App\Models\ShippingCompany::factory(4)->create();
        $orders = \App\Models\order::factory(200)->create();
        
      
@@ -63,6 +63,18 @@ class DatabaseSeeder extends Seeder
     }
 
     
+
+    foreach ($shippings as $shipping) {
+        $stores = Store::inRandomOrder()->limit(3)->get();
+        
+        foreach ($stores as $store) {
+            $price = 10.99; // Set the desired price for the pivot table
+
+            $shipping->stores()->attach($store, [
+                'debt' => $price,
+            ]);
+        }
+    }
 
 
 

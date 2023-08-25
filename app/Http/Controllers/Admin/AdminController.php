@@ -31,7 +31,7 @@ $totalPrice_in_month = Order::whereMonth('created_at', now()->month)
 $total_order_price = Order::sum('price');
 
 $data = [
-    'user_count' => $user_count,
+    'user_count' => $user_count,  
     'store_count' => $store_count,
     'totalPrice_in_day' => $totalPrice_in_day,
     'totalPrice_in_month' => $totalPrice_in_month,
@@ -39,7 +39,7 @@ $data = [
 ];
 
           return view('Admin\index',compact('data'));
-    //    return response()->json($data);
+    //   return response()->json($data);
      
     }   
 }

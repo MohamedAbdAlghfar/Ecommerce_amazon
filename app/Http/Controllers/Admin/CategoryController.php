@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 use Tymon\JWTAuth\Facades\JWTAuth;
-class CategoryController extends Controller
+class CategoryController extends Controller 
 {
        // ------------------------------------------------ [ (REPORT) ] ------------------------------------------------------- //
     // this controller belong to {{Category Pages}}
@@ -66,19 +66,27 @@ class CategoryController extends Controller
     
     public function show()
     {
-        $category = Category::orderBy('created_at', 'desc')->get();
-      //  return view('admin/Category/show',compact('category'));
-          return response()->json($category); 
+        $category = Category::orderBy('created_at', 'desc')->select('image','name','id')->get();
+        return view('admin/Category/show',compact('category'));
+      //    return response()->json($category); 
     }
 
     
-    public function edit(Category $category)
+    public function edit(Category $category) 
     {
         
-    return view('admin/Category/edit',compact('category'));
- // return response()->json($category);
 
-    }
+$all_parent_id = Category::select('name','id')->get();
+$data = [
+
+    'all_parent_id' => $all_parent_id,
+    'category'      => $category,
+];
+
+    return view('admin/Category/edit',compact('category'));
+ // return response()->json($data);
+
+    } 
 
     
     public function update(Request $request,  Category $category)

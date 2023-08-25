@@ -10,6 +10,15 @@
   text-decoration: none;
   cursor: pointer;
 }
+.back-button {
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  padding: 5px 10px;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -24,6 +33,7 @@
             <th>website</th>
             <th>location</th>
             <th>address</th>
+            <th> <a href="shippingCombany/create" class="back-button">Add_shipping</a></th>
         </tr>
     </thead>
     <tbody>
@@ -53,6 +63,8 @@
                                  
                                 </form>
                                 <a href="{{ route('Shipping.show', $shipping) }}" class="btn btn-info btn-sm">show</a>
+                               <br><br>
+                                <a href="{{ route('Shipping.getShippingStores', $shipping) }}" class="btn btn-info btn-sm" link = "black">show storesAccounts</a>
 
             </td>
 
@@ -60,8 +72,8 @@
         @endforeach
     </tbody>
 </table>
-<br>
-<div align = "center"><a href="{{ route('owner.index') }}" class="back-button">Back</a></div>
+
+
 </body>
 </html>
 

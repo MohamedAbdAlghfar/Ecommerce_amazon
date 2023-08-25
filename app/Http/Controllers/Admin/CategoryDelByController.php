@@ -29,8 +29,20 @@ class CategoryDelByController extends Controller
     $adminName = $admin->f_name;
     $adminEmail = $admin->email;
 
+    $data = [
+        'category' => $category,  
+        'admin' => $admin,
+        'adminName' => $adminName,
+        'adminEmail' => $adminEmail,
+    ];
+
+
+
+
     // Pass the admin information to the view or perform any other desired actions
-    return view('Admin\Category\DelBy', compact('category', 'adminName', 'adminEmail'));
+  
+   // return view('Admin\Category\DelBy', compact('data'));
+    return response()->json($data);
 }
 
 

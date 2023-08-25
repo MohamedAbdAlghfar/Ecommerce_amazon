@@ -72,22 +72,22 @@
   <div class="sold-item">
  <div class="fixed-size-img">
  
- @if ($request->Product->Photos->isNotEmpty())
-    <img src="{{ $request->Product->Photos->first()->filename }}"width = 200px hight = 200px>
+ @if ($request->filename)
+    <img src="{{ $request->filename }}"width = 200px hight = 200px>
 @else
     <p> NO IMAGE FOUND </p>
 @endif
 
 </div> 
-  <h3>{{ $request->Product->name }}</h3>
+  <h3>{{ $request->product_name }}</h3>
       <p class="sold-date"><font color="black"><b>Request on </b></font> :: {{ $request->created_at }}</p>
       <p class="sold-price">$ {{ $request->price }}</p>
-      <p class="sold-price"><font color="black">From Store :: </font> {{ $request->Product->Store->name }}</p>
-      <p class="sold-price"><font color="black">THE BUYER :: </font> {{ $request->User->f_name }}</p>
+      <p class="sold-price"><font color="black">From Store :: </font> {{ $request->store_name }}</p>
+      <p class="sold-price"><font color="black">THE BUYER :: </font> {{ $request->user_name }}</p>
       <p class="sold-price"><font color="black">LOCATION OF ORDER </font> ::{{ $request->location }} </p>
-      <p class="sold-price"><font color="black">OTHER AVAILABLE PIECES </font> ::{{ $request->Product->available_pieces }} </p>
-@if($request->ShippingCompany)
-    <p class="sold-price"><font color="black">THE SHIPPING_COM NAME </font> ::{{ $request->ShippingCompany->name }}</p>
+      <p class="sold-price"><font color="black">OTHER AVAILABLE PIECES </font> ::{{ $request->available_pieces }} </p>
+      @if($request->shipping_com_name)
+    <p class="sold-price"><font color="black">THE SHIPPING_COM NAME </font> ::{{ $request->shipping_com_name }}</p>
 @else
     <p class="sold-price"><font color="black">No Shipping Company</font></p>
 @endif

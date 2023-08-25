@@ -28,10 +28,19 @@ class ProductDelByController extends Controller
 
     // Access admin information
     $adminName = $admin->f_name;
-    $adminEmail = $admin->email;
+    $adminEmail = $admin->email; 
+
+    $data = [
+        'product' => $product,  
+        'admin' => $admin,
+        'adminName' => $adminName,
+        'adminEmail' => $adminEmail,
+    ];
+
 
     // Pass the admin information to the view or perform any other desired actions
-    return view('Admin\Product\DelBy', compact('product', 'adminName', 'adminEmail'));
+    return view('Admin\Product\DelBy', compact('data'));
+    return response()->json($data);
 }
  
 

@@ -75,9 +75,10 @@ Route::get('shippingCombany', 'App\Http\Controllers\Shipping\ShippingController@
 Route::get('shippingCombany/show/{id}', 'App\Http\Controllers\Shipping\ShippingController@show')->name('Shipping.show');
 Route::delete('shippingCombany/{shipping}', 'App\Http\Controllers\Shipping\DeleteShippingController@destroy')->name('DeleteShipping.destroy');
 Route::put('shippingCombany/order/{id}', 'App\Http\Controllers\Shipping\updateOrderStatusController@change')->name('UpdateStatus.change');
-
-
-
+Route::get('shippingCombany/create', 'App\Http\Controllers\Shipping\CreateShippingController@create');
+Route::post('shippingCombany/create', 'App\Http\Controllers\Shipping\CreateShippingController@store')->name('CreateShipping.store');
+Route::get('shippingCombany/getStoresShippingPrice/{id}', 'App\Http\Controllers\Shipping\StoresShippingDebtController@getShippingStores')->name('Shipping.getShippingStores');
+Route::delete('shippingCombany/delStoresShippingDebt/{shipping_id}/{store_id}', 'App\Http\Controllers\Shipping\delStoresShippingDebtController@DelStoreDebt')->name('delShippingStoresDebt.DelStoreDebt');
 
 
 
