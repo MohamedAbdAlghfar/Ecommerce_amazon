@@ -36,7 +36,6 @@ class UpdateStoreController extends Controller
 
     public function update(Request $request)
     {
-        // validate the request data and images
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email',
@@ -49,35 +48,29 @@ class UpdateStoreController extends Controller
             'store_cover' => 'required|image'
         ]);
     
-        // find the store by id
         $store = Store::find($request->id);
-
 
         // get the hashes of the uploaded files
         $store_image_hash = $request->file('store_image')->hashName();
         $store_cover_hash = $request->file('store_cover')->hashName();
 
-        // .. If Photo Not Same With Old Then Delete It Or Dont Update It ..
         if ($store_image_hash != basename($store->store_image)) {
-            // .. Delete Old Image ..
+
             Storage::disk('public')->delete('images/Store-Images/' . basename($store->store_image));
-            // .. Update New Image ..
-            $store->update([
+
+            $store->update([              // .. Update New Image ..
                 'store_image' => asset('storage/images/Store-Images/' . $store_image_hash)
             ]);
         }
-
         if ($store_cover_hash != basename($store->store_cover)) {
-            // .. Delete Old Image ..
+
             Storage::disk('public')->delete('images/Store-Images/' . basename($store->store_cover));
-            // .. Update New Image ..
-            $store->update([
+
+            $store->update([               // .. Update New Image ..
                 'store_cover' => asset('storage/images/Store-Images/' . $store_cover_hash)
             ]);
         }
 
-    
-        // update the store with the new data and images
         $store->update([
             'name' => $request->name,
             'email'=> $request->email,
@@ -88,7 +81,6 @@ class UpdateStoreController extends Controller
             'link_website'=>$request->link_website,
         ]);
     
-        // return a success message or redirect to another page
         return response()->json(['message' => 'Store updated successfully']);
     }
 

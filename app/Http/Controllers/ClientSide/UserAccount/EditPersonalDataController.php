@@ -47,12 +47,11 @@ class EditPersonalDataController extends Controller
 
         $user_profile_hash = $request->file('store_image')->hashName();
 
-        // .. If Photo Not Same With Old Then Delete It Or Dont Update It ..
         if ($user_profile_hash != basename($user->profile_image)) {
-            // delete the old image from the storage
+
             Storage::disk('public')->delete('images/Profile-Images/' . basename($store->store_cover));
-            // update the store cover with the new one
-            $user->update([
+
+            $user->update([               // .. Update New Image ..
                 'store_cover' => asset('storage/images/Profile-Images/' . $user_profile_hash)
             ]);
         }
