@@ -38,8 +38,6 @@ class AddToCartController extends Controller
         return response()->json([
           'status' => 'success',
           'message' => 'Product added to cart successfully',
-          'cart_product' => $addProductToCart,
-          'user_name'=> $user->f_name,
         ]);
       } else {
         return response()->json([

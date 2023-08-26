@@ -4,7 +4,7 @@ namespace App\Http\Controllers\ClientSide\UserAccount;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Order,Store,User,Cart};
+use App\Models\{Order,Store,User,Cart,Product};
 
 class GetUserDataController extends Controller
 {
@@ -72,10 +72,11 @@ class GetUserDataController extends Controller
         $user = auth()->user();
         $cartId = $user->cart->id;
 
-        $cartAllProducts = Cart::with('products')->findOrFail($cartId)->get();
+        $ids = CartProduct::whereIn('cart_id')->select(['product_id'])->get();
+        $products = Product::whereIn('id', $ids)->get();
 
-        if($cartAllProducts){
-            return response()->json([$cartAllProducts]);
+        if($products){
+            return response()->json([$products]);
         }
         // .. If Any Error Happen With Getting Data ..
         return response()->json(['message' =>'Failed To Get The Data !']);
