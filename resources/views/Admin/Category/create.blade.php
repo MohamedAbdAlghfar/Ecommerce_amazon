@@ -65,7 +65,7 @@ button[type="submit"]:hover {
         <div class="form-group{{ $errors->has('Category_id') ? ' has-danger' : '' }}">
     <label class="form-control-label" for="input-Category_id">{{ __('Parent Title') }}</label>
     
-    <select id="category-select" name="parent_id" required class="form-control">
+    <select id="category-select" name="parent_id"  class="form-control">
     <option value="0">Null</option>
     @foreach(\App\Models\Category::orderBy('id', 'desc')->get() as $Category)
         <option value="{{ $Category->id }}">{{ $Category->name }}</option>

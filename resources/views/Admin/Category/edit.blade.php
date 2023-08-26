@@ -90,10 +90,10 @@ button[type="submit"]:hover {
       <div class="profile"> 
         <div class="avatar">
         @if ($category->image)
-    <img src="/images/{{ $category->image }}">
+    <img src="/images/{{ $category->image }}"width = 200px hight = 200px>
         @else
                                 
-    <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo">
+    <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo"width = 200px hight = 200px>
         @endif
             
         <div class="info">
@@ -130,6 +130,17 @@ button[type="submit"]:hover {
         </span>
     @endif
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#category-select').select2();
+    });
+</script>
+
 
     <br><br><br>
     <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">

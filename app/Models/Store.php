@@ -58,4 +58,10 @@ class Store extends Model
         });
     }
 
+    public function ShippingCompanies()
+    {
+        return $this->belongsToMany(ShippingCompany::class)->withPivot('debt');
+    }
+
+
 }

@@ -90,10 +90,10 @@ button[type="submit"]:hover {
       <div class="profile"> 
         <div class="avatar">
         @if ($product->Photos->isNotEmpty())
-    <img src="/images/{{ $product->Photos->first()->filename }}">
+    <img src="/images/{{ $product->Photos->first()->filename }}"width = 200px hight = 200px>
         @else
                                 
-    <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo">
+    <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo"width = 200px hight = 200px>
         @endif
             
         <div class="info">
@@ -113,11 +113,11 @@ button[type="submit"]:hover {
 
         <br><br><br><br>
         <label for="available_pieces">Available_pieces:</label>
-		<input type="number" id="available_pieces" name="available_pieces"  value= "{{ $product->available_pieces }}">
+		<input type="number" id="available_pieces" name="available_pieces" required  value= "{{ $product->available_pieces }}">
         
         <br><br><br><br>
         <label for="weight">Weight:</label>
-		<input type="number" id="weight" name="weight"  value= "{{ $product->weight }}">
+		<input type="number" id="weight" name="weight" required value= "{{ $product->weight }}">
 
         <br><br><br><br>
         <label for="color">Color:</label>
@@ -158,7 +158,7 @@ button[type="submit"]:hover {
     
     <select id="category-select" name="parent_id"  class="form-control">
     <option value="" disabled selected>{{ $product->Category->name }}</option>
-    <option value="0">Null</option>
+    
     @foreach(\App\Models\Category::orderBy('id', 'desc')->get() as $Category)
         <option value="{{ $Category->id }}">{{ $Category->name }}</option>
     @endforeach
@@ -170,6 +170,17 @@ button[type="submit"]:hover {
         </span>
     @endif
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#category-select').select2();
+    });
+</script>
+
 
     <br><br><br>
     <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">

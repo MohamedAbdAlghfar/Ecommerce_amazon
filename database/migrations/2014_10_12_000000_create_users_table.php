@@ -9,10 +9,10 @@ return new class extends Migration
     
     public function up()  
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) { 
             $table->bigIncrements('id')->unsigned();   
             $table->string('f_name')->nullable(); 
-            $table->string('l_name')->nullable();  
+            $table->string('l_name')->nullable();   
             $table->string('phone' )->nullable();
             $table->tinyInteger('gender')->nullable();   // 0 => male , 1 => female
             $table->tinyInteger('age')->nullable();
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->tinyInteger('role')->nullable()->default(0);  // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Owner=2 || Store-Admin=3 ..
+            $table->tinyInteger('role')->nullable()->default(0);  // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Owner=2 || Store-Admin=3 || shipping_combany-Admin=5..
             $table->string('profile_image')->default('jpg.jpg');  
             $table->rememberToken();
             $table->timestamps();

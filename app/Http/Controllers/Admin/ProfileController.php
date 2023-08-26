@@ -8,6 +8,12 @@ use App\Models\User;
 class ProfileController extends Controller
 {
   
+   // ------------------------------------------------ [ (REPORT) ] ------------------------------------------------------- //
+    // this controller belong to {{Admins View}}
+      //details
+           // index : show some data about admins
+
+
     public function index()
     {
         

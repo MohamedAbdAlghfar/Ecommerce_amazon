@@ -90,9 +90,9 @@ button[type="submit"]:hover {
       <div class="profile"> 
         <div class="avatar">
             @if($user->profile_image)
-                                <img src="/images/{{$user->profile_image}}" class="card-img-top" alt="admin Photo">
+                                <img src="/images/{{$user->profile_image}}"width = 200px hight = 200px class="card-img-top" alt="admin Photo">
                                 @else
-                                <img  src="/images/default.jpeg" class="card-img-top" alt="admin Photo">
+                                <img  src="/images/default.jpeg" class="card-img-top" alt="admin Photo"width = 200px hight = 200px>
                                 @endif </div>
             
         <div class="info">

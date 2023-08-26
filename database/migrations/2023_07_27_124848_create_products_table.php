@@ -4,10 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 return new class extends Migration
 {
    
-    public function up()
+    public function up() 
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
@@ -26,13 +27,18 @@ return new class extends Migration
             $table->string('about',500)->nullable();
             $table->string('name')->nullable();
             $table->string('brand')->nullable();
-            $table->foreignId('store_id')->constrained();
+            $table->foreignId('store_id')->nullable()->constrained();
             $table->foreignId('category_id')->constrained(); 
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->foreign('deleted_by')->references('id')->on('users');
             $table->tinyInteger('added_by')->nullable();
             $table->timestamps();
         });
+    
+    
+      
+       
+    
     }
 
     

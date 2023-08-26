@@ -31,10 +31,10 @@
                 @foreach($category as $category)
                 <div class="row">
                 @if ($category->image)
-    <img src="/images/{{ $category->image }}">
+    <img src="/images/{{ $category->image }}"width = 200px hight = 200px>
                 @else
                                 
-                                    <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo">
+                                    <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo"width = 200px hight = 200px>
                                 @endif
                                 <div class="card-body">
                                     <h5 class="card-title">{{ \Str::limit($category->name, 100) }}</h5>

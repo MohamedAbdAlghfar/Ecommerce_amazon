@@ -9,6 +9,15 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class MyprofileController extends Controller
 {
    
+   // ------------------------------------------------ [ (REPORT) ] ------------------------------------------------------- //
+    // this controller belong to {{Myprofile Page}}
+      //details
+           // 1- edit  : return view have data of authintecation admin
+           // 2- update: update data of authintecation admin 
+
+
+
+
     public function __construct()
     {
         $this->middleware('auth:api');
@@ -21,8 +30,8 @@ class MyprofileController extends Controller
 
        //  return the user profile as a JSON response
     
-       return view('admin/Myprofile/edit',compact('user'));
-      //   return response()->json(optional($user)->only('email', 'address','gender','f_name','l_name'));
+      // return view('admin/Myprofile/edit',compact('user'));
+         return response()->json(optional($user)->only('email', 'address','gender','f_name','l_name'));
     
     }
     
@@ -70,8 +79,8 @@ $admin->save();
         }
 
 
-        return redirect('/admin')->withStatus('profile successfully updated.');
-   //  return response()->json(['message' => 'profile successfully updated.']);
+     //   return redirect('/admin')->withStatus('profile successfully updated.');
+     return response()->json(['message' => 'profile successfully updated.']);
 
     }
    

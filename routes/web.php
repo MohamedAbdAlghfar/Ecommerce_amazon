@@ -6,7 +6,7 @@ use App\Http\Controllers\RejestrationContrallers\SignUpController;
 use App\Http\Controllers\HomePageControllers\MainHomeController;
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
  use App\Http\Controllers\Admin;
-
+ use App\Http\Controllers\Owner;
 // ..  ..
 
 // Route::get('signup', function() { return view('loginform'); });
@@ -40,7 +40,7 @@ use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Own
 
      Route::resource('admin', 'App\Http\Controllers\Admin\AdminController'); 
     
-     Route::resource('admin/product', App\Http\Controllers\Admin\ProductController::class);
+     Route::resource('admin/product', App\Http\Controllers\Admin\ProductController::class); 
      Route::get('admin/product/show', [App\Http\Controllers\Admin\ProductController::class, 'show']);
      Route::resource('admin/Product/recent', 'App\Http\Controllers\Admin\RecentController');
      Route::resource('admin/Product/request', 'App\Http\Controllers\Admin\RequestController');
@@ -58,6 +58,28 @@ use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Own
       Route::get('admin/store/show', [App\Http\Controllers\Admin\Del_StoreController::class, 'show']);
       Route::resource('admin/store', 'App\Http\Controllers\Admin\Del_StoreController');
       Route::get('admin/store/delBy/{id}', 'App\Http\Controllers\Admin\StoreDelByController@showDeletedStore');
+
+// owner routes
+
+Route::get('owner', 'App\Http\Controllers\Owner\OwnerController@index')->name('owner.index');
+Route::get('admin/create', 'App\Http\Controllers\Owner\CreateAdminController@create');
+Route::post('admin/create', 'App\Http\Controllers\Owner\CreateAdminController@store')->name('CreateAdmin.store');
+Route::get('owner/admin/show', 'App\Http\Controllers\Owner\DeleteAdminController@index');
+Route::delete('owner/delete-admin/{user}', 'App\Http\Controllers\Owner\DeleteAdminController@destroy')->name('DeleteAdmin.destroy');
+Route::get('owner/create', 'App\Http\Controllers\Owner\CreateOwnerController@create');
+Route::post('owner/create', 'App\Http\Controllers\Owner\CreateOwnerController@store')->name('CreateOwner.store');
+
+// shipping_combany Admin routes
+
+Route::get('shippingCombany', 'App\Http\Controllers\Shipping\ShippingController@index')->name('Shipping.index');
+Route::get('shippingCombany/show/{id}', 'App\Http\Controllers\Shipping\ShippingController@show')->name('Shipping.show');
+Route::delete('shippingCombany/{shipping}', 'App\Http\Controllers\Shipping\DeleteShippingController@destroy')->name('DeleteShipping.destroy');
+Route::put('shippingCombany/order/{id}', 'App\Http\Controllers\Shipping\updateOrderStatusController@change')->name('UpdateStatus.change');
+Route::get('shippingCombany/create', 'App\Http\Controllers\Shipping\CreateShippingController@create');
+Route::post('shippingCombany/create', 'App\Http\Controllers\Shipping\CreateShippingController@store')->name('CreateShipping.store');
+Route::get('shippingCombany/getStoresShippingPrice/{id}', 'App\Http\Controllers\Shipping\StoresShippingDebtController@getShippingStores')->name('Shipping.getShippingStores');
+Route::delete('shippingCombany/delStoresShippingDebt/{shipping_id}/{store_id}', 'App\Http\Controllers\Shipping\delStoresShippingDebtController@DelStoreDebt')->name('delShippingStoresDebt.DelStoreDebt');
+
 
 
 
