@@ -80,7 +80,7 @@
                                         
                    
                         
-                        <h5 class="card-title">Store Name :: {{ $product->Store->name }}</h5>
+                        <h5 class="card-title">Store Name :: {{ $product->store_name }}</h5>
                        
                       
                         @endforeach

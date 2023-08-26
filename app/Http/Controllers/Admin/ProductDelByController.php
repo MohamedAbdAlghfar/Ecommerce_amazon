@@ -21,27 +21,27 @@ class ProductDelByController extends Controller
 
 
 
-    public function showDeletedProduct($productId)  
-{
-    $product = Product::withTrashed()->find($productId); 
-    $admin = User::find($product->deleted_by);
+   public function showDeletedProduct($productId)  
+   {
+      $product = Product::withTrashed()->find($productId); 
+      $admin = User::find($product->deleted_by);
 
-    // Access admin information
-    $adminName = $admin->f_name;
-    $adminEmail = $admin->email; 
+      // Access admin information
+      $adminName = $admin->f_name;
+      $adminEmail = $admin->email; 
 
-    $data = [
-        'product' => $product,  
-        'admin' => $admin,
-        'adminName' => $adminName,
-        'adminEmail' => $adminEmail,
-    ];
+      $data = [
+          'product' => $product,  
+          'admin' => $admin,
+          'adminName' => $adminName,
+          'adminEmail' => $adminEmail,
+              ];
 
 
-    // Pass the admin information to the view or perform any other desired actions
-    return view('Admin\Product\DelBy', compact('data'));
-    return response()->json($data);
-}
+      // Pass the admin information to the view or perform any other desired actions
+      return view('Admin\Product\DelBy', compact('data'));
+      return response()->json($data);
+    }
  
 
 }

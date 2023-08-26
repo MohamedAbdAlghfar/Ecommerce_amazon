@@ -22,18 +22,13 @@ class delStoresShippingDebtController extends Controller
     
             // Return a response or perform additional actions
        
-        return redirect()->route('Shipping.getShippingStores',$shippingId)->withStatus(__('Debt successfully deleted.'));
-    //  return response()->json(['message' => 'Debt successfully deleted.']);
+           return redirect()->route('Shipping.getShippingStores',$shippingId)->withStatus(__('Debt successfully deleted.'));
+         //return response()->json(['message' => 'Debt successfully deleted.']);
 
         }
 
 
-
-
     }
        
-
-
-
 
 }

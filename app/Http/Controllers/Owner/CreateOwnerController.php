@@ -12,7 +12,7 @@ class CreateOwnerController extends Controller
     
     public function create()  
     {
-     //   return view("Owner\create");
+     //  return view("Owner\create");
          return response()->json(['message' => ' Create method called.']); 
     }
 
@@ -27,7 +27,7 @@ class CreateOwnerController extends Controller
             'email'    => 'required',
             'password' =>'required',           
             'image'    => 'required',                
-        ]; 
+                 ]; 
         
         $data = $request->all();
         if(isset($data['gender'])) {
@@ -41,9 +41,7 @@ class CreateOwnerController extends Controller
       
         $this->validate($request, $rules);
         $Owner = new User;
-        $Owner->fill($request->merge(["role" => 4 , 'password'=> Hash::make('password')])->all());
-        
-
+        $Owner->fill($request->merge(["role" => 4 , 'password'=> Hash::make('password')])->all());        
         
         $Owner->save();
         if($Owner) {
@@ -62,9 +60,9 @@ class CreateOwnerController extends Controller
                 }
             }
 
-    }
-    //return redirect('/owner')->withStatus('Owner successfully created.');        
-     return response()->json(['message' => 'Owner successfully created.']);
+        }
+       //return redirect('/owner')->withStatus('Owner successfully created.');        
+        return response()->json(['message' => 'Owner successfully created.']);
 
 
     }

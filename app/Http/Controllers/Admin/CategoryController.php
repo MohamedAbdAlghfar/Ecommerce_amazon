@@ -38,7 +38,7 @@ class CategoryController extends Controller
             'name' => 'required|min:2|max:150',
             'image' => 'required',  
             'parent_id' => 'required',              
-        ]; 
+                 ]; 
         $this->validate($request, $rules);
         $category = Category::create($request->merge(["parent_id" => $request->get('parent_id')])->all());
         $category->save();
@@ -67,7 +67,7 @@ class CategoryController extends Controller
     public function show()
     {
         $category = Category::orderBy('created_at', 'desc')->select('image','name','id')->get();
-        return view('admin/Category/show',compact('category'));
+            return view('admin/Category/show',compact('category'));
       //    return response()->json($category); 
     }
 
@@ -76,15 +76,15 @@ class CategoryController extends Controller
     {
         
 
-$all_parent_id = Category::select('name','id')->get();
-$data = [
+       $all_parent_id = Category::select('name','id')->get();
+       $data = [
 
-    'all_parent_id' => $all_parent_id,
-    'category'      => $category,
-];
+        'all_parent_id' => $all_parent_id,
+        'category'      => $category,
+               ];
 
-    return view('admin/Category/edit',compact('category'));
- // return response()->json($data);
+       return view('admin/Category/edit',compact('category'));
+ //    return response()->json($data);
 
     } 
 
@@ -93,15 +93,12 @@ $data = [
     {
         
         $rules = [
-            'name' => 'required|min:5|max:150',            
-                           
-        ];
+            'name' => 'required|min:5|max:150',                                
+                 ];
 
         $this->validate($request, $rules);
         $category->update($request->all());
-     
-     
-     
+
         if($file = $request->file('image')) {
 
             $filename = $file->getClientOriginalName();
@@ -130,7 +127,7 @@ $category->save();
 
 
         return redirect('/admin')->withStatus('category successfully updated.');
-    // return response()->json(['message' => 'category successfully updated.']);
+    //  return response()->json(['message' => 'category successfully updated.']);
 
     }
 

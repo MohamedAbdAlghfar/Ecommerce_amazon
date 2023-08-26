@@ -19,29 +19,20 @@ class StoresShippingDebtController extends Controller
     
         // Get the stores with prices
         $stores = $shipping->stores->map(function ($store) {
-            return [
-                'store_name' => $store->name,
-                'store_id' => $store->id,
-                'debt' => $store->pivot->debt,
-            ];
+         return [
+            'store_name' => $store->name,
+            'store_id' => $store->id,
+            'debt' => $store->pivot->debt,
+                ];
         });
     
-$data = [
+        $data = [
+            'stores' => $stores,
+            'shipping_id' => $shipping->id,
+                ];
 
-    'stores' => $stores,
-    'shipping_id' => $shipping->id,
-
-];
-
-
-
-       // return view('Shipping\showStoreDebt',compact('data'));
-        return response()->json($data);
+        return view('Shipping\showStoreDebt',compact('data'));
+      //return response()->json($data);
     }
-
-
-
-
-
 
 }

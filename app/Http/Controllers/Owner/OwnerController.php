@@ -14,14 +14,13 @@ class OwnerController extends Controller
     public function index()
     {
 
-    
         $user_count = User::where('role', 0)->count();
         $Admin_count = User::where('role', 1)->count();
         $store_count = Store::count();
         $totalPrice_in_day = Order::whereDate('created_at', today())->sum('price');
         $totalPrice_in_month = Order::whereMonth('created_at', now()->month)
-            ->whereYear('created_at', now()->year)
-            ->sum('price');
+          ->whereYear('created_at', now()->year)
+          ->sum('price');
         $total_order_price = Order::sum('price');
         
         $data = [
@@ -31,9 +30,9 @@ class OwnerController extends Controller
             'totalPrice_in_day' => $totalPrice_in_day,
             'totalPrice_in_month' => $totalPrice_in_month,
             'total_order_price' => $total_order_price
-        ];
-       return view('Owner\index',compact('data'));
-     //       return response()->json($data);
+                ];
+        return view('Owner\index',compact('data'));
+     // return response()->json($data);
     
     }
 

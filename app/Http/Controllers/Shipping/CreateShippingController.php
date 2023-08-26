@@ -12,7 +12,7 @@ class CreateShippingController extends Controller
     
     public function create() 
     {
-       // return view("Shipping\create");
+       //return view("Shipping\create");
          return response()->json(['message' => ' Create method called.']); 
     }
 
@@ -26,19 +26,15 @@ class CreateShippingController extends Controller
             'address' => 'required',
             'location' => 'required',
             'image' => 'required',
-
-        ]; 
+                 ]; 
         $this->validate($request, $rules);
         $shipping = ShippingCompany::create($request->all());
         $shipping->save();
-        if($shipping) {
-            
+        if($shipping) {            
             if($file = $request->file('image')) {
-
                 $filename = $file->getClientOriginalName();
                 $fileextension = $file->getClientOriginalExtension();
                 $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
-
                 if($file->move('images', $file_to_store)) {
                     $Photo = $shipping->cover_image;
                     $filename = $Photo;
@@ -47,15 +43,11 @@ class CreateShippingController extends Controller
                 }
             }
 
-    }
-//  return redirect('/shippingCombany')->withStatus('shipping successfully created.');        
- return response()->json(['message' => 'shipping successfully created.']);
+        }
+     // return redirect('/shippingCombany')->withStatus('shipping successfully created.');        
+        return response()->json(['message' => 'shipping successfully created.']);
 
     }
-
-
-
-
 
 
 }

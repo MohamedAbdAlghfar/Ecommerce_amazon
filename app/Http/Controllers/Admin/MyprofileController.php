@@ -28,9 +28,9 @@ class MyprofileController extends Controller
         // get the authenticated user
         $user = auth()->user();
 
-       //  return the user profile as a JSON response
+        //  return the user profile as a JSON response
     
-      // return view('admin/Myprofile/edit',compact('user'));
+     //  return view('admin/Myprofile/edit',compact('user'));
          return response()->json(optional($user)->only('email', 'address','gender','f_name','l_name'));
     
     }
@@ -71,7 +71,7 @@ class MyprofileController extends Controller
                     }
 
                     $admin->profile_image = $file_to_store;
-$admin->save();
+                    $admin->save();
                 }else {
                     $admin->profile_image = $file_to_store;
                 }
@@ -80,7 +80,7 @@ $admin->save();
 
 
      //   return redirect('/admin')->withStatus('profile successfully updated.');
-     return response()->json(['message' => 'profile successfully updated.']);
+          return response()->json(['message' => 'profile successfully updated.']);
 
     }
    

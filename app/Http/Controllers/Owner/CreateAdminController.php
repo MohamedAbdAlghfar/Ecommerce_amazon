@@ -12,7 +12,7 @@ class CreateAdminController extends Controller
     
     public function create() 
     {
-     //   return view("Owner\Admin\create");
+     //  return view("Owner\Admin\create");
          return response()->json(['message' => ' Create method called.']); 
     }
 
@@ -27,7 +27,7 @@ class CreateAdminController extends Controller
             'email'    => 'required',
             'password' =>'required',           
             'image'    => 'required',                
-        ]; 
+                 ]; 
         
         $data = $request->all();
         if(isset($data['gender'])) {
@@ -41,9 +41,7 @@ class CreateAdminController extends Controller
       
         $this->validate($request, $rules);
         $Admin = new User;
-        $Admin->fill($request->merge(["role" => 1 , 'password'=> Hash::make('password')])->all());
-        
-
+        $Admin->fill($request->merge(["role" => 1 , 'password'=> Hash::make('password')])->all());        
         
         $Admin->save();
         if($Admin) {
@@ -62,9 +60,9 @@ class CreateAdminController extends Controller
                 }
             }
 
-    }
-    //return redirect('/owner')->withStatus('Admin successfully created.');        
-     return response()->json(['message' => 'Admin successfully created.']);
+        }
+     //return redirect('/owner')->withStatus('Admin successfully created.');        
+       return response()->json(['message' => 'Admin successfully created.']);
 
 
     }

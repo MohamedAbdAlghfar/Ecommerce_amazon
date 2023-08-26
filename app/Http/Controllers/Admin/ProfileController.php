@@ -20,7 +20,7 @@ class ProfileController extends Controller
         $admins = User::select('id','f_name','l_name','email','phone')->where('role', 1)->get();        
         
         return view('Admin\Profile\index',compact('admins'));
-       // return response()->json($admins);
+      //return response()->json($admins);
 
     }
 
