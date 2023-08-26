@@ -51,10 +51,31 @@ class UpdateStoreController extends Controller
     
         // find the store by id
         $store = Store::find($request->id);
-    
-        // delete the old images from the storage
-        Storage::disk('public')->delete('images/' . basename($store->store_image));
-        Storage::disk('public')->delete('images/' . basename($store->store_cover));
+
+
+        // get the hashes of the uploaded files
+        $store_image_hash = $request->file('store_image')->hashName();
+        $store_cover_hash = $request->file('store_cover')->hashName();
+
+        // .. If Photo Not Same With Old Then Delete It Or Dont Update It ..
+        if ($store_image_hash != basename($store->store_image)) {
+            // .. Delete Old Image ..
+            Storage::disk('public')->delete('images/Store-Images/' . basename($store->store_image));
+            // .. Update New Image ..
+            $store->update([
+                'store_image' => asset('storage/images/Store-Images/' . $store_image_hash)
+            ]);
+        }
+
+        if ($store_cover_hash != basename($store->store_cover)) {
+            // .. Delete Old Image ..
+            Storage::disk('public')->delete('images/Store-Images/' . basename($store->store_cover));
+            // .. Update New Image ..
+            $store->update([
+                'store_cover' => asset('storage/images/Store-Images/' . $store_cover_hash)
+            ]);
+        }
+
     
         // update the store with the new data and images
         $store->update([
@@ -65,8 +86,6 @@ class UpdateStoreController extends Controller
             'location'=>$request->location,
             'services'=>$request->services,
             'link_website'=>$request->link_website,
-            'store_cover' => asset('storage/images/' . $request->file('store_cover')->hashName()),
-            'store_image' => asset('storage/images/' . $request->file('store_image')->hashName())
         ]);
     
         // return a success message or redirect to another page

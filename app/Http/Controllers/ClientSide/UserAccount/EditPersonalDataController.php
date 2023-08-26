@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ClientSide\UserAccount;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
@@ -29,12 +30,14 @@ class EditPersonalDataController extends Controller
 
         $userId = $user->id;
 
+        $user = User::find($userId);
+
         $rules = [
             'f_name'  => 'required',
             'l_name'  => 'required',
             'email'   => 'required|email|unique:users',
             'age'     => 'required',
-            'profile_image' => 'required',
+            'profile_image' => 'required|image',
             'address' => 'required',
             'gender'  => 'required',
             'phone'   => 'required',
@@ -42,15 +45,30 @@ class EditPersonalDataController extends Controller
         ];
         $this->validate($request, $rules);
 
+        $user_profile_hash = $request->file('store_image')->hashName();
+
+        // .. If Photo Not Same With Old Then Delete It Or Dont Update It ..
+        if ($user_profile_hash != basename($user->profile_image)) {
+            // delete the old image from the storage
+            Storage::disk('public')->delete('images/Profile-Images/' . basename($store->store_cover));
+            // update the store cover with the new one
+            $user->update([
+                'store_cover' => asset('storage/images/Profile-Images/' . $user_profile_hash)
+            ]);
+        }
+
 
         // .. updating ..  
-        $updateUser = User::update(
-            [
-                'id' => $user->id,
-            ],
-            $request->except(['f_name', 'l_name', 'email', 'age', 'address', 
-            'gender','profile_image', 'phone', 'password']),
-        );
+        $updateUser = $user->update([
+            'name'    => $request->f_name,
+            'l_name'  => $request->l_name,
+            'email'   => $request->email,
+            'age'     => $request->age,
+            'address' => $request->address,
+            'gender'  => $request->gender,
+            'phone'   => $request->phone,
+            'password'=> $request->password,
+        ]);
         
         if ($updateUser) {
             return response()->json([

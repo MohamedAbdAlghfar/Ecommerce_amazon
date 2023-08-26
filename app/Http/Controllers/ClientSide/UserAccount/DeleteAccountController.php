@@ -20,6 +20,7 @@ class DeleteAccountController extends Controller
         $userId = $user->id;
 
         $deleteUser = User::where('id', $userId)->delete();
+        // add if he has any store you should delete it and if he have shipping company is the same 
 
         if (!$deleteUser) {
             return resposne()->json([
