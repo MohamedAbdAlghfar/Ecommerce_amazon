@@ -25,14 +25,17 @@ class DeleteShippingController extends Controller
 
 
       
-        if ($shipping->cover_image) {
-            $filename = $shipping->cover_image;
-            unlink('images/' . $filename);
-            $imagePath = $shipping->cover_image;
-    
-            if ($imagePath) {
-                Storage::delete($imagePath);
-                $shipping->update(['image' => 'default.jpeg']); // Remove the image path from the admin
+        if ($shipping->photo !== null) {
+            if ($shipping->photo instanceof \Illuminate\Support\Collection) {
+                foreach ($shipping->photo as $photo) {
+                    $filename = $photo->filename;
+                    unlink('images/' . $filename);
+                    $photo->delete();
+                }
+            } else {
+                $filename = $shipping->photo->filename;
+                unlink('images/' . $filename);
+                $shipping->photo->delete();
             }
         }
     

@@ -39,7 +39,7 @@ class ProductDelByController extends Controller
 
 
       // Pass the admin information to the view or perform any other desired actions
-      return view('Admin\Product\DelBy', compact('data'));
+   //   return view('Admin\Product\DelBy', compact('data'));
       return response()->json($data);
     }
  

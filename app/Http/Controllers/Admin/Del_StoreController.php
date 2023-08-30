@@ -24,7 +24,7 @@ class Del_StoreController extends Controller
     public function show()
     {
         $store = Store::orderBy('created_at', 'desc')->select('id','name','store_cover','store_image')->get();
-    //  return view('admin/Store/show',compact('store')); 
+     // return view('admin/Store/show',compact('store')); 
         return response()->json($store);
     }
 

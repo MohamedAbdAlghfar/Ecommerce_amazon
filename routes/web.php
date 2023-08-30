@@ -33,7 +33,7 @@ use App\Http\Controllers\Owner;
 //     })->withoutMiddleware([Is_Owner::class]);
 // });
 
-
+ 
 
 ///////////////////////////////////////////admin routes//////////////////////////////////////////////////// 
      // dashboard
@@ -44,6 +44,7 @@ use App\Http\Controllers\Owner;
      Route::resource('admin/Product/recent', 'App\Http\Controllers\Admin\RecentController');
      Route::resource('admin/Product/request', 'App\Http\Controllers\Admin\RequestController');
      Route::get('admin/product/delBy/{id}', 'App\Http\Controllers\Admin\ProductDelByController@showDeletedProduct');
+     Route::get('admin/products/RunOut', 'App\Http\Controllers\Admin\ProductRunOutController@showRunOut');
      // profile
      Route::resource('admin/profile/admins', 'App\Http\Controllers\Admin\ProfileController');
      Route::get('admin/profile/myprofile', ['as' => 'myprofile.edit', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@edit']);	

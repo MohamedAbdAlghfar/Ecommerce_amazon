@@ -77,7 +77,7 @@ class ProductController extends Controller
                 }
             }
             return redirect('/admin')->withStatus('Product successfully created.');        
-          //return response()->json(['message' => 'product successfully created.']);
+         // return response()->json(['message' => 'product successfully created.']);
 
         }
 
@@ -106,14 +106,14 @@ class ProductController extends Controller
 
 
           return view('admin/Product/show',compact('data'));
-       // return response()->json($data);
+        //return response()->json($data);
     }
 
     
     public function edit(Product $product)
     {
          return view('admin/Product/edit',compact('product'));
-     //  return response()->json($product); 
+       //return response()->json($product); 
     }
 
     
@@ -137,7 +137,7 @@ class ProductController extends Controller
            $product->category_id = $category->id; // set the "category_id" attribute of the "Product" model to the "parent_id" attribute of the related "Category" model
         
         $product->save();
-        if ($file = $request->file('image')) {
+        if ($file = $request->file('image')) { 
             $filename = $file->getClientOriginalName();
             $fileextension = $file->getClientOriginalExtension();
             $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.' . $fileextension;
@@ -148,7 +148,7 @@ class ProductController extends Controller
                       $photo = $product->Photos;
         
                       // Remove the old image
-                      $oldFilename = $photo->filename;
+                      $oldFilename = $photo->filename; 
                       unlink('images/' . $oldFilename);
                     }
                     $photo->filename = $file_to_store;
@@ -164,7 +164,7 @@ class ProductController extends Controller
             }
         }
         return redirect()->route('admin.index')->withStatus(__('product successfully updated.'));
-     // return response()->json(['message' => 'product successfully updated.']);
+      //return response()->json(['message' => 'product successfully updated.']);
 
 
     }

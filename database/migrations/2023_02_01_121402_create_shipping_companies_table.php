@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email'); 
             $table->string('address');
             $table->string('location'); 
-            $table->string('cover_image')->default('default.jpeg'); 
+          //  $table->string('cover_image')->default('default.jpeg'); 
             $table->timestamps();
         });
     }

@@ -304,6 +304,7 @@ section {
         <a href="admin/product/delBy/{id}">Product Del By</a>
         <a href="admin/Product/recent">Recent Sold</a>
         <a href="admin/Product/request">Requests</a>
+        <a href="admin/products/RunOut">Products Run Out</a>
         <a href="admin/store/show">Delete Store</a>
         <a href="admin/store/delBy/{id}">Store Del By</a>
         <a href="admin/profile/admins">Admins page</a>

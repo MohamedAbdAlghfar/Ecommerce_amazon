@@ -41,7 +41,7 @@ class EditPersonalDataController extends Controller
             'address' => 'required',
             'gender'  => 'required',
             'phone'   => 'required',
-            'password'=> 'required|min:8|confirmed',
+            'password'=> 'required|min:8|confirmed', 
         ];
         $this->validate($request, $rules);
 

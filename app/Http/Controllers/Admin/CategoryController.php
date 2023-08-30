@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
+use App\Models\photo;
 use Tymon\JWTAuth\Facades\JWTAuth;
 class CategoryController extends Controller 
 {
@@ -51,40 +52,36 @@ class CategoryController extends Controller
                 $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
 
                 if($file->move('images', $file_to_store)) {
-                    $Photo = $category->image;
-                    $filename = $Photo;
-                    $category->image = $file_to_store;
-                    $category->save();
+                    photo::create([
+                        'filename' => $file_to_store,
+                        'photoable_id' => $category->id,
+                        'photoable_type' => 'App\Models\Category', 
+                    ]);
                 }
             }
-
-    }
-  return redirect('/admin')->withStatus('category successfully created.');        
-// return response()->json(['message' => 'category successfully created.']);
+        }   
+       return redirect('/admin')->withStatus('category successfully created.');        
+     //return response()->json(['message' => 'category successfully created.']);
 
     }
     
     public function show()
     {
-        $category = Category::orderBy('created_at', 'desc')->select('image','name','id')->get();
-            return view('admin/Category/show',compact('category'));
-      //    return response()->json($category); 
+        $category = Category::orderBy('categories.created_at', 'desc')->select('categories.name','categories.id','photoable.filename')->join('photoable', 'photoable.photoable_id', '=', 'categories.id')->get();
+        //    return view('admin/Category/show',compact('category'));
+         return response()->json($category); 
     }
 
     
-    public function edit(Category $category) 
+    public function edit($category) 
     {
         
 
-       $all_parent_id = Category::select('name','id')->get();
-       $data = [
+       $category = Category::select('categories.name','categories.id','photoable.filename')->join('photoable', 'photoable.photoable_id', '=', 'categories.id')->find($category);
 
-        'all_parent_id' => $all_parent_id,
-        'category'      => $category,
-               ];
 
        return view('admin/Category/edit',compact('category'));
- //    return response()->json($data);
+    // return response()->json($category);
 
     } 
 
@@ -98,29 +95,30 @@ class CategoryController extends Controller
 
         $this->validate($request, $rules);
         $category->update($request->all());
-
-        if($file = $request->file('image')) {
-
+        
+        if ($file = $request->file('image')) { 
             $filename = $file->getClientOriginalName();
             $fileextension = $file->getClientOriginalExtension();
-            $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
-
-            if($file->move('images', $file_to_store)) {
-                if($category->image) {
-                    $Photo = $category->image;
-
-                    // remove the old image
-
-                    $filename = $Photo;
-                    if(file_exists('images/'.$filename)) {
-                        // delete the file
-                        unlink('images/'.$filename);
-                    }
-
-                    $category->image = $file_to_store;
-$category->save();
-                }else {
-                    $category->image = $file_to_store;
+            $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.' . $fileextension;
+        
+            if ($file->move('images', $file_to_store)) {
+                if ($category->photo) {
+                   
+                      $photo = $category->photo;
+        
+                      // Remove the old image
+                      $oldFilename = $photo->filename; 
+                      unlink('images/' . $oldFilename);
+                    
+                    $photo->filename = $file_to_store;
+                    $photo->save();
+                } 
+                else {
+                    Photo::create([
+                        'filename' => $file_to_store,
+                        'photoable_id' => $category->id,
+                        'photoable_type' => 'App\Models\Category',
+                    ]);
                 }
             }
         }
@@ -136,17 +134,18 @@ $category->save();
     {
         
         $category->deleted_by = auth()->user()->id;
-        if ($category->image) {
-            
-                $filename = $category->image;
-                unlink('images/' . $filename);
-                $imagePath = $category->image;
-
-                if ($imagePath) {
-                    Storage::delete($imagePath);
-                    $category->update(['image' => 'default.jpeg']); // Remove the image path from the category
+        if ($category->photo !== null) {
+            if ($category->photo instanceof \Illuminate\Support\Collection) {
+                foreach ($category->photo as $photo) {
+                    $filename = $photo->filename;
+                    unlink('images/' . $filename);
+                    $photo->delete();
                 }
-            
+            } else {
+                $filename = $category->photo->filename;
+                unlink('images/' . $filename);
+                $category->photo->delete();
+            }
         }
         
         $category->delete();

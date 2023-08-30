@@ -29,8 +29,8 @@
         <tr>
             <td align = "center">{{ $admin->id }}</td>
             <td align = "center">   
-                        @if ($admin->profile_image)
-                           <img src="/images/{{ $admin->profile_image }}" width = 200px hight = 200px>
+                        @if ($admin->filename)
+                           <img src="/images/{{ $admin->filename }}" width = 200px hight = 200px>
                         @else
                             <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo"width = 200px hight = 200px>
                         @endif

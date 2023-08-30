@@ -12,7 +12,7 @@ class ShippingController extends Controller
     
     public function index()
     {
-        $shipping = ShippingCompany::get();
+        $shipping = ShippingCompany::select('shipping_companies.name','shipping_companies.id','photoable.filename','shipping_companies.phone','shipping_companies.email','shipping_companies.website','shipping_companies.location','shipping_companies.address')->join('photoable', 'photoable.photoable_id', '=', 'shipping_companies.id')->get();
         return view('Shipping\index',compact('shipping'));
       //return response()->json($shipping);
 
@@ -21,7 +21,8 @@ class ShippingController extends Controller
     public function show($id)
     {
         
-        $shipping = ShippingCompany::select('name','cover_image')->findOrFail($id); 
+        $shipping = ShippingCompany::select('shipping_companies.name','shipping_companies.id','photoable.filename')->join('photoable', 'photoable.photoable_id', '=', 'shipping_companies.id')->findOrFail($id); 
+        
         $order = order::select('orders.id','orders.created_at','orders.trans_date','orders.price','orders.location','products.name as product_name','users.f_name as user_name','stores.name as store_name')
           ->join('products', 'orders.product_id', '=', 'products.id')
           ->leftJoin('users', 'orders.user_id', '=', 'users.id')

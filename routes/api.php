@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController,CategoryController,Del_StoreController,RequestController,CategoryDelByController,ProductDelByController,StoreDelByController};
+use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductController,MyprofileController,AdminController,CategoryController,Del_StoreController,RequestController,CategoryDelByController,ProductDelByController,StoreDelByController,ProductRunOutController};
 use App\Http\Controllers\Owner\{OwnerController,CreateAdminController,DeleteAdminController,CreateOwnerController};
 use App\Http\Controllers\Shipping\{ShippingController,DeleteShippingController,updateOrderStatusController,CreateShippingController,StoresShippingDebtController,delStoresShippingDebtController};
 // ..
@@ -34,6 +34,7 @@ Route::prefix('my-api')->group(function(){
     Route::get('admin/Product/request' , [RequestController::class ,'index']);
     Route::get('admin/Product/recent' , [RecentController::class ,'index']);
     Route::get('admin/product/delBy/{id}', [ProductDelByController::class,'showDeletedProduct']);
+    Route::get('admin/products/RunOut', [ProductRunOutController::class,'showRunOut']);
     // dashboard
     Route::get('admin' , [AdminController::class ,'index']);
     // profile

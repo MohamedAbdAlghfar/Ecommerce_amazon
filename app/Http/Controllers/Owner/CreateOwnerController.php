@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Owner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\photo;
 use Illuminate\Support\Facades\Hash;
 
 class CreateOwnerController extends Controller
@@ -53,13 +54,13 @@ class CreateOwnerController extends Controller
                 $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
 
                 if($file->move('images', $file_to_store)) {
-                    $Photo = $Owner->profile_image;
-                    $filename = $Photo;
-                    $Owner->profile_image = $file_to_store;
-                    $Owner->save();
+                    photo::create([
+                        'filename' => $file_to_store,
+                        'photoable_id' => $Owner->id,
+                        'photoable_type' => 'App\Models\User', 
+                    ]);
                 }
             }
-
         }
        //return redirect('/owner')->withStatus('Owner successfully created.');        
         return response()->json(['message' => 'Owner successfully created.']);

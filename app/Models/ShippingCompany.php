@@ -17,7 +17,7 @@ class ShippingCompany extends Model
         'phone',
         'website',
         'address',
-        'cover_image',
+      //  'cover_image',
     ];
 
     
@@ -31,6 +31,12 @@ public function Stores()
 {
     return $this->belongsToMany(Store::class)->withPivot('debt');
 }
+
+
+public function photo()
+    {
+        return $this->morphOne(Photo::class, 'photoable');
+    }
 
 
 

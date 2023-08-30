@@ -15,7 +15,7 @@ class Category extends Model
     protected $fillable = [  
         'name',
         'id', 
-        'image',
+     //   'image',
         'parent_id', 
         'deleted_by',
     ];
@@ -33,6 +33,13 @@ public function Products()
 {
     return $this->hasMany(Product::class);
 }
+
+public function photo()
+    {
+        return $this->morphOne(Photo::class, 'photoable');
+    }
+
+
 
 
 protected static function boot()

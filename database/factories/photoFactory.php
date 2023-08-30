@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ShippingCompany;
 use App\Models\Store;
 use App\Models\Category;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Photo>
@@ -19,11 +20,27 @@ class photoFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition()
-    {  $photoable_id= Product::all()->random()->id;
+    { 
+        
+        $product_id  = Product::all()->random()->id;
+        $category_id = Category::all()->random()->id;
+        $user_id     = User::all()->random()->id;
+        $shipping_id = ShippingCompany::all()->random()->id;
+
+        $photoable_id = $this->faker->randomElement([ $product_id, $category_id,$user_id,$shipping_id ]);
         
        
-       $photoable_type = 'App\Models\Product'; 
+     //  $photoable_type = $photoable_id == $product_id ? 'App\Models\Product' : 'App\Models\Category'; 
        
+      if($photoable_id == $product_id)
+        $photoable_type = 'App\Models\Product';
+      elseif($photoable_id == $category_id)
+        $photoable_type = 'App\Models\Category';
+      elseif($photoable_id == $user_id)
+        $photoable_type = 'App\Models\User';
+      else
+        $photoable_type = 'App\Models\ShippingCompany';
+
 
 
 
