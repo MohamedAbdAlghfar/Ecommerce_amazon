@@ -35,19 +35,19 @@ class CreateStoreController extends Controller
             'services' => 'required',  
             'link_website' => 'nullable',                
         ]; 
-        $this->validate($request, $rules);
+        $validator = $this->validate($request, $rules);
 
         $createStore = Store::create([
-            'name' => $request->name,
-            'user_id' => $userId,
-            'email'=> $email,
-            'about_store'=>$request->about_store,
-            'phone'=>$request->phone,
-            'location'=>$request->location,
-            'store_cover'=>$request->store_cover ? asset('storage/images/' . $request->file('store_cover')->hashName()) : null,
-            'store_image'=>$request->asset('storage/images/' . $request->file('store_image')->hashName()), // hasName choose a unique name for the file in public/images 
-            'services'=>$request->services,
-            'link_website'=>$request->link_site,
+            'name'        => $request->name,
+            'user_id'     => $userId,
+            'email'       => $email,
+            'about_store' => $request->about_store,
+            'phone'       => $request->phone,
+            'location'    => $request->location,
+            'store_cover' => $request->store_cover ? asset('storage/images/Store-Images/' . $request->file('store_cover')->hashName()) : null,
+            'store_image' => $request->asset('storage/images/Store-Images/' . $request->file('store_image')->hashName()), // hasName choose a unique name for the file in public/images 
+            'services'    => $request->services,
+            'link_website'=> $request->link_site,
         ]);
 
 

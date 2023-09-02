@@ -27,8 +27,8 @@ class Store extends Model
         'deleted_by', 
     ];
 
-    public function Admins() {
-        return $this->belongsToMany(User::class);
+    public function admins() {
+        return $this->hasMany(User::class);
     }
 
 

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
-class FiltersController extends Controller
+class FilterProductsController extends Controller
 {
     public function filter(Request $request ,$category)
     {
@@ -23,7 +23,7 @@ class FiltersController extends Controller
         // Check if the most sold filter is present and apply it
         if ($request->has('sold')) {
             $sold = $request->query('sold');
-            $query->where('sold', $buy)->orderBy('sold', 'desc'); //.. Get most sold In any Category ..
+            $query->where('sold', $sold)->orderBy('sold', 'desc'); //.. Get most sold In any Category ..
         }
 
         // ..

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Store;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -17,11 +18,14 @@ class UserFactory extends Factory
      */
     public function definition() 
     {
+        $store_id  = Store::all()->random()->id;
+
         return [ 
             'f_name' => fake()->name(),    
             'l_name' => fake()->name(),
             'phone' => fake()->PhoneNumber(),
             'age' => fake()->numberBetween(0, 99),
+            'store_id' => $store_id ,
             'gender' => fake()->randomElement([0,1]),
             'address' => fake()->address(),
             'email' => fake()->unique()->safeEmail(),

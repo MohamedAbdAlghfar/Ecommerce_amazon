@@ -10,7 +10,7 @@ use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,Logou
 use App\Http\Controllers\ClientSide\UserAccount\{DelCartController,GetCartProducts,DeleteAccountController,
     EditPersonalDataController,CreateStoreController,GetPersonalDataController,GetUserOrders,GetUserStore};
 use App\Http\Controllers\ClientSide\HomePage\{MainHomeController};
-use App\Http\Controllers\ClientSide\ProductType\{FiltersController,GetCardsController};
+use App\Http\Controllers\ClientSide\ProductType\{CategoryProductsController};
 use App\Http\Controllers\ClientSide\ProductDetails_Payment\{AddToCartController,GetSuggestedProducts,GetProductDetails};
 use App\Http\Controllers\Store\{EditStoreController};
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};

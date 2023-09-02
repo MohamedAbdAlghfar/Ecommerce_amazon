@@ -31,12 +31,12 @@ class SellStoreController extends Controller
             'email' => 'required|email',
         ]);
         
-        $user   =  auth()->user();
-        $userId =  $user->id;
+        $user    =  auth()->user();
+        $userId  =  $user->id;
+        $storeId =  $user->store_id;
         //     ..        ..        ..
         $email  =  $request->email; 
         //     ..        ..        ..
-        $pivotId = StoreUser::where('user_id',$userId)->select(['id'])->pluck('id');
         $newOwnerId = User::where('email',$email)->select(['id'])->pluck('id');
 
         if (!$newOwnerId) {
@@ -45,31 +45,25 @@ class SellStoreController extends Controller
             ]);
         }
 
-        // .. If One Query False , Then No Query Will Done .. 
+        // .. If One Query False , Other One Will Also ! .. 
         DB::transaction(function () {
             // .. Transfer Store ..
-            $update = StoreUser::updateOrFail([
-                [
-                    'id'=>$pivotId,
-                ],
-                'user_id'=>$newOwnerId,
-            ]);
-            // .. Changing Roles ..
-            $updateRoleForNew = User::updateOrFail([
+            $updateForNew = User::updateOrFail([
                 [
                     'id' => $newOwnerId,
                 ],
+                'store_id' => $storeId,
                 'role' => 2 ,
             ]);
             // .. Changing Roles ..
-            $updateRoleForOld = User::updateOrFail([
+            $updateForOld = User::updateOrFail([
                 [
                     'id'=>$userId,
                 ],
+                'store_id' => null,
                 'role' => 0 ,
             ]);
 
-            // ..
             // .. Transaction Failed ..
         })->catch(function () {
                 return response()->json([

@@ -43,9 +43,9 @@ class EditPersonalDataController extends Controller
             'phone'   => 'required',
             'password'=> 'required|min:8|confirmed',
         ];
-        $this->validate($request, $rules);
+        $validator = $this->validate($request, $rules);
 
-        $user_profile_hash = $request->file('store_image')->hashName();
+        $user_profile_hash = $request->file('profile_image')->hashName();
 
         if ($user_profile_hash != basename($user->profile_image)) {
 
