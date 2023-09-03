@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('services',500);    
             $table->string('location');  
             $table->string('email');
-            $table->string('store_cover');
-            $table->string('store_image');  
+       //     $table->string('store_cover');
+       //     $table->string('store_image');  
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->foreign('deleted_by')->references('id')->on('users');
             $table->timestamps();

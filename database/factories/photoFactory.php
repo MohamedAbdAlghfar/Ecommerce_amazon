@@ -26,8 +26,9 @@ class photoFactory extends Factory
         $category_id = Category::all()->random()->id;
         $user_id     = User::all()->random()->id;
         $shipping_id = ShippingCompany::all()->random()->id;
+        $store_id    = Store::all()->random()->id;
 
-        $photoable_id = $this->faker->randomElement([ $product_id, $category_id,$user_id,$shipping_id ]);
+        $photoable_id = $this->faker->randomElement([ $product_id, $category_id,$user_id,$shipping_id,$store_id ]);
         
        
      //  $photoable_type = $photoable_id == $product_id ? 'App\Models\Product' : 'App\Models\Category'; 
@@ -38,7 +39,9 @@ class photoFactory extends Factory
         $photoable_type = 'App\Models\Category';
       elseif($photoable_id == $user_id)
         $photoable_type = 'App\Models\User';
-      else
+        elseif($photoable_id == $store_id)
+        $photoable_type = 'App\Models\Store';
+        else
         $photoable_type = 'App\Models\ShippingCompany';
 
 

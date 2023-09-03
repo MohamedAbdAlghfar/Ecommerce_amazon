@@ -21,8 +21,8 @@ class Store extends Model
         'phone',
         'link_website',  
         'about_store',
-        'store_cover',
-        'store_image',
+       // 'store_cover',
+      //  'store_image',
        
         'deleted_by', 
     ];
