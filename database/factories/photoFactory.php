@@ -58,7 +58,7 @@ class photoFactory extends Factory
             'https://m.media-amazon.com/images/I/71tduSp8ooL._AC._SR360,460.jpg']),
             'photoable_id' => $photoable_id, 
             'photoable_type' => $photoable_type, 
-
+            'ordering' => fake()->randomElement(['1','2','3','4','5','6','7','8','9']),
         ];
     }
 }

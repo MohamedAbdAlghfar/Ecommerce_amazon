@@ -28,7 +28,7 @@ class Store extends Model
     ];
 
     public function admins() {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function photos()

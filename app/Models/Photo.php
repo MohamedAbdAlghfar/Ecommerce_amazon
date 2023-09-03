@@ -13,6 +13,7 @@ class Photo extends Model
     'filename', 
     'photoable_id',  
     'photoable_type', 
+    'ordering' ,
   ];
   
   public function photoable ()

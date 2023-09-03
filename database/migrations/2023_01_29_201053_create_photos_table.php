@@ -14,6 +14,11 @@ return new class extends Migration
             $table->string('filename');   
             $table->integer('photoable_id');
             $table->string('photoable_type'); 
+            $table->tinyInteger('ordering')->nullable();
+            /*
+                store = 1 store image || 2 store cover
+                product =  main product image 
+            */ 
             $table->timestamps(); 
         });
     }

@@ -14,7 +14,6 @@ return new class extends Migration
             $table->string('f_name')->nullable(); 
             $table->string('l_name')->nullable();   
             $table->string('phone' )->nullable();
-            $table->foreign('store_id')->references('id')->on('stores');
             $table->tinyInteger('gender')->nullable();   // 0 => male , 1 => female
             $table->tinyInteger('age')->nullable();
             $table->string('address')->nullable();
