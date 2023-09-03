@@ -22,7 +22,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('role')->nullable()->default(0);  // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Owner=2 || Store-Admin=3 || shipping_combany-Admin=5..
-         //   $table->string('profile_image')->default('jpg.jpg');  
+         // $table->string('profile_image')->default('jpg.jpg');  
+          //  $table->foreignId('store_id')->nullable()->constrained();
             $table->rememberToken();
             $table->timestamps();
         });

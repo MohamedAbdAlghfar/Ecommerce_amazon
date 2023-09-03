@@ -15,7 +15,7 @@ class CategoryFactory extends Factory
     
         $parent_id = Category::all()->random()->id; 
 
-    //    $parent_id = 1;      // when first migration 
+     //   $parent_id = 1;      // when first migration 
            
         return [
 
