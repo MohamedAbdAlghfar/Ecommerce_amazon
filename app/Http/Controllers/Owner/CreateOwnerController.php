@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Owner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\photo;
 use Illuminate\Support\Facades\Hash;
 
 class CreateOwnerController extends Controller
@@ -12,7 +13,7 @@ class CreateOwnerController extends Controller
     
     public function create()  
     {
-     //   return view("Owner\create");
+     //  return view("Owner\create");
          return response()->json(['message' => ' Create method called.']); 
     }
 
@@ -27,7 +28,7 @@ class CreateOwnerController extends Controller
             'email'    => 'required',
             'password' =>'required',           
             'image'    => 'required',                
-        ]; 
+                 ]; 
         
         $data = $request->all();
         if(isset($data['gender'])) {
@@ -41,9 +42,7 @@ class CreateOwnerController extends Controller
       
         $this->validate($request, $rules);
         $Owner = new User;
-        $Owner->fill($request->merge(["role" => 4 , 'password'=> Hash::make('password')])->all());
-        
-
+        $Owner->fill($request->merge(["role" => 4 , 'password'=> Hash::make('password')])->all());        
         
         $Owner->save();
         if($Owner) {
@@ -55,16 +54,16 @@ class CreateOwnerController extends Controller
                 $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
 
                 if($file->move('images', $file_to_store)) {
-                    $Photo = $Owner->profile_image;
-                    $filename = $Photo;
-                    $Owner->profile_image = $file_to_store;
-                    $Owner->save();
+                    photo::create([
+                        'filename' => $file_to_store,
+                        'photoable_id' => $Owner->id,
+                        'photoable_type' => 'App\Models\User', 
+                    ]);
                 }
             }
-
-    }
-    //return redirect('/owner')->withStatus('Owner successfully created.');        
-     return response()->json(['message' => 'Owner successfully created.']);
+        }
+       //return redirect('/owner')->withStatus('Owner successfully created.');        
+        return response()->json(['message' => 'Owner successfully created.']);
 
 
     }

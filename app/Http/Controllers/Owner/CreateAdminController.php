@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Owner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\photo;
 use Illuminate\Support\Facades\Hash;
 
 class CreateAdminController extends Controller
@@ -12,8 +13,8 @@ class CreateAdminController extends Controller
     
     public function create() 
     {
-     //   return view("Owner\Admin\create");
-         return response()->json(['message' => ' Create method called.']); 
+       return view("Owner\Admin\create");
+       //  return response()->json(['message' => ' Create method called.']); 
     }
 
     public function store(Request $request)
@@ -27,7 +28,7 @@ class CreateAdminController extends Controller
             'email'    => 'required',
             'password' =>'required',           
             'image'    => 'required',                
-        ]; 
+                 ]; 
         
         $data = $request->all();
         if(isset($data['gender'])) {
@@ -41,9 +42,7 @@ class CreateAdminController extends Controller
       
         $this->validate($request, $rules);
         $Admin = new User;
-        $Admin->fill($request->merge(["role" => 1 , 'password'=> Hash::make('password')])->all());
-        
-
+        $Admin->fill($request->merge(["role" => 1 , 'password'=> Hash::make('password')])->all());        
         
         $Admin->save();
         if($Admin) {
@@ -55,16 +54,16 @@ class CreateAdminController extends Controller
                 $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
 
                 if($file->move('images', $file_to_store)) {
-                    $Photo = $Admin->profile_image;
-                    $filename = $Photo;
-                    $Admin->profile_image = $file_to_store;
-                    $Admin->save();
+                    photo::create([
+                        'filename' => $file_to_store,
+                        'photoable_id' => $Admin->id,
+                        'photoable_type' => 'App\Models\User', 
+                    ]);
                 }
             }
-
-    }
-    //return redirect('/owner')->withStatus('Admin successfully created.');        
-     return response()->json(['message' => 'Admin successfully created.']);
+        }
+     //return redirect('/owner')->withStatus('Admin successfully created.');        
+       return response()->json(['message' => 'Admin successfully created.']);
 
 
     }

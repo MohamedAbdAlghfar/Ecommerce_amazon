@@ -34,7 +34,8 @@ class DatabaseSeeder extends Seeder
        \App\Models\Comments::factory(150)->create();
         $shippings = \App\Models\ShippingCompany::factory(4)->create();
        $orders = \App\Models\order::factory(200)->create();
-       $requests = \App\Models\Request::factory(200)->create();
+>>>>>>> 55282ad00d13836b15b65b69b3b81f07e05b1031
+       
      
     
     

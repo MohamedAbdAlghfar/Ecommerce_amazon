@@ -33,12 +33,12 @@ class StoreDelByController extends Controller
             'admin' => $admin,
             'adminName' => $adminName,
             'adminEmail' => $adminEmail,
-        ];
+                ];
 
         // Pass the admin information to the view or perform any other desired actions
         
         return view('Admin\Store\DelBy', compact('data'));
-       // return response()->json($data);
+      //return response()->json($data);
     }    
 
 

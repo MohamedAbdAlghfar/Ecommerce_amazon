@@ -24,8 +24,8 @@ class Del_StoreController extends Controller
     public function show()
     {
         $store = Store::orderBy('created_at', 'desc')->select('id','name','store_cover','store_image')->get();
-       //    return view('admin/Store/show',compact('store')); 
-         return response()->json($store);
+     // return view('admin/Store/show',compact('store')); 
+        return response()->json($store);
     }
 
     public function destroy(Store $store)
@@ -43,25 +43,25 @@ class Del_StoreController extends Controller
                 $store->update(['image' => 'default.jpeg']); // Remove the image path from the category
             }
         
-    }
-    
-    if ($store->store_cover) {
-            
-        $filename = $store->store_cover;
-        unlink('images/' . $filename);
-        $imagePath = $store->store_cover;
-
-        if ($imagePath) {
-            Storage::delete($imagePath);
-            $store->update(['image' => 'default.jpeg']); // Remove the image path from the category
         }
     
-}
+        if ($store->store_cover) {
+            
+            $filename = $store->store_cover;
+            unlink('images/' . $filename);
+            $imagePath = $store->store_cover;
+
+            if ($imagePath) {
+               Storage::delete($imagePath);
+               $store->update(['image' => 'default.jpeg']); // Remove the image path from the category
+            }
+    
+        }
     
    
-    $store->delete();
-  //  return redirect()->route('admin.index')->withStatus(__('store successfully deleted.'));
-    return response()->json(['message' => 'store successfully deleted.']);
+        $store->delete();
+      //return redirect()->route('admin.index')->withStatus(__('store successfully deleted.'));
+        return response()->json(['message' => 'store successfully deleted.']);
 
 
 

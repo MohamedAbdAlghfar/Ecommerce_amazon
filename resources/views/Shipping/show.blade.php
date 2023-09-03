@@ -70,8 +70,8 @@
 
 
 <div class="recent-sold">
-@if($data['shipping']->cover_image)
-<img src="/images/{{$data['shipping']->cover_image}}"width = 200px hight = 200px>
+@if($data['shipping']->filename)
+<img src="/images/{{$data['shipping']->filename}}"width = 200px hight = 200px>
 @endif
   <br><br>
   <div class="sold-grid">

@@ -13,37 +13,34 @@ class DeleteAdminController extends Controller
     public function index()
     {
         
-        $admins = User::select('id','f_name','l_name','email','phone','profile_image')->where('role', 1)->get();        
-        
-     //   return view('Owner\Admin\show',compact('admins'));
-        return response()->json($admins);
+        $admins = User::select('users.id','users.f_name','users.l_name','users.email','users.phone','photoable.filename')->where('role', 1)->join('photoable', 'photoable.photoable_id', '=', 'users.id')->get();               
+        return view('Owner\Admin\show',compact('admins'));
+      //return response()->json($admins);
 
     }
 
     public function destroy(User $user)
-{
-    if ($user->profile_image) {
-        $filename = $user->profile_image;
-        unlink('images/' . $filename);
-        $imagePath = $user->profile_image;
-
-        if ($imagePath) {
-            Storage::delete($imagePath);
-            $user->update(['image' => 'default.jpeg']); // Remove the image path from the admin
+    {
+      if ($user->photo !== null) {
+        if ($user->photo instanceof \Illuminate\Support\Collection) {
+            foreach ($user->photo as $photo) {
+                $filename = $photo->filename;
+                unlink('images/' . $filename);
+                $photo->delete();
+            }
+        } else {
+            $filename = $user->photo->filename;
+            unlink('images/' . $filename);
+            $user->photo->delete();
         }
     }
 
-    // Move the user deletion code inside the if block
-    $user->delete();
+        // Move the user deletion code inside the if block
+        $user->delete();
 
-  //  return redirect()->route('owner.index')->withStatus(__('Admin successfully deleted.'));
-    return response()->json(['message' => 'Admin successfully deleted.']);
-}
-
-
-
-
-
+      //return redirect()->route('owner.index')->withStatus(__('Admin successfully deleted.'));
+        return response()->json(['message' => 'Admin successfully deleted.']);
+    }
 
 
 }

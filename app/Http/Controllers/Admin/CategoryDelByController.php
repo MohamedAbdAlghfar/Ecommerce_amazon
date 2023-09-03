@@ -20,30 +20,26 @@ class CategoryDelByController extends Controller
 
 
 
-    public function showDeletedCategory($categoryId)
-{
-    $category = Category::withTrashed()->find($categoryId); 
-    $admin = User::find($category->deleted_by);
+   public function showDeletedCategory($categoryId)
+   {
+      $category = Category::withTrashed()->find($categoryId); 
+      $admin = User::find($category->deleted_by);
 
-    // Access admin information
-    $adminName = $admin->f_name;
-    $adminEmail = $admin->email;
+      // Access admin information
+      $adminName = $admin->f_name;
+      $adminEmail = $admin->email;
 
-    $data = [
+      $data = [
         'category' => $category,  
         'admin' => $admin,
         'adminName' => $adminName,
         'adminEmail' => $adminEmail,
-    ];
+              ];
 
-
-
-
-    // Pass the admin information to the view or perform any other desired actions
-  
-   // return view('Admin\Category\DelBy', compact('data'));
-    return response()->json($data);
-}
+     
+     // return view('Admin\Category\DelBy', compact('data'));
+        return response()->json($data);
+    }
 
 
 

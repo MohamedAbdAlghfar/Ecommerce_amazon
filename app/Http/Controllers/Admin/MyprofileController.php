@@ -28,9 +28,9 @@ class MyprofileController extends Controller
         // get the authenticated user
         $user = auth()->user();
 
-       //  return the user profile as a JSON response
+        //  return the user profile as a JSON response
     
-      // return view('admin/Myprofile/edit',compact('user'));
+     //  return view('admin/Myprofile/edit',compact('user'));
          return response()->json(optional($user)->only('email', 'address','gender','f_name','l_name'));
     
     }
@@ -49,38 +49,39 @@ class MyprofileController extends Controller
                 $data['gender'] = 1;
             }
         }
-        $admin->update($data);
+        $admin->update($data); 
 
 
-        if($file = $request->file('image')) {
-
+        if ($file = $request->file('image')) { 
             $filename = $file->getClientOriginalName();
             $fileextension = $file->getClientOriginalExtension();
-            $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
-
-            if($file->move('images', $file_to_store)) {
-                if($admin->profile_image) {
-                    $Photo = $admin->profile_image;
-
-                    // remove the old image
-
-                    $filename = $Photo;
-                    if(file_exists('images/'.$filename)) {
-                        // delete the file
-                        unlink('images/'.$filename);
-                    }
-
-                    $admin->profile_image = $file_to_store;
-$admin->save();
-                }else {
-                    $admin->profile_image = $file_to_store;
+            $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.' . $fileextension;
+        
+            if ($file->move('images', $file_to_store)) {
+                if ($admin->photo) {
+                   
+                      $photo = $admin->photo;
+        
+                      // Remove the old image
+                      $oldFilename = $photo->filename; 
+                      unlink('images/' . $oldFilename);
+                    
+                    $photo->filename = $file_to_store;
+                    $photo->save();
+                } 
+                else {
+                    Photo::create([
+                        'filename' => $file_to_store,
+                        'photoable_id' => $admin->id,
+                        'photoable_type' => 'App\Models\Category',
+                    ]);
                 }
             }
         }
 
 
      //   return redirect('/admin')->withStatus('profile successfully updated.');
-     return response()->json(['message' => 'profile successfully updated.']);
+          return response()->json(['message' => 'profile successfully updated.']);
 
     }
    

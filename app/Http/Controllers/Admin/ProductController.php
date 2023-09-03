@@ -32,7 +32,7 @@ class ProductController extends Controller
     public function create() 
     {
         return view("Admin\Product\create");
-     //    return response()->json(['message' => ' Create method called.']); 
+     // return response()->json(['message' => ' Create method called.']); 
     }
 
     
@@ -47,9 +47,8 @@ class ProductController extends Controller
             'weight' =>'required',
             'description' => 'required', 
             'about' => 'required',
-            
             'image' => 'required',                
-        ]; 
+                 ]; 
         $this->validate($request, $rules);
 
         $Product = new Product;
@@ -58,7 +57,7 @@ class ProductController extends Controller
         $parent_id = $request->input('parent_id'); // get the selected parent category ID from the request data
         $category = Category::find($parent_id); // get the Category model for the selected parent category
         if ($category !== null)
-        $Product->category_id = $category->id; // set the "category_id" attribute of the "Product" model to the "parent_id" attribute of the related "Category" model
+            $Product->category_id = $category->id; // set the "category_id" attribute of the "Product" model to the "parent_id" attribute of the related "Category" model
         
         $Product->save();
         if($Product) {
@@ -78,7 +77,7 @@ class ProductController extends Controller
                 }
             }
             return redirect('/admin')->withStatus('Product successfully created.');        
-       //     return response()->json(['message' => 'product successfully created.']);
+         // return response()->json(['message' => 'product successfully created.']);
 
         }
 
@@ -93,29 +92,28 @@ class ProductController extends Controller
         $product_of_web = Product::select('products.id', 'products.name as product_name', 'products.available_pieces', 'products.store_id','photoable.filename')->where('products.store_id',Null)->join('photoable', 'photoable.photoable_id', '=', 'products.id')->get();
 
         $product_of_store = Product::select('products.id', 'products.name as product_name', 'products.available_pieces', 'products.store_id', 'stores.name as store_name', 'photoable.filename')
-        ->join('stores', 'stores.id', '=', 'products.store_id')
-        ->leftJoin('photoable', 'photoable.photoable_id', '=', 'products.id')
-        ->orderBy('products.store_id', 'asc')
-        ->get();
+         ->join('stores', 'stores.id', '=', 'products.store_id')
+         ->leftJoin('photoable', 'photoable.photoable_id', '=', 'products.id')
+         ->orderBy('products.store_id', 'asc')
+         ->get();
 
-   $data = [
-   'product_of_web' => $product_of_web,
-   'product_of_store' => $product_of_store 
-
-   ];
+        $data = [
+           'product_of_web' => $product_of_web,
+           'product_of_store' => $product_of_store 
+                ];
 
 
 
 
           return view('admin/Product/show',compact('data'));
-      // return response()->json($data);
+        //return response()->json($data);
     }
 
     
     public function edit(Product $product)
     {
-        return view('admin/Product/edit',compact('product'));
-     //  return response()->json($product); 
+         return view('admin/Product/edit',compact('product'));
+       //return response()->json($product); 
     }
 
     
@@ -129,21 +127,17 @@ class ProductController extends Controller
             'color' => 'required',
             'weight' =>'required',
             'description' => 'required',
-            'about' => 'required',
-            
-                         
-        ]; 
+            'about' => 'required',                       
+                 ]; 
         $this->validate($request, $rules);
         $product->update($request->all());
         $parent_id = $request->input('parent_id'); // get the selected parent category ID from the request data
         $category = Category::find($parent_id); // get the Category model for the selected parent category
         if ($category !== null)
-        $product->category_id = $category->id; // set the "category_id" attribute of the "Product" model to the "parent_id" attribute of the related "Category" model
+           $product->category_id = $category->id; // set the "category_id" attribute of the "Product" model to the "parent_id" attribute of the related "Category" model
         
         $product->save();
-
-
-        if ($file = $request->file('image')) {
+        if ($file = $request->file('image')) { 
             $filename = $file->getClientOriginalName();
             $fileextension = $file->getClientOriginalExtension();
             $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.' . $fileextension;
@@ -151,15 +145,16 @@ class ProductController extends Controller
             if ($file->move('images', $file_to_store)) {
                 if ($product->Photos) {
                    foreach($product->Photos as $product->Photos){
-                    $photo = $product->Photos;
+                      $photo = $product->Photos;
         
-                    // Remove the old image
-                    $oldFilename = $photo->filename;
-                    unlink('images/' . $oldFilename);
-                }
+                      // Remove the old image
+                      $oldFilename = $photo->filename; 
+                      unlink('images/' . $oldFilename);
+                    }
                     $photo->filename = $file_to_store;
                     $photo->save();
-                } else {
+                } 
+                else {
                     Photo::create([
                         'filename' => $file_to_store,
                         'photoable_id' => $product->id,
@@ -168,8 +163,8 @@ class ProductController extends Controller
                 }
             }
         }
-  return redirect()->route('admin.index')->withStatus(__('product successfully updated.'));
-// return response()->json(['message' => 'product successfully updated.']);
+        return redirect()->route('admin.index')->withStatus(__('product successfully updated.'));
+      //return response()->json(['message' => 'product successfully updated.']);
 
 
     }
@@ -178,7 +173,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
        
-            $product->deleted_by = auth()->user()->id;
+        $product->deleted_by = auth()->user()->id;
         if ($product->photos->isNotEmpty()) {
             foreach ($product->photos as $photo) {
                 $filename = $photo->filename;
@@ -189,7 +184,7 @@ class ProductController extends Controller
         
         $product->delete();
         return redirect()->route('admin.index')->withStatus(__('product successfully deleted.'));
-      //  return response()->json(['message' => 'product successfully deleted.']);
+      //return response()->json(['message' => 'product successfully deleted.']);
 
 
     }

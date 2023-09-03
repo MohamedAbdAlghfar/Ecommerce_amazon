@@ -30,8 +30,8 @@
                 </div>
                 @foreach($category as $category)
                 <div class="row">
-                @if ($category->image)
-    <img src="/images/{{ $category->image }}"width = 200px hight = 200px>
+                @if ($category->filename)
+    <img src="/images/{{ $category->filename }}"width = 200px hight = 200px>
                 @else
                                 
                                     <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo"width = 200px hight = 200px>

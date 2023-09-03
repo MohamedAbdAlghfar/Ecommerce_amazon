@@ -13,7 +13,7 @@ return new class extends Migration
             $table->bigIncrements('id')->unsigned();          
             $table->string('name')->nullable();             
             $table->unsignedInteger('parent_id');   
-            $table->string('image'); 
+           // $table->string('image'); 
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->foreign('deleted_by')->references('id')->on('users');
            // $table->integer('Ordering')->nullable();

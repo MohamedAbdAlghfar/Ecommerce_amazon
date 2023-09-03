@@ -41,8 +41,8 @@
         <tr>
             <td align = "center">{{ $shipping->id }}</td>
             <td align = "center">   
-                        @if ($shipping->cover_image)
-                           <img src="/images/{{ $shipping->cover_image }}" width = 200px hight = 200px>
+                        @if ($shipping->filename)
+                           <img src="/images/{{ $shipping->filename }}" width = 200px hight = 200px>
                         @else
                             <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo"width = 200px hight = 200px>
                         @endif
