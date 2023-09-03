@@ -31,6 +31,10 @@ class Store extends Model
         return $this->hasMany(User::class);
     }
 
+    public function photos()
+    {
+        return $this->morphMany(Photo::class, 'photoable');
+    }
 
     public function Orders()
     {
