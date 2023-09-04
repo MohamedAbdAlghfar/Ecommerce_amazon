@@ -124,16 +124,10 @@ button[type="submit"]:hover {
         <label for="col_4">Aditional_info:</label>
 		<input type="text" id="col_4" name="col_4" >
 
-        <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-image">{{ __('Image') }}</label>
-                                    <input type="file" name="image" id="input-image" class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }}" required>
-                                    
-                                    @if ($errors->has('image'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('image') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
+    
+        <label>Images:</label>
+    <input type="file" name="images[]" multiple accept="image/*">
+
 
 		<button type="submit" id="submit">SAVE</button>
         <a href="{{ route('admin.index') }}" class="back-button">Back</a>

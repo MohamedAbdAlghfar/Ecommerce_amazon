@@ -47,7 +47,7 @@ class ProductController extends Controller
             'weight' =>'required',
             'description' => 'required', 
             'about' => 'required',
-            'image' => 'required',                
+            'images' => 'required',                
                  ]; 
         $this->validate($request, $rules);
 
@@ -62,18 +62,22 @@ class ProductController extends Controller
         $Product->save();
         if($Product) {
             
-            if($file = $request->file('image')) {
-
-                $filename = $file->getClientOriginalName();
-                $fileextension = $file->getClientOriginalExtension();
-                $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
-
-                if($file->move('images', $file_to_store)) {
-                    photo::create([
-                        'filename' => $file_to_store,
-                        'photoable_id' => $Product->id,
-                        'photoable_type' => 'App\Models\Product', 
-                    ]);
+            if ($files = $request->file('images')) {
+               $i = 1;
+                foreach ($files as $file) {
+                    $filename = $file->getClientOriginalName();
+                    $fileextension = $file->getClientOriginalExtension();
+                    $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.' . $fileextension;
+            
+                    if ($file->move('images', $file_to_store)) {
+                        photo::create([
+                            'filename' => $file_to_store,
+                            'photoable_id' => $Product->id,
+                            'photoable_type' => 'App\Models\Product',
+                            'ordering' => $i,
+                        ]);
+                    }
+                $i++;
                 }
             }
             return redirect('/admin')->withStatus('Product successfully created.');        
