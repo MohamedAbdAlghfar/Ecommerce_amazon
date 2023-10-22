@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'is-sotre-owner' => \App\Http\Middleware\Is_Store_Owner::class,
         'is-owner-assistant' => \App\Http\Middleware\Is_Owner_Assistant::class,
         'is-sotre-admin' => \App\Http\Middleware\Is_Store_Admin::class,
+        'is-shipping-admin' => \App\Http\Middleware\Is_Shipping_Admin::class,
     ];
 }

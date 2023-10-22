@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Store\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Store;
+use App\Models\{Store, Photo};
+use Exception;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
@@ -36,7 +37,7 @@ class UpdateStoreController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
+        $validatedData = Validator::make(($request->all()),[
             'name'        => 'required|string',
             'email'       => 'required|email',
             'about_store' => 'required|string',
@@ -47,30 +48,52 @@ class UpdateStoreController extends Controller
             'store_image' => 'required|image',
             'store_cover' => 'required|image',
         ]);
+
+        if ($validatedData->fails()) {
+            return $validatedData->errors();
+        }
     
         $store = Store::find($request->id);
 
-        // get the hashes of the uploaded files
-        $store_image_hash = $request->file('store_image')->hashName();
-        $store_cover_hash = $request->file('store_cover')->hashName();
+        if ($request->hasFile('store_image')) {
 
-        if ($store_image_hash != basename($store->store_image)) {
+            $oldStoreImage = $store->photos()->where('ordering', 1)->first();
 
-            Storage::disk('public')->delete('images/Store-Images/' . basename($store->store_image));
+            Storage::delete('images/Store-Images/' . $oldStoreImage->filename);
 
-            $path = $request->file('store_image')->store('images/Store-Images');
-            $store->update([              // .. Update New Image ..
-                'store_image' => asset($path),
+            $image = $request->file('store_image');
+
+            $imageName = time() . '.' . $image->extension();
+
+            $image->move(storage_path('images/Store-Images'), $imageName);
+
+            $oldStoreImage->update([
+                'filename' => $imageName,
             ]);
         }
-        if ($store_cover_hash != basename($store->store_cover)) {
+        // Check if the request has a new store cover
+        if ($request->hasFile('store_cover')) {
 
-            Storage::disk('public')->delete('images/Store-Images/' . basename($store->store_cover));
-
-            $path_ = $request->file('store_image')->store('images/Store-Images');
-            $store->update([               // .. Update New Image ..
-                'store_cover' => asset($path_),
+            $oldStoreCover = $store->photos()->where('ordering', 2)->firstOrNew([
+                'photoable_id' => $request->id,
+                'photoable_type' => Store::class,
+                'ordering' => 2,
             ]);
+
+            // Delete the old store cover file from the storage folder, if it exists
+            if ($oldStoreCover->exists) {
+                Storage::delete('images/Store-Images/' . $oldStoreCover->filename);
+            }
+
+            $image = $request->file('store_cover');
+
+            $imageName = time() . '.' . $image->extension();
+
+            $image->move(storage_path('images/Store-Images'), $imageName);
+
+            $oldStoreCover->fill([
+                'filename' => $imageName,
+            ])->save();
         }
 
         $store->update([
@@ -86,14 +109,4 @@ class UpdateStoreController extends Controller
         return response()->json(['message' => 'Store updated successfully']);
     }
 
-    // Override the failedValidation method
-    protected function failedValidation(Validator $validator)
-    {
-        // Throw an exception with a custom response
-        throw new HttpResponseException(response()->json([
-            'status' => 'error',
-            'message' => 'Validation failed',
-            'errors' => $validator->errors()
-        ], 422));
-    }
 }

@@ -7,16 +7,19 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\User;
 use Illuminate\Http\Response;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {   
     public function login(Request $Request){
-        $Request->validate([
+        $validatedData = Validator::make(($Request->all()),[
             'email'   => 'required|email',
             'password'=> 'required|min:8',
         ]); 
+        
+        if ($validatedData->fails()) {
+            return $validatedData->errors();
+        }
 
         $credentials = $Request->only('email','password');
 
@@ -33,17 +36,6 @@ class LoginController extends Controller
             'token'  =>$token,
             'user'   =>$user,
         ]);
-    }
-        
-    // Override the failedValidation method
-        
-    protected function failedValidation(Validator $validator){
-        // Throw an exception with a custom response
-        throw new HttpResponseException(response()->json([
-            'status' => 'error',
-            'message' => 'Validation failed',
-            'errors' => $validator->errors()
-        ], 422));
     }
 
 }

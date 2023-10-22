@@ -16,12 +16,14 @@ class CategoryProductsController extends Controller
         // .. Check if any filter is applied ..
         if ($request->hasAny(['brand', 'price', 'sold', 'rate', 'discount'])) {
             // Get the filtered products from the FilterProductsController
-            $products = FilterProductsController::filter($request);
+            $filter = new FilterProductsController ;
+            $filter->filter($request , $category_id);
+            // $products = FilterProductsController::filter($request, $category_id);
         }else{
             // If no filter is applied , get all products of that category
-            $products = Product::whereHasNested('category', function ($query) use ($categoryId) {
-                $query->where('categories.id', $categoryId);
-            })->selectRaw('name','price','image','discount','rate','sold')->get();
+            $products = Product::whereHas('category', function ($query) use ($category_id) {
+                $query->where('categories.id', $category_id);
+            })->select(['name','about','discount','rate','sold'])->get();
         }
 
         

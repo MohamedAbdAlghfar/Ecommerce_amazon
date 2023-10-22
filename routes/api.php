@@ -12,7 +12,7 @@ use App\Http\Controllers\ClientSide\UserAccount\{DelCartController,GetCartProduc
 use App\Http\Controllers\ClientSide\HomePage\{MainHomeController};
 use App\Http\Controllers\ClientSide\ProductType\{CategoryProductsController};
 use App\Http\Controllers\ClientSide\ProductDetails_Payment\{AddToCartController,GetSuggestedProducts,GetProductDetails};
-use App\Http\Controllers\Store\{EditStoreController};
+use App\Http\Controllers\Store\ProductWarning\WarningController;
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
 
 /*
@@ -106,6 +106,10 @@ Route::prefix('v-api')->group(function () {
     Route::post('addcart/{productId}', [AddCartController::class, 'addToCart']);
     Route::post('delcart/{productId}', [DelCartController::class, 'deleteFromCart']);
     Route::post('cartproducts', [GetCartProducts::class, 'getAllProducts']);
+
+    Route::post('createstore/',[CreateStoreController::class, 'create']);
+    Route::get('categoryproducts',[CategoryProductsController::class,'getProducts']);
+    Route::post('warnings/', [WarningController::class,'filte']);
 
     Route::group(['middleware' => ['is-owner-assistant']],function () {
         Route::get('/owner', function () {

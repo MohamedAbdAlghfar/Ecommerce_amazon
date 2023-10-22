@@ -8,7 +8,7 @@ use App\Models\{User, Store};
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Request>
  */
-class RequestFactory extends Factory
+class _RequestFactory extends Factory
 {
     public function definition()
     {

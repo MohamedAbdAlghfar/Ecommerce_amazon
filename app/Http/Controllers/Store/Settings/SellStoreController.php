@@ -6,86 +6,86 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\{Store,User};
-use Illuminate\Contracts\Validation\Validator;
+use Exception;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class SellStoreController extends Controller
 {
 
     // .. Here owner can give his store to another new owner ..
-    /* 
-        1- make Store_id in StoreUser equals new userId , 
-        2- make new User's role = owner role 
-        3- make old owner's role = user  role
-    */
-
 
     public function __construct()
     {
         $this->middleware('auth:api');
     }
 
-    public function sellStore(Request $request){
+    public function sellStore(Request $request)
+    {
         // .. Validation .. 
-        $request->validate([
+        $validatedData = Validator::make($request->all(), [
             'email' => 'required|email',
         ]);
+
+        if ($validatedData->fails()) {
+            return $validatedData->errors();
+        }
         
-        $user    =  auth()->user();
-        $userId  =  $user->id;
-        $storeId =  $user->store_id;
-        //     ..        ..        ..
-        $email  =  $request->email; 
-        //     ..        ..        ..
-        $newOwnerId = User::where('email',$email)->select(['id'])->pluck('id');
+            $user = auth()->user();
+            $userId = $user->id;
+            $storeId = $user->store_id;
+            // ..        ..        ..
+            $email = $request->email; 
+            // ..        ..        ..
+            $newOwnerId = User::where('email', $email)->pluck('id')->first();
 
         if (!$newOwnerId) {
             return response()->json([
-                'message'=>'User does not exist',
+                'message' => 'User does not exist',
             ]);
         }
 
-        // .. If One Query False , Other One Will Also ! .. 
-        DB::transaction(function () {
+        // Check if the user's role is equal to zero
+        $newUser = User::find($newOwnerId);
+        if ($newUser->role !== 0) {
+            return response()->json([
+                'message' => 'The selected user cannot be the new owner of the store.',
+            ]);
+        }
+
+        // Start the transaction
+        DB::beginTransaction();
+
+        try {
+
+            DB::table('store_user')
+            ->where('store_id', $storeId)
+            ->update('user_id', $newOwnerId);
+            
             // .. Transfer Store ..
-            $updateForNew = User::updateOrFail([
-                [
-                    'id' => $newOwnerId,
-                ],
-                'store_id' => $storeId,
-                'role' => 2 ,
+            User::where('id', $newOwnerId)->update([
+                'role' => 2,
             ]);
+
             // .. Changing Roles ..
-            $updateForOld = User::updateOrFail([
-                [
-                    'id'=>$userId,
-                ],
-                'store_id' => null,
-                'role' => 0 ,
+            User::where('id', $userId)->update([
+                'role' => 0,
             ]);
 
-            // .. Transaction Failed ..
-        })->catch(function () {
-                return response()->json([
-                    'message'=>'The Transaction Failed',
-                ]);
-            });
-        // .. Transaction Done ..
-        return response()->json([
-            'message'=>'Store Successfully Transferred',
-        ]);
-    }
+            // Commit the transaction if all queries succeeded
+            DB::commit();
 
-    
-    // Override the failedValidation method
-    protected function failedValidation(Validator $validator)
-    {
-        // Throw an exception with a custom response
-        throw new HttpResponseException(response()->json([
-            'status' => 'error',
-            'message' => 'Validation failed',
-            'errors' => $validator->errors()
-        ], 422));
+            return response()->json([
+                'message' => 'Store Successfully Transferred',
+            ]);
+        } catch (\Exception $e) {
+            // Rollback the transaction if any query fails
+            DB::rollback();
+
+            return response()->json([
+                'message' => 'The Transaction Failed',
+            ]);
+        }
     }
 
 

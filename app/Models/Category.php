@@ -15,44 +15,32 @@ class Category extends Model
     protected $fillable = [  
         'name',
         'id', 
-     //   'image',
         'parent_id', 
         'deleted_by',
     ];
-    // again fjahlfalhdajkl
-    // look if it was changed
-     // try again 
-    //here the second change test
 
-    
-
-    
-
-
-public function Products()
-{
-    return $this->hasMany(Product::class);
-}
-
-public function photo()
+    public function photo()
     {
         return $this->morphOne(Photo::class, 'photoable');
     }
+    
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id')->with('children');
+    }
+    
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 
+    protected static function boot()
+    {
+        parent::boot();
 
-
-
-protected static function boot()
-{
-    parent::boot();
-
-    static::deleting(function ($category) {
-        $category->deleted_by = auth()->user()->id; 
-        $category->save();
-    });
-}
-
-
-
-
+        static::deleting(function ($category) {
+            $category->deleted_by = auth()->user()->id; 
+            $category->save();
+        });
+    }
 }

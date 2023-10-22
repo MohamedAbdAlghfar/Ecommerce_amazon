@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Validator;
 
 class EditPersonalDataController extends Controller
 {
@@ -32,7 +31,7 @@ class EditPersonalDataController extends Controller
 
         $user = User::find($userId);
 
-        $rules = [
+        $validatedData = Validator::make(($request->all()),[
             'f_name'  => 'required',
             'l_name'  => 'required',
             'email'   => 'required|email|unique:users',
@@ -42,8 +41,11 @@ class EditPersonalDataController extends Controller
             'gender'  => 'required',
             'phone'   => 'required',
             'password'=> 'required|min:8|confirmed', 
-        ];
-        $validator = $this->validate($request, $rules);
+        ]);
+
+        if ($validatedData->fails()) {
+            return $validatedData->errors();
+        }
 
         $user_profile_hash = $request->file('profile_image')->hashName();
 
@@ -81,17 +83,6 @@ class EditPersonalDataController extends Controller
             'message'=> 'Error In Updating User Data ! .. Try Again Later',
         ]);
         
-    }
-
-    // Override the failedValidation method
-    protected function failedValidation(Validator $validator)
-    {
-        // Throw an exception with a custom response
-        throw new HttpResponseException(response()->json([
-            'status' => 'error',
-            'message' => 'Validation failed',
-            'errors' => $validator->errors()
-        ], 422));
     }
 
 }

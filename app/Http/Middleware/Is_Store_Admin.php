@@ -19,7 +19,7 @@ class Is_Store_Admin
             return response()->json(['user_not_found'], 404);
         }
         if (in_array($user->role, [2,3])) { // .. Role .. = value ..
-            // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Owner=2 || Store-Admin=3 .. 
+            // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Owner=2 || Store-Admin=3 || ShippingAdmin=5 .. 
             return $next($request);
         } 
             

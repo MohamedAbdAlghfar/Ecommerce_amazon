@@ -5,17 +5,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{User,Cart};
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Illuminate\Support\Facades\Auth;
 class SignUpController extends Controller
 {
     public $token;
 
     public function signup(Request $Request)
     {
-        $validatedData = $Request->validate([
+        $validatedData = Validator::make(($Request->all()),[
             'f_name'  => 'required',
             'l_name'  => 'required',
             'email'   => 'required|email|unique:users',
@@ -26,15 +24,19 @@ class SignUpController extends Controller
             'password'=> 'required|min:8|confirmed',
         ]);
 
+        if ($validatedData->fails()) {
+            return $validatedData->errors();
+        }
+
         $user = User::create([
-            'f_name'  => $validatedData['f_name'],
-            'l_name'  => $validatedData['l_name'],
-            'email'   => $validatedData['email'],
-            'age'     => $validatedData['age'],
-            'address' => $validatedData['address'],
-            'gender'  => $validatedData['gender'],
-            'phone'   => $validatedData['phone'],
-            'password'=> Hash::make($validatedData['password']),
+            'f_name'  => $Request->f_name,
+            'l_name'  => $Request->l_name,
+            'email'   => $Request->email,
+            'age'     => $Request->age,
+            'address' => $Request->address,
+            'gender'  => $Request->gender,
+            'phone'   => $Request->phone,
+            'password'=> Hash::make($Request->input('password')),
         ]);   
         
         // .. Create The Default Cart Of User ..
@@ -51,17 +53,6 @@ class SignUpController extends Controller
             'user' => $user ,
             'usercart' => $cart ,
         ]);
-    }
-
-    // Override the failedValidation method
-        
-    protected function failedValidation(Validator $validator){
-        // Throw an exception with a custom response
-        throw new HttpResponseException(response()->json([
-            'status' => 'error',
-            'message' => 'Validation failed',
-            'errors' => $validator->errors()
-        ], 422));
     }
 
 }

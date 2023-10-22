@@ -7,23 +7,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class Is_Owner_Assistant
+class Is_Shipping_Admin
 {
     public function handle($request, Closure $next)
     {
-
         $token = $request->header("Authorization");
-
+        // Parse the token and get the user
         $user = JWTAuth::parseToken()->toUser($token);
-
         if (!$user) {
             return response()->json(['user_not_found'], 404);
         }
-        if (in_array($user->role, [1,4])) { // .. Role .. = value ..
-            // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Owner=2 || Store-Admin=3 || ShippingAdmin=5 .. 
+        if (in_array($user->role, [5])) { // .. Role .. = value ..
+            // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Owner=2 || Store-Admin=3 || ShippingAdmin=5 ..           
             return $next($request);
         }
             
-        return response()->json(['role_not_allowed'], 403);  
+        return response()->json(['role_not_allowed'], 403);
     }
 }

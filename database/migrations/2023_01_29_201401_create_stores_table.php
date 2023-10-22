@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('name'); 
             $table->string('about_store',500);   
             $table->string('phone');                                      // .. Done ..
-            $table->string('link_website');
+            $table->string('link_website')->nullable();
             $table->string('services',500);    
             $table->string('location');  
             $table->string('email');
