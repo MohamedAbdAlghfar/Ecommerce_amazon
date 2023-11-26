@@ -1,66 +1,174 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+First 
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+.                                       +-----------------------------+
+.                                       |         DESCRIPTION         |
+.                                       +-----------------------------+
 
-## About Laravel
+This Is Multi Vendor Ecommerce Project With Just Api's
+We Are TWO Developers Work In This Project , First one Which Is Abdullah Omar, Wrok In Part Of :  -->>>> FROM LINE 15
+Client Side  & Store Admin Panel & Authentication System.
+And Second One Is Mohammed Abdelghafar, Wrok In Part Of :                              ----->>>>>>>>     FROM LINE 88 
+Shipping Company  & Admin Panel Of The Site Owner 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The next is Description Of What Each Part Of Every One Have .
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#######################################################################################################################
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+.                                       +-----------------------------+
+.                                       |     Abullah Omar's Part     |
+.                                       +-----------------------------+
 
-### Premium Partners
++----------------------------------------------------------------------------------------------------------------------+
+|         ABDULLAH , Part Of Client Side                                                                               |
++----------------------------------------------------------------------------------------------------------------------+
+| This Part's All Controllers Were In ClientSide Folder In Controllers .                                               |
+| First We Have a Home Page , Every One Can Visit Home Page , And If Authenticated User is a Man                       |
+| There Will be Specefic Products Will Appear To Him , and If Authenticated Were Women Or Children                     |
+| There Will be Also speceific Products Should Be Suggested .                                                          |
+| And Also In Home Page Will Show Best Seller Products and Show the Main Parent Categories To Visit It All Products .  |
+|                                                                                                                      |
+| The Next Page Is Page Of Show Products Of Specefic Category With Side Par That Have Filters To                       | 
+| Sort Products As User Wants To Filter , For Example by Price Or Brand Or Store .                                     |
+| And In The End Of those Products There Suggested Products For This Category By Which is                              |
+| The Most Sold In This Category .                                                                                     |
+|                                                                                                                      |
+| The Next Page Is Page Of Show Product's all Details And Images and Add It To Cart And Buy Product Button .           |
+| And In The End Of those Details There Suggested Products For This Category By Which is                               |
+| The Most Sold In This Category .                                                                                     |
+|                                                                                                                      |
+| payment page part :                                                                                                  |
+| i make a payment system with paymob and paybal  ................ekh                                                  |
+|                                                                                                                      |
+|                                                                                                                      |
++----------------------------------------------------------------------------------------------------------------------+
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
++----------------------------------------------------------------------------------------------------------------------+
+|          ABDULLAH , Part Of Store Admin Panel                                                                        |
++----------------------------------------------------------------------------------------------------------------------+
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
++----------------------------------------------------------------------------------------------------------------------+
 
-## Contributing
++----------------------------------------------------------------------------------------------------------------------+
+|           ABDULLAH , Part Of Authentication System                                                                   |
++----------------------------------------------------------------------------------------------------------------------+
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
++----------------------------------------------------------------------------------------------------------------------+
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+########################################################################################################################
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+.                                       +-----------------------------+
+.                                       | Mohammed Abdelghafar's Part |
+.                                       +-----------------------------+
 
-## License
++----------------------------------------------------------------------------------------------------------------------+
+|          Mohammed Abdelghafar , Part Of Owner Pannel                                                                 |
++----------------------------------------------------------------------------------------------------------------------+
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
++----------------------------------------------------------------------------------------------------------------------+
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
++----------------------------------------------------------------------------------------------------------------------+
+|          Mohammed Abdelghafar , Part Of shipping Pannel                                                              |
++----------------------------------------------------------------------------------------------------------------------+
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
++----------------------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+|          Mohammed Abdelghafar , Part Of Admin -Owner Assistant- Pannel                                               |
++----------------------------------------------------------------------------------------------------------------------+
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
+|                                                                                                                      |
++----------------------------------------------------------------------------------------------------------------------+
