@@ -2,7 +2,7 @@
 
 This is a multi-vendor ecommerce project that consists of various components developed by two developers: Abdullah Omar and Mohammed Abdelghafar.
 
-## Abdullah Omar's Part   |
+## Abdullah Omar's Part 
 
 
 ### Client Side
@@ -26,9 +26,9 @@ Abdullah Omar has implemented the authentication system for the project.
 
 (TODO: Add description of the authentication system functionality)
 
-## ----------------------------+
-## Mohammed Abdelghafar's Part |
-## ----------------------------+
+
+## Mohammed Abdelghafar's Part
+
 
 
 ### Owner Panel
