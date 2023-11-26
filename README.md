@@ -9,10 +9,10 @@ This is a multi-vendor ecommerce project that consists of various components dev
 
 This part includes the client-side functionality of the application. The controllers for this part are located in the `ClientSide` folder under `Controllers`.
 
-- Home Page: The home page displays specific products based on the user's gender (men, women, or children). It also showcases best-selling products and provides main parent categories for easy navigation.
-- Category Page: This page shows products from a specific category and allows users to filter and sort products by price, brand, or store. It also suggests other popular products in the category.
-- Product Details Page: This page displays all the details and images of a specific product. Users can add the product to their cart and proceed with the purchase. It also suggests other popular products in the same category.
-- Payment Page: A payment system has been implemented using Paymob and PayPal (work in progress).
+-` Home Page`: The home page displays specific products based on the user's gender (men, women, or children). It also showcases best-selling products and provides main parent categories for easy navigation.
+- `Category Page`: This page shows products from a specific category and allows users to filter and sort products by price, brand, or store. It also suggests other popular products in the category.
+- `Product Details Page`: This page displays all the details and images of a specific product. Users can add the product to their cart and proceed with the purchase. It also suggests other popular products in the same category.
+- `Payment Page`: A payment system has been implemented using Paymob and PayPal (work in progress).
 
 ### Store Admin Panel
 
