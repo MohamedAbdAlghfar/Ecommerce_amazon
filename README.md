@@ -2,7 +2,7 @@
 
 This is a multi-vendor ecommerce project that consists of various components developed by two developers: Abdullah Omar and Mohammed Abdelghafar.
 
-## **Abdullah Omar's Part** 
+## <span style="color: blue;">Abdullah Omar's Part</span>
 
 
 ### Client Side
