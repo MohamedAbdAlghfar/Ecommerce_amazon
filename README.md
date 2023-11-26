@@ -1,8 +1,8 @@
 # Multi-Vendor Ecommerce Project - API Documentation
 
-This is a multi-vendor ecommerce project that consists of various components developed by two developers: Abdullah Omar and Mohammed Abdelghafar.
+This is a multi-vendor ecommerce project that consists of various components **developed** by two developers: Abdullah Omar and Mohammed Abdelghafar.
 
-## <span style="color: blue;">Abdullah Omar's Part</span>
+## **Abdullah Omar's Part** 
 
 
 ### Client Side
