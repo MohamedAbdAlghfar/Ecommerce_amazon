@@ -3,7 +3,8 @@
 This is a multi-vendor ecommerce project that consists of various components developed by two developers: `Abdullah Omar` and `Mohammed Abdelghafar`.
 
 ## **Abdullah Omar's Part** 
-<span style="color: #ff0000;">Text</span>
+<span style="color: green;">This is some green text.</span>
+
 
 ### Client Side
 
