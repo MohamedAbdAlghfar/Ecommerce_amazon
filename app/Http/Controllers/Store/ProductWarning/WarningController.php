@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Store\ProductWarning;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Product, StoreUser, Category};
+use App\Models\{Product,Category};
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 
