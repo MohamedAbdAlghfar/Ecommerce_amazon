@@ -29,41 +29,38 @@ class SuggestedProductsController extends Controller
         $age = $user->age;
         $gender = $user->gender;
 
-        if ($age >=12  && $gender == 0) {
-            $fisrtCategory  = 'men';
-            $secondCategory = 'pc';
-            $thirdCategory  = 'moblie_phones';
-            $fourthCategory = 'laptops';
-        }elseif ($gender == 1 && $age >= 10) {
-            $fisrtCategory  = 'women';
-            $secondCategory = 'eyeliner';
-            $thirdCategory  = 'dresses';
-            $fourthCategory = 'makeup';
-        }elseif ($gender == 0 && $age <= 10) {
-            $firstCategory  = 'boys';
-            $secondCategory = 'toys';
-            $thirdCategory  = 'games';
-            $fourthCategory = 'books';
-        }elseif ($gender == 1 && $age <= 10) {
-            $firstCategory  = 'girls';
-            $secondCategory = 'toys';
-            $thirdCategory  = 'games';
-            $fourthCategory = 'books';
+        $categoryIds = [];
+
+        if ($age >= 12 && $gender == 0) {
+            $categoryIds = [
+            1,
+            2, 
+            3, 
+            4 ];
+        } elseif ($gender == 1 && $age >= 10) {
+            $categoryIds = [
+            5, 
+            6, 
+            7, 
+            8 ];
+        } elseif ($gender == 0 && $age <= 10) {
+            $categoryIds = [
+            9, 
+            10, 
+            11, 
+            12 ];
+        } elseif ($gender == 1 && $age <= 10) {
+            $categoryIds = [
+            13, 
+            14, 
+            15, 
+            16 ];
         }
 
-
-        function getProductsByCategory($categoryName) {
-            return Product::whereHas('category', function ($query) use ($categoryName) {
-                $query->where('name', $categoryName)->limit(10)->offset(0); })->get();
-        }
-
-
-        // .. Call The Function For Each Category and Merge The Results ..
-        $Products = getProductsByCategory($firstCategory);
-        $Products = $Products->merge(getProductsByCategory($secondCategory));
-        $Products = $Products->merge(getProductsByCategory($thirdCategory));
-        $Products = $Products->merge(getProductsByCategory($fourthCategory));
-        $Products = $Products->toArray();
+        $products = Product::whereIn('category_id', $categoryIds)
+            ->limit(10)
+            ->offset(0)
+            ->get();
 
         if ($products) {
             return response()->json([

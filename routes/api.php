@@ -11,7 +11,7 @@ use App\Http\Controllers\ClientSide\UserAccount\{DelCartController,GetCartProduc
     EditPersonalDataController,CreateStoreController,GetPersonalDataController,GetUserOrders,GetUserStore};
 use App\Http\Controllers\ClientSide\HomePage\{MainHomeController};
 use App\Http\Controllers\ClientSide\ProductType\{CategoryProductsController};
-use App\Http\Controllers\ClientSide\ProductDetails_Payment\{AddToCartController,GetSuggestedProducts,GetProductDetails};
+use App\Http\Controllers\ClientSide\ProductDetails\{AddToCartController,GetSuggestedProducts,GetProductDetails};
 use App\Http\Controllers\Store\ProductWarning\WarningController;
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
 

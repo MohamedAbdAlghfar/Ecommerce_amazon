@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\ClientSide\ProductDetails_Payment;
+namespace App\Http\Controllers\ClientSide\ProductDetails;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,9 +13,9 @@ class GetSuggestedProducts extends Controller
         $categoryId = Product::find($prodId)->only('category_id');
 
         // .. Get All Products Of One Parent In Category ..
-        $products = Product::whereHasNested('category', function ($query) use ($categoryId) {
-            $query->where('categories.id', $categoryId);
-        })->selectRaw('name','price','image','discount','rate','sold')->take(50)->get();
+        $childIds = Category::where('id', $categoryId)->with('children')->pluck('id')->flatten();
+        
+        $products = Product::whereIn('category_id', $childIds)->get();
 
 
         if ($products) {
