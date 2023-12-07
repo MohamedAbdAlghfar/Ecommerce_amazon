@@ -1,6 +1,8 @@
 # Multi-Vendor Ecommerce Project - API Documentation
 
-This is a multi-vendor ecommerce project that consists of various components developed by two developers: `Abdullah Omar` -> abdullahomarj1@gmail.com and `Mohammed Abdelghafar`.
+This is a multi-vendor ecommerce project that consists of various components developed by two developers: `Abdullah Omar` `Email`   -> abdullahomarj1@gmail.com 
+`WebSite` -> eng-abdullahomar.site
+and `Mohammed Abdelghafar`.
 
 ## **Abdullah Omar's Part** 
 
