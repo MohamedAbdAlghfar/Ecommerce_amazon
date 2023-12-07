@@ -2,7 +2,8 @@
 
 This is a multi-vendor ecommerce project that consists of various components developed by two developers: <br>`Abdullah Omar` <br>**Email**   -> abdullahomarj1@gmail.com  <br>
 **WebSite** -> https://eng-abdullahomar.site  <br>
-`Mohammed Abdelghafar`.
+`Mohammed Abdelghafar` <br>**Email**   -> moh***d@gmail.com  <br>
+**WebSite** -> https://eng-mohammedabdo.site  <br>
 
 ## **Abdullah Omar's Part** 
 
