@@ -1,9 +1,13 @@
 # Multi-Vendor Ecommerce Project - API Documentation
 
-This is a multi-vendor ecommerce project that consists of various components developed by two developers: <br>`Abdullah Omar` <br>**Email**   -> abdullahomarj1@gmail.com  <br>
-<br> <a href="https://rb.gy/youkh1">LinkedIn</a> <br>
+This is a multi-vendor ecommerce project that consists of various components developed by two developers: <br>`Abdullah Omar` <br>**Email**   -> abdullahomarj1@gmail.com <br>
+
+**LinkedIn** -> <a href="https://rb.gy/youkh1">LinkedIn</a> <br>
+
 **WebSite** -> https://eng-abdullahomar.site  <br>
+
 `Mohammed Abdelghafar` <br>**Email**   -> mohammed___@gmail.com  <br>
+
 **WebSite** -> https://eng-mohammedabdo.site  <br>
 
 ## **Abdullah Omar's Part** 
