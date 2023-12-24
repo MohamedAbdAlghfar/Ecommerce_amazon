@@ -2,7 +2,7 @@
 
 This is a multi-vendor ecommerce project that consists of various components developed by two developers: <br>`Abdullah Omar` <br>**Email**   -> abdullahomarj1@gmail.com <br>
 
-**LinkedIn** -> <a href="https://rb.gy/youkh1">LinkedIn</a> <br>
+**LinkedIn** -> <a href="https://www.linkedin.com/in/abdullah-omar-81196420a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">LinkedIn</a> <br>
 
 **WebSite** -> https://eng-abdullahomar.site  <br>
 
