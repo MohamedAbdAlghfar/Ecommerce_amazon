@@ -62,8 +62,8 @@ class CreateOwnerController extends Controller
                 }
             }
         }
-       //return redirect('/owner')->withStatus('Owner successfully created.');        
-        return response()->json(['message' => 'Owner successfully created.']);
+       return redirect('/owner')->withStatus('Owner successfully created.');        
+       // return response()->json(['message' => 'Owner successfully created.']);
 
 
     }

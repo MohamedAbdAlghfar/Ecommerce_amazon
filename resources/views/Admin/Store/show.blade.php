@@ -30,21 +30,15 @@
                 </div>
                 @foreach($store as $store)
                 <div class="row">
-                @if ($store->store_image)
-    <img src="/images/{{ $store->store_image }}"width = 200px hight = 200px>
+                @if ($store->Photos->isNotEmpty())
+    <img src="/images/{{ $store->Photos->first()->filename }}"width = 200px hight = 200px>
                 @else
                                 
                                     <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo"width = 200px hight = 200px>
                                 @endif
                                 
                             
-                <div class="row">
-                @if ($store->store_cover)
-    <img src="/images/{{ $store->store_cover }}">
-                @else
-                                
-                                    <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo">
-                                @endif
+
                                 
                                 
                                 

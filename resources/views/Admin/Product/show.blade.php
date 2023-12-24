@@ -35,7 +35,7 @@
                 @else
                                 
                                     <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo"width = 200px hight = 200px>
-                                @endif
+                                @endif  
                                 <div class="card-body">
                                     <h5 class="card-title">{{ \Str::limit($product->product_name, 100) }}</h5>
                                 </div>
@@ -48,7 +48,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <a href="{{ route('product.edit', $product) }}" class="back-button">Edit</a>
-                                        
+                                        <a href="{{ route('ShowProductPhotos.showPhotos', $product) }}" class="back-button">Show Photos</a>
 
                                         <input class="btn btn-danger btn-sm" type="submit" value="Delete" name="deleteproduct">
                             

@@ -13,8 +13,8 @@ class CreateAdminController extends Controller
     
     public function create() 
     {
-       return view("Owner\Admin\create");
-       //  return response()->json(['message' => ' Create method called.']); 
+      // return view("Owner\Admin\create");
+         return response()->json(['message' => ' Create method called.']); 
     }
 
     public function store(Request $request)

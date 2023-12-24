@@ -13,7 +13,10 @@ class DeleteAdminController extends Controller
     public function index()
     {
         
-        $admins = User::select('users.id','users.f_name','users.l_name','users.email','users.phone','photoable.filename')->where('role', 1)->join('photoable', 'photoable.photoable_id', '=', 'users.id')->get();               
+        $admins = User::select('users.id','users.f_name','users.l_name','users.email','users.phone','photoable.filename')->where('role', 1)     ->join('photoable', function ($join) {
+          $join->on('photoable.photoable_id', '=', 'users.id')
+          ->where('photoable.photoable_type', '=', 'App\Models\User');
+      })->get();               
         return view('Owner\Admin\show',compact('admins'));
       //return response()->json($admins);
 

@@ -29,8 +29,8 @@ class RequestController extends Controller
           ->where('orders.status', 2)
           ->orderBy('orders.created_at', 'desc')
           ->get();
-        return view('admin/Product/request',compact('request'));
-     // return response()->json($request); 
+     //   return view('admin/Product/request',compact('request'));
+      return response()->json($request); 
     }
 
     

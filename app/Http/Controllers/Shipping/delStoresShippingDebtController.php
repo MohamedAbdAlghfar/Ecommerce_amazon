@@ -9,7 +9,7 @@ use App\Models\Store;
 
 class delStoresShippingDebtController extends Controller
 {
-    public function DelStoreDebt($shippingId, $storeId)
+    public function DelStoreDebt($shippingId, $storeId)  
     {
         $shipping = ShippingCompany::find($shippingId);
         $store = Store::find($storeId);

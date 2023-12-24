@@ -27,8 +27,8 @@ class RecentController extends Controller
          ->where('orders.status', 3)
          ->orderBy('orders.created_at', 'desc')
          ->get(); 
-        return view('admin/Product/recent',compact('recentorder'));
-     // return response()->json($recentorder); 
+     //   return view('admin/Product/recent',compact('recentorder'));
+      return response()->json($recentorder); 
 
     }
 

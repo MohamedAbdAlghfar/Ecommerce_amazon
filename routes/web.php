@@ -45,6 +45,12 @@ use App\Http\Controllers\Owner;
      Route::resource('admin/Product/request', 'App\Http\Controllers\Admin\RequestController');
      Route::get('admin/product/delBy/{id}', 'App\Http\Controllers\Admin\ProductDelByController@showDeletedProduct');
      Route::get('admin/products/RunOut', 'App\Http\Controllers\Admin\ProductRunOutController@showRunOut');
+     Route::get('admin/products/showPhotos/{id}', 'App\Http\Controllers\Admin\ShowProductPhotosController@showPhotos')->name('ShowProductPhotos.showPhotos');
+     Route::get('admin/products/editPhotos/{id}', 'App\Http\Controllers\Admin\ShowProductPhotosController@EditPhoto')->name('ShowProductPhotos.EditPhoto');
+     Route::put('admin/products/editPhotos/{id}', 'App\Http\Controllers\Admin\ShowProductPhotosController@updatePhoto')->name('ShowProductPhotos.updatePhoto');
+     Route::delete('admin/products/deletePhotos/{id}', 'App\Http\Controllers\Admin\ShowProductPhotosController@destroy')->name('ShowProductPhotos.destroy');
+     Route::get('admin/products/createPhotos/{id}', 'App\Http\Controllers\Admin\ShowProductPhotosController@create')->name('ShowProductPhotos.create');
+     Route::post('admin/products/createPhotos/{id}', 'App\Http\Controllers\Admin\ShowProductPhotosController@store')->name('ShowProductPhotos.store');
      // profile
      Route::resource('admin/profile/admins', 'App\Http\Controllers\Admin\ProfileController');
      Route::get('admin/profile/myprofile', ['as' => 'myprofile.edit', 'uses' => 'App\Http\Controllers\Admin\MyprofileController@edit']);	
@@ -78,6 +84,8 @@ use App\Http\Controllers\Owner;
      Route::delete('shippingCombany/{shipping}', 'App\Http\Controllers\Shipping\DeleteShippingController@destroy')->name('DeleteShipping.destroy');
      Route::get('shippingCombany/create', 'App\Http\Controllers\Shipping\CreateShippingController@create');
      Route::post('shippingCombany/create', 'App\Http\Controllers\Shipping\CreateShippingController@store')->name('CreateShipping.store');
+     Route::get('shippingCombany/edit/{id}', 'App\Http\Controllers\Shipping\ShippingController@edit')->name('Shipping.edit');
+     Route::put('shippingCombany/edit/{id}', 'App\Http\Controllers\Shipping\ShippingController@update')->name('Shipping.update');
      // order
      Route::put('shippingCombany/order/{id}', 'App\Http\Controllers\Shipping\updateOrderStatusController@change')->name('UpdateStatus.change');
      Route::get('shippingCombany/getStoresShippingPrice/{id}', 'App\Http\Controllers\Shipping\StoresShippingDebtController@getShippingStores')->name('Shipping.getShippingStores');

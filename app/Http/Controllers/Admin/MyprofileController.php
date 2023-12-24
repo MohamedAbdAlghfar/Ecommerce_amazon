@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\photo;
 use Tymon\JWTAuth\Facades\JWTAuth;
 class MyprofileController extends Controller
 {
@@ -27,11 +28,20 @@ class MyprofileController extends Controller
     {
         // get the authenticated user
         $user = auth()->user();
+        $user_id = $user->id;
+        $user2 = User::with('photo')->findOrFail($user_id);
+        $photo = $user2->photo; 
+
+$data = [
+     'user' => $user,
+     'photo' => $photo,
+        ];
+
 
         //  return the user profile as a JSON response
     
      //  return view('admin/Myprofile/edit',compact('user'));
-         return response()->json(optional($user)->only('email', 'address','gender','f_name','l_name'));
+         return response()->json($data);
     
     }
     
@@ -73,7 +83,7 @@ class MyprofileController extends Controller
                     Photo::create([
                         'filename' => $file_to_store,
                         'photoable_id' => $admin->id,
-                        'photoable_type' => 'App\Models\Category',
+                        'photoable_type' => 'App\Models\User',
                     ]);
                 }
             }
