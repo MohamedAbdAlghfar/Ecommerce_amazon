@@ -2,16 +2,21 @@
 
 namespace App\Models;
 
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
     use HasFactory;
+    use LogsActivity;
+
     protected $fillable = [               
         'id',
         'location', 
         'trans_date',     
+        'Cancellation_date',     
         'price',
         'user_id',
         'store_id',
@@ -20,8 +25,11 @@ class Order extends Model
         'status',
     ];
 
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults([]);
+    }
 
-    
     // order comment on new 
     public function User()
     {

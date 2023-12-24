@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\ShippingCompany;
 use App\Models\Product;
+use Illuminate\Support\Arr;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\order>
@@ -28,13 +30,21 @@ class OrderFactory extends Factory
         $product_id = $product->id;
         $storeId = $product->store_id;
 
-        $start_date = '-1 year'; // Set the start date to one year ago
-        $end_date = 'now'; // Set the end date to now
-    
-        // Generate a random date and time value between the start and end dates
+        $start_date = '-1 year';
+        $end_date = 'now';
+
         $trans_date = fake()->dateTimeBetween($start_date, $end_date);
-       
-       
+        $cancellationRandom = fake()->dateTimeBetween($start_date, $end_date);
+
+        $options = [$cancellationRandom, $cancellationRandom, null];
+        $cancellationDate = Arr::random($options);
+
+        $realCancellation = null; // Default value
+
+        if ($cancellationDate !== null) {
+            $realCancellation = $cancellationDate->format('Y-m-d H:i:s');
+        }
+
         return [
             'price' => $productActualPrice,
             'user_id' => $user_id,
@@ -45,10 +55,8 @@ class OrderFactory extends Factory
             'location' => fake()->address(),
             'trans_date' => $trans_date->format('Y-m-d H:i:s'),
 
-        
-        
-        
-        
+            'cancellation_date'=> $realCancellation,
+
         ];
     }
 }

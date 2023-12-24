@@ -16,7 +16,7 @@ class RequestsController extends Controller
     {
         $user = auth()->user();
 
-        $userRequests = _Request::where('user_id', $user->id);
+        $userRequests = _Request::where('user_id', $user->id)->latest()->get();
 
         if ($userRequests == null){
             return response()->json([

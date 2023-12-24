@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -11,11 +13,14 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use LogsActivity;
+
     protected $dates = ['deleted_at'];
+
     protected $fillable = [ 
         'id',
-    	'price', 
-    	'discount', 
+        'price', 
+        'discount', 
         'available_pieces',
         'weight', 
         'color', 
@@ -33,10 +38,16 @@ class Product extends Model
         'deleted_by',
         'added_by',
     ];
+    
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults([]);
+    }
+
     public function comments() 
-{
-    return $this->hasMany(Comment::class);
-}
+    {
+        return $this->hasMany(Comment::class);
+    }
 
    public function store()
     {
@@ -53,23 +64,6 @@ class Product extends Model
      return $this->belongsTo(Category::class);
     }
 
-
-
-
-
-protected static function boot()
-{
-    parent::boot();
-
-    static::deleting(function ($product) {
-        $product->deleted_by = auth()->user()->id; 
-        $product->save();
-    });
-
-}
-
-
-
     public function orders() 
     {
         return $this->hasMany(Order::class);
@@ -79,5 +73,32 @@ protected static function boot()
     {
         return $this->belongsToMany(Cart::class);
     }
+
+
+
+    public function addedBy()
+    {
+        return $this->belongsTo(User::class, 'added_by');
+    }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
+    }
+
+    
+
+    // .. Soft Deletes Part ..
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($product) {
+            $product->deleted_by = auth()->user()->id; 
+            $product->save();
+        });
+
+    }
+
 
 }

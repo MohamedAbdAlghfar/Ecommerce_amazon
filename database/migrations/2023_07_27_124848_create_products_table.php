@@ -31,19 +31,20 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained(); 
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->foreign('deleted_by')->references('id')->on('users');
-            $table->tinyInteger('added_by')->nullable();
+
+            $table->unsignedBigInteger('added_by')->nullable();
+            $table->foreign('added_by')->references('id')->on('users');
+
             $table->timestamps();
         });
-    
-    
-      
-       
+
     
     }
 
     
     public function down()
     {
+        $table->dropForeign(['added_by']);
         $table->dropForeign(['deleted_by']); 
         $table->dropColumn('deleted_by');
         Schema::dropIfExists('products');

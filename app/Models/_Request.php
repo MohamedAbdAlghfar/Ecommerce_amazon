@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Models;
-
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class _Request extends Model
 {
     use HasFactory; 
-
+    use LogsActivity;
+    
     protected $table = 'requests';
 
     protected $fillable = [
@@ -19,6 +21,11 @@ class _Request extends Model
         'response',
     ];
 
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults([]);
+    }
 
     public function users()
     {

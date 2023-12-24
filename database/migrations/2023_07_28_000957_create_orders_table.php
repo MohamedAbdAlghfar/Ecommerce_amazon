@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('price')->nullable();   
             $table->foreignId('user_id')->constrained();
             $table->tinyInteger('status')->nullable();
+            $table->datetime('Cancellation_date')->nullable();
             $table->foreignId('shipping_company_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('product_id')->constrained(); 
             $table->foreignId('store_id')->constrained(); 

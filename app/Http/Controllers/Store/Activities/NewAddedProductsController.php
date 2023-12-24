@@ -8,14 +8,14 @@ use Carbon\Carbon;
 use App\Models\{Product, User};
 use Spatie\Activitylog\Models\Activity;
 
-class NewUpdatedProducts extends Controller
+class NewAddedProducts extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth:api');
     }
-
-    public function updatedProductsActivity(Request $request)
+    
+    public function productActivity(Request $request)
     {
         $startDate = null;
         $endDate = null;
@@ -53,7 +53,7 @@ class NewUpdatedProducts extends Controller
 
         $logs = Activity::whereIn('subject_id', $productIds)
             ->where('subject_type', [Product::class])
-            ->where('description', 'Product Updated')
+            ->where('description', 'Product created')
             ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
                 $query->whereBetween('created_at', [$startDate, $endDate]);
             })
@@ -66,6 +66,8 @@ class NewUpdatedProducts extends Controller
             // Retrieve the Product model instance
             $product = Product::find($log->subject_id);
 
+            // Get the user who added the product
+            $addedByUser = $product->addedBy; // Assuming you have a relationship setup
             $store  = $product->store;
 
             // Customize the message based on the activity description
@@ -74,6 +76,7 @@ class NewUpdatedProducts extends Controller
             return [
                 'message' => $message,
                 'product_id' => $log->subject_id,
+                'added_by' => $addedByUser ? $addedByUser->f_name : null, // User's name who added the product
                 'store' => $store ? $store->name : null,
             ];
         });
