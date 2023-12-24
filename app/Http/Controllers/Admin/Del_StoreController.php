@@ -23,7 +23,14 @@ class Del_StoreController extends Controller
 
     public function show()
     {
-        $store = Store::orderBy('created_at', 'desc')->select('id','name','store_cover','store_image')->get();
+        $store = Store::orderBy('stores.created_at', 'desc')
+        ->select('stores.id', 'stores.name', 'photoable.filename')
+        ->leftJoin('photoable', function ($join) {
+        $join->on('photoable.photoable_id', '=', 'stores.id')
+        ->where('photoable.photoable_type', '=', 'App\Models\Store');
+        })
+        ->get()
+        ->unique('id');
      // return view('admin/Store/show',compact('store')); 
         return response()->json($store);
     }
@@ -32,35 +39,24 @@ class Del_StoreController extends Controller
     {
         
         $store->deleted_by = auth()->user()->id; 
-        if ($store->store_image) {
-            
-            $filename = $store->store_image;
-            unlink('images/' . $filename);
-            $imagePath = $store->store_image;
-
-            if ($imagePath) {
-                Storage::delete($imagePath);
-                $store->update(['image' => 'default.jpeg']); // Remove the image path from the category
+        if ($store->photos->isNotEmpty()) {
+            foreach ($store->photos as $photo) {
+                $filename = $photo->filename;
+                unlink('images/' . $filename); 
+                $photo->delete();
             }
-        
-        }
+       }
     
-        if ($store->store_cover) {
-            
-            $filename = $store->store_cover;
-            unlink('images/' . $filename);
-            $imagePath = $store->store_cover;
+        $users = $store->admins ;
+        foreach($users as $user){
+          $user->role = 0 ;
+          $user->save();
+        }
 
-            if ($imagePath) {
-               Storage::delete($imagePath);
-               $store->update(['image' => 'default.jpeg']); // Remove the image path from the category
-            }
-    
-        }
-    
    
         $store->delete();
-      //return redirect()->route('admin.index')->withStatus(__('store successfully deleted.'));
+   
+        //return redirect()->route('admin.index')->withStatus(__('store successfully deleted.'));
         return response()->json(['message' => 'store successfully deleted.']);
 
 

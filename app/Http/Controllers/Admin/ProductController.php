@@ -31,8 +31,9 @@ class ProductController extends Controller
 
     public function create() 
     {
-        return view("Admin\Product\create");
-     // return response()->json(['message' => ' Create method called.']); 
+        $category = Category::select('id','name')->orderBy('id', 'desc')->get();
+      //  return view("Admin\Product\create",compact('category'));
+         return response()->json($category); 
     }
 
     
@@ -81,7 +82,7 @@ class ProductController extends Controller
                 }
             }
             return redirect('/admin')->withStatus('Product successfully created.');        
-         // return response()->json(['message' => 'product successfully created.']);
+        //  return response()->json(['message' => 'product successfully created.']);
 
         }
 
@@ -93,11 +94,20 @@ class ProductController extends Controller
     public function show()
     {
 
-        $product_of_web = Product::select('products.id', 'products.name as product_name', 'products.available_pieces', 'products.store_id','photoable.filename')->where('products.store_id',Null)->join('photoable', 'photoable.photoable_id', '=', 'products.id')->get();
-
+        $product_of_web = Product::select('products.id', 'products.name as product_name', 'products.available_pieces', 'products.store_id', 'photoable.filename')
+        ->where('products.store_id', null)
+        ->leftJoin('photoable', function ($join) {
+        $join->on('photoable.photoable_id', '=', 'products.id')
+        ->where('photoable.photoable_type', '=', 'App\Models\Product');
+        })
+        ->get()
+        ->unique('id');
         $product_of_store = Product::select('products.id', 'products.name as product_name', 'products.available_pieces', 'products.store_id', 'stores.name as store_name', 'photoable.filename')
          ->join('stores', 'stores.id', '=', 'products.store_id')
-         ->leftJoin('photoable', 'photoable.photoable_id', '=', 'products.id')
+         ->leftJoin('photoable', function ($join) {
+            $join->on('photoable.photoable_id', '=', 'products.id')
+            ->where('photoable.photoable_type', '=', 'App\Models\Product');
+            })
          ->orderBy('products.store_id', 'asc')
          ->get();
 
@@ -110,14 +120,32 @@ class ProductController extends Controller
 
 
           return view('admin/Product/show',compact('data'));
-        //return response()->json($data);
+      //  return response()->json($data);
     }
 
     
-    public function edit(Product $product)
+    public function edit($product_id)
     {
-         return view('admin/Product/edit',compact('product'));
-       //return response()->json($product); 
+      
+        $product = Product::select('products.id', 'products.name as product_name', 'products.available_pieces', 'photoable.filename','price','discount','weight','color','col_1','description','col_2','col_3','col_4','about','brand','category_id')
+        ->where('products.store_id', null)
+        ->leftJoin('photoable', function ($join) {
+        $join->on('photoable.photoable_id', '=', 'products.id')
+        ->where('photoable.photoable_type', '=', 'App\Models\Product');
+        })
+        ->find($product_id);
+        
+        $product2 = Product::findOrFail($product_id);
+        $photos = $product2->photos;
+        $category = Category::select('id','name')->orderBy('id', 'desc')->get();
+        $data = [
+           'category' => $category,
+           'product' => $product,
+           'photos' => $photos,    
+                ];
+      
+         return view('admin/Product/edit',compact('data'));
+     //  return response()->json($data); 
     }
 
     
@@ -141,34 +169,39 @@ class ProductController extends Controller
            $product->category_id = $category->id; // set the "category_id" attribute of the "Product" model to the "parent_id" attribute of the related "Category" model
         
         $product->save();
-        if ($file = $request->file('image')) { 
-            $filename = $file->getClientOriginalName();
-            $fileextension = $file->getClientOriginalExtension();
-            $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.' . $fileextension;
+        if ($files = $request->file('images')) {
+            if ($product->Photos) {
+                foreach ($product->Photos as $photo) {
+                    $photo->delete();
+                    // Remove the old image
+                    $oldFilename = $photo->filename;
+                    unlink('images/' . $oldFilename);
+
+                }
+                
+            }
+            $i = 1;
+            foreach ($files as $file) {
+                $filename = $file->getClientOriginalName();
+                $fileextension = $file->getClientOriginalExtension();
+                $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.' . $fileextension;
         
-            if ($file->move('images', $file_to_store)) {
-                if ($product->Photos) {
-                   foreach($product->Photos as $product->Photos){
-                      $photo = $product->Photos;
+                if ($file->move('images', $file_to_store)) {
+                    
         
-                      // Remove the old image
-                      $oldFilename = $photo->filename; 
-                      unlink('images/' . $oldFilename);
-                    }
-                    $photo->filename = $file_to_store;
-                    $photo->save();
-                } 
-                else {
                     Photo::create([
                         'filename' => $file_to_store,
                         'photoable_id' => $product->id,
                         'photoable_type' => 'App\Models\Product',
+                        'ordering' => $i,
                     ]);
+        
+                    $i++;
                 }
             }
         }
         return redirect()->route('admin.index')->withStatus(__('product successfully updated.'));
-      //return response()->json(['message' => 'product successfully updated.']);
+    //  return response()->json(['message' => 'product successfully updated.']);
 
 
     }
@@ -181,14 +214,14 @@ class ProductController extends Controller
         if ($product->photos->isNotEmpty()) {
             foreach ($product->photos as $photo) {
                 $filename = $photo->filename;
-                unlink('images/' . $filename);
+                unlink('images/' . $filename); 
                 $photo->delete();
             }
         }
         
         $product->delete();
         return redirect()->route('admin.index')->withStatus(__('product successfully deleted.'));
-      //return response()->json(['message' => 'product successfully deleted.']);
+    //  return response()->json(['message' => 'product successfully deleted.']);
 
 
     }

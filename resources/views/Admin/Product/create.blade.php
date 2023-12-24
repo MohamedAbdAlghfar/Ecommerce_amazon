@@ -88,7 +88,7 @@ button[type="submit"]:hover {
     
     <select id="category-select" name="parent_id" required class="form-control">
     
-    @foreach(\App\Models\Category::orderBy('id', 'desc')->get() as $Category)
+    @foreach($category as $Category)
         <option value="{{ $Category->id }}">{{ $Category->name }}</option>
     @endforeach
 </select>

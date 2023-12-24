@@ -32,7 +32,7 @@ class StoresShippingDebtController extends Controller
                 ];
 
         return view('Shipping\showStoreDebt',compact('data'));
-      //return response()->json($data);
+     // return response()->json($data);
     }
 
 }

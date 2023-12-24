@@ -89,8 +89,8 @@ button[type="submit"]:hover {
     <div class="container">
       <div class="profile"> 
         <div class="avatar">
-        @if ($category->filename)
-    <img src="/images/{{ $category->filename }}"width = 200px hight = 200px>
+        @if ($data['category']->filename)
+    <img src="/images/{{ $data['category']->filename }}"width = 200px hight = 200px>
         @else
                                 
     <img src="/images/default.jpeg" class="card-img-top" alt="Default Product Photo"width = 200px hight = 200px>
@@ -98,28 +98,27 @@ button[type="submit"]:hover {
             
         <div class="info">
          <br><br><br><br><br><br><br><br> 
-        <form method="post" action="{{ route('category.update', $category) }}" enctype="multipart/form-data" autocomplete="off" >
+        <form method="post" action="{{ route('category.update', $data['category']) }}" enctype="multipart/form-data" autocomplete="off" >
           @csrf
           @method('put')
           <label for="name">Name:</label>
-		<input type="text" id="name" name="name" required value= "{{ $category->name }}">
+		<input type="text" id="name" name="name" required value= "{{ $data['category']->name }}">
         <br><br><br><br>
 
         <div class="form-group{{ $errors->has('Category_id') ? ' has-danger' : '' }}">
     <label class="form-control-label" for="input-Category_id">{{ __('Parent Title') }}</label>
     
     <select id="category-select" name="parent_id"  class="form-control">
-    @php
-    $parentCategory = \App\Models\Category::find($category->parent_id);
-@endphp
+ 
 
-@if ($parentCategory)
+
     
-
-    <option value="" disabled selected>{{ $parentCategory->name }}</option>
+    @if($data['category_parent'])
+    <option value="{{ $data['category_parent']->id }}"  selected>{{ $data['category_parent']->name }}</option>
     @endif
     <option value="0">Null</option>
-    @foreach(\App\Models\Category::orderBy('id', 'desc')->get() as $Category)
+    
+    @foreach($data['all_category'] as $Category)
         <option value="{{ $Category->id }}">{{ $Category->name }}</option>
     @endforeach
 </select>

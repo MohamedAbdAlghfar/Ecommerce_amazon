@@ -65,7 +65,7 @@
                                 <a href="{{ route('Shipping.show', $shipping) }}" class="btn btn-info btn-sm">show</a>
                                <br><br>
                                 <a href="{{ route('Shipping.getShippingStores', $shipping) }}" class="btn btn-info btn-sm" link = "black">show storesAccounts</a>
-
+                                <a href="{{ route('Shipping.edit', $shipping) }}" class="btn btn-info btn-sm" link = "black">Edit</a>
             </td>
 
         </tr>        

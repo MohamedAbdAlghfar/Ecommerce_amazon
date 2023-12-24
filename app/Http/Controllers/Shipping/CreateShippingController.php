@@ -13,7 +13,7 @@ class CreateShippingController extends Controller
     public function create() 
     {
        return view("Shipping\create");
-       //  return response()->json(['message' => ' Create method called.']); 
+      //   return response()->json(['message' => ' Create method called.']); 
     }
 
     public function store(Request $request)

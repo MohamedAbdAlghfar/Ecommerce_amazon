@@ -28,8 +28,9 @@ class CategoryController extends Controller
 
     public function create() 
     {
-        return view("Admin\Category\create"); 
-     // return response()->json(['message' => ' Create method called.']); 
+        $category = Category::select('id','name')->orderBy('id', 'desc')->get();
+      //  return view("Admin\Category\create",compact('category')); 
+      return response()->json($category); 
     }
 
     
@@ -67,9 +68,13 @@ class CategoryController extends Controller
     
     public function show()
     {
-        $category = Category::orderBy('categories.created_at', 'desc')->select('categories.name','categories.id','photoable.filename')->join('photoable', 'photoable.photoable_id', '=', 'categories.id')->get();
-        //    return view('admin/Category/show',compact('category'));
-         return response()->json($category); 
+        $category = Category::orderBy('categories.created_at', 'desc')->select('categories.name','categories.id','photoable.filename')
+        ->join('photoable', function ($join) {
+            $join->on('photoable.photoable_id', '=', 'categories.id')
+            ->where('photoable.photoable_type', '=', 'App\Models\Category');
+        })->get();
+            return view('admin/Category/show',compact('category'));
+       //  return response()->json($category); 
     }
 
     
@@ -77,11 +82,27 @@ class CategoryController extends Controller
     {
         
 
-       $category = Category::select('categories.name','categories.id','photoable.filename')->join('photoable', 'photoable.photoable_id', '=', 'categories.id')->find($category);
+    
+    
+        $category = Category::select('categories.name','categories.id','photoable.filename','categories.parent_id')->join('photoable', function ($join) {
+            $join->on('photoable.photoable_id', '=', 'categories.id')
+            ->where('photoable.photoable_type', '=', 'App\Models\Category');
+        })->find($category);
+        $all_category    = Category::select('categories.name','categories.id')->get();
+        $parent_id       = $category->parent_id; 
+       if($parent_id == 0)
+        $category_parent = Null ;     
+       else       
+        $category_parent = Category::find($parent_id);
+        $data = [
+               'category' => $category,
+               'category_parent' => $category_parent,
+               'all_category' => $all_category, 
+                 ];
+        
 
-
-       return view('admin/Category/edit',compact('category'));
-    // return response()->json($category);
+        return view('admin/Category/edit',compact('data'));
+    //  return response()->json($data);
 
     } 
 
@@ -90,7 +111,7 @@ class CategoryController extends Controller
     {
         
         $rules = [
-            'name' => 'required|min:5|max:150',                                
+            'name' => 'required|min:2|max:150',                                
                  ];
 
         $this->validate($request, $rules);
@@ -124,8 +145,8 @@ class CategoryController extends Controller
         }
 
 
-        return redirect('/admin')->withStatus('category successfully updated.');
-    //  return response()->json(['message' => 'category successfully updated.']);
+    //    return redirect('/admin')->withStatus('category successfully updated.');
+      return response()->json(['message' => 'category successfully updated.']);
 
     }
 
@@ -149,8 +170,8 @@ class CategoryController extends Controller
         }
         
         $category->delete();
-  //      return redirect()->route('admin.index')->withStatus(__('category successfully deleted.'));
-          return response()->json(['message' => 'category successfully deleted.']);
+        return redirect()->route('admin.index')->withStatus(__('category successfully deleted.'));
+   //       return response()->json(['message' => 'category successfully deleted.']);
 
 
     }

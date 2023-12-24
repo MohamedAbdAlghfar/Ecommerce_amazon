@@ -52,11 +52,11 @@ button[type="submit"]:hover {
 
 
 
-	<title>Add Admin</title>
+	<title>Add Owner</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body bgcolor = "#008374">
-	<h1>Add Admin</h1>
+	<h1>Add Owner</h1>
 	<form method="post" action="{{ route('CreateOwner.store') }}" enctype="multipart/form-data" autocomplete="off" >
     @csrf
 		<label for="f_name">First Name:</label>
