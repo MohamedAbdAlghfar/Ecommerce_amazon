@@ -24,30 +24,11 @@ class CanceledOrders extends Controller
 
     public function cancelledOrders(Request $request)
     {
-        $startDate = null;
-        $endDate = null;
+        // .. Get Start and End Date From TimeFilter Class ..
         $filter = $request->input('filter', 'all');
-
-        if ($filter === 'last_month') {
-
-            $startDate = Carbon::now()->subMonth()->startOfMonth();
-            $endDate = Carbon::now()->subMonth()->endOfMonth();
-
-        } elseif ($filter === 'last_week') {
-
-            $startDate = Carbon::now()->subWeek()->startOfWeek();
-            $endDate = Carbon::now()->subWeek()->endOfWeek();
-
-        } elseif ($filter === 'last_year') {
-
-            $startDate = Carbon::now()->subYear()->startOfYear();
-            $endDate = Carbon::now()->subYear()->endOfYear();
-
-        } elseif ($filter === 'today') {
-
-            $startDate = Carbon::today();
-            $endDate = Carbon::tomorrow();
-        }
+        $timeFrame = TimeFrameFilter::getTimeFrameDates($filter);
+        $startDate = $timeFrame['start_date'];
+        $endDate = $timeFrame['end_date'];
 
 
         $user = auth()->user();

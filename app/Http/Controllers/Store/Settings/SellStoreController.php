@@ -36,7 +36,6 @@ class SellStoreController extends Controller
             $storeId = $user->store_id;
             // ..        ..        ..
             $email = $request->email; 
-            // ..        ..        ..
             $newOwnerId = User::where('email', $email)->pluck('id')->first();
 
         if (!$newOwnerId) {

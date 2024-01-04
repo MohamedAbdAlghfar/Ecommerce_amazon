@@ -45,8 +45,8 @@ class UpdateStoreController extends Controller
             'location'    => 'required|string',
             'services'    => 'required|string',
             'link_website'=> 'required|url',
-            'store_image' => 'required|image',
-            'store_cover' => 'required|image',
+            'store_image' => 'required|image|size:300|mimes:jpg,bmp,png',
+            'store_cover' => 'required|image|size:300|mimes:jpg,bmp,png',
         ]);
 
         if ($validatedData->fails()) {

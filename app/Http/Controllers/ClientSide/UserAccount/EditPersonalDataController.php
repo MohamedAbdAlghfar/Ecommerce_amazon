@@ -36,7 +36,7 @@ class EditPersonalDataController extends Controller
             'l_name'  => 'required',
             'email'   => 'required|email|unique:users',
             'age'     => 'required',
-            'profile_image' => 'required|image',
+            'profile_image' => 'required|image|size:300|mimes:jpg,bmp,png',
             'address' => 'required',
             'gender'  => 'required',
             'phone'   => 'required',

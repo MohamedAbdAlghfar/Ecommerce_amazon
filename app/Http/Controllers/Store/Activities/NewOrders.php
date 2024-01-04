@@ -17,31 +17,12 @@ class NewOrders extends Controller
     
     public function orderActivity(){
 
-        $startDate = null;
-        $endDate = null;
         $filter = $request->input('filter', 'all');
+        $timeFrame = TimeFrameFilter::getTimeFrameDates($filter);
+        $startDate = $timeFrame['start_date'];
+        $endDate = $timeFrame['end_date'];
 
-        if ($filter === 'last_month') {
-
-            $startDate = Carbon::now()->subMonth()->startOfMonth();
-            $endDate = Carbon::now()->subMonth()->endOfMonth();
-
-        } elseif ($filter === 'last_week') {
-
-            $startDate = Carbon::now()->subWeek()->startOfWeek();
-            $endDate = Carbon::now()->subWeek()->endOfWeek();
-
-        } elseif ($filter === 'last_year') {
-
-            $startDate = Carbon::now()->subYear()->startOfYear();
-            $endDate = Carbon::now()->subYear()->endOfYear();
-
-        } elseif ($filter === 'today') {
-
-            $startDate = Carbon::today();
-            $endDate = Carbon::tomorrow();
-        }
-
+        
         $user = auth()->user();
         $findUser = User::find($user->id);
         $storeId = $findUser->store->id;
