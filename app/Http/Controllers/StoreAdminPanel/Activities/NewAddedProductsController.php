@@ -4,9 +4,9 @@ namespace App\Http\Controllers\StoreAdminPanel\Activities;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Models\{Product, User};
 use Spatie\Activitylog\Models\Activity;
+use App\Http\Resources\ActivityResource;
 
 class NewAddedProducts extends Controller
 {
@@ -43,25 +43,18 @@ class NewAddedProducts extends Controller
 
         $logs->appends($request->query());
 
-        $formattedLogs = $logs->map(function ($log) {
-            // Retrieve the Product model instance
-            $product = Product::find($log->subject_id);
+        $activityResource = ActivityResource::collection($logs);
 
-            // Get the user who added the product
-            $addedByUser = $product->addedBy; // Assuming you have a relationship setup
-            $store  = $product->store;
+        if(!$activityResource){
+            return response()->json([
+                'message'=>'Error Try Again Later !'
+            ]);
+        }
+        return response()->json([
+            'status '  => 'Success',
+            'activity' => $activityResource,
+        ]);
 
-            // Customize the message based on the activity description
-            $message = $log->description;
-
-            return [
-                'message' => $message,
-                'product_id' => $log->subject_id,
-                'added_by' => $addedByUser ? $addedByUser->f_name : null, // User's name who added the product
-                'store' => $store ? $store->name : null,
-            ];
-        });
-
-        return $formattedLogs;
     }
+
 }

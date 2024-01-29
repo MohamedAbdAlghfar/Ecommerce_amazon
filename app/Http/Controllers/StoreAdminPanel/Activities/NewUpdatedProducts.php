@@ -4,9 +4,9 @@ namespace App\Http\Controllers\StoreAdminPanel\Activities;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Models\{Product, User};
 use Spatie\Activitylog\Models\Activity;
+use App\Http\Resources\ActivityResource;
 
 class NewUpdatedProducts extends Controller
 {
@@ -43,22 +43,16 @@ class NewUpdatedProducts extends Controller
 
         $logs->appends($request->query());
 
-        $formattedLogs = $logs->map(function ($log) {
-            // Retrieve the Product model instance
-            $product = Product::find($log->subject_id);
+        $activityResource = ActivityResource::collection($logs);
 
-            $store  = $product->store;
-
-            // Customize the message based on the activity description
-            $message = $log->description;
-
-            return [
-                'message' => $message,
-                'product_id' => $log->subject_id,
-                'store' => $store ? $store->name : null,
-            ];
-        });
-
-        return $formattedLogs;
+        if(!$activityResource){
+            return response()->json([
+                'message'=>'Error Try Again Later !'
+            ]);
+        }
+        return response()->json([
+            'status '  => 'Success',
+            'activity' => $activityResource,
+        ]);
     }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\StoreAdminPanel\Activities;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Models\{Order,User};
 use Spatie\Activitylog\Models\Activity;
+use App\Http\Resources\ActivityResource;
 
 class CanceledOrders extends Controller
 {
@@ -53,22 +53,18 @@ class CanceledOrders extends Controller
 
         $logs->appends($request->query());
 
-        // Format the logs
-        $formattedLogs = $logs->map(function ($log) {
-            // Customize the message based on the activity description
-            $message = $log->description;
+        $activityResource = ActivityResource::collection($logs);
 
-            // Include additional details if needed (e.g., the ID of the order)
-            $orderId = $log->subject_id;
+        if(!$activityResource){
+            return response()->json([
+                'message'=>'Error Try Again Later !'
+            ]);
+        }
+        return response()->json([
+            'status '  => 'Success',
+            'activity' => $activityResource,
+        ]);
 
-            return [
-                'message' => $message,
-                'order_id' => $orderId, // Include the order ID or other relevant IDs
-            ];
-        });
-
-        return $formattedLogs;
     }
-
 
 }

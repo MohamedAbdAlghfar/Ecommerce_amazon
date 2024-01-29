@@ -4,9 +4,9 @@ namespace App\Http\Controllers\StoreAdminPanel\Activities;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Models\{Product,User};
 use Spatie\Activitylog\Models\Activity;
+use App\Http\Resources\ActivityResource;
 
 class NewDiscounts extends Controller
 {
@@ -44,24 +44,17 @@ class NewDiscounts extends Controller
 
         $logs->load(['subject.store']);
 
-        // Format and return the results
-        $formattedLogs = $logs->map(function ($log) {
-            $message = $log->description;
-            $productId = $log->subject_id;
-            $product = $log->subject;
+        $activityResource = ActivityResource::collection($logs);
 
-            $storeName = $product->store;
+        if(!$activityResource){
+            return response()->json([
+                'message'=>'Error Try Again Later !'
+            ]);
+        }
+        return response()->json([
+            'status '  => 'Success',
+            'activity' => $activityResource,
+        ]);
 
-            return [
-                'message' => $message,
-                'product_id' => $productId,
-                'store_name' => $storeName->name,
-            ];
-        });
-
-        // Append query parameters for pagination
-        $formattedLogs->appends($request->query());
-
-        return $formattedLogs;
     }
 }

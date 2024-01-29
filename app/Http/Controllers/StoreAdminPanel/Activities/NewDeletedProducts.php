@@ -4,9 +4,9 @@ namespace App\Http\Controllers\StoreAdminPanel\Activities;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Models\{Product,User};
 use Spatie\Activitylog\Models\Activity;
+use App\Http\Resources\ActivityResource;
 
 class NewDeletedProducts extends Controller
 {
@@ -47,27 +47,17 @@ class NewDeletedProducts extends Controller
         // Eager load related models to prevent N+1 queries
         $logs->load(['subject.deletedBy', 'subject.store']);
 
-        // Format and return the results
-        $formattedLogs = $logs->map(function ($log) {
-            $message = $log->description;
-            $productId = $log->subject_id;
-            $product = $log->subject;
+        $activityResource = ActivityResource::collection($logs);
 
-            $deletedBy = $product->deletedBy;
-            $storeName = $product->store;
-
-            return [
-                'message' => $message,
-                'product_id' => $productId,
-                'deleted_by' => $deletedBy->f_name,
-                'store_name' => $storeName->name,
-            ];
-        });
-
-        // Append query parameters for pagination
-        $formattedLogs->appends($request->query());
-
-        return $formattedLogs;
+        if(!$activityResource){
+            return response()->json([
+                'message'=>'Error Try Again Later !'
+            ]);
+        }
+        return response()->json([
+            'status '  => 'Success',
+            'activity' => $activityResource,
+        ]);
     }
 
 }

@@ -3,8 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\User;
 
-class CategoryResource extends JsonResource
+class ActivityResource extends JsonResource
 {
     public function toArray($request)
     {
@@ -24,6 +25,16 @@ class CategoryResource extends JsonResource
             'order_id',
         ];
 
-        return array_intersect_key($this->resource->toArray(), array_flip($selectedColumns));
+        $data = array_intersect_key($this->resource->toArray(), array_flip($selectedColumns));
+
+        // If causer_id is present, fetch additional user information
+        if ($this->causer_id) {
+            $user = User::select('id', 'f_name', 'email')->find($this->causer_id);
+            if ($user) {
+                $data['causer'] = $user->toArray();
+            }
+        }
+
+        return $data;
     }
 }

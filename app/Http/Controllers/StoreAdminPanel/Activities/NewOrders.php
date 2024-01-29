@@ -4,9 +4,9 @@ namespace App\Http\Controllers\StoreAdminPanel\Activities;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Models\{Order, User};
 use Spatie\Activitylog\Models\Activity;
+use App\Http\Resources\ActivityResource;
 
 class NewOrders extends Controller
 {
@@ -46,21 +46,16 @@ class NewOrders extends Controller
 
         $logs->appends($request->query());
 
-        $formattedLogs = $logs->map(function ($log) {
-            // Customize the message based on the activity description
-            $message = $log->description;
-            $order   = $log->subject;
+        $activityResource = ActivityResource::collection($logs);
 
-            $userName = $order->user;
-            $orderId = $log->subject_id;
-
-            return [
-                'message' => $message,
-                'order_id' => $orderId,
-                'user_name' => $userName->f_name .' '. $userName->l_name,
-            ];
-        });
-
-        return $formattedLogs;
+        if(!$activityResource){
+            return response()->json([
+                'message'=>'Error Try Again Later !'
+            ]);
+        }
+        return response()->json([
+            'status '  => 'Success',
+            'activity' => $activityResource,
+        ]);
     }
 }

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\StoreAdminPanel\Activities;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Activitylog\Models\Activity;
-use App\Modles\{Order,};
+use App\Modles\{_Request, User};
+use App\Http\Resources\ActivityResource;
+
 class ResponseRequest extends Controller
 {
     public function __construct()
@@ -26,13 +28,11 @@ class ResponseRequest extends Controller
         $storeId = $findUser->store->id;
 
         // .. select all order ids for this store ..
-        $orderIds = Order::where('store_id', $storeId)->pluck('id')->toArray();
+        $requestsIds = _Request::where('store_id', $storeId)->pluck('id')->toArray();
         
-        $logs = Activity::whereIn('subject_id', $orderIds)
-
-        ->where('subject_type', [Order::class])
-        ->where('description', 'New order created')
-
+        $logs = Activity::whereIn('subject_id', $requestsIds)
+        ->where('subject_type', [_Request::class])
+        ->where('description', 'New Request Response')
         // .. when there are selected date ..
         ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
             $query->whereBetween('created_at', [$startDate, $endDate]);
@@ -44,21 +44,16 @@ class ResponseRequest extends Controller
 
         $logs->appends($request->query());
 
-        $formattedLogs = $logs->map(function ($log) {
-            // Customize the message based on the activity description
-            $message = $log->description;
-            $order   = $log->subject;
+        $activityResource = ActivityResource::collection($logs);
 
-            $userName = $order->user;
-            $orderId = $log->subject_id;
-
-            return [
-                'message' => $message,
-                'order_id' => $orderId,
-                'user_name' => $userName->f_name .' '. $userName->l_name,
-            ];
-        });
-
-        return $formattedLogs;
+        if(!$activityResource){
+            return response()->json([
+                'message'=>'Error Try Again Later !'
+            ]);
+        }
+        return response()->json([
+            'status '  => 'Success',
+            'activity' => $activityResource,
+        ]);
     }
 }

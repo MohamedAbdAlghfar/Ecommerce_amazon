@@ -46,6 +46,7 @@ class ResponseRequestController extends Controller
                 if ($latestRequest) {
                     activity()
                         ->performedOn(_Request::class, $latestRequest)
+                        ->causedBy($user) // Associates the authenticated user with the activity
                         ->log("User : {$user->f_name} accepted the request to be an assistant in your team");
                 }
 

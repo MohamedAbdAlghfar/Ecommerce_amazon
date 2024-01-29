@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\{Comments, User, Product};
 use Spatie\Activitylog\Models\Activity;
+use App\Http\Resources\ActivityResource;
 
 class QuestionsInProduct extends Controller
 {
@@ -46,30 +47,16 @@ class QuestionsInProduct extends Controller
 
         $logs->appends($request->query());
 
-        $formattedLogs = $logs->map(function ($log) {
-            // Retrieve the Product model instance
-            $comment = Comments::find($log->subject_id);
+        $activityResource = ActivityResource::collection($logs);
 
-            $productId = $comment->product_id;
-
-            $userName = $comment->user->f_name;
-
-            $userId = $comment->user->id;
-
-            $store  = $product->store;
-
-            // Customize the message based on the activity description
-            $message = $log->description;
-
-            return [
-                'message'   => $message,
-                'user_name' => $userName,
-                'user_id '  => $userId,
-                'product_id'=> $productId,
-                'store'     => $store ? $store->name : null,
-            ];
-        });
-
-        return $formattedLogs;
+        if(!$activityResource){
+            return response()->json([
+                'message'=>'Error Try Again Later !'
+            ]);
+        }
+        return response()->json([
+            'status '  => 'Success',
+            'activity' => $activityResource,
+        ]);
     }
 }

@@ -20,7 +20,7 @@ class CreateActivityLogTable extends Migration
             $table->uuid('batch_uuid')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
-            $table->unsignedInteger('order_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
         });
     }
 
