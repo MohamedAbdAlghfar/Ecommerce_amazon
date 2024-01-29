@@ -57,8 +57,11 @@ class ShowOrdersController extends Controller
             ->orderBy('created_at', 'DESC') // Orders of the same day come first
             ->get();
 
+        $ordersResource = OrderResource::collection($orders);
+
         return response()->json([
-            'orders' => $orders,
+            'status' => 'Success',
+            'orders' => $ordersResource,
         ]);
     }
 }

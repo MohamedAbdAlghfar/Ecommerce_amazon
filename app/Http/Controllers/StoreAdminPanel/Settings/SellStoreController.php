@@ -59,6 +59,7 @@ class SellStoreController extends Controller
 
             DB::table('store_user')
             ->where('store_id', $storeId)
+            ->where('user_role', 2)
             ->update('user_id', $newOwnerId);
             
             // .. Transfer Store ..

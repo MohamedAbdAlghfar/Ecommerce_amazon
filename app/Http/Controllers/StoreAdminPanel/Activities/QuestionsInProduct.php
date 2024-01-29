@@ -52,15 +52,21 @@ class QuestionsInProduct extends Controller
 
             $productId = $comment->product_id;
 
+            $userName = $comment->user->f_name;
+
+            $userId = $comment->user->id;
+
             $store  = $product->store;
 
             // Customize the message based on the activity description
             $message = $log->description;
 
             return [
-                'message' => $message,
-                'product_id' => $productId,
-                'store' => $store ? $store->name : null,
+                'message'   => $message,
+                'user_name' => $userName,
+                'user_id '  => $userId,
+                'product_id'=> $productId,
+                'store'     => $store ? $store->name : null,
             ];
         });
 

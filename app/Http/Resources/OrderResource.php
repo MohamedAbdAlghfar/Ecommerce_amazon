@@ -1,18 +1,27 @@
 <?php
 
 namespace App\Http\Resources;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderResource extends JsonResource
+class OfferResource extends JsonResource
 {
     public function toArray($request)
     {
-        return [
-            'store_name' => $this->store->name,
-            'user_name' => $this->user->name,
-            'created_at' => $this->created_at,
-            'cancelled_at' => $this->cancelled_at,
-            'order_id' => $this->id,
+        $selectedColumns = [
+            'id',
+            'location', 
+            'trans_date',     
+            'Cancellation_date',     
+            'price',
+            'user_id',
+            'store_id',
+            'shipping_company_id',
+            'product_id', 
+            'offer_id', 
+            'status',
         ];
+
+        return array_intersect_key($this->resource->toArray(), array_flip($selectedColumns));
     }
 }
