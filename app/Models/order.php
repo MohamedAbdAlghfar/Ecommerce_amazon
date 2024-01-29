@@ -52,7 +52,7 @@ class Order extends Model
         return $this->belongsTo(Offer::class);
     }
     
-    public function ShippingCompany()
+    public function shippingCompany()
     {
      return $this->belongsTo(ShippingCompany::class);
     }

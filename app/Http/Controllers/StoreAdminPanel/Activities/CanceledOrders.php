@@ -19,7 +19,7 @@ class CanceledOrders extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware(Is_Store_Owner::class)->only(['cancelledOrders']);
     }
 
     public function cancelledOrders(Request $request)

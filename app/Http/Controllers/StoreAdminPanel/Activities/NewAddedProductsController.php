@@ -12,7 +12,7 @@ class NewAddedProducts extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware(Is_Store_Owner::class);
     }
     
     public function productActivity(Request $request)

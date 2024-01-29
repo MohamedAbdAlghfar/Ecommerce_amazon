@@ -26,11 +26,11 @@ class CustomersDataControllr extends Controller
 
         $storeUsers = DB::table('store_user')
         ->where('store_id', $storeId)
+        ->where('user_role', 0)
         ->select('id')
         ->first();
 
         $storeCustomers = User::whereIn('id', $storeUsers)
-        ->where('role', 0)
         ->selectRow('id', 'f_name', 'email', 'phone', 'address')
         ->get();
 

@@ -12,7 +12,7 @@ class ResponseRequest extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware(Is_Store_Owner::class);
     }
 
     public function reqeustsResponseActivity(Request $request)
