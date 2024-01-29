@@ -37,6 +37,7 @@ class ResponseRequestController extends Controller
                 DB::table('store_user')->insert([
                     'store_id' => $storeId,
                     'user_id' => $user->id,
+                    'user_role' => 3,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

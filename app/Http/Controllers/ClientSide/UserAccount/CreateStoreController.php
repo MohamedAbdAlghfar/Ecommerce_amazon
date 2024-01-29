@@ -65,6 +65,7 @@ class CreateStoreController extends Controller
             DB::table('store_user')->insert([
                 'store_id' => $storeid,
                 'user_id' => $userId,
+                'user_role' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

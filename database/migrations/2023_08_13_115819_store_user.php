@@ -12,6 +12,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('store_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->tinyInteger('user_role')->nullable();
+
             $table->timestamps();
         });
     }
