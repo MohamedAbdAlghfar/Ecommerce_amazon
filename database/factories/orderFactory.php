@@ -23,6 +23,7 @@ class OrderFactory extends Factory
     {
         $user_id = User::all()->random()->id;
         $shipingcom_id = ShippingCompany::all()->random()->id;
+        $offerId = fake()->numberBetween(1, 400);
         $product = Product::inRandomOrder()->first();
         $productDiscount = $product->discount;
         $productPrice    = $product->price;
@@ -52,6 +53,7 @@ class OrderFactory extends Factory
             'status' => fake()->randomElement([1,2,3]),
             'shipping_company_id' => $shipingcom_id,
             'product_id' => $product_id,
+            'offer_id' => $offerId,
             'location' => fake()->address(),
             'trans_date' => $trans_date->format('Y-m-d H:i:s'),
 

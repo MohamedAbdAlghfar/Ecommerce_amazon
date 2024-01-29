@@ -5,9 +5,6 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\{User, Store};
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Request>
- */
 class _RequestFactory extends Factory
 {
     public function definition()

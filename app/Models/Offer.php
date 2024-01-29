@@ -1,40 +1,37 @@
 <?php
 
 namespace App\Models;
+
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class _Request extends Model
+class Offer extends Model
 {
-    use HasFactory; 
+    use HasFactory;
     use LogsActivity;
-    
-    protected $table = 'requests';
 
-    protected $fillable = [
-        'id',
+    protected $fillable = [               
+        'id',   
+        'price',
         'store_id',
-        'user_id',
-        'store_name',
-        'message',
-        'response',
+        'name',
+        'about',
+        'no_pices',
     ];
-
 
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults([]);
     }
 
-    public function users()
-    {
-        return $this->belongsTo(User::class);
+    public function product() {
+        return $this->hasMany(Product::class);
     }
 
-    public function stores()
+    public function orders() 
     {
-        return $this->belongsTo(Store::class);
+        return $this->hasMany(Order::class);
     }
 }

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Product::factory(200)->create();
         \App\Models\Comments::factory(150)->create();
         $shippings = \App\Models\ShippingCompany::factory(4)->create();
-        $orders = \App\Models\order::factory(200)->create();
+        $orders = \App\Models\Order::factory(200)->create();
         $requests = \App\Models\_Request::factory(200)->create();
      
        

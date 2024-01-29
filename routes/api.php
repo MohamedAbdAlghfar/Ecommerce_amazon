@@ -99,11 +99,14 @@ Route::prefix('my-api')->group(function(){
 |--------------------------------------------------------------------------
 */
 
+    // Include additional API files
+    require __DIR__.'/storepanel.php';
+    require __DIR__.'/clientside.php';
+    require __DIR__.'/auth.php';
+
 Route::prefix('v-api')->group(function () { 
    
-    Route::post('logout', [LogoutController::class , 'logout']);
-    Route::post('login' , [LoginController::class , 'login'])->name('login');
-    Route::post('register', [SignUpController::class , 'signup']);
+
     Route::get('/category' , [MainHomeController::class , 'getCategory']);
     Route::get('/product/{id}' , [MainHomeController::class , 'getProduct']);
     // 

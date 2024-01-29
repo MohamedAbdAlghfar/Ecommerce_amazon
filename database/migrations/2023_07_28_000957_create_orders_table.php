@@ -20,8 +20,9 @@ return new class extends Migration
             $table->tinyInteger('status')->nullable();
             $table->datetime('Cancellation_date')->nullable();
             $table->foreignId('shipping_company_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignId('product_id')->constrained(); 
+            $table->foreignId('product_id')->constrained()->nullable(); 
             $table->foreignId('store_id')->constrained(); 
+            $table->foreignId('offer_id')->constrained()->nullable(); 
             $table->string('location')->nullable();
             $table->datetime('trans_date');
             $table->timestamps();

@@ -13,9 +13,9 @@ class CategoryFactory extends Factory
   public function definition()
   {
   
-    $parent_id = Category::all()->random()->id; 
+    // $parent_id = Category::all()->random()->id; 
 
-    //$parent_id = 1;      // when first migration 
+    $parent_id = 1;      // when first migration 
           
     return [
       'name' => fake()->name(),

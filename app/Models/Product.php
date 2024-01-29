@@ -59,6 +59,11 @@ class Product extends Model
         return $this->morphMany(Photo::class, 'photoable');
     }
 
+    public function offer()
+    {
+        return $this->belongsToMany(Offer::class);
+    }
+
     public function category()
     {
      return $this->belongsTo(Category::class);

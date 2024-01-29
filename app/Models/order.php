@@ -22,6 +22,7 @@ class Order extends Model
         'store_id',
         'shipping_company_id',
         'product_id', 
+        'offer_id', 
         'status',
     ];
 
@@ -44,6 +45,11 @@ class Order extends Model
     public function product() 
     {
         return $this->belongsTo(Product::class);
+    }
+    
+    public function offer() 
+    {
+        return $this->belongsTo(Offer::class);
     }
     
     public function ShippingCompany()
