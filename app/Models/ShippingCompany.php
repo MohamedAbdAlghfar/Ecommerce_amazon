@@ -20,24 +20,20 @@ class ShippingCompany extends Model
       //  'cover_image',
     ];
 
-    
-
     public function Orders() 
-{
-    return $this->hasMany(order::class);
-}
-
-public function Stores()
-{
-    return $this->belongsToMany(Store::class);
-}
-
-
-public function photo()
     {
-        return $this->morphOne(Photo::class, 'photoable');
+        return $this->hasMany(order::class);
+    }
+
+    public function Stores() : BelongsToMany
+    {
+        return $this->belongsToMany(Store::class , 'shipping_company_store');
     }
 
 
+    public function photo()
+    {
+        return $this->morphOne(Photo::class, 'photoable');
+    }
 
 }

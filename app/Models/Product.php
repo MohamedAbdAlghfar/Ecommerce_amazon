@@ -59,9 +59,9 @@ class Product extends Model
         return $this->morphMany(Photo::class, 'photoable');
     }
 
-    public function offer()
+    public function offers() : BelongsToMany
     {
-        return $this->belongsToMany(Offer::class);
+        return $this->belongsToMany(Offer::class, 'offer_product');
     }
 
     public function category()
@@ -74,9 +74,9 @@ class Product extends Model
         return $this->hasMany(Order::class);
     }
 
-    public function carts()
+    public function carts() : BelongsToMany
     {
-        return $this->belongsToMany(Cart::class);
+        return $this->belongsToMany(Cart::class,'cart_product');
     }
 
 

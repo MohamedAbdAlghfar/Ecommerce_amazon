@@ -15,14 +15,4 @@ class StoreUser extends Pivot
         'store_id',
     ];
 
-    public function users()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function store()
-    {
-        return $this->belongsTo(Store::class);
-    }
-
 }

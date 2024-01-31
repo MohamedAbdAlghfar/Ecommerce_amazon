@@ -47,6 +47,7 @@ class NewUpdatedProducts extends Controller
 
         if(!$activityResource){
             return response()->json([
+                'status' => 'Failed',
                 'message'=>'Error Try Again Later !'
             ]);
         }

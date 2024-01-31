@@ -27,8 +27,9 @@ class Store extends Model
         'deleted_by', 
     ];
 
-    public function admins() {
-        return $this->belongsToMany(User::class);
+    public function admins() : BelongsToMany
+    {
+        return $this->belongsToMany(User::class , 'store_user');
     }
 
     public function photos()
@@ -62,9 +63,9 @@ class Store extends Model
         });
     }
 
-    public function ShippingCompanies()
+    public function ShippingCompanies() : BelongsToMany
     {
-        return $this->belongsToMany(ShippingCompany::class)->withPivot('debt');
+        return $this->belongsToMany(ShippingCompany::class , 'shipping_company_store')->withPivot('debt');
     }
 
 

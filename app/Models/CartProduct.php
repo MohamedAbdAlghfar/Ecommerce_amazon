@@ -14,15 +14,4 @@ class CartProduct extends Pivot
         'product_id',
         'cart_id',
     ];
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
-
-    public function cart()
-    {
-        return $this->belongsTo(Cart::class);
-    }
-
 }

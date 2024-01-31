@@ -18,6 +18,7 @@ class Offer extends Model
         'store_id',
         'name',
         'about',
+        'custom', // this to know if offer for public = 0 or for customers = 1
         'no_pices',
     ];
 
@@ -26,12 +27,23 @@ class Offer extends Model
         return LogOptions::defaults([]);
     }
 
-    public function product() {
-        return $this->hasMany(Product::class);
+    public function photo()
+    {
+        return $this->morphOne(Photo::class, 'photoable');
+    }
+
+    public function products() : HasMany
+    {
+        return $this->hasMany(Product::class, 'offer_product');
     }
 
     public function orders() 
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class , 'offer_user');
     }
 }
