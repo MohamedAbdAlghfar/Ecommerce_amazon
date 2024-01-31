@@ -9,14 +9,16 @@ class CategoryProductsController extends Controller
 {
     public function getProducts(Request $request)
     {
-        $category_id = $request->category_id;
-
         $query = Product::query();
 
-        // .. Select all Childs Of This Parent Category ..
-        $childIds = Category::where('id', $categoryId)->with('children')->pluck('id')->flatten();
-        // .. Add all Products Belonged To Childs Of This Parent Category ..
-        $query->whereIn('category_id', $childIds);
+        if ($request->has('category_id'))
+        {
+            $category_id = $request->category_id;
+            // .. Select all Childs Of This Parent Category ..
+            $childIds = Category::where('id', $categoryId)->with('children')->pluck('id')->flatten();
+            // .. Add all Products Belonged To Childs Of This Parent Category ..
+            $query->whereIn('category_id', $childIds);
+        }
 
         // .. If Selected Filter Were Brand ..
         if ($request->has('brand')) {

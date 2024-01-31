@@ -41,6 +41,7 @@ class AddOfferController extends Controller
             DB::beginTransaction();
         
             try {
+                // .. Create Offer ..
                 $offer = Offer::create([
                     'price'    => $request->price,
                     'store_id' => $storeId,
@@ -50,7 +51,8 @@ class AddOfferController extends Controller
                     'no_pices' => $request->no_pices,
                 ]);
         
-                if ($request->offer_image) {
+                // .. Create Image For The Offer ..
+                {    
                     $image1 = $request->file('offer_image');
                     $imageName1 = uniqid() . '.' . $image1->extension();
                     $image1->move(storage_path('images/'), $imageName1);
@@ -61,7 +63,8 @@ class AddOfferController extends Controller
                         'filename'       => $imageName1,
                     ]);
                 }
-        
+
+                // .. Save OfferProduct In Pivot ..
                 $offerPivot = OfferProduct::create([
                         'store_id'   => $storeId,
                         'product_id' => $request->product_id,
@@ -117,7 +120,7 @@ class AddOfferController extends Controller
                 ]);
 
                 // .. Create Image For The Offer ..
-                if ($request->offer_image) {
+                {
                     $image1 = $request->file('offer_image');
                     $imageName1 = uniqid() . '.' . $image1->extension();
                     $image1->move(storage_path('images/'), $imageName1);

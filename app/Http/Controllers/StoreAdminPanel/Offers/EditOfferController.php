@@ -27,7 +27,7 @@ class EditOfferController extends Controller
             'custom' => 'required|integer|in:0,1',
             'name' => 'required|string',
             'about' => 'required|string',
-            'offer_image' => 'image|size:300|mimes:jpg,bmp,png',
+            'offer_image' => 'nullable|image|size:300|mimes:jpg,bmp,png',
             'no_pices' => 'integer|required_without:product_id',
             'del_product_id' => 'nullable|integer|exists:products,id'
         ]);
