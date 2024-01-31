@@ -5,7 +5,7 @@ namespace App\Http\Controllers\StoreAdminPanel\Offers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Models\{User, Offer, Photo};
+use App\Http\Models\{User, Offer, Photo, OfferProduct};
 use App\Http\Middleware\Is_Store_Admin;
 
 class AddOfferController extends Controller
@@ -62,13 +62,10 @@ class AddOfferController extends Controller
                     ]);
                 }
         
-                $offerPivot = DB::table('offer_product')
-                    ->create([
+                $offerPivot = OfferProduct::create([
                         'store_id'   => $storeId,
                         'product_id' => $request->product_id,
                         'offer_id'   => $offer->id,
-                        'created_at' => now(),
-                        'updated_at' => now(),
                     ]);
         
                 // Check if the offer creation was successful
@@ -134,13 +131,10 @@ class AddOfferController extends Controller
 
                 // .. Save Records In Pivot For Every Product In This One Offer ..
                 foreach ($productId as $product_id) {
-                    $offerPivot = DB::table('offer_product')
-                        ->create([
+                    $offerPivot = OfferProduct::create([
                             'store_id'   => $offer->store_id,
                             'product_id' => $product_id,
                             'offer_id'   => $offer->id,
-                            'created_at' => now(),
-                            'updated_at' => now(),
                         ]);
 
                     // Check if the offer pivot creation was successful

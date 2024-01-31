@@ -29,7 +29,6 @@ class DeleteOfferController extends Controller
 
         if($deletedOffer){
             $deletedOffer->delete();
-            DB::table('offer_product')->where('offer_id',$deletedOffer->id)->delete();
             return response()->json(['status'=>'Success', 'message'=>'Deletion Done .']);
 
         }else{
