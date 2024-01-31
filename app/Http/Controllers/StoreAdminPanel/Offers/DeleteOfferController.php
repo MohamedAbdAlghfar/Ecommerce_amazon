@@ -26,13 +26,18 @@ class DeleteOfferController extends Controller
         $storeId = $userId->store->id;
 
         $deletedOffer = Offer::find($request->offer_id);
+        $deletion = $deletedOffer->delete();
 
-        if($deletedOffer){
-            $deletedOffer->delete();
-            return response()->json(['status'=>'Success', 'message'=>'Deletion Done .']);
-
+        if($deletion){
+            return response()->json([
+                'status'=>'Success', 
+                'message'=>'Deletion Done .'
+            ]);
         }else{
-            return response()->json(['status'=>'Fails', 'message'=>'Failed To Delete Offer , Try Again Later']);
+            return response()->json([
+                'status'=>'Fails', 
+                'message'=>'Failed To Delete Offer , Try Again Later'
+            ]);
         }
     }
 }
