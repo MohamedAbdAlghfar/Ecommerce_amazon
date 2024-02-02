@@ -34,7 +34,19 @@ class ProductResource extends JsonResource
         ];
 
         return array_intersect_key($this->resource->toArray(), array_flip($selectedColumns));
+        // Add logic to load and display photo paths
+        $data['photo_paths'] = $this->loadPhotoPaths();
+
+        return $data;
     }
+
+    protected function loadPhotoPaths()
+    {
+        // Assuming 'photos' is a relationship on your Product model
+        return $this->resource->photos->pluck('filename')->toArray();
+    }
+
+
 }
 
 

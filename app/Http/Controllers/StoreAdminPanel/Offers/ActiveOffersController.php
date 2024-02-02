@@ -20,12 +20,20 @@ class ActiveOffersController extends Controller
 
     public function activeOffers()
     {
+        $validatedData = $request->validate([
+            'status' => 'required|in:0,1',
+        ]);
+
+        if ($validatedData->fails()) {
+            return $validatedData->errors();
+        }
+
         $user = auth()->user();
         $userId = User::find($user->id);
         $storeId = $userId->store->id;
 
         // Select active offers for the specific store with eager loading of products
-        $activeOffers = Offer::with('products')->where('store_id', $storeId)->where('status', 1)->get();
+        $activeOffers = Offer::with('products')->where('store_id', $storeId)->where('status', $request->status)->get();
 
         $offersWithProducts = [];
 
@@ -34,19 +42,11 @@ class ActiveOffersController extends Controller
             $productResource = ProductResource::collection($offer->products);
 
             // Add images of each product to the product
-            $extraData = [
-                'photo_paths' => $offer->products->map(function ($product) {
-                    return $product->photos->pluck('filename')->toArray();
-                }),
-            ];
-
             $extraOfferImage = [
                 'offer_image' => $offer->photo->map(function ($offer_){
                     return $offer->photo->filename;
                 }),
             ];
-
-            $productResource->additional($extraData);
 
             $offerResource = new OfferResource($offer);
             $offerResource->additional($extraOfferImage);

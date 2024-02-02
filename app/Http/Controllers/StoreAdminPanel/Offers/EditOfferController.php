@@ -90,21 +90,23 @@ class EditOfferController extends Controller
                 $imageName = uniqid() . '.' . $image->extension();
                 $image->move(storage_path('images/'), $imageName);
 
-                $oldOfferCover = $Offer->photo()->first([
+                $oldOfferImage = $Offer->photo()->first([
                     'photoable_id' => $offer->id,
                     'photoable_type' => Offer::class,
                 ]);
     
-                // Delete the old store cover file from the storage folder, if it exists
-                if ($oldOfferCover->exists) {
-                    Storage::delete('images/' . $oldOfferCover->filename);
+                if (!$image->isValid()) { // this isValid() ensures that file uploaded successfully , it Provided by Laravel
+                    throw new \Exception('Invalid image provided.');
                 }
 
-                Photo::create([
-                    'photoable_id' => $offer->id,
-                    'photoable_type' => Offer::class,
+                // Delete the old store cover file from the storage folder, if it exists
+                if ($oldOfferImage->exists) {
+                    Storage::delete('images/' . $oldOfferImage->filename);
+                }
+
+                $oldOfferImage->fill([
                     'filename' => $imageName,
-                ]);
+                ])->save();
             }
 
             // If everything is successful, commit the transaction

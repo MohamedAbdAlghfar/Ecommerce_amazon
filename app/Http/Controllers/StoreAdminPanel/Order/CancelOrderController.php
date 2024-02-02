@@ -7,5 +7,5 @@ use Illuminate\Http\Request;
 
 class CancelOrderController extends Controller
 {
-    //
+    // .. that must be after make payment part in clientside ..
 }

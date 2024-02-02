@@ -5,7 +5,6 @@ namespace App\Http\Controllers\StoreAdminPanel\Offers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Models\Offer;
-use App\Http\Middleware\Is_Store_Admin;
 
 class OfferActivationController extends Controller
 {
@@ -20,6 +19,10 @@ class OfferActivationController extends Controller
             'offer_id' => 'required|exists:offers,id',
             'activation' => 'required|integer|in:0,1',
         ]);
+
+        if ($validatedData->fails()) {
+            return $validatedData->errors();
+        }
 
         $disactiveOffer = Offer::find($request->offer_id);
 

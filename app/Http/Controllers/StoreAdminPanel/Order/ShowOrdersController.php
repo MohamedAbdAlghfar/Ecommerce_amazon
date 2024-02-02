@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Activities\TimeFrameFilter;
+use App\Http\Resources\OrderResource;
 
 class ShowOrdersController extends Controller
 {
@@ -26,31 +28,11 @@ class ShowOrdersController extends Controller
         $query = Order::where('store_id', $storeId);
 
         // Check if time period filter is specified in the request
-        if ($request->has('time_period')) {
-            $timePeriod = $request->input('time_period');
-
-            // Apply the appropriate time period filter
-            switch ($timePeriod) {
-                case 'last_month':
-                    $query->whereBetween('created_at', [
-                        Carbon::now()->subMonth()->startOfMonth(),
-                        Carbon::now()->subMonth()->endOfMonth(),
-                    ]);
-                    break;
-                case 'last_year':
-                    $query->whereBetween('created_at', [
-                        Carbon::now()->subYear()->startOfYear(),
-                        Carbon::now()->subYear()->endOfYear(),
-                    ]);
-                    break;
-                case 'last_week':
-                    $query->whereBetween('created_at', [
-                        Carbon::now()->subWeek()->startOfWeek(),
-                        Carbon::now()->subWeek()->endOfWeek(),
-                    ]);
-                    break;
-                // Add more cases for additional time period options if needed
-            }
+        if ($request->has('filter')) {
+            $filter = $request->input('filter', 'all');
+            $timeFrame = TimeFrameFilter::getTimeFrameDates($filter);
+            $startDate = $timeFrame['start_date'];
+            $endDate = $timeFrame['end_date'];
         }
 
         $orders = $query->orderByDesc('created_at') // Order by history (latest first)

@@ -56,6 +56,11 @@ class AddOfferController extends Controller
                     $image1 = $request->file('offer_image');
                     $imageName1 = uniqid() . '.' . $image1->extension();
                     $image1->move(storage_path('images/'), $imageName1);
+
+                    if (!$image1->isValid()) { // this isValid() ensures that file uploaded successfully , it Provided by Laravel
+                        throw new \Exception('Invalid image provided.');
+                    }
+
                     Photo::create([
                         'photoable_id'   => $offer->id,
                         'ordering'       => 1,
