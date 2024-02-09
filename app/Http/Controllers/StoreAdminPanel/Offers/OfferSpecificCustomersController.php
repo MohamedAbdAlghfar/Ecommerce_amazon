@@ -18,6 +18,8 @@ class OfferSpecificCustomersController extends Controller
 
     public function specifyCustomers(Request $request)
     {
+        // no validatino coz it will be in AddOfferController in addOffer();   .. and all data in request the same in request of create offer
+
         $user = auth()->user();
         $userId = User::find($user->id);
         $storeId = $userId->store->id;

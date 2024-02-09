@@ -14,7 +14,7 @@ class CustomersDataControllr extends Controller
     }
 
     // .. Get All Customers Of Store ..
-    public function showAllCustomers(Request $request)
+    public function showAllCustomers()
     {
         $user = auth()->user();
 

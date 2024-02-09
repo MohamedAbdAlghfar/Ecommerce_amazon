@@ -14,7 +14,7 @@ class RequestShowController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function viewRequests(Request $request)
+    public function viewRequests()
     {
         $user = auth()->user();
 

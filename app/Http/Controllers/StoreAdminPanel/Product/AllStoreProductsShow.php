@@ -19,7 +19,7 @@ class AllStoreProductsShow extends Controller
     public function getProducts(Request $request){
 
         $validatedData = $request->validate([
-            'product_name' => 'required|exists:products,name',
+            'product_name' => 'nullable|exists:products,name',
         ]);
 
         if ($validatedData->fails()) {

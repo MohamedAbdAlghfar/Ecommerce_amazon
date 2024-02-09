@@ -13,7 +13,7 @@ class OfferActivationController extends Controller
         $this->middleware(Is_Store_Admin::class);
     }
 
-    public function disactiveOffer(Request $request)
+    public function disOrActiveOffer(Request $request)
     {
         $validatedData = $request->validate([
             'offer_id' => 'required|exists:offers,id',

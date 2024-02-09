@@ -16,6 +16,14 @@ class DeleteAssistantController extends Controller
 
     public function deleteAssistant(Request $request)
     {
+        $validatedData = $request->validate([
+            'id' => 'required|unique:users',
+        ]);
+
+        if ($validatedData->fails()) {
+            return $validatedData->errors();
+        }
+
         $user = auth()->user();
 
         if ($user->role == 2) {

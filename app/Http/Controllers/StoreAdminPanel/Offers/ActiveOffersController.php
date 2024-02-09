@@ -11,14 +11,14 @@ use App\Http\Resources\OfferResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Middleware\Is_Store_Admin;
 
-class ActiveOffersController extends Controller
+class GetOffersController extends Controller
 {
     public function __construct()
     {
         $this->middleware(Is_Store_Admin::class);
     }
 
-    public function activeOffers()
+    public function getOffers(Request $request)
     {
         $validatedData = $request->validate([
             'status' => 'required|in:0,1',

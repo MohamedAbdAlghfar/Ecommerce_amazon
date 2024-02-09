@@ -18,6 +18,14 @@ class DisableRequestController extends Controller
     {
         $user = auth()->user();
 
+        $validatedData = $request->validate([
+            'id' => 'required|unique:users',
+        ]);
+
+        if ($validatedData->fails()) {
+            return $validatedData->errors();
+        }
+
         $storeId = DB::table('store_user')->where('user_id', $user->id)->select('store_id')->get();
 
         $userId = $request->id;

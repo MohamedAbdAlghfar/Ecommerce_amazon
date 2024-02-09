@@ -15,7 +15,7 @@ class ResponseRequest extends Controller
         $this->middleware(Is_Store_Owner::class);
     }
 
-    public function reqeustsResponseActivity(Request $request)
+    public function reqeustActivity(Request $request)
     {
         $filter = $request->input('filter', 'all');
         $timeFrame = TimeFrameFilter::getTimeFrameDates($filter);

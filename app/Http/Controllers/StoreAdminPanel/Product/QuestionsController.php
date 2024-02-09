@@ -15,7 +15,7 @@ class QuestionsController extends Controller
         $this->middleware(Is_Store_Admin::class);
     }
 
-    public function getRates(Request $request)
+    public function getQuestions(Request $request)
     {
         $validatedData = $request->validate([
             'product_id' => 'required|exists:products,id',

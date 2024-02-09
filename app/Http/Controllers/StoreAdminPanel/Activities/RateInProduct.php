@@ -15,7 +15,7 @@ class RateInProduct extends Controller
         $this->middleware(Is_Store_Owner::class);
     }
 
-    public function newQuestionInProductActivity(Request $request)
+    public function rateProductActivity(Request $request)
     {
         $filter = $request->input('filter', 'all');
         $timeFrame = TimeFrameFilter::getTimeFrameDates($filter);

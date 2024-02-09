@@ -59,6 +59,8 @@ class UpdateProductController extends Controller
             $productImages = [];
             $productImages = $request->product_image;
 
+            // not done ..
+            
             foreach ($productImages as $p_image) {
                 $imageOrdering = Photo::find($p_image->id);
                 $ordering = $imageOrdering->ordering;

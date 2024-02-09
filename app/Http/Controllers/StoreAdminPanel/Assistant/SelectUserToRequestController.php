@@ -15,6 +15,14 @@ class SelectUserToRequestController extends Controller
 
     public function getUsers(Request $reqeust)
     {
+        $validatedData = $request->validate([
+            'email' => 'required|email|unique:users',
+        ]);
+
+        if ($validatedData->fails()) {
+            return $validatedData->errors();
+        }
+        
         if ($reqeust->email) 
         {
             // .. Get Selected Email's User ..

@@ -14,7 +14,7 @@ use App\Http\Controllers\ClientSide\ProductType\{CategoryProductsController};
 use App\Http\Controllers\ClientSide\ProductDetails\{AddToCartController,GetSuggestedProducts,GetProductDetails};
 use App\Http\Controllers\Store\ProductWarning\WarningController;
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
-
+use App\Http\Controllers\ClientSide\OrderPayment\MakeOrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes   - Mohammed
@@ -121,6 +121,7 @@ Route::prefix('v-api')->group(function () {
     Route::post('cartproducts', [GetCartProducts::class, 'getAllProducts']);
 
     Route::post('createstore/',[CreateStoreController::class, 'create']);
+    Route::post('createorder/',[MakeOrderController::class, 'create']);
     Route::get('categoryproducts',[CategoryProductsController::class,'getProducts']);
     Route::post('warnings/', [WarningController::class,'filte']);
 

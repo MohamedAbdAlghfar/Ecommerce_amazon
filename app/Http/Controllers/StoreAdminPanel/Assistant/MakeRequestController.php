@@ -16,6 +16,14 @@ class MakeRequestController extends Controller
 
     public function sendRequest(Request $request)
     {
+        $validatedData = $request->validate([
+            'email' => 'required|email|unique:users',
+        ]);
+
+        if ($validatedData->fails()) {
+            return $validatedData->errors();
+        }
+        
         $user = auth()->user();
 
         if (!$user->role == 2) 

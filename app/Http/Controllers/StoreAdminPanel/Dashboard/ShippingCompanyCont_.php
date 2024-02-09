@@ -18,7 +18,7 @@ class ShippingCompanyCont_ extends Controller
         $this->middleware(Is_Store_Admin::class)->only(['shippedOrdersWithShipperName', 'shippingDubt']);
     }
 
-    public function shippedOrdersWithShipperName()
+    public function shippedOrders()
     {
         $user = auth()->user();
         $userId = $user->id;

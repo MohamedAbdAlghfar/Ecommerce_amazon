@@ -15,13 +15,14 @@ class EditOfferController extends Controller
         $this->middleware(Is_Store_Admin::class);
     }
 
-    public function editOffer(Request $request, $offerId)
+    public function editOffer(Request $request)
     {
         $user = auth()->user();
         $userId = $user->id;
         $storeId = $user->store->id;
 
         $validatedData = $request->validate([
+            'id' => 'required|unique:offers',
             'price' => 'required|integer',
             'product_id' => 'integer|required_without:no_pices',
             'custom' => 'required|integer|in:0,1',
@@ -40,7 +41,7 @@ class EditOfferController extends Controller
         DB::beginTransaction();
 
         try {
-            $offer = Offer::find($offerId);
+            $offer = Offer::find($request->id);
 
             if (!$offer) {
                 throw new \Exception('Offer Not Found.');
