@@ -168,19 +168,19 @@ Route::prefix('store-panel')->group(function () {
         Route::post('/', [WarningController::class , 'warning']);
     });
     Route::prefix('settings')->group(function () {
-        Route::post('/', [DeleteStoreController::class , 'destroy']);
-        Route::post('/', [SellStoreController::class , 'sellStore']);
-        Route::post('/', [SellStoreController::class , 'storeData']);
-        Route::post('/', [UpdateStoreController::class , 'update']);
-        Route::post('/', [UpdateStoreController::class , 'sendStoreData']);
+        Route::post('/delete', [DeleteStoreController::class , 'destroy']);
+        Route::post('/sell', [SellStoreController::class , 'sellStore']);
+        Route::get('/data', [SellStoreController::class , 'storeData']);
+        Route::post('/update', [UpdateStoreController::class , 'update']);
+        Route::get('/store-data', [UpdateStoreController::class , 'sendStoreData']);
     });    
 });
 Route::prefix('client-side')->group(function () { // .. Client Side EndPoints ..
 
     Route::prefix('home')->group(function () {
-        Route::get('/',[MainHomeController::class ,'getCategory']);
+        Route::get('/categories',[MainHomeController::class ,'getCategory']);
         Route::get('/products',[MainHomeController::class ,'getProduct']);
-        Route::get('/products',[SuggestedProductsController::class ,'suggestedProducts']);
+        Route::get('/suggested-products',[SuggestedProductsController::class ,'suggestedProducts']);
     });
     Route::prefix('notificatinos')->group(function () {
         Route::get('/', 'UserController@index');
