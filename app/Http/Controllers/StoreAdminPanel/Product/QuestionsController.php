@@ -7,13 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Models\{Product, Comment};
 use App\Http\Middleware\Is_Store_Admin;
 use App\Http\Resources\CommentResource;
+use Illuminate\Support\Facades\DB;
 
 class QuestionsController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware(Is_Store_Admin::class);
+        $this->middleware($middleware);
     }
+
 
     public function getQuestions(Request $request)
     {

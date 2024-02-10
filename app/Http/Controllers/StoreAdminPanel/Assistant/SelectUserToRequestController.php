@@ -5,14 +5,15 @@ namespace App\Http\Controllers\StoreAdminPanel\Assistant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Middleware\Is_Store_Owner;
 
 class SelectUserToRequestController extends Controller
 {
-    public function __construct()
+    public function __construct(Is_Store_Owner $middleware)
     {
-        $this->middleware('auth:api');
+        $this->middleware($middleware);
     }
-
+    
     public function getUsers(Request $reqeust)
     {
         $validatedData = $request->validate([

@@ -5,24 +5,18 @@ namespace App\Http\Controllers\StoreAdminPanel\Categories;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Http\Middleware\Is_Store_Owner;
 
 class ShowAllCategoriesController extends Controller
 {
-    public function __construct()
+    public function __construct(Is_Store_Owner $middleware)
     {
-        $this->middleware('auth:api');
+        $this->middleware($middleware);
     }
 
     public function showAllCategories(Request $request)
     {
         $user = auth()->user();
-
-        if ($user->role == 0) 
-        {
-            return response()->json([
-                'message'=>'You Dont Have Permission To Visit This Page !',
-            ]);
-        }
 
         if (!$request->category_name) 
         {

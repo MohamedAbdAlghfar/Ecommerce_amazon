@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\_Request;
+use App\Http\Middleware\Is_Store_Owner;
 
 class MakeRequestController extends Controller
 {
-    public function __construct()
+    public function __construct(Is_Store_Owner $middleware)
     {
-        $this->middleware('auth:api');
+        $this->middleware($middleware);
     }
 
     public function sendRequest(Request $request)
@@ -33,7 +34,11 @@ class MakeRequestController extends Controller
             ]);
         }
 
-        $storeId = DB::table('store_user')->where('user_id', $user->id)->select(['store_id'])->first();
+        $store_Id = DB::table('store_user')
+        ->where('user_id', $user->id)
+        ->select('store_id')
+        ->first();
+        $storeId = $store_Id->store_id;
 
         $findStore = Store::find($storeId);
 

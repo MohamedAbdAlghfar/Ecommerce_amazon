@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\{Order,User};
 use Spatie\Activitylog\Models\Activity;
 use App\Http\Resources\ActivityResource;
+use Illuminate\Support\Facades\DB;
+use App\Http\Middleware\Is_Store_Owner;
 
 class CanceledOrders extends Controller
 {
@@ -17,11 +19,12 @@ class CanceledOrders extends Controller
         choose by filter to get last month or week or year or day's cancelled orders .
     */
 
-    public function __construct()
+    public function __construct(Is_Store_Owner $middleware)
     {
-        $this->middleware(Is_Store_Owner::class)->only(['cancelledOrders']);
+        $this->middleware($middleware);
     }
-
+    
+    
     public function cancelledOrders(Request $request)
     {
         // .. Get Start and End Date From TimeFilter Class ..
@@ -30,10 +33,12 @@ class CanceledOrders extends Controller
         $startDate = $timeFrame['start_date'];
         $endDate = $timeFrame['end_date'];
 
-
         $user = auth()->user();
-        $findUser = User::find($user->id);
-        $storeId = $findUser->store->id;
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
 
         // Fetch order IDs for this store with status = 0 (cancelled)
         $orderIds = Order::where('store_id', $storeId)

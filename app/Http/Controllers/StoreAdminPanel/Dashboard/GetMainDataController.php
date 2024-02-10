@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\{Order, User};
 use Illuminate\Support\Facades\DB;
+use App\Http\Middleware\Is_Store_Admin;
 
 class GetMainDataController extends Controller
 {
-    public function __construct()
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware('auth:api');
+        $this->middleware($middleware);
     }
 
     public function mainData() {

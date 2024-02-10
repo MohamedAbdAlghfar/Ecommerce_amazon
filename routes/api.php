@@ -12,7 +12,7 @@ use App\Http\Controllers\ClientSide\UserAccount\{DelCartController,GetCartProduc
 use App\Http\Controllers\ClientSide\HomePage\{MainHomeController};
 use App\Http\Controllers\ClientSide\ProductType\{CategoryProductsController};
 use App\Http\Controllers\ClientSide\ProductDetails\{AddToCartController,GetSuggestedProducts,GetProductDetails};
-use App\Http\Controllers\Store\ProductWarning\WarningController;
+use App\Http\Controllers\StoreAdminPanel\Activities\CanceledOrders;
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
 use App\Http\Controllers\ClientSide\OrderPayment\MakeOrderController;
 /*
@@ -99,35 +99,103 @@ Route::prefix('my-api')->group(function(){
 |--------------------------------------------------------------------------
 */
 
-    // Include additional API files
-    require __DIR__.'/storepanel.php';
-    require __DIR__.'/clientside.php';
-    require __DIR__.'/auth.php';
+// .. Auth Endpoints ..
+Route::prefix('auth')->group(function () {
+    Route::post('logout', [LogoutController::class , 'logout']);
+    Route::post('login' , [LoginController::class , 'login'])->name('login');
+    Route::post('register', [SignUpController::class , 'signup']);
+});
+Route::prefix('store-panel')->group(function () { 
+    Route::prefix('activities')->group(function () {
+        Route::post('/cancelled-orders', [CanceledOrders::class , 'cancelledOrders']);
+        Route::post('/discounts', [NewDiscounts::class , 'newDiscountsActivity']);
+        Route::post('/new-orders', [NewOrders::class , 'orderActivity']);
+        Route::post('/updated-products', [NewUpdatedProducts::class , 'updatedProductsActivity']);
+        Route::post('/added-products', [NewAddedProducts::class , 'productActivity']);
+        Route::post('/deleted-products', [NewDeletedProducts::class , 'delProd_Activity']);
+        Route::post('/questions', [QuestionsInProduct::class , 'newQuestionInProductActivity']);
+        Route::post('/rate', [RateInProduct::class , 'rateProductActivity']);
+        Route::post('/response-requests', [ResponseRequest::class , 'reqeustActivity']);
+    });
+    Route::prefix('assitant')->group(function () {
+        Route::post('/add-assitant', [AddAssistantController::class , 'createAssistant']);
+        Route::get('/ ', [AssistantGetAllController::class , 'getAssistants']);
+        Route::post('/delete', [DeleteAssistantController::class , 'deleteAssistant']);
+        Route::post('/disable-request', [DisableRequestController::class , 'disable']);
+        Route::post('/send-request', [MakeRequestController::class , 'sendRequest']);
+        Route::post('/show-requests', [RequestShowController::class , 'viewRequests']);
+        Route::post('/select-user', [SelectUserToRequestController::class , 'getUsers']);
+    });
+    Route::prefix('category')->group(function () {
+        Route::post('/search', [ShowAllCategoriesController::class , 'showAllCategories']);
+    });
+    Route::prefix('customers')->group(function () {
+        Route::get('/customers', [CustomersDataControllr::class , 'showAllCustomers']);
+        Route::get('/statistics', [CustomerStatisticsController::class , 'statistics']);
+    });
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [GetMainDataController::class , 'mainData']);
+        Route::get('/shipped-orders', [ShippingCompanyCont_::class , 'shippedOrders']);
+        Route::get('/shipping-dubt', [ShippingCompanyCont_::class , 'shippingDubt']);
+    });
+    Route::prefix('offer')->group(function () {
+        Route::post('/activated/{status?}', [GetOffersController::class, 'getOffers'])->where('status', 1);
+        Route::post('/disabled/{status?}', [GetOffersController::class, 'getOffers'])->where('status', 0);
+        Route::post('/add', [AddOfferController::class , 'addOffer']);
+        Route::post('/delete', [DeleteOfferController::class , 'deleteOffer']);
+        Route::post('/edit', [EditOfferController::class , 'editOffer']);
+        Route::post('/activate/{activation?}', [OfferActivationController::class , 'disOrActiveOffer'])->where('activation', 1);
+        Route::post('/disactivate/{activation?}', [OfferActivationController::class , 'disOrActiveOffer'])->where('activation', 1);
+        Route::post('/specify-customers', [OfferSpecificCustomersController::class , 'specifyCustomers']);
+    });    
+    Route::prefix('order')->group(function () {
+        Route::post('/cancel',[CancelOrderController::class, '']);
+        Route::post('/show',[ShowOrdersController::class, 'getStoreOrders']);
+    });
+    Route::prefix('product')->group(function () {
+        Route::post('/add', [AddProductController::class , 'addProduct']);
+        Route::post('/', [AllStoreProductsShow::class , 'getProducts']);
+        Route::post('/delete', [DeleteProductController::class , 'deleteProduct']);
+        Route::post('/disable-discount', [DisableDiscountController::class , 'disableDiscount']);
+        Route::post('/make-discount', [MakeDiscountController::class , 'makeDiscount']);
+        Route::post('/questions', [QuestionsController::class , 'getQuestions']);
+        Route::post('/rates', [RatingController::class , 'getRates']);
+        Route::post('/reply', [ReplyToQuestionController::class , 'replyQuestions']);
+        Route::post('/update', [UpdateProductController::class , 'editProduct']);
+    });
+    Route::prefix('warnings')->group(function () {
+        Route::post('/add-pices', [EditAvailablePicesController::class , 'newPices']);
+        Route::post('/', [WarningController::class , 'warning']);
+    });
+    Route::prefix('settings')->group(function () {
+        Route::post('/', [DeleteStoreController::class , 'destroy']);
+        Route::post('/', [SellStoreController::class , 'sellStore']);
+        Route::post('/', [SellStoreController::class , 'storeData']);
+        Route::post('/', [UpdateStoreController::class , 'update']);
+        Route::post('/', [UpdateStoreController::class , 'sendStoreData']);
+    });    
+});
+Route::prefix('client-side')->group(function () { // .. Client Side EndPoints ..
 
-Route::prefix('v-api')->group(function () { 
-   
+    Route::prefix('home')->group(function () {
+        Route::get('/',[MainHomeController::class ,'getCategory']);
+        Route::get('/products',[MainHomeController::class ,'getProduct']);
+        Route::get('/products',[SuggestedProductsController::class ,'suggestedProducts']);
+    });
+    Route::prefix('notificatinos')->group(function () {
+        Route::get('/', 'UserController@index');
+    });
+    Route::prefix('orders')->group(function () {
+        Route::get('/', 'UserController@index');
+    });
+    Route::prefix('product-details')->group(function () {
+        Route::get('/', 'UserController@index');
+    });
+    Route::prefix('product-type')->group(function () {
+        Route::get('/', 'UserController@index');
+    });
+    Route::prefix('account')->group(function () {
+        Route::get('/', 'UserController@index');
+    });
 
-    Route::get('/category' , [MainHomeController::class , 'getCategory']);
-    Route::get('/product/{id}' , [MainHomeController::class , 'getProduct']);
-    // 
-    Route::get('/profile' , [UserProfileController::class , 'index']);
-    Route::post('/profile' , [UserProfileController::class , 'store']);
-    Route::get('/profile/{id}' , [UserProfileController::class , 'show']);
-    Route::put('/profile/{id}' , [UserProfileController::class , 'update']);
-    Route::delete('/profile/{id}' , [UserProfileController::class , 'delete']);
-    // 
-    Route::post('addcart/{productId}', [AddCartController::class, 'addToCart']);
-    Route::post('delcart/{productId}', [DelCartController::class, 'deleteFromCart']);
-    Route::post('cartproducts', [GetCartProducts::class, 'getAllProducts']);
-
-    Route::post('createstore/',[CreateStoreController::class, 'create']);
-    Route::post('createorder/',[MakeOrderController::class, 'create']);
-    Route::get('categoryproducts',[CategoryProductsController::class,'getProducts']);
-    Route::post('warnings/', [WarningController::class,'filte']);
-
-    Route::group(['middleware' => ['is-owner-assistant']],function () {
-        Route::get('/owner', function () {
-            return 'owner page'->withoutMiddleware([Is_Owner_Assistant::class]);
-        });
-    }); 
 });

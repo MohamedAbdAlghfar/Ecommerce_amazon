@@ -7,14 +7,15 @@ use Illuminate\Http\Request;
 use App\Models\{Product,Category};
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
+use App\Http\Middleware\Is_Store_Admin;
 
 class WarningController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
 
+    public function __construct(Is_Store_Admin $middleware)
+    {
+        $this->middleware($middleware);
+    }
 
     public function warning(Request $request){
 
@@ -22,7 +23,11 @@ class WarningController extends Controller
         $userId = $user->id;
 
         // .. get it -TO- select products from which store ..
-        $storeId = DB::table('store_user')->where('user_id', $userId)->select(['store_id'])->first();
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
 
         // .. get all products that it available pices less than 40 pices ..
         $warnings = Product::where('available_pieces', '<=', 40)->where('store_id', $storeId)->get();

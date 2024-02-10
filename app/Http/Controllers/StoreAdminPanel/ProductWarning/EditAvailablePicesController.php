@@ -6,19 +6,26 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
+use App\Http\Middleware\Is_Store_Admin;
 
 class EditAvailablePicesController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware('auth:api');
+        $this->middleware($middleware);
     }
+
 
     public function newPices(Request $request)
     {
         $user = auth()->user();
 
-        $storeId = DB::table('store_user')->where('user_id', $user->id)->select(['store_id'])->first();
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
 
         $product = Product::where('id', $request->product_id)
         ->where('store_id', $storeId)

@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\_Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Middleware\Is_Store_Owner;
 
 class DisableRequestController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Owner $middleware)
     {
-        $this->middleware('auth:api');
+        $this->middleware($middleware);
     }
 
     public function disable(Request $request)
@@ -26,7 +28,11 @@ class DisableRequestController extends Controller
             return $validatedData->errors();
         }
 
-        $storeId = DB::table('store_user')->where('user_id', $user->id)->select('store_id')->get();
+        $store_Id = DB::table('store_user')
+        ->where('user_id', $user->id)
+        ->select('store_id')
+        ->first();
+        $storeId = $store_Id->store_id;
 
         $userId = $request->id;
 

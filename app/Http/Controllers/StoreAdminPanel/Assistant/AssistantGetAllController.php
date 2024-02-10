@@ -5,12 +5,14 @@ namespace App\Http\Controllers\StoreAdminPanel\Assistant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Middleware\Is_Store_Owner;
 
 class AssistantGetAllController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Owner $middleware)
     {
-        $this->middleware('auth:api');
+        $this->middleware($middleware);
     }
 
     public function getAssistants()
@@ -18,10 +20,11 @@ class AssistantGetAllController extends Controller
         $user = auth()->user();
 
         // .. Get The Store Id ..
-        $storeId = DB::table('store_user')
+        $store_Id = DB::table('store_user')
         ->where('user_id', $user->id)
         ->select('store_id')
         ->first();
+        $storeId = $store_Id->store_id;
 
         // .. Get Array Of Store's All Related Users asssitants Or Other[customers, or owners] ..
         $storeAsistantsIds = DB::table('store_user')

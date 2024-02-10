@@ -6,15 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Middleware\Is_Store_Admin;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class UpdateProductController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware(Is_Store_Admin::class);
+        $this->middleware($middleware);
     }
 
-    public function editProducts(Request $request)
+
+    public function editProduct(Request $request)
     {
         $validatedData = $request->validate([
             'product_id'  => 'required|exists:products,id',
@@ -43,7 +46,7 @@ class UpdateProductController extends Controller
             $product = Product::find($request->product_id);
 
             $updateProduct = $product->update([
-                'product_id' => $request->product_id,
+                'id' => $request->product_id,
                 'name' => $request->name,
                 'price' => $request->price,
                 'discount' => $request->discount,

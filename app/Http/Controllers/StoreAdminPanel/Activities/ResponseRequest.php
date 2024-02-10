@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use Spatie\Activitylog\Models\Activity;
 use App\Modles\{_Request, User};
 use App\Http\Resources\ActivityResource;
+use Illuminate\Support\Facades\DB;
+use App\Http\Middleware\Is_Store_Owner;
 
 class ResponseRequest extends Controller
 {
-    public function __construct()
+    public function __construct(Is_Store_Owner $middleware)
     {
-        $this->middleware(Is_Store_Owner::class);
+        $this->middleware($middleware);
     }
 
     public function reqeustActivity(Request $request)
@@ -24,8 +26,11 @@ class ResponseRequest extends Controller
 
         
         $user = auth()->user();
-        $findUser = User::find($user->id);
-        $storeId = $findUser->store->id;
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
 
         // .. select all order ids for this store ..
         $requestsIds = _Request::where('store_id', $storeId)->pluck('id')->toArray();

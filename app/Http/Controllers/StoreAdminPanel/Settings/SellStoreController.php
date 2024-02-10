@@ -9,17 +9,17 @@ use App\Models\{Store,User};
 use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Http\Middleware\Is_Store_Owner;
 
 class SellStoreController extends Controller
 {
 
     // .. Here owner can give his store to another new owner ..
 
-    public function __construct()
+    public function __construct(Is_Store_Owner $middleware)
     {
-        $this->middleware('auth:api');
+        $this->middleware($middleware);
     }
-
     public function sellStore(Request $request)
     {
         // .. Validation .. 
@@ -33,7 +33,11 @@ class SellStoreController extends Controller
         
             $user = auth()->user();
             $userId = $user->id;
-            $storeId = $user->store_id;
+            $store_Id = DB::table('store_user')
+                ->where('user_id', $user->id)
+                ->select('store_id')
+                ->first();
+            $storeId = $store_Id->store_id;
             // ..        ..        ..
             $email = $request->email; 
             $newOwnerId = User::where('email', $email)->pluck('id')->first();

@@ -10,16 +10,21 @@ use App\Http\Middleware\Is_Store_Admin;
 
 class EditOfferController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware(Is_Store_Admin::class);
+        $this->middleware($middleware);
     }
 
     public function editOffer(Request $request)
     {
         $user = auth()->user();
-        $userId = $user->id;
-        $storeId = $user->store->id;
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
+
 
         $validatedData = $request->validate([
             'id' => 'required|unique:offers',

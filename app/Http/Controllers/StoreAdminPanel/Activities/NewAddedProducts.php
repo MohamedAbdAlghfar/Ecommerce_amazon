@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\{Product, User};
 use Spatie\Activitylog\Models\Activity;
 use App\Http\Resources\ActivityResource;
+use App\Http\Middleware\Is_Store_Owner;
+use Illuminate\Support\Facades\DB;
 
 class NewAddedProducts extends Controller
 {
-    public function __construct()
+    public function __construct(Is_Store_Owner $middleware)
     {
-        $this->middleware(Is_Store_Owner::class);
+        $this->middleware($middleware);
     }
     
     public function productActivity(Request $request)
@@ -24,8 +26,11 @@ class NewAddedProducts extends Controller
 
         
         $user = auth()->user();
-        $findUser = User::find($user->id);
-        $storeId = $findUser->store->id;
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
 
         // Fetch order IDs for this store with status = 0 (cancelled)
         $productIds = Product::where('store_id', $storeId)

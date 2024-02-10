@@ -11,10 +11,11 @@ class OfferSpecificCustomersController extends Controller
 {
     // .. Make An Offer Just For Customers  ..
 
-    public function __construct()
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware(Is_Store_Admin::class);
+        $this->middleware($middleware);
     }
+
 
     public function specifyCustomers(Request $request)
     {
@@ -22,7 +23,11 @@ class OfferSpecificCustomersController extends Controller
 
         $user = auth()->user();
         $userId = User::find($user->id);
-        $storeId = $userId->store->id;
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
 
         $store = StoreUser::find($storeId);
         $customersIds = [];

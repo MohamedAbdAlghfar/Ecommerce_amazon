@@ -13,9 +13,9 @@ class ShippingCompanyCont_ extends Controller
     // .. that should get all orders that shipping company shipped for The store ,
     // and get full debt money for shipping company that store should pay it ..
 
-    public function __construct()
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware(Is_Store_Admin::class)->only(['shippedOrdersWithShipperName', 'shippingDubt']);
+        $this->middleware($middleware);
     }
 
     public function shippedOrders()
