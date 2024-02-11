@@ -6,15 +6,7 @@ use App\Http\Controllers\Admin\{RecentController,ProfileController,ProductContro
 use App\Http\Controllers\Owner\{OwnerController,CreateAdminController,DeleteAdminController,CreateOwnerController};
 use App\Http\Controllers\Shipping\{ShippingController,DeleteShippingController,updateOrderStatusController,CreateShippingController,StoresShippingDebtController,delStoresShippingDebtController};
 // ..
-use App\Http\Controllers\AuthControllers\{SignUpController,LoginController,LogoutController};
-use App\Http\Controllers\ClientSide\UserAccount\{DelCartController,GetCartProducts,DeleteAccountController,
-    EditPersonalDataController,CreateStoreController,GetPersonalDataController,GetUserOrders,GetUserStore};
-use App\Http\Controllers\ClientSide\HomePage\{MainHomeController};
-use App\Http\Controllers\ClientSide\ProductType\{CategoryProductsController};
-use App\Http\Controllers\ClientSide\ProductDetails\{AddToCartController,GetSuggestedProducts,GetProductDetails};
-use App\Http\Controllers\StoreAdminPanel\Activities\CanceledOrders;
 use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Owner,Is_User};
-use App\Http\Controllers\ClientSide\OrderPayment\MakeOrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes   - Mohammed
@@ -98,103 +90,105 @@ Route::prefix('my-api')->group(function(){
 | API Routes   - Abdullah
 |--------------------------------------------------------------------------
 */
-
+// 
 // .. Auth Endpoints ..
-Route::prefix('auth')->group(function () {
-    Route::post('logout', [LogoutController::class , 'logout']);
-    Route::post('login' , [LoginController::class , 'login'])->name('login');
-    Route::post('register', [SignUpController::class , 'signup']);
+Route::prefix('auth')->namespace('App\Http\Controllers\AuthControllers')->group(function () {
+    // dd(SignUpController::class);
+    Route::post('logout', 'LogoutController@logout');
+    Route::post('login', 'LoginController@login')->name('login');
+    Route::post('register','SignUpController@signup');
 });
-Route::prefix('store-panel')->group(function () { 
+
+Route::prefix('store-panel')->namespace('App\Http\Controllers\StoreAdminPanel\Activities')->group(function () { 
     Route::prefix('activities')->group(function () {
-        Route::post('/cancelled-orders', [CanceledOrders::class , 'cancelledOrders']);
-        Route::post('/discounts', [NewDiscounts::class , 'newDiscountsActivity']);
-        Route::post('/new-orders', [NewOrders::class , 'orderActivity']);
-        Route::post('/updated-products', [NewUpdatedProducts::class , 'updatedProductsActivity']);
-        Route::post('/added-products', [NewAddedProducts::class , 'productActivity']);
-        Route::post('/deleted-products', [NewDeletedProducts::class , 'delProd_Activity']);
-        Route::post('/questions', [QuestionsInProduct::class , 'newQuestionInProductActivity']);
-        Route::post('/rate', [RateInProduct::class , 'rateProductActivity']);
-        Route::post('/response-requests', [ResponseRequest::class , 'reqeustActivity']);
+        Route::post('/cancelled-orders', 'CanceledOrders@cancelledOrders');
+        Route::post('/discounts', 'NewDiscounts@newDiscountsActivity');
+        Route::post('/new-orders', 'NewOrders@orderActivity');
+        Route::post('/updated-products', 'NewUpdatedProducts@updatedProductsActivity');
+        Route::post('/added-products', 'NewAddedProducts@productActivity');
+        Route::post('/deleted-products', 'NewDeletedProducts@delProd_Activity');
+        Route::post('/questions', 'QuestionsInProduct@newQuestionInProductActivity');
+        Route::post('/rate', 'RateInProduct@rateProductActivity');
+        Route::post('/response-requests', 'ResponseRequest@reqeustActivity');
     });
-    Route::prefix('assitant')->group(function () {
-        Route::post('/add-assitant', [AddAssistantController::class , 'createAssistant']);
-        Route::get('/ ', [AssistantGetAllController::class , 'getAssistants']);
-        Route::post('/delete', [DeleteAssistantController::class , 'deleteAssistant']);
-        Route::post('/disable-request', [DisableRequestController::class , 'disable']);
-        Route::post('/send-request', [MakeRequestController::class , 'sendRequest']);
-        Route::post('/show-requests', [RequestShowController::class , 'viewRequests']);
-        Route::post('/select-user', [SelectUserToRequestController::class , 'getUsers']);
+    Route::prefix('assitant')->namespace('App\Http\Controllers\StoreAdminPanel\Assistant')->group(function () {
+        Route::post('/add-assistant', 'AddAssistantController@createAssistant');
+        Route::get('/', 'AssistantGetAllController@getAssistants');
+        Route::post('/delete', 'DeleteAssistantController@deleteAssistant');
+        Route::post('/disable-request', 'DisableRequestController@disable');
+        Route::post('/send-request', 'MakeRequestController@sendRequest');
+        Route::post('/show-requests', 'RequestShowController@viewRequests');
+        Route::post('/select-user', 'SelectUserToRequestController@getUsers');
     });
-    Route::prefix('category')->group(function () {
-        Route::post('/search', [ShowAllCategoriesController::class , 'showAllCategories']);
+    Route::prefix('category')->namespace('App\Http\Controllers\StoreAdminPanel\Categories')->group(function () {
+        Route::post('/search', 'ShowAllCategoriesController@showAllCategories');
     });
-    Route::prefix('customers')->group(function () {
-        Route::get('/customers', [CustomersDataControllr::class , 'showAllCustomers']);
-        Route::get('/statistics', [CustomerStatisticsController::class , 'statistics']);
+    Route::prefix('customers')->namespace('App\Http\Controllers\StoreAdminPanel\Customers')->group(function () {
+        Route::get('/customers', 'CustomersDataController@showAllCustomers');
+        Route::get('/statistics', 'CustomerStatisticsController@statistics');
     });
-    Route::prefix('dashboard')->group(function () {
-        Route::get('/', [GetMainDataController::class , 'mainData']);
-        Route::get('/shipped-orders', [ShippingCompanyCont_::class , 'shippedOrders']);
-        Route::get('/shipping-dubt', [ShippingCompanyCont_::class , 'shippingDubt']);
+    Route::prefix('dashboard')->namespace('App\Http\Controllers\StoreAdminPanel\Dashboard')->group(function () {
+        Route::get('/', 'GetMainDataController@mainData');
+        Route::get('/shipped-orders', 'ShippingCompanyController@shippedOrders');
+        Route::get('/shipping-dubt', 'ShippingCompanyController@shippingDubt');
     });
-    Route::prefix('offer')->group(function () {
-        Route::post('/activated/{status?}', [GetOffersController::class, 'getOffers'])->where('status', 1);
-        Route::post('/disabled/{status?}', [GetOffersController::class, 'getOffers'])->where('status', 0);
-        Route::post('/add', [AddOfferController::class , 'addOffer']);
-        Route::post('/delete', [DeleteOfferController::class , 'deleteOffer']);
-        Route::post('/edit', [EditOfferController::class , 'editOffer']);
-        Route::post('/activate/{activation?}', [OfferActivationController::class , 'disOrActiveOffer'])->where('activation', 1);
-        Route::post('/disactivate/{activation?}', [OfferActivationController::class , 'disOrActiveOffer'])->where('activation', 1);
-        Route::post('/specify-customers', [OfferSpecificCustomersController::class , 'specifyCustomers']);
+    Route::prefix('offer')->namespace('App\Http\Controllers\StoreAdminPanel\Offers')->group(function () {
+        Route::post('/activated/{status?}', 'GetOffersController@getOffers')->where('status', 1);
+        Route::post('/disabled/{status?}', 'GetOffersController@getOffers')->where('status', 0);
+        Route::post('/add', 'AddOfferController@addOffer');
+        Route::post('/delete', 'DeleteOfferController@deleteOffer');
+        Route::post('/edit', 'EditOfferController@editOffer');
+        Route::post('/activate/{activation?}', 'OfferActivationController@disOrActiveOffer')->where('activation', 1);
+        Route::post('/disactivate/{activation?}', 'OfferActivationController@disOrActiveOffer')->where('activation', 1);
+        Route::post('/specify-customers', 'OfferSpecificCustomersController@specifyCustomers');
     });    
-    Route::prefix('order')->group(function () {
-        Route::post('/cancel',[CancelOrderController::class, '']);
-        Route::post('/show',[ShowOrdersController::class, 'getStoreOrders']);
+    Route::prefix('order')->namespace('App\Http\Controllers\StoreAdminPanel\Order')->group(function () {
+        Route::post('/cancel', 'CancelOrderController@cancel');
+        Route::post('/show', 'ShowOrdersController@getStoreOrders');
     });
-    Route::prefix('product')->group(function () {
-        Route::post('/add', [AddProductController::class , 'addProduct']);
-        Route::post('/', [AllStoreProductsShow::class , 'getProducts']);
-        Route::post('/delete', [DeleteProductController::class , 'deleteProduct']);
-        Route::post('/disable-discount', [DisableDiscountController::class , 'disableDiscount']);
-        Route::post('/make-discount', [MakeDiscountController::class , 'makeDiscount']);
-        Route::post('/questions', [QuestionsController::class , 'getQuestions']);
-        Route::post('/rates', [RatingController::class , 'getRates']);
-        Route::post('/reply', [ReplyToQuestionController::class , 'replyQuestions']);
-        Route::post('/update', [UpdateProductController::class , 'editProduct']);
+    Route::prefix('product')->namespace('App\Http\Controllers\StoreAdminPanel\Product')->group(function () {
+        Route::post('/add', 'AddProductController@addProduct');
+        Route::post('/', 'AllStoreProductsShow@getProducts');
+        Route::post('/delete', 'DeleteProductController@deleteProduct');
+        Route::post('/disable-discount', 'DisableDiscountController@disableDiscount');
+        Route::post('/make-discount', 'MakeDiscountController@makeDiscount');
+        Route::post('/questions', 'QuestionsController@getQuestions');
+        Route::post('/rates', 'RatingController@getRates');
+        Route::post('/reply', 'ReplyToQuestionController@replyQuestions');
+        Route::post('/update', 'UpdateProductController@editProduct');
     });
-    Route::prefix('warnings')->group(function () {
-        Route::post('/add-pices', [EditAvailablePicesController::class , 'newPices']);
-        Route::post('/', [WarningController::class , 'warning']);
+    Route::prefix('warnings')->namespace('App\Http\Controllers\StoreAdminPanel\ProductWarning')->group(function () {
+        Route::post('/add-pices', 'EditAvailablePicesController@newPices');
+        Route::post('/', 'WarningController@warning');
     });
-    Route::prefix('settings')->group(function () {
-        Route::post('/delete', [DeleteStoreController::class , 'destroy']);
-        Route::post('/sell', [SellStoreController::class , 'sellStore']);
-        Route::get('/data', [SellStoreController::class , 'storeData']);
-        Route::post('/update', [UpdateStoreController::class , 'update']);
-        Route::get('/store-data', [UpdateStoreController::class , 'sendStoreData']);
+    Route::prefix('settings')->namespace('App\Http\Controllers\StoreAdminPanel\Settings')->group(function () {
+        Route::post('/delete', 'DeleteStoreController@destroy');
+        Route::post('/sell', 'SellStoreController@sellStore');
+        Route::get('/data', 'SellStoreController@storeData');
+        Route::post('/update', 'UpdateStoreController@update');
+        Route::get('/store-data', 'UpdateStoreController@sendStoreData');
     });    
 });
 Route::prefix('client-side')->group(function () { // .. Client Side EndPoints ..
 
-    Route::prefix('home')->group(function () {
-        Route::get('/categories',[MainHomeController::class ,'getCategory']);
-        Route::get('/products',[MainHomeController::class ,'getProduct']);
-        Route::get('/suggested-products',[SuggestedProductsController::class ,'suggestedProducts']);
+    Route::prefix('home')->namespace('App\Http\Controllers\ClientSide\HomePage')->group(function () {
+        Route::get('/categories','MainHomeController@getCategory');
+        Route::get('/products','MainHomeController@getProduct');
+        Route::get('/suggested-products','SuggestedProductsController@suggestedProducts');
     });
-    Route::prefix('notificatinos')->group(function () {
+    Route::prefix('notificatinos')->namespace('App\Http\Controllers\ClientSide\Notificatinos')->group(function () {
         Route::get('/', 'UserController@index');
     });
-    Route::prefix('orders')->group(function () {
+    Route::prefix('orders')->namespace('App\Http\Controllers\ClientSide\OrderPayment')->group(function () {
         Route::get('/', 'UserController@index');
     });
-    Route::prefix('product-details')->group(function () {
+    Route::prefix('product-details')->namespace('App\Http\Controllers\ClientSide\ProductDetails')->group(function () {
         Route::get('/', 'UserController@index');
     });
-    Route::prefix('product-type')->group(function () {
+    Route::prefix('product-type')->namespace('App\Http\Controllers\ClientSide\ProductType')->group(function () {
         Route::get('/', 'UserController@index');
     });
-    Route::prefix('account')->group(function () {
+    Route::prefix('account')->namespace('App\Http\Controllers\ClientSide\UserAccount')->group(function () {
         Route::get('/', 'UserController@index');
     });
 
