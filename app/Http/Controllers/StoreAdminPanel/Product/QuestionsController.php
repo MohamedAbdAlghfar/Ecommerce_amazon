@@ -7,15 +7,18 @@ use Illuminate\Http\Request;
 use App\Http\Models\{Product, Comment};
 use App\Http\Middleware\Is_Store_Admin;
 use App\Http\Resources\CommentResource;
+use Illuminate\Support\Facades\DB;
 
 class QuestionsController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware(Is_Store_Admin::class);
+        $this->middleware($middleware);
     }
 
-    public function getRates(Request $request)
+
+    public function getQuestions(Request $request)
     {
         $validatedData = $request->validate([
             'product_id' => 'required|exists:products,id',

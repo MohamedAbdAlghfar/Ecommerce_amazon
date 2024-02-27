@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\{User,Product,_Request,Order};
 use Illuminate\Support\Facades\DB;
 use Exception;
+use App\Http\Middleware\Is_Store_Owner;
 
 class DeleteStoreController extends Controller
 {
-    public function __construct()
+    public function __construct(Is_Store_Owner $middleware)
     {
-        $this->middleware('auth:api');
+        $this->middleware($middleware);
     }
     
     public function destroy()
@@ -24,8 +25,11 @@ class DeleteStoreController extends Controller
 
         $userId = $user->id;
 
-        $storeId = DB::table('store_user')->where('user_id', $userId)->select('store_id')->pluck();
-
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
 
         $storeUsers = DB::table('store_user')->where('store_id', $storeId)->get();
 

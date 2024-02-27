@@ -7,13 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Resources\CommentResource;
 use App\Http\Models\{Product, Comment};
 use App\Http\Middleware\Is_Store_Admin;
+use Illuminate\Support\Facades\DB;
 
 class RatingController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware(Is_Store_Admin::class);
+        $this->middleware($middleware);
     }
+
 
     public function getRates(Request $request)
     {

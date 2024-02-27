@@ -9,12 +9,13 @@ use App\Models\{Store, Photo};
 use Exception;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Http\Middleware\Is_Store_Owner;
 
 class UpdateStoreController extends Controller
 {
-    public function __construct()
+    public function __construct(Is_Store_Owner $middleware)
     {
-      $this->middleware('auth:api');
+        $this->middleware($middleware);
     }
 
     public function sendStoreData(){

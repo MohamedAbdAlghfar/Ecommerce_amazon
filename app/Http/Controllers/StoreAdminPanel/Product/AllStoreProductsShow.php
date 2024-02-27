@@ -11,15 +11,17 @@ use App\Http\Middleware\Is_Store_Admin;
 
 class AllStoreProductsShow extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware(Is_Store_Admin::class);
+        $this->middleware($middleware);
     }
+
 
     public function getProducts(Request $request){
 
         $validatedData = $request->validate([
-            'product_name' => 'required|exists:products,name',
+            'product_name' => 'nullable|exists:products,name',
         ]);
 
         if ($validatedData->fails()) {
@@ -28,7 +30,11 @@ class AllStoreProductsShow extends Controller
 
         $user = auth()->user();
         $userId = User::find($user->id);
-        $storeId = $userId->store->id;
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
 
         if ($request->product_name) 
         {

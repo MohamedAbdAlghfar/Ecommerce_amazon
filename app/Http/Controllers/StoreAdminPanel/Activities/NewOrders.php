@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\{Order, User};
 use Spatie\Activitylog\Models\Activity;
 use App\Http\Resources\ActivityResource;
+use App\Http\Middleware\Is_Store_Owner;
+use Illuminate\Support\Facades\DB;
 
 class NewOrders extends Controller
 {
-    public function __construct()
+    public function __construct(Is_Store_Owner $middleware)
     {
-        $this->middleware(Is_Store_Owner::class);
+        $this->middleware($middleware);
     }
     
     public function orderActivity(){
@@ -24,8 +26,11 @@ class NewOrders extends Controller
 
         
         $user = auth()->user();
-        $findUser = User::find($user->id);
-        $storeId = $findUser->store->id;
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
 
         // .. select all order ids for this store ..
         $orderIds = Order::where('store_id', $storeId)->pluck('id')->toArray();

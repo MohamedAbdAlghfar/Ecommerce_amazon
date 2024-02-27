@@ -11,16 +11,23 @@ class OfferSpecificCustomersController extends Controller
 {
     // .. Make An Offer Just For Customers  ..
 
-    public function __construct()
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware(Is_Store_Admin::class);
+        $this->middleware($middleware);
     }
+
 
     public function specifyCustomers(Request $request)
     {
+        // no validatino coz it will be in AddOfferController in addOffer();   .. and all data in request the same in request of create offer
+
         $user = auth()->user();
         $userId = User::find($user->id);
-        $storeId = $userId->store->id;
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
 
         $store = StoreUser::find($storeId);
         $customersIds = [];

@@ -11,14 +11,15 @@ use App\Http\Resources\OfferResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Middleware\Is_Store_Admin;
 
-class ActiveOffersController extends Controller
+class GetOffersController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware(Is_Store_Admin::class);
+        $this->middleware($middleware);
     }
 
-    public function activeOffers()
+    public function getOffers(Request $request)
     {
         $validatedData = $request->validate([
             'status' => 'required|in:0,1',
@@ -30,7 +31,11 @@ class ActiveOffersController extends Controller
 
         $user = auth()->user();
         $userId = User::find($user->id);
-        $storeId = $userId->store->id;
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
 
         // Select active offers for the specific store with eager loading of products
         $activeOffers = Offer::with('products')->where('store_id', $storeId)->where('status', $request->status)->get();

@@ -5,16 +5,17 @@ namespace App\Http\Controllers\StoreAdminPanel\Customers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Middleware\Is_Store_Admin;
 
 class CustomersDataControllr extends Controller
 {
-    public function __construct()
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware('auth:api');
+        $this->middleware($middleware);
     }
 
     // .. Get All Customers Of Store ..
-    public function showAllCustomers(Request $request)
+    public function showAllCustomers()
     {
         $user = auth()->user();
 

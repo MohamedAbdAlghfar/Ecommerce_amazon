@@ -12,16 +12,22 @@ class Is_Owner
     public function handle($request, Closure $next)
     {
         $token = $request->header("Authorization");
-        // Parse the token and get the user
-        $user = JWTAuth::parseToken()->toUser($token);
-        if (!$user) {
-            return response()->json(['user_not_found'], 404);
+
+        try {
+            $user = JWTAuth::parseToken()->authenticate($token);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
         if (in_array($user->role, [4])) { // .. Role .. = value ..
-            // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Owner=2 || Store-Admin=3 || ShippingAdmin=5 ..           
+            // .. user=0 || Owner-assistant=1 || Owner=4 || Store-Owner=2 || Store-Admin=3 || ShippingAdmin=5 .. 
             return $next($request);
         }
-            
-        return response()->json(['role_not_allowed'], 403);
+
+        return response()->json(['error' => 'Role not allowed'], 403);
     }
 }

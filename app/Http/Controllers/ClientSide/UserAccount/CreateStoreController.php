@@ -35,8 +35,8 @@ class CreateStoreController extends Controller
             'about_store' => 'required',
             'phone' => 'required',
             'location' =>'required',
-            'store_cover' => 'nullable|image|size:300|mimes:jpg,bmp,png',
-            'store_image' => 'required|image|size:300|mimes:jpg,bmp,png',
+            'store_cover' => 'nullable|image|max:300|mimes:jpg,bmp,png',
+            'store_image' => 'required|image|max:300|mimes:jpg,bmp,png',
             'services' => 'required',  
             'link_website' => 'required|url',                
         ]); 

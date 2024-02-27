@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Exception;
+use App\Http\Middleware\Is_Store_Owner;
 
 class AddAssistantController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Owner $middleware)
     {
-        $this->middleware('auth:api');
+        $this->middleware($middleware);
     }
 
     // .. here admin can add an account to be an assistant in store ..
@@ -55,10 +57,11 @@ class AddAssistantController extends Controller
             $authenticatedUser = auth()->user();
             $authUserId = $authenticatedUser->id;
 
-            $storeId = DB::table('store_user')
+            $store_Id = DB::table('store_user')
                 ->where('user_id', $authUserId)
                 ->select('store_id')
                 ->first();
+            $storeId = $store_Id->store_id;
 
             // .. Make The Account Belonged To This Store ..
             if ($storeId) {

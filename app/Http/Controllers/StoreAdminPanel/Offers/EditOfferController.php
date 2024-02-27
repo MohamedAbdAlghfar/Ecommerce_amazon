@@ -10,18 +10,24 @@ use App\Http\Middleware\Is_Store_Admin;
 
 class EditOfferController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware(Is_Store_Admin::class);
+        $this->middleware($middleware);
     }
 
-    public function editOffer(Request $request, $offerId)
+    public function editOffer(Request $request)
     {
         $user = auth()->user();
-        $userId = $user->id;
-        $storeId = $user->store->id;
+        $store_Id = DB::table('store_user')
+            ->where('user_id', $user->id)
+            ->select('store_id')
+            ->first();
+        $storeId = $store_Id->store_id;
+
 
         $validatedData = $request->validate([
+            'id' => 'required|unique:offers',
             'price' => 'required|integer',
             'product_id' => 'integer|required_without:no_pices',
             'custom' => 'required|integer|in:0,1',
@@ -40,7 +46,7 @@ class EditOfferController extends Controller
         DB::beginTransaction();
 
         try {
-            $offer = Offer::find($offerId);
+            $offer = Offer::find($request->id);
 
             if (!$offer) {
                 throw new \Exception('Offer Not Found.');

@@ -8,12 +8,14 @@ use App\Http\Models\Offer;
 
 class OfferActivationController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Is_Store_Admin $middleware)
     {
-        $this->middleware(Is_Store_Admin::class);
+        $this->middleware($middleware);
     }
 
-    public function disactiveOffer(Request $request)
+
+    public function disOrActiveOffer(Request $request)
     {
         $validatedData = $request->validate([
             'offer_id' => 'required|exists:offers,id',
