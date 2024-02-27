@@ -9,7 +9,7 @@ use Spatie\Activitylog\LogOptions;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Model
+class Product extends Model 
 {
     use HasFactory;
     use SoftDeletes;
@@ -74,7 +74,7 @@ class Product extends Model
         return $this->hasMany(Order::class);
     }
 
-    public function carts() : BelongsToMany
+    public function carts() : BelongsToMany 
     {
         return $this->belongsToMany(Cart::class,'cart_product');
     }

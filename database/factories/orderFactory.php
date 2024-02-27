@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\ShippingCompany;
 use App\Models\Product;
+use App\Models\Offer;
 use Illuminate\Support\Arr;
 
 
@@ -23,7 +24,7 @@ class OrderFactory extends Factory
     {
         $user_id = User::all()->random()->id;
         $shipingcom_id = ShippingCompany::all()->random()->id;
-        $offerId = fake()->numberBetween(1, 400);
+        $offerId = Offer::all()->random()->id;
         $product = Product::inRandomOrder()->first();
         $productDiscount = $product->discount;
         $productPrice    = $product->price;

@@ -13,7 +13,7 @@ class LogoutController extends Controller
       $this->middleware('auth:api');
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request){ 
 
         $user = auth()->user();
 

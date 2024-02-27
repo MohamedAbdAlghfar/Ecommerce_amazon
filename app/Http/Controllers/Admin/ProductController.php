@@ -81,8 +81,8 @@ class ProductController extends Controller
                 $i++;
                 }
             }
-            return redirect('/admin')->withStatus('Product successfully created.');        
-        //  return response()->json(['message' => 'product successfully created.']);
+           // return redirect('/admin')->withStatus('Product successfully created.');        
+          return response()->json(['message' => 'product successfully created.']);
 
         }
 

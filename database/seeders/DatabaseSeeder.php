@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\{Category, User, Comments, Order, Photo, ShippingCompany, Store, Cart, Product, _Request};
+use App\Models\{Category, User, Comments, Order, Photo, ShippingCompany, Store, Cart, Product, _Request, Offer};
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Product::factory(200)->create();
         \App\Models\Comments::factory(150)->create();
         $shippings = \App\Models\ShippingCompany::factory(4)->create();
+        $offers = \App\Models\Offer::factory(15)->create();
         $orders = \App\Models\Order::factory(200)->create();
         $requests = \App\Models\_Request::factory(200)->create();
      
@@ -54,6 +56,28 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+
+        
+        foreach ($offers as $offer) {
+            $product_ids = [
+                'offer_id' => $offer->id,
+                'product_id' => Product::all()->random()->id,
+                'store_id' => $offer->store_id, // Assuming offer is associated with a store
+            ];
+        
+            DB::table('offer_product')->insert($product_ids);
+        }
+
+        foreach ($offers as $offer) {
+            $user_ids = [];
+            $user_ids[] = User::all()->random()->id;
+            $user_ids[] = User::all()->random()->id;
+            $user_ids[] = User::all()->random()->id;
+            $offer->users()->sync($user_ids);
+        }
+
+
 
 
     }

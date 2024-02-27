@@ -38,8 +38,8 @@ class AdminController extends Controller
            'total_order_price' => $total_order_price
                 ];
 
-         return view('Admin\index',compact('data'));
-    //   return response()->json($data);
+    //     return view('Admin\index',compact('data'));
+       return response()->json($data);
      
     }   
 }
