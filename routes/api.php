@@ -67,7 +67,7 @@ Route::prefix('my-api')->group(function(){
     Route::post('owner/create', [CreateOwnerController::class, 'store'])->name('CreateOwner.store');
     });
 /////////////////////////Shipping company Part/////////////////////////////////////////
-    Route::group(['middleware' => ['is-owner']],function () {
+    Route::group(['middleware' => ['Is_Shipping_Admin']],function () {
     // dashboard
     Route::get('shippingCombany' , [ShippingController::class ,'index'])->name('owner.index');
     // shipping company
