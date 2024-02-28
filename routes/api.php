@@ -68,7 +68,7 @@ Route::prefix('my-api')->group(function(){
     });
 /////////////////////////Shipping company Part/////////////////////////////////////////
     Route::group(['middleware' => ['Is_Shipping_Admin']],function () {
-    // dashboard
+    // dashboard 
     Route::get('shippingCombany' , [ShippingController::class ,'index'])->name('owner.index');
     // shipping company
     Route::get('shippingCombany/show/{id}', [ShippingController::class, 'show'])->name('Shipping.show');
