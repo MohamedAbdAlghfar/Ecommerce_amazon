@@ -67,6 +67,7 @@ Route::prefix('my-api')->group(function(){
     Route::post('owner/create', [CreateOwnerController::class, 'store'])->name('CreateOwner.store');
     });
 /////////////////////////Shipping company Part/////////////////////////////////////////
+    Route::group(['middleware' => ['is-owner']],function () {
     // dashboard
     Route::get('shippingCombany' , [ShippingController::class ,'index'])->name('owner.index');
     // shipping company
@@ -83,51 +84,13 @@ Route::prefix('my-api')->group(function(){
     Route::delete('shippingCombany/delStoresShippingDebt/{shipping_id}/{store_id}', [delStoresShippingDebtController::class, 'DelStoreDebt'])->name('delShippingStoresDebt.DelStoreDebt');
 
 }); 
-
+}); 
 
 /*
 |--------------------------------------------------------------------------
 | API Routes   - Abdullah
 |--------------------------------------------------------------------------
 */
-<<<<<<< HEAD
-
-    // Include additional API files
-    require __DIR__.'/storepanel.php';
-    require __DIR__.'/clientside.php';
-    require __DIR__.'/auth.php';
-
-Route::prefix('v-api')->group(function () { 
-   
-
-
-    Route::post('logout', [LogoutController::class , 'logout']);
-    Route::post('login' , [LoginController::class , 'login'])->name('login');
-    Route::post('register', [SignUpController::class , 'signup']);
-
-    Route::get('/category' , [MainHomeController::class , 'getCategory']);
-    Route::get('/product/{id}' , [MainHomeController::class , 'getProduct']);
-    // 
-    Route::get('/profile' , [UserProfileController::class , 'index']);
-    Route::post('/profile' , [UserProfileController::class , 'store']);
-    Route::get('/profile/{id}' , [UserProfileController::class , 'show']);
-    Route::put('/profile/{id}' , [UserProfileController::class , 'update']);
-    Route::delete('/profile/{id}' , [UserProfileController::class , 'delete']);
-    // 
-    Route::post('addcart/{productId}', [AddCartController::class, 'addToCart']);
-    Route::post('delcart/{productId}', [DelCartController::class, 'deleteFromCart']);
-    Route::post('cartproducts', [GetCartProducts::class, 'getAllProducts']);
-
-    Route::post('createstore/',[CreateStoreController::class, 'create']);
-    Route::get('categoryproducts',[CategoryProductsController::class,'getProducts']);
-    Route::post('warnings/', [WarningController::class,'filte']);
-
-    Route::group(['middleware' => ['is-owner-assistant']],function () {
-        Route::get('/owner', function () {
-            return 'owner page'->withoutMiddleware([Is_Owner_Assistant::class]);
-        });
-    }); 
-=======
 // 
 // .. Auth Endpoints ..
 Route::prefix('auth')->namespace('App\Http\Controllers\AuthControllers')->group(function () {
@@ -230,5 +193,4 @@ Route::prefix('client-side')->group(function () { // .. Client Side EndPoints ..
         Route::get('/', 'UserController@index');
     });
 
->>>>>>> 61f0e3a41cbb3d763f9cdc4c3faf9e7a9690bd4c
 });
