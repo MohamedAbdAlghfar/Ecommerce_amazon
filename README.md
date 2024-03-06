@@ -11,7 +11,7 @@ This is a multi-vendor ecommerce project that consists of various components dev
 - **Telegram:** [@abdullahomar_p](https://t.me/abdullahomar_p)
 
 `Mohammed Abdelghafar` <br>
-- **LinkedIn:** [Mohamed_Abdo]([https://www.linkedin.com/in/abdullah-omar-81196420a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app](https://www.linkedin.com/in/mohamed-abd-alghfar-ab366b214?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app )
+- **LinkedIn:** [Mohamed_Abdo]([https://www.linkedin.com/in/abdullah-omar-81196420a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app](https://www.linkedin.com/in/mohamed-abd-alghfar-ab366b214?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
 - **Email:**    mohammedabdodv@gmail.com  <br>
 
 
