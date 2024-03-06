@@ -12,7 +12,7 @@ This is a multi-vendor ecommerce project that consists of various components dev
 
 `Mohammed Abdelghafar` <br>
 - **Email:**    mohammedabdodv@gmail.com  <br>
-- **WebSite:**  https://eng-mohammedabdo.site  <br>
+
 
 ## **Abdullah Omar's Part** 
 
