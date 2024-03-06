@@ -13,7 +13,7 @@ This is a multi-vendor ecommerce project that consists of various components dev
 `Mohammed Abdelghafar` <br>
 - **Email:**    mohammedabdodv@gmail.com  <br>
 - **WhatsApp:** [+01274267314](https://wa.me/01274267314)
-- **LinkedIn:** [Mohamed_Abdo](https://www.linkedin.com/in/abdullah-omar-81196420a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+- **LinkedIn:** [Mohamed_Abdo](https://www.linkedin.com/in/mohamed-abd-alghfar-ab366b214?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app) 
 
 
 ## **Abdullah Omar's Part** 
