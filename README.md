@@ -52,7 +52,25 @@ Abdullah Omar has implemented the authentication system for the project.
 
 Mohammed Abdelghafar has worked on the owner panel functionality.
 
-(TODO: Add description of the owner panel functionality)
+(### Route Descriptions
+
+This Laravel route group is configured with the 'is-owner' middleware, ensuring that only users designated as owners have access to these routes. Below are the descriptions for the routes within this group:
+
+#### Dashboard Route:
+- **Owner Dashboard**: `/owner` - Renders the dashboard for the owner.
+
+#### Admin Routes:
+- **Create Admin**: `/admin/create` - Renders a form to create a new admin.
+- **Store Admin**: `/admin/create` - Stores a newly created admin.
+- **Show Admins**: `/owner/admin/show` - Displays a list of all admins.
+- **Delete Admin**: `/owner/delete-admin/{user}` - Deletes a specific admin.
+
+#### Owner Routes:
+- **Create Owner**: `/owner/create` - Renders a form to create a new owner.
+- **Store Owner**: `/owner/create` - Stores a newly created owner.
+
+These routes enable the owner to manage administrators and other owners within the system. Access to these routes is restricted to users who have the 'is-owner' middleware applied.
+)
 
 ### Shipping Panel
 
