@@ -10,7 +10,7 @@ This is a multi-vendor ecommerce project that consists of various components dev
 - **Website:** [Eng-AbdullhOmar.online](https://www.eng-abdullahomar.online)
 - **Telegram:** [@abdullahomar_p](https://t.me/abdullahomar_p)
 
-`Mohammed Abdelghafar` <br>**Email**   -> mohammed___@gmail.com  <br>
+`Mohammed Abdelghafar` <br>**Email**   -> mohammedabdodv@gmail.com  <br>
 
 **WebSite** -> https://eng-mohammedabdo.site  <br>
 
