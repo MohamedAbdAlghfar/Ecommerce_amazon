@@ -64,4 +64,43 @@ In addition to the owner panel, Mohammed Abdelghafar has developed the shipping 
 
 Mohammed Abdelghafar has also contributed to the development of the admin - owner assistant panel.
 
-(TODO: Add description of the admin - owner assistant panel functionality)
+(### Route Descriptions
+
+This Laravel application includes routes grouped under the 'is-owner-assistant' middleware. These routes are accessible to users who are designated as owner assistants and provide functionalities related to managing products, categories, stores, profiles, and dashboard information.
+
+#### Product Routes:
+- **Create Product**: `/admin/product` - Allows creating new products.
+- **Store Product**: `/admin/product` - Stores a newly created product.
+- **Edit Product**: `/admin/product/{product}` - Allows editing a specific product.
+- **Update Product**: `/admin/product/{product}` - Updates a specific product.
+- **Show All Products**: `/admin/Product/show` - Displays all products.
+- **Delete Product**: `/admin/product/{product}` - Deletes a specific product.
+- **Product Requests**: `/admin/Product/request` - Shows product requests.
+- **Recent Products**: `/admin/Product/recent` - Displays recently added products.
+- **Deleted Products**: `/admin/product/delBy/{id}` - Shows deleted products.
+- **Run Out Products**: `/admin/products/RunOut` - Shows products running out of stock.
+- **Manage Product Photos**: `/admin/products/showPhotos/{id}`, `/admin/products/deletePhotos/{id}`, `/admin/products/editPhotos/{id}`, `/admin/products/createPhotos/{id}` - Manage photos associated with products.
+
+#### Dashboard Route:
+- **Dashboard**: `/admin` - Renders the dashboard with relevant information.
+
+#### Profile Routes:
+- **Admin Profiles**: `/admin/profile/admins` - Displays profiles of admins.
+- **Edit Profile**: `/admin/profile/myprofile` - Allows the current user to edit their profile.
+  
+#### Category Routes:
+- **Create Category**: `/admin/category` - Allows creating new categories.
+- **Store Category**: `/admin/category` - Stores a newly created category.
+- **Show All Categories**: `/admin/category/show` - Displays all categories.
+- **Delete Category**: `/admin/category/{category}` - Deletes a specific category.
+- **Update Category**: `/admin/category/{category}` - Updates a specific category.
+- **Edit Category**: `/admin/category/{category}` - Allows editing a specific category.
+- **Deleted Categories**: `/admin/category/delBy/{id}` - Shows deleted categories.
+
+#### Store Routes:
+- **Delete Store**: `/admin/store/{store}` - Deletes a specific store.
+- **Show All Stores**: `/admin/store/show` - Displays all stores.
+- **Deleted Stores**: `/admin/store/delBy/{id}` - Shows deleted stores.
+
+These routes provide CRUD operations for managing products, categories, stores, and user profiles. Access to these routes is restricted to users who have the 'is-owner-assistant' middleware applied.
+)
