@@ -76,7 +76,30 @@ These routes enable the owner to manage administrators and other owners within t
 
 In addition to the owner panel, Mohammed Abdelghafar has developed the shipping panel functionality.
 
-(TODO: Add description of the shipping panel functionality)
+(### Route Descriptions
+
+This Laravel route group is configured with the 'Is_Shipping_Admin' middleware, ensuring that only users designated as shipping administrators have access to these routes. Below are the descriptions for the routes within this group:
+
+#### Dashboard Route:
+- **Shipping Company Dashboard**: `/shippingCombany` - Renders the dashboard for the shipping company.
+
+#### Shipping Company Routes:
+- **Show Shipping Company**: `/shippingCombany/show/{id}` - Displays details of a specific shipping company.
+- **Delete Shipping Company**: `/shippingCombany/{shipping}` - Deletes a specific shipping company.
+- **Create Shipping Company**: `/shippingCombany/create` - Renders a form to create a new shipping company.
+- **Store Shipping Company**: `/shippingCombany/create` - Stores a newly created shipping company.
+- **Edit Shipping Company**: `/shippingCombany/edit/{id}` - Renders a form to edit details of a specific shipping company.
+- **Update Shipping Company**: `/shippingCombany/edit/{id}` - Updates details of a specific shipping company.
+
+#### Order Route:
+- **Change Order Status**: `/shippingCombany/order/{id}` - Updates the status of an order.
+
+#### Store Route:
+- **Get Stores Shipping Price**: `/shippingCombany/getStoresShippingPrice/{id}` - Retrieves shipping prices for stores associated with a specific shipping company.
+- **Delete Stores Shipping Debt**: `/shippingCombany/delStoresShippingDebt/{shipping_id}/{store_id}` - Deletes shipping debt associated with a specific store and shipping company.
+
+These routes enable the shipping administrators to manage shipping companies, orders, and associated stores' shipping prices and debts. Access to these routes is restricted to users who have the 'Is_Shipping_Admin' middleware applied.
+)
 
 ### Admin - Owner Assistant Panel
 
