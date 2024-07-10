@@ -10,9 +10,11 @@ This is a multi-vendor ecommerce project that consists of various components dev
 - **Website:** [Eng-AbdullhOmar.online](https://www.eng-abdullahomar.online)
 - **Telegram:** [@abdullahomar_p](https://t.me/abdullahomar_p)
 
-`Mohammed Abdelghafar` <br>**Email**   -> mohammed___@gmail.com  <br>
+`Mohammed Abdelghafar` <br>
+- **Email:**    mohammedabdodv@gmail.com  <br>
+- **WhatsApp:** [+01274267314](https://wa.me/01274267314)
+- **LinkedIn:** [Mohamed_Abdo](https://www.linkedin.com/in/mohamed-abd-alghfar-ab366b214?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app) 
 
-**WebSite** -> https://eng-mohammedabdo.site  <br>
 
 ## **Abdullah Omar's Part** 
 
@@ -50,16 +52,96 @@ Abdullah Omar has implemented the authentication system for the project.
 
 Mohammed Abdelghafar has worked on the owner panel functionality.
 
-(TODO: Add description of the owner panel functionality)
+(### Route Descriptions
+
+This Laravel route group is configured with the 'is-owner' middleware, ensuring that only users designated as owners have access to these routes. Below are the descriptions for the routes within this group:
+
+#### Dashboard Route:
+- **Owner Dashboard**: `/owner` - Renders the dashboard for the owner.
+
+#### Admin Routes:
+- **Create Admin**: `/admin/create` - Renders a form to create a new admin.
+- **Store Admin**: `/admin/create` - Stores a newly created admin.
+- **Show Admins**: `/owner/admin/show` - Displays a list of all admins.
+- **Delete Admin**: `/owner/delete-admin/{user}` - Deletes a specific admin.
+
+#### Owner Routes:
+- **Create Owner**: `/owner/create` - Renders a form to create a new owner.
+- **Store Owner**: `/owner/create` - Stores a newly created owner.
+
+These routes enable the owner to manage administrators and other owners within the system. Access to these routes is restricted to users who have the 'is-owner' middleware applied.
+)
 
 ### Shipping Panel
 
 In addition to the owner panel, Mohammed Abdelghafar has developed the shipping panel functionality.
 
-(TODO: Add description of the shipping panel functionality)
+(### Route Descriptions
+
+This Laravel route group is configured with the 'Is_Shipping_Admin' middleware, ensuring that only users designated as shipping administrators have access to these routes. Below are the descriptions for the routes within this group:
+
+#### Dashboard Route:
+- **Shipping Company Dashboard**: `/shippingCombany` - Renders the dashboard for the shipping company.
+
+#### Shipping Company Routes:
+- **Show Shipping Company**: `/shippingCombany/show/{id}` - Displays details of a specific shipping company.
+- **Delete Shipping Company**: `/shippingCombany/{shipping}` - Deletes a specific shipping company.
+- **Create Shipping Company**: `/shippingCombany/create` - Renders a form to create a new shipping company.
+- **Store Shipping Company**: `/shippingCombany/create` - Stores a newly created shipping company.
+- **Edit Shipping Company**: `/shippingCombany/edit/{id}` - Renders a form to edit details of a specific shipping company.
+- **Update Shipping Company**: `/shippingCombany/edit/{id}` - Updates details of a specific shipping company.
+
+#### Order Route:
+- **Change Order Status**: `/shippingCombany/order/{id}` - Updates the status of an order.
+
+#### Store Route:
+- **Get Stores Shipping Price**: `/shippingCombany/getStoresShippingPrice/{id}` - Retrieves shipping prices for stores associated with a specific shipping company.
+- **Delete Stores Shipping Debt**: `/shippingCombany/delStoresShippingDebt/{shipping_id}/{store_id}` - Deletes shipping debt associated with a specific store and shipping company.
+
+These routes enable the shipping administrators to manage shipping companies, orders, and associated stores' shipping prices and debts. Access to these routes is restricted to users who have the 'Is_Shipping_Admin' middleware applied.
+)
 
 ### Admin - Owner Assistant Panel
 
 Mohammed Abdelghafar has also contributed to the development of the admin - owner assistant panel.
 
-(TODO: Add description of the admin - owner assistant panel functionality)
+(### Route Descriptions
+
+This Laravel application includes routes grouped under the 'is-owner-assistant' middleware. These routes are accessible to users who are designated as owner assistants and provide functionalities related to managing products, categories, stores, profiles, and dashboard information.
+
+#### Product Routes:
+- **Create Product**: `/admin/product` - Allows creating new products.
+- **Store Product**: `/admin/product` - Stores a newly created product.
+- **Edit Product**: `/admin/product/{product}` - Allows editing a specific product.
+- **Update Product**: `/admin/product/{product}` - Updates a specific product.
+- **Show All Products**: `/admin/Product/show` - Displays all products.
+- **Delete Product**: `/admin/product/{product}` - Deletes a specific product.
+- **Product Requests**: `/admin/Product/request` - Shows product requests.
+- **Recent Products**: `/admin/Product/recent` - Displays recently added products.
+- **Deleted Products**: `/admin/product/delBy/{id}` - Shows deleted products.
+- **Run Out Products**: `/admin/products/RunOut` - Shows products running out of stock.
+- **Manage Product Photos**: `/admin/products/showPhotos/{id}`, `/admin/products/deletePhotos/{id}`, `/admin/products/editPhotos/{id}`, `/admin/products/createPhotos/{id}` - Manage photos associated with products.
+
+#### Dashboard Route:
+- **Dashboard**: `/admin` - Renders the dashboard with relevant information.
+
+#### Profile Routes:
+- **Admin Profiles**: `/admin/profile/admins` - Displays profiles of admins.
+- **Edit Profile**: `/admin/profile/myprofile` - Allows the current user to edit their profile.
+  
+#### Category Routes:
+- **Create Category**: `/admin/category` - Allows creating new categories.
+- **Store Category**: `/admin/category` - Stores a newly created category.
+- **Show All Categories**: `/admin/category/show` - Displays all categories.
+- **Delete Category**: `/admin/category/{category}` - Deletes a specific category.
+- **Update Category**: `/admin/category/{category}` - Updates a specific category.
+- **Edit Category**: `/admin/category/{category}` - Allows editing a specific category.
+- **Deleted Categories**: `/admin/category/delBy/{id}` - Shows deleted categories.
+
+#### Store Routes:
+- **Delete Store**: `/admin/store/{store}` - Deletes a specific store.
+- **Show All Stores**: `/admin/store/show` - Displays all stores.
+- **Deleted Stores**: `/admin/store/delBy/{id}` - Shows deleted stores.
+
+These routes provide CRUD operations for managing products, categories, stores, and user profiles. Access to these routes is restricted to users who have the 'is-owner-assistant' middleware applied.
+)
