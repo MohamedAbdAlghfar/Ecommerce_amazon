@@ -16,7 +16,7 @@ use App\Http\Middleware\{Is_Owner,Is_Owner_Assistant,Is_Store_Admin,Is_Store_Own
 Route::prefix('my-api')->group(function(){
 
     /////////////////////////Admin Part/////////////////////////////////////////
-    Route::group(['middleware' => ['is-owner-assistant']],function () {
+    Route::group(['middleware' => ['is-owner-assistant']],function () { 
     // product
     Route::get('admin/product', [ProductController::class, 'create']);
     Route::post('admin/product', [ProductController::class, 'store']);
@@ -67,7 +67,7 @@ Route::prefix('my-api')->group(function(){
     Route::post('owner/create', [CreateOwnerController::class, 'store'])->name('CreateOwner.store');
     });
 /////////////////////////Shipping company Part/////////////////////////////////////////
-    Route::group(['middleware' => ['Is_Shipping_Admin']],function () {
+    Route::group(['middleware' => ['is-shipping-admin']],function () {
     // dashboard 
     Route::get('shippingCombany' , [ShippingController::class ,'index'])->name('owner.index');
     // shipping company

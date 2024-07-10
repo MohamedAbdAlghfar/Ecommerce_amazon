@@ -28,7 +28,7 @@ class ShippingCompany extends Model
 
     public function Stores() : BelongsToMany
     {
-        return $this->belongsToMany(Store::class , 'shipping_company_store');
+        return $this->belongsToMany(Store::class , 'shipping_company_store')->withPivot('debt');
     }
 
 

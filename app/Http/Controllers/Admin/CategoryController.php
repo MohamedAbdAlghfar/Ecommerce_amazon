@@ -61,8 +61,8 @@ class CategoryController extends Controller
                 }
             }
         }   
-       return redirect('/admin')->withStatus('category successfully created.');        
-     //return response()->json(['message' => 'category successfully created.']);
+      // return redirect('/admin')->withStatus('category successfully created.');        
+     return response()->json(['message' => 'category successfully created.']);
 
     }
     
@@ -73,8 +73,8 @@ class CategoryController extends Controller
             $join->on('photoable.photoable_id', '=', 'categories.id')
             ->where('photoable.photoable_type', '=', 'App\Models\Category');
         })->get();
-            return view('admin/Category/show',compact('category'));
-       //  return response()->json($category); 
+        //            return view('admin/Category/show',compact('category'));
+         return response()->json($category); 
     }
 
     
@@ -101,8 +101,8 @@ class CategoryController extends Controller
                  ];
         
 
-        return view('admin/Category/edit',compact('data'));
-    //  return response()->json($data);
+    //    return view('admin/Category/edit',compact('data'));
+      return response()->json($data);
 
     } 
 
@@ -170,8 +170,8 @@ class CategoryController extends Controller
         }
         
         $category->delete();
-        return redirect()->route('admin.index')->withStatus(__('category successfully deleted.'));
-   //       return response()->json(['message' => 'category successfully deleted.']);
+  //      return redirect()->route('admin.index')->withStatus(__('category successfully deleted.'));
+          return response()->json(['message' => 'category successfully deleted.']);
 
 
     }

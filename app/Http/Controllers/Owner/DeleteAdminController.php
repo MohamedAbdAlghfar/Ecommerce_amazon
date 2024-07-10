@@ -17,8 +17,8 @@ class DeleteAdminController extends Controller
           $join->on('photoable.photoable_id', '=', 'users.id')
           ->where('photoable.photoable_type', '=', 'App\Models\User');
       })->get();               
-        return view('Owner\Admin\show',compact('admins'));
-      //return response()->json($admins);
+ //       return view('Owner\Admin\show',compact('admins'));
+      return response()->json($admins);
 
     }
 

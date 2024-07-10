@@ -12,8 +12,8 @@ class CreateShippingController extends Controller
     
     public function create() 
     {
-       return view("Shipping\create");
-      //   return response()->json(['message' => ' Create method called.']); 
+      // return view("Shipping\create");
+         return response()->json(['message' => ' Create method called.']); 
     }
 
     public function store(Request $request)
@@ -47,8 +47,8 @@ class CreateShippingController extends Controller
                 }
             }
         }
-      return redirect('/shippingCombany')->withStatus('shipping successfully created.');        
-     //   return response()->json(['message' => 'shipping successfully created.']);
+//      return redirect('/shippingCombany')->withStatus('shipping successfully created.');        
+        return response()->json(['message' => 'shipping successfully created.']);
 
     }
 

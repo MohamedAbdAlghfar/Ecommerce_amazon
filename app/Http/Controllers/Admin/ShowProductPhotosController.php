@@ -16,16 +16,16 @@ class ShowProductPhotosController extends Controller
         $product = Product::select('id','name')->find($id);
         $photos = $product->photos;
        
-           return view('admin/Product/showPhotos',compact('product'));
-      //  return response()->json($product);
+       //    return view('admin/Product/showPhotos',compact('product'));
+        return response()->json($product);
     } 
 
     public function EditPhoto($id)
     {
 
         $photo = Photo::find($id);
-           return view('admin/Product/editPhotos',compact('photo'));
-      //  return response()->json($photo);
+       //    return view('admin/Product/editPhotos',compact('photo'));
+        return response()->json($photo);
     }
 
     public function updatePhoto(Request $request,$id)
@@ -52,8 +52,8 @@ class ShowProductPhotosController extends Controller
             ]);
         }
         $photo->delete();
-        return redirect()->route('admin.index')->withStatus(__('photo successfully updated.'));
-        //return response()->json(['message' => 'photo successfully updated.']);
+      //  return redirect()->route('admin.index')->withStatus(__('photo successfully updated.'));
+        return response()->json(['message' => 'photo successfully updated.']);
     }
 
     public function destroy($id)
@@ -108,8 +108,8 @@ class ShowProductPhotosController extends Controller
                 $i++;
                 }
             }
-            return redirect('/admin')->withStatus('Photos successfully created.');        
-         // return response()->json(['message' => 'Photos successfully created.']);
+         //   return redirect('/admin')->withStatus('Photos successfully created.');        
+          return response()->json(['message' => 'Photos successfully created.']);
 
         }
 

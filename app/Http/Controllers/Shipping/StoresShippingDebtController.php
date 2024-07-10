@@ -31,8 +31,8 @@ class StoresShippingDebtController extends Controller
             'shipping_id' => $shipping->id,
                 ];
 
-        return view('Shipping\showStoreDebt',compact('data'));
-     // return response()->json($data);
+     //   return view('Shipping\showStoreDebt',compact('data'));
+      return response()->json($data);
     }
 
 }

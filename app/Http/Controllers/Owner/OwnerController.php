@@ -31,8 +31,8 @@ class OwnerController extends Controller
             'totalPrice_in_month' => $totalPrice_in_month,
             'total_order_price' => $total_order_price
                 ];
-        return view('Owner\index',compact('data'));
-     // return response()->json($data);
+      //  return view('Owner\index',compact('data'));
+      return response()->json($data);
     
     }
 

@@ -16,8 +16,8 @@ class updateOrderStatusController extends Controller
        
         $order->update();
         // $route = route('Shipping.show', ['id' => $shippingCompany->id]);
-        return redirect()->route('Shipping.index')->withStatus(__('order successfully updated.'));
-        // return response()->json(['message' => 'order successfully updated.']);
+      //  return redirect()->route('Shipping.index')->withStatus(__('order successfully updated.'));
+         return response()->json(['message' => 'order successfully updated.']);
 
     }
 

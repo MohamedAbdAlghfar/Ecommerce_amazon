@@ -21,8 +21,8 @@ class ShippingController extends Controller
         })
         ->get()
         ->unique('id');  
-              return view('Shipping\index',compact('shipping'));
-    //  return response()->json($shipping);
+//              return view('Shipping\index',compact('shipping'));
+      return response()->json($shipping);
 
     }
 
@@ -47,8 +47,8 @@ class ShippingController extends Controller
                 ];
 
 
-         return view('Shipping\show',compact('data'));
-     //  return response()->json($data);
+    //     return view('Shipping\show',compact('data'));
+       return response()->json($data);
     } 
 
     public function edit($shipping_id)  
@@ -107,8 +107,8 @@ class ShippingController extends Controller
         }
 
 
-        return redirect('/shippingCombany')->withStatus('shipping company successfully updated.');
-    //  return response()->json(['message' => 'shipping company successfully updated.']);
+     //   return redirect('/shippingCombany')->withStatus('shipping company successfully updated.');
+      return response()->json(['message' => 'shipping company successfully updated.']);
 
     }
 

@@ -119,8 +119,8 @@ class ProductController extends Controller
 
 
 
-          return view('admin/Product/show',compact('data'));
-      //  return response()->json($data);
+    //      return view('admin/Product/show',compact('data'));
+        return response()->json($data);
     }
 
     
@@ -144,8 +144,8 @@ class ProductController extends Controller
            'photos' => $photos,    
                 ];
       
-         return view('admin/Product/edit',compact('data'));
-     //  return response()->json($data); 
+       //  return view('admin/Product/edit',compact('data'));
+       return response()->json($data); 
     }
 
     
@@ -200,8 +200,8 @@ class ProductController extends Controller
                 }
             }
         }
-        return redirect()->route('admin.index')->withStatus(__('product successfully updated.'));
-    //  return response()->json(['message' => 'product successfully updated.']);
+     //   return redirect()->route('admin.index')->withStatus(__('product successfully updated.'));
+      return response()->json(['message' => 'product successfully updated.']);
 
 
     }
@@ -220,8 +220,8 @@ class ProductController extends Controller
         }
         
         $product->delete();
-        return redirect()->route('admin.index')->withStatus(__('product successfully deleted.'));
-    //  return response()->json(['message' => 'product successfully deleted.']);
+    //    return redirect()->route('admin.index')->withStatus(__('product successfully deleted.'));
+      return response()->json(['message' => 'product successfully deleted.']);
 
 
     }
